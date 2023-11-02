@@ -1,12 +1,7 @@
+import { Story } from "./types";
+
 type ItemProps = {
-  item: {
-    title: string;
-    url: string;
-    author: string;
-    num_comments: number;
-    points: number;
-    objectID: number;
-  };
+  item: Story;
   onRemoveItem: (item: ItemProps["item"]) => void;
 };
 

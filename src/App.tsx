@@ -1,22 +1,11 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
+import { Story, Stories } from "./types";
 import { useSemiPersistentState } from "./hooks";
 import SearchForm from "./SearchForm";
 import List from "./List";
 // Api endpoint used to fetch tech stories for certain query (a search topic)
 const API_ENDPOINT: string = "https://hn.algolia.com/api/v1/search?query=";
-
-// Define the types
-type Story = {
-  title: string;
-  url: string;
-  author: string;
-  num_comments: number;
-  points: number;
-  objectID: number;
-};
-
-type Stories = Array<Story>;
 
 type StoriesState = {
   data: Stories;
