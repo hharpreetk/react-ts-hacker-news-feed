@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Item from "./Item";
 
 interface ListItem {
@@ -14,7 +15,7 @@ interface ListProps {
   onRemoveItem: (item: ListItem) => void;
 }
 
-const List = ({ list, onRemoveItem }: ListProps) => (
+const List = memo(({ list, onRemoveItem }: ListProps) => (
   <div>
     {list.map((item) => {
       return (
@@ -22,6 +23,6 @@ const List = ({ list, onRemoveItem }: ListProps) => (
       );
     })}
   </div>
-);
+));
 
 export default List;

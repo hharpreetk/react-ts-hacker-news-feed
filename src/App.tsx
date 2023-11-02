@@ -104,9 +104,9 @@ const App = () => {
     handleFetchStories();
   }, [handleFetchStories]);
 
-  const handleRemoveStory = (item: Story) => {
+  const handleRemoveStory = useCallback((item: Story) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
-  };
+  }, []);
 
   const handleSearchInput = (
     event: React.ChangeEvent<HTMLInputElement>,
