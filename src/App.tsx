@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import axios from "axios";
 import { useSemiPersistentState } from "./hooks";
 import Search from "./Search";
 import List from "./List";
@@ -84,12 +85,12 @@ const App = () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
     // fetch stories about react
-    fetch(url)
-      .then((response) => response.json())
+    axios
+      .get(url)
       .then((result) => {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.hits,
+          payload: result.data.hits,
         });
       })
       .catch((error) => {
