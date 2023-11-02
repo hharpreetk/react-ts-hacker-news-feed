@@ -1,4 +1,4 @@
-interface ItemProps {
+type ItemProps = {
   item: {
     title: string;
     url: string;
@@ -8,7 +8,7 @@ interface ItemProps {
     objectID: number;
   };
   onRemoveItem: (item: ItemProps["item"]) => void;
-}
+};
 
 const Item = ({ item, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item);

@@ -16,20 +16,25 @@ type Story = {
   objectID: number;
 };
 
-type State = {
-  data: Story[];
+type Stories = Array<Story>;
+
+type StoriesState = {
+  data: Stories;
   isLoading: boolean;
   isError: boolean;
 };
 
-type Action =
+type StoriesAction =
   | { type: "STORIES_FETCH_INIT" }
-  | { type: "STORIES_FETCH_SUCCESS"; payload: Story[] }
+  | { type: "STORIES_FETCH_SUCCESS"; payload: Stories }
   | { type: "STORIES_FETCH_FAILURE" }
   | { type: "REMOVE_STORY"; payload: Story };
 
 // define the reducer function
-const storiesReducer = (state: State, action: Action): State => {
+const storiesReducer = (
+  state: StoriesState,
+  action: StoriesAction,
+): StoriesState => {
   switch (action.type) {
     case "STORIES_FETCH_INIT":
       return {
@@ -70,7 +75,7 @@ const App = () => {
 
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
-    data: [] as Story[],
+    data: [] as Stories,
     isLoading: false,
     isError: false,
   });

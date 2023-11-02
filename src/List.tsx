@@ -1,18 +1,18 @@
 import { memo } from "react";
 import Item from "./Item";
 
-interface ListItem {
+type Item = {
   title: string;
   url: string;
   author: string;
   num_comments: number;
   points: number;
   objectID: number;
-}
+};
 
 interface ListProps {
-  list: ListItem[];
-  onRemoveItem: (item: ListItem) => void;
+  list: Item[];
+  onRemoveItem: (item: Item) => void;
 }
 
 const List = memo(({ list, onRemoveItem }: ListProps) => (
