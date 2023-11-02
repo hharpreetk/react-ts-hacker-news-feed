@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useSemiPersistentState } from "./hooks";
-import Search from "./Search";
+import SearchForm from "./SearchForm";
 import List from "./List";
 // Api endpoint used to fetch tech stories for certain query (a search topic)
 const API_ENDPOINT: string = "https://hn.algolia.com/api/v1/search?query=";
@@ -114,18 +114,21 @@ const App = () => {
     setSearchTerm(event.target.value);
   };
 
-  // Set Url when search is confirmed by user
-  const handleSearchSubmit = (): void => {
+  // Set Url when search is confirmed by the user
+  const handleSearchSubmit = (
+    event: React.FormEvent<HTMLFormElement>,
+  ): void => {
+    event.preventDefault(); // Prevent the form from submitting by default
     setUrl(`${API_ENDPOINT}${searchTerm}`);
   };
 
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
-      <Search
+      <SearchForm
         searchTerm={searchTerm}
-        handleSearchInput={handleSearchInput}
-        handleSearchSubmit={handleSearchSubmit}
+        onSearchInput={handleSearchInput}
+        onSearchSubmit={handleSearchSubmit}
       />
       {isError && <p>Something went wrong...</p>}
       {isLoading ? (
