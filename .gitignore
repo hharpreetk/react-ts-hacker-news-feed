@@ -1,0 +1,9 @@
+# Ignore CodeSandbox related directories
+.codesandbox/
+.devcontainer/
+
+# Ignore Node.js modules
+node_modules/
+
+# Ignore Typescript configuration
+tsconfig.json
