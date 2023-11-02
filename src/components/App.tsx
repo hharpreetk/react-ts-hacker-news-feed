@@ -1,24 +1,11 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
-import { Story, Stories } from "../types/types";
+import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import SearchForm from "./SearchForm";
 import List from "./List";
 // Api endpoint used to fetch tech stories for certain query (a search topic)
 const API_ENDPOINT: string = "https://hn.algolia.com/api/v1/search?query=";
-
-type StoriesState = {
-  data: Stories;
-  isLoading: boolean;
-  isError: boolean;
-};
-
-type StoriesAction =
-  | { type: "STORIES_FETCH_INIT" }
-  | { type: "STORIES_FETCH_SUCCESS"; payload: Stories }
-  | { type: "STORIES_FETCH_FAILURE" }
-  | { type: "REMOVE_STORY"; payload: Story };
-
 // define the reducer function
 const storiesReducer = (
   state: StoriesState,
