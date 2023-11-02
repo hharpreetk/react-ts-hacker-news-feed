@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { useSemiPersistentState } from "./hooks";
 import Search from "./Search";
@@ -77,7 +77,8 @@ const App = () => {
 
   const { data, isLoading, isError } = stories;
 
-  useEffect(() => {
+  // Memorized handler function for fetching and handling stories
+  const handleFetchStories = useCallback(() => {
     // Do nothing if the search term is not present
     if (!searchTerm) return;
 
@@ -98,6 +99,10 @@ const App = () => {
         dispatchStories({ type: "STORIES_FETCH_FAILURE" });
       });
   }, [url]);
+
+  useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
 
   const handleRemoveStory = (item: Story) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
