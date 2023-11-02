@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
-import { Story, Stories } from "./types";
-import { useSemiPersistentState } from "./hooks";
+import { Story, Stories } from "../types/types";
+import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import SearchForm from "./SearchForm";
 import List from "./List";
 // Api endpoint used to fetch tech stories for certain query (a search topic)

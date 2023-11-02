@@ -1,4 +1,4 @@
-import { Story } from "./types";
+import { Story } from "../types/types";
 
 type ItemProps = {
   item: Story;

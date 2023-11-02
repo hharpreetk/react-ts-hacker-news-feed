@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Story, Stories } from "./types";
+import { Story, Stories } from "../types/types";
 import Item from "./Item";
 
 interface ListProps {
