@@ -7,20 +7,28 @@ type ItemProps = {
 
 const Item = ({ item, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item);
+
+  const getFormattedDate = (dateInput: string): string => {
+    const date = new Date(dateInput);
+    const formattedDate = date.toLocaleDateString();
+    return formattedDate;
+  };
+
   return (
-    <div>
-      <span>
+    <tr>
+      <td>
         <a href={item.url}>{item.title}</a>
-      </span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-      <span>
+      </td>
+      <td>{item.author}</td>
+      <td>{item.num_comments}</td>
+      <td>{item.points}</td>
+      <td>{getFormattedDate(item.created_at)}</td>
+      <td>
         <button type="button" onClick={handleRemoveItem}>
           Dismiss
         </button>
-      </span>
-    </div>
+      </td>
+    </tr>
   );
 };
 

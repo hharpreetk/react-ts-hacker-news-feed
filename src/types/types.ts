@@ -4,6 +4,7 @@ type Story = {
   author: string;
   num_comments: number;
   points: number;
+  created_at: string;
   objectID: number;
 };
 
