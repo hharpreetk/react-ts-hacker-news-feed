@@ -59,7 +59,7 @@ const App = () => {
     "React",
   );
 
-  const [url, setUrl] = useState<string>(getUrl(searchTerm));
+  const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
 
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
@@ -112,7 +112,7 @@ const App = () => {
     event: React.FormEvent<HTMLFormElement>,
   ): void => {
     event.preventDefault();
-    setUrl(getUrl(searchTerm));
+    setUrl(getUrl(searchTerm, 0));
   };
 
   return (
