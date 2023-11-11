@@ -151,7 +151,7 @@ const App = () => {
       />
       {isError ? (
         <p>Something went wrong...</p>
-      ) : isLoading ? (
+      ) : isLoading && page === 0 ? (
         <p>Loading...</p>
       ) : data.length === 0 ? (
         <p>No Results Found</p>
@@ -159,10 +159,12 @@ const App = () => {
         <>
           <List list={data} onRemoveItem={handleRemoveStory} />
           {page < totalPages - 1 ? (
-            <button onClick={loadMoreResults}>Load More</button>
-          ) : (
-            <></>
-          )}
+            isLoading ? (
+              <p>Loading More Results...</p>
+            ) : (
+              <button onClick={loadMoreResults}>Load More</button>
+            )
+          ) : null}
         </>
       )}
     </div>
