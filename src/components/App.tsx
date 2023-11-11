@@ -47,6 +47,13 @@ const storiesReducer = (
           (story) => action.payload.objectID !== story.objectID,
         ),
       };
+    case "LOAD_MORE_STORIES":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: [...state.data, ...action.payload],
+      };
     default:
       throw new Error("Unsupported action");
   }
@@ -61,6 +68,9 @@ const App = () => {
 
   const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
 
+  // Track current page number
+  const [page, setPage] = useState<number>(0);
+
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
     data: [] as Stories,
@@ -71,7 +81,7 @@ const App = () => {
   const { data, isLoading, isError } = stories;
 
   // Memorized handler function for fetching and handling stories
-  const handleFetchStories = useCallback(() => {
+  const handleFetchStories = useCallback(async () => {
     // Do nothing if the search term is not present
     if (!searchTerm) return;
 
@@ -79,19 +89,24 @@ const App = () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
     // Fetch stories
-    axios
-      .get(url)
-      .then((result) => {
+    try {
+      const result = await axios.get(url);
+      if (page === 0) {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
           payload: result.data.hits,
         });
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatchStories({ type: "STORIES_FETCH_FAILURE" });
-      });
-  }, [url]);
+      } else {
+        dispatchStories({
+          type: "LOAD_MORE_STORIES",
+          payload: result.data.hits,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatchStories({ type: "STORIES_FETCH_FAILURE" });
+    }
+  }, [url, page]);
 
   useEffect(() => {
     handleFetchStories();
@@ -112,7 +127,17 @@ const App = () => {
     event: React.FormEvent<HTMLFormElement>,
   ): void => {
     event.preventDefault();
+    // Reset the page when search term changes
+    setPage(0);
     setUrl(getUrl(searchTerm, 0));
+  };
+
+  // Load more results
+  const loadMoreResults = () => {
+    // Increment the page number
+    const nextPage = page + 1;
+    setPage(nextPage);
+    setUrl(getUrl(searchTerm, nextPage)); // Update the URL with the new page
   };
 
   return (
@@ -130,7 +155,10 @@ const App = () => {
       ) : data.length === 0 ? (
         <p>No Results Found</p>
       ) : (
-        <List list={data} onRemoveItem={handleRemoveStory} />
+        <>
+          <List list={data} onRemoveItem={handleRemoveStory} />
+          <button onClick={loadMoreResults}>Load More</button>
+        </>
       )}
     </div>
   );
