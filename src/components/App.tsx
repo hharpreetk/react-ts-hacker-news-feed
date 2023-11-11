@@ -152,17 +152,17 @@ const App = () => {
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading && page === 0 ? (
-        <p>Loading...</p>
+        <LoadingIndicator />
       ) : data.length === 0 ? (
-        <p>No Results Found</p>
+        <NoResults />
       ) : (
         <>
           <List list={data} onRemoveItem={handleRemoveStory} />
           {page < totalPages - 1 ? (
             isLoading ? (
-              <p>Loading More Results...</p>
+              <LoadingMoreResults />
             ) : (
-              <button onClick={loadMoreResults}>Load More</button>
+              <LoadMoreButton handleMore={loadMoreResults} />
             )
           ) : null}
         </>
@@ -170,5 +170,15 @@ const App = () => {
     </div>
   );
 };
+
+const LoadingIndicator = () => <p>Loading...</p>;
+
+const NoResults = () => <p>No Results Found</p>;
+
+const LoadMoreButton = ({ handleMore }: { handleMore: () => void }) => (
+  <button onClick={handleMore}>Load More</button>
+);
+
+const LoadingMoreResults = () => <p>Loading More Results...</p>;
 
 export default App;
