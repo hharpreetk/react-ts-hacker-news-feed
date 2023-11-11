@@ -4,9 +4,11 @@ import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import SearchForm from "./SearchForm";
 import List from "./List";
+
 // Api endpoint used to fetch tech stories for certain query (a search topic)
 const API_ENDPOINT: string = "https://hn.algolia.com/api/v1/search?query=";
-// define the reducer function
+
+// Define the reducer function
 const storiesReducer = (
   state: StoriesState,
   action: StoriesAction,
@@ -63,10 +65,10 @@ const App = () => {
     // Do nothing if the search term is not present
     if (!searchTerm) return;
 
-    //show loading indicator when data loading is delayed
+    // Show loading indicator when data loading is delayed
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
-    // fetch stories about react
+    // Fetch stories
     axios
       .get(url)
       .then((result) => {
@@ -111,9 +113,12 @@ const App = () => {
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
       />
-      {isError && <p>Something went wrong...</p>}
-      {isLoading ? (
+      {isError ? (
+        <p>Something went wrong...</p>
+      ) : isLoading ? (
         <p>Loading...</p>
+      ) : data.length === 0 ? (
+        <p>No Results Found</p>
       ) : (
         <List list={data} onRemoveItem={handleRemoveStory} />
       )}
