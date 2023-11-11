@@ -61,15 +61,13 @@ const storiesReducer = (
 
 const App = () => {
   // Manage searchTerm with a custom hook
-  const [searchTerm, setSearchTerm] = useSemiPersistentState<string>(
-    "search",
-    "React",
-  );
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
   const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
 
-  // Track current page number
   const [page, setPage] = useState<number>(0);
+
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
@@ -91,15 +89,18 @@ const App = () => {
     // Fetch stories
     try {
       const result = await axios.get(url);
+      const { hits, nbPages } = result.data; // Extract the hits and total pages from the response
       if (page === 0) {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.data.hits,
+          payload: hits,
         });
+        // Set the total pages from API response
+        setTotalPages(nbPages);
       } else {
         dispatchStories({
           type: "LOAD_MORE_STORIES",
-          payload: result.data.hits,
+          payload: hits,
         });
       }
     } catch (error) {
@@ -157,7 +158,11 @@ const App = () => {
       ) : (
         <>
           <List list={data} onRemoveItem={handleRemoveStory} />
-          <button onClick={loadMoreResults}>Load More</button>
+          {page < totalPages - 1 ? (
+            <button onClick={loadMoreResults}>Load More</button>
+          ) : (
+            <></>
+          )}
         </>
       )}
     </div>
