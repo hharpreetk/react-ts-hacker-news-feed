@@ -5,8 +5,15 @@ import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import SearchForm from "./SearchForm";
 import List from "./List";
 
-// Api endpoint used to fetch tech stories for certain query (a search topic)
-const API_ENDPOINT: string = "https://hn.algolia.com/api/v1/search?query=";
+// Api endpoint used to fetch stories
+const API_BASE = "https://hn.algolia.com/api/v1";
+const API_SEARCH = "/search";
+const PARAM_SEARCH = "query=";
+const PARAM_PAGE = "page=";
+
+// Retrieve appropriate url based on search and page argument
+const getUrl = (searchTerm: string, page: number): string =>
+  `${API_BASE}${API_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`;
 
 // Define the reducer function
 const storiesReducer = (
@@ -47,9 +54,12 @@ const storiesReducer = (
 
 const App = () => {
   // Manage searchTerm with a custom hook
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState<string>(
+    "search",
+    "React",
+  );
 
-  const [url, setUrl] = useState<string>(`${API_ENDPOINT}${searchTerm}`);
+  const [url, setUrl] = useState<string>(getUrl(searchTerm));
 
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
@@ -101,8 +111,8 @@ const App = () => {
   const handleSearchSubmit = (
     event: React.FormEvent<HTMLFormElement>,
   ): void => {
-    event.preventDefault(); // Prevent the form from submitting by default
-    setUrl(`${API_ENDPOINT}${searchTerm}`);
+    event.preventDefault();
+    setUrl(getUrl(searchTerm));
   };
 
   return (
