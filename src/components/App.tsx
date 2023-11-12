@@ -69,6 +69,9 @@ const App = () => {
 
   const [totalPages, setTotalPages] = useState<number>(0);
 
+  // State to store an array of urls representing last five searches
+  const [suggestions, setSuggestions] = useState<Array<string>>([]);
+
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {
     data: [] as Stories,
@@ -131,6 +134,15 @@ const App = () => {
     // Reset the page when search term changes
     setPage(0);
     setUrl(getUrl(searchTerm, 0));
+
+    setSearchSuggestion(searchTerm);
+  };
+
+  const setSearchSuggestion = (searchTerm: string) => {
+    // Check if the search term doesn't already exist in the suggestions array
+    if (!suggestions.includes(searchTerm)) {
+      setSuggestions([searchTerm, ...suggestions].slice(0, 5)); // Limit the number of suggestions to last 5
+    }
   };
 
   // Load more results
@@ -148,6 +160,7 @@ const App = () => {
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
+        suggestions={suggestions}
       />
       {isError ? (
         <p>Something went wrong...</p>
