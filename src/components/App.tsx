@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
+import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import SearchForm from "./SearchForm";
 import List from "./List";
 
@@ -70,7 +71,10 @@ const App = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   // State to store an array of urls representing last five searches
-  const [suggestions, setSuggestions] = useState<Array<string>>([]);
+  const [suggestions, setSuggestions] = useSearchSuggestions(
+    "searchSuggestions",
+    [],
+  );
 
   // Use useReducer for unified state management
   const [stories, dispatchStories] = useReducer(storiesReducer, {

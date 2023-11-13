@@ -19,6 +19,7 @@ const SearchForm = ({
         value={searchTerm}
         onChange={onSearchInput}
         list="suggestions"
+        autoComplete="off"
         autoFocus
       />
       <datalist id="suggestions">
