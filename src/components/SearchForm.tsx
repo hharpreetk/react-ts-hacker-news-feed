@@ -1,9 +1,9 @@
-type SearchProps = {
+interface SearchProps {
   searchTerm: string;
   onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   suggestions: Array<string>;
-};
+}
 
 const SearchForm = ({
   searchTerm,

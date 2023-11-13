@@ -1,9 +1,9 @@
 import { Story } from "../types/types";
 
-type ItemProps = {
+interface ItemProps {
   item: Story;
   onRemoveItem: (item: ItemProps["item"]) => void;
-};
+}
 
 const Item = ({ item, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item);
