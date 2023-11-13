@@ -2,20 +2,29 @@ import { useState, memo } from "react";
 import { sortBy } from "lodash";
 import { Story, Stories } from "../types/types";
 import Item from "./Item";
-import SortButton from "./SortButton";
+import SortList from "./SortList";
 
 interface ListProps {
   list: Stories;
   onRemoveItem: (item: Story) => void;
 }
 
-const SORTS: Record<string, (list: Stories) => Stories> = {
-  NONE: (list) => list,
-  TITLE: (list) => sortBy(list, "title"),
-  AUTHOR: (list) => sortBy(list, "author"),
-  COMMENTS: (list) => sortBy(list, "num_comments"),
-  POINTS: (list) => sortBy(list, "points"),
-  DATE_CREATED: (list) => sortBy(list, "created_at"),
+const SORTS: Record<
+  string,
+  { name: string; sortFunction: (list: Stories) => Stories }
+> = {
+  NONE: { name: "None", sortFunction: (list) => list },
+  TITLE: { name: "Title", sortFunction: (list) => sortBy(list, "title") },
+  AUTHOR: { name: "Author", sortFunction: (list) => sortBy(list, "author") },
+  COMMENTS: {
+    name: "Comments",
+    sortFunction: (list) => sortBy(list, "num_comments"),
+  },
+  POINTS: { name: "Points", sortFunction: (list) => sortBy(list, "points") },
+  DATE_CREATED: {
+    name: "Date Created",
+    sortFunction: (list) => sortBy(list, "created_at"),
+  },
 };
 
 const List = memo(({ list, onRemoveItem }: ListProps) => {
@@ -24,103 +33,61 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
     isReverse: false,
   });
 
-  const handleSort = (sortKey: string, isReverse?: boolean) => {
-    // Change the sort order when sorting key is same as the current sorting key otherwise reset the sort order
-    setSort((prevSort) => ({
-      sortKey: sortKey,
-      isReverse: sortKey === prevSort.sortKey ? !prevSort.isReverse : false,
-    }));
+  const handleSortCriteriaSelect = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSort({ ...sort, sortKey: event.target.value });
   };
 
-  const sortFunction = SORTS[sort.sortKey];
-  const sortedList = sort.isReverse
+  const handleSortOrderChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSort({
+      ...sort,
+      isReverse: event.target.value === "DESCENDING",
+    });
+  };
+
+  const { sortKey, isReverse } = sort;
+
+  const { sortFunction } = SORTS[sortKey];
+  const sortedList = isReverse
     ? sortFunction(list).reverse()
     : sortFunction(list);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">
-            <nobr>
-              Title{" "}
-              <SortButton
-                handleSort={() => handleSort("TITLE")}
-                isActive={sort.sortKey === "TITLE"}
-                isReverse={sort.isReverse}
-                normalOrderText="Click to sort the title in reverse alphabetical order"
-                reverseOrderText="Click to sort the title in alphabetical order"
+    <>
+      <SortList
+        sorts={SORTS}
+        onSortCriteriaSelect={handleSortCriteriaSelect}
+        onSortOrderChange={handleSortOrderChange}
+      />
+
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Comments</th>
+            <th scope="col">Points</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedList.map((item) => {
+            return (
+              <Item
+                key={item.objectID}
+                item={item}
+                onRemoveItem={onRemoveItem}
               />
-            </nobr>
-          </th>
-          <th scope="col">
-            <nobr>
-              Author{" "}
-              <SortButton
-                handleSort={() => handleSort("AUTHOR")}
-                isActive={sort.sortKey === "AUTHOR"}
-                isReverse={sort.isReverse}
-                normalOrderText="Click to sort the author in reverse alphabetical order"
-                reverseOrderText="Click to sort the author in alphabetical order"
-              />
-            </nobr>
-          </th>
-          <th scope="col">
-            <nobr>
-              Comments{" "}
-              <SortButton
-                handleSort={() => handleSort("COMMENTS")}
-                isActive={sort.sortKey === "COMMENTS"}
-                isReverse={sort.isReverse}
-                normalOrderText="Click to sort the total comments from highest to lowest"
-                reverseOrderText="Click to sort the total comments from lowest to highest"
-              />
-            </nobr>
-          </th>
-          <th scope="col">
-            <nobr>
-              Points{" "}
-              <SortButton
-                handleSort={() => handleSort("POINTS")}
-                isActive={sort.sortKey === "POINTS"}
-                isReverse={sort.isReverse}
-                normalOrderText="Click to sort the total points from highest to lowest"
-                reverseOrderText="Click to sort the total points from lowest to highest"
-              />
-            </nobr>
-          </th>
-          <th scope="col">
-            <nobr>
-              Date Created{" "}
-              <SortButton
-                handleSort={() => handleSort("DATE_CREATED")}
-                isActive={sort.sortKey === "DATE_CREATED"}
-                isReverse={sort.isReverse}
-                normalOrderText="Click to sort the date of creation from oldest to newest"
-                reverseOrderText="Click to sort the date of creation from newest to oldest"
-              />
-            </nobr>
-          </th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedList.map((item) => {
-          return (
-            <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
-          );
-        })}
-      </tbody>
-    </table>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 });
-
-interface SortButtonProps {
-  handleSort: () => void;
-  isActive: boolean;
-  isReverse: boolean;
-  normalOrderText: string;
-  reverseOrderText: string;
-}
 
 export default List;
