@@ -2,6 +2,7 @@ import { useState, memo } from "react";
 import { sortBy } from "lodash";
 import { Story, Stories } from "../types/types";
 import Item from "./Item";
+import SortButton from "./SortButton";
 
 interface ListProps {
   list: Stories;
@@ -9,24 +10,32 @@ interface ListProps {
 }
 
 const SORTS: Record<string, (list: Stories) => Stories> = {
-  NONE: (list: Stories): Stories => list,
-  TITLE: (list: Stories): Stories => sortBy(list, "title"),
-  AUTHOR: (list: Stories): Stories => sortBy(list, "author"),
-  COMMENTS: (list: Stories): Stories => sortBy(list, "num_comments").reverse(),
-  POINTS: (list: Stories): Stories => sortBy(list, "points").reverse(),
-  DATE_CREATED: (list: Stories): Stories => sortBy(list, "created_at"),
+  NONE: (list) => list,
+  TITLE: (list) => sortBy(list, "title"),
+  AUTHOR: (list) => sortBy(list, "author"),
+  COMMENTS: (list) => sortBy(list, "num_comments"),
+  POINTS: (list) => sortBy(list, "points"),
+  DATE_CREATED: (list) => sortBy(list, "created_at"),
 };
 
 const List = memo(({ list, onRemoveItem }: ListProps) => {
-  const [sort, setSort] = useState("NONE");
+  const [sort, setSort] = useState<{ sortKey: string; isReverse: boolean }>({
+    sortKey: "NONE",
+    isReverse: false,
+  });
 
-  const handleSort = (sortKey: string) => {
-    // Reset the sort order when sorting key is same as the current sorting key
-    setSort((prevSort) => (prevSort === sortKey ? "NONE" : sortKey));
+  const handleSort = (sortKey: string, isReverse?: boolean) => {
+    // Change the sort order when sorting key is same as the current sorting key otherwise reset the sort order
+    setSort((prevSort) => ({
+      sortKey: sortKey,
+      isReverse: sortKey === prevSort.sortKey ? !prevSort.isReverse : false,
+    }));
   };
 
-  const sortFunction = SORTS[sort];
-  const sortedList = sortFunction(list);
+  const sortFunction = SORTS[sort.sortKey];
+  const sortedList = sort.isReverse
+    ? sortFunction(list).reverse()
+    : sortFunction(list);
 
   return (
     <table>
@@ -35,56 +44,61 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
           <th scope="col">
             <nobr>
               Title{" "}
-              <button
-                onClick={() => handleSort("TITLE")}
-                alt="Click to sort the title column in alphabetical order"
-              >
-                {sort === "TITLE" ? "⮇" : "⮃"}
-              </button>
+              <SortButton
+                handleSort={() => handleSort("TITLE")}
+                isActive={sort.sortKey === "TITLE"}
+                isReverse={sort.isReverse}
+                normalOrderText="Click to sort the title in reverse alphabetical order"
+                reverseOrderText="Click to sort the title in alphabetical order"
+              />
             </nobr>
           </th>
           <th scope="col">
             <nobr>
               Author{" "}
-              <button
-                onClick={() => handleSort("AUTHOR")}
-                alt="Click to sort the author column in alphabetical order"
-              >
-                {sort === "AUTHOR" ? "⮇" : "⮃"}
-              </button>
+              <SortButton
+                handleSort={() => handleSort("AUTHOR")}
+                isActive={sort.sortKey === "AUTHOR"}
+                isReverse={sort.isReverse}
+                normalOrderText="Click to sort the author in reverse alphabetical order"
+                reverseOrderText="Click to sort the author in alphabetical order"
+              />
             </nobr>
           </th>
           <th scope="col">
             <nobr>
               Comments{" "}
-              <button
-                onClick={() => handleSort("COMMENTS")}
-                alt="Click to sort the total comments from highest to lowest"
-              >
-                {sort === "COMMENTS" ? "⮅" : "⮃"}
-              </button>
+              <SortButton
+                handleSort={() => handleSort("COMMENTS")}
+                isActive={sort.sortKey === "COMMENTS"}
+                isReverse={sort.isReverse}
+                normalOrderText="Click to sort the total comments from highest to lowest"
+                reverseOrderText="Click to sort the total comments from lowest to highest"
+              />
             </nobr>
           </th>
           <th scope="col">
             <nobr>
               Points{" "}
-              <button
-                onClick={() => handleSort("POINTS")}
-                alt="Click to sort the total points from highest to lowest"
-              >
-                ⮅
-              </button>
+              <SortButton
+                handleSort={() => handleSort("POINTS")}
+                isActive={sort.sortKey === "POINTS"}
+                isReverse={sort.isReverse}
+                normalOrderText="Click to sort the total points from highest to lowest"
+                reverseOrderText="Click to sort the total points from lowest to highest"
+              />
             </nobr>
           </th>
           <th scope="col">
             <nobr>
               Date Created{" "}
-              <button
-                onClick={() => handleSort("DATE_CREATED")}
-                alt="Click to sort the date of creation from newest to oldest"
-              >
-                {sort === "DATE_CREATED" ? "⮇" : "⮃"}
-              </button>
+              <SortButton
+                handleSort={() => handleSort("DATE_CREATED")}
+                isActive={sort.sortKey === "DATE_CREATED"}
+                isReverse={sort.isReverse}
+                normalOrderText="Click to sort the date of creation from oldest to newest"
+                reverseOrderText="Click to sort the date of creation from newest to oldest"
+              />
             </nobr>
           </th>
           <th scope="col">Action</th>
@@ -100,5 +114,13 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
     </table>
   );
 });
+
+interface SortButtonProps {
+  handleSort: () => void;
+  isActive: boolean;
+  isReverse: boolean;
+  normalOrderText: string;
+  reverseOrderText: string;
+}
 
 export default List;
