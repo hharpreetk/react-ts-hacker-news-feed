@@ -13,24 +13,26 @@ const SORTS: Record<
   string,
   { name: string; sortFunction: (list: Stories) => Stories }
 > = {
-  NONE: { name: "None", sortFunction: (list) => list },
-  TITLE: { name: "Title", sortFunction: (list) => sortBy(list, "title") },
-  AUTHOR: { name: "Author", sortFunction: (list) => sortBy(list, "author") },
-  COMMENTS: {
+  POINTS: {
+    name: "Popularity",
+    sortFunction: (list) => sortBy(list, "points"),
+  },
+  DATE_CREATED: {
+    name: "Date",
+    sortFunction: (list) => sortBy(list, "created_at"),
+  },
+  NUM_COMMENTS: {
     name: "Comments",
     sortFunction: (list) => sortBy(list, "num_comments"),
   },
-  POINTS: { name: "Points", sortFunction: (list) => sortBy(list, "points") },
-  DATE_CREATED: {
-    name: "Date Created",
-    sortFunction: (list) => sortBy(list, "created_at"),
-  },
+  TITLE: { name: "Title", sortFunction: (list) => sortBy(list, "title") },
+  AUTHOR: { name: "Author", sortFunction: (list) => sortBy(list, "author") },
 };
 
 const List = memo(({ list, onRemoveItem }: ListProps) => {
   const [sort, setSort] = useState<{ sortKey: string; isReverse: boolean }>({
-    sortKey: "NONE",
-    isReverse: false,
+    sortKey: "POINTS",
+    isReverse: true,
   });
 
   const handleSortCriteriaSelect = (
@@ -59,6 +61,7 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
     <>
       <SortList
         sorts={SORTS}
+        sort={sort}
         onSortCriteriaSelect={handleSortCriteriaSelect}
         onSortOrderChange={handleSortOrderChange}
       />

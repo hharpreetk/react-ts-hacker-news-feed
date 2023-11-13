@@ -5,12 +5,14 @@ interface SortDropdownProps {
     string,
     { name: string; sortFunction: (list: Stories) => Stories }
   >;
+  sort: { sortKey: string; isReverse: boolean };
   onSortCriteriaSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onSortOrderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SortDropdown = ({
   sorts,
+  sort,
   onSortCriteriaSelect,
   onSortOrderChange,
 }: SortDropdownProps) => {
@@ -34,6 +36,7 @@ const SortDropdown = ({
         name="sortOrder"
         value="ASCENDING"
         onChange={onSortOrderChange}
+        checked={!sort.isReverse}
       />
       <label htmlFor="ascending">Ascending</label>
       <input
@@ -42,6 +45,7 @@ const SortDropdown = ({
         name="sortOrder"
         value="DESCENDING"
         onChange={onSortOrderChange}
+        checked={sort.isReverse}
       />
       <label htmlFor="descending">Descending</label>
     </div>
