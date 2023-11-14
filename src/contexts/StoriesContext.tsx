@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useReducer,
-  ReactNode,
-  useContext,
-} from "react";
+import React, { createContext, useReducer, ReactNode, useContext } from "react";
 import { Stories, StoriesState, StoriesAction } from "../types/types";
 
 interface StoriesContextProps {
@@ -12,10 +7,11 @@ interface StoriesContextProps {
 
 export const StoriesContext = createContext<StoriesState>(null!);
 
-export const StoriesDispatchContext =
-  createContext<React.Dispatch<StoriesAction>>(null!);
+export const StoriesDispatchContext = createContext<
+  React.Dispatch<StoriesAction>
+>(null!);
 
-export function StoriesProvider({ children }: StoriesContextProps) {
+export const StoriesProvider = ({ children }: StoriesContextProps) => {
   const [stories, dispatchStories] = useReducer(storiesReducer, {
     data: [] as Stories,
     isLoading: false,
@@ -29,15 +25,15 @@ export function StoriesProvider({ children }: StoriesContextProps) {
       </StoriesDispatchContext.Provider>
     </StoriesContext.Provider>
   );
-}
+};
 
-export function useStories() {
+export const useStories = () => {
   return useContext(StoriesContext);
-}
+};
 
-export function useStoriesDispatch() {
+export const useStoriesDispatch = () => {
   return useContext(StoriesDispatchContext);
-}
+};
 
 const storiesReducer = (
   state: StoriesState,
