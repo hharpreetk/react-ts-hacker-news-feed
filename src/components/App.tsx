@@ -4,6 +4,7 @@ import { sortBy } from "lodash";
 import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
+import { useStories, useStoriesDispatch } from "../contexts/StoriesContext";
 import Search from "./Search";
 import Sort from "./Sort";
 import List from "./List";
@@ -17,50 +18,6 @@ const PARAM_PAGE = "page=";
 // Retrieve appropriate url based on search and page argument
 const getUrl = (searchTerm: string, page: number): string =>
   `${API_BASE}${API_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`;
-
-// Define the reducer function
-const storiesReducer = (
-  state: StoriesState,
-  action: StoriesAction,
-): StoriesState => {
-  switch (action.type) {
-    case "STORIES_FETCH_INIT":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    case "STORIES_FETCH_SUCCESS":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload,
-      };
-    case "STORIES_FETCH_FAILURE":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-      };
-    case "REMOVE_STORY":
-      return {
-        ...state,
-        data: state.data.filter(
-          (story) => action.payload.objectID !== story.objectID,
-        ),
-      };
-    case "LOAD_MORE_STORIES":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: [...state.data, ...action.payload],
-      };
-    default:
-      throw new Error("Unsupported action");
-  }
-};
 
 const SORTS: Record<
   string,
@@ -83,7 +40,10 @@ const SORTS: Record<
 };
 
 const App = () => {
-  // Manage searchTerm with a custom hook
+  const stories = useStories();
+
+  const dispatchStories = useStoriesDispatch();
+
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
   const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
@@ -95,15 +55,8 @@ const App = () => {
   // State to store an array of urls representing last five searches
   const [suggestions, setSuggestions] = useSearchSuggestions(
     "searchSuggestions",
-    [],
+    []
   );
-
-  // Use useReducer for unified state management
-  const [stories, dispatchStories] = useReducer(storiesReducer, {
-    data: [] as Stories,
-    isLoading: false,
-    isError: false,
-  });
 
   const [sort, setSort] = useState<{ sortKey: string; isReverse: boolean }>({
     sortKey: "POINTS",
@@ -111,13 +64,13 @@ const App = () => {
   });
 
   const handleSortCriteriaSelect = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSort({ ...sort, sortKey: event.target.value });
   };
 
   const handleSortOrderChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSort({
       ...sort,
@@ -128,7 +81,7 @@ const App = () => {
   const getSortedList = (
     list: Stories,
     sortKey: string,
-    isReverse: boolean,
+    isReverse: boolean
   ) => {
     const { sortFunction } = SORTS[sortKey];
     const sorted = sortFunction(list);
@@ -177,14 +130,14 @@ const App = () => {
   }, []);
 
   const handleSearchInput = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setSearchTerm(event.target.value);
   };
 
   // Set Url when search is confirmed by the user
   const handleSearchSubmit = (
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ): void => {
     event.preventDefault();
     // Reset the page when search term changes
