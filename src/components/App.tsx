@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 import axios from "axios";
+import { sortBy } from "lodash";
 import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import SearchList from "./SearchList";
+import Sort from "./Sort";
 import List from "./List";
 
 // Api endpoint used to fetch stories
@@ -60,6 +62,26 @@ const storiesReducer = (
   }
 };
 
+const SORTS: Record<
+  string,
+  { name: string; sortFunction: (list: Stories) => Stories }
+> = {
+  POINTS: {
+    name: "Popularity",
+    sortFunction: (list) => sortBy(list, "points"),
+  },
+  DATE_CREATED: {
+    name: "Date",
+    sortFunction: (list) => sortBy(list, "created_at"),
+  },
+  NUM_COMMENTS: {
+    name: "Comments",
+    sortFunction: (list) => sortBy(list, "num_comments"),
+  },
+  TITLE: { name: "Title", sortFunction: (list) => sortBy(list, "title") },
+  AUTHOR: { name: "Author", sortFunction: (list) => sortBy(list, "author") },
+};
+
 const App = () => {
   // Manage searchTerm with a custom hook
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
@@ -82,6 +104,36 @@ const App = () => {
     isLoading: false,
     isError: false,
   });
+
+  const [sort, setSort] = useState<{ sortKey: string; isReverse: boolean }>({
+    sortKey: "POINTS",
+    isReverse: true,
+  });
+
+  const handleSortCriteriaSelect = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSort({ ...sort, sortKey: event.target.value });
+  };
+
+  const handleSortOrderChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSort({
+      ...sort,
+      isReverse: event.target.value === "DESCENDING",
+    });
+  };
+
+  const getSortedList = (
+    list: Stories,
+    sortKey: string,
+    isReverse: boolean,
+  ) => {
+    const { sortFunction } = SORTS[sortKey];
+    const sorted = sortFunction(list);
+    return isReverse ? sorted.reverse() : sorted;
+  };
 
   const { data, isLoading, isError } = stories;
 
@@ -149,6 +201,10 @@ const App = () => {
     }
   };
 
+  const { sortKey, isReverse } = sort;
+
+  const sortedList = getSortedList(data, sortKey, isReverse);
+
   // Load more results
   const loadMoreResults = () => {
     // Increment the page number
@@ -166,6 +222,12 @@ const App = () => {
         onSearchSubmit={handleSearchSubmit}
         suggestions={suggestions}
       />
+      <Sort
+        sorts={SORTS}
+        sort={sort}
+        onSortCriteriaSelect={handleSortCriteriaSelect}
+        onSortOrderChange={handleSortOrderChange}
+      />
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading && page === 0 ? (
@@ -174,7 +236,7 @@ const App = () => {
         <NoResults />
       ) : (
         <>
-          <List list={data} onRemoveItem={handleRemoveStory} />
+          <List list={sortedList} onRemoveItem={handleRemoveStory} />
           {page < totalPages - 1 ? (
             isLoading ? (
               <LoadingMoreResults />
