@@ -1,6 +1,6 @@
 import { Stories } from "../types/types";
 
-interface SortDropdownProps {
+interface SortProps {
   sorts: Record<
     string,
     { name: string; sortFunction: (list: Stories) => Stories }
@@ -10,12 +10,12 @@ interface SortDropdownProps {
   onSortOrderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SortDropdown = ({
+const Sort = ({
   sorts,
   sort,
   onSortCriteriaSelect,
   onSortOrderChange,
-}: SortDropdownProps) => {
+}: SortProps) => {
   return (
     <div>
       <label htmlFor="sortingCriteria">Sort By:</label>
@@ -52,4 +52,4 @@ const SortDropdown = ({
   );
 };
 
-export default SortDropdown;
+export default Sort;
