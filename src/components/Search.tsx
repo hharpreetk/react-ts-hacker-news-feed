@@ -5,7 +5,7 @@ interface SearchProps {
   suggestions: Array<string>;
 }
 
-const SearchForm = ({
+const Search = ({
   searchTerm,
   onSearchInput,
   onSearchSubmit,
@@ -34,4 +34,4 @@ const SearchForm = ({
   );
 };
 
-export default SearchForm;
+export default Search;

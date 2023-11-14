@@ -4,7 +4,7 @@ import { sortBy } from "lodash";
 import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
-import SearchList from "./SearchList";
+import Search from "./Search";
 import Sort from "./Sort";
 import List from "./List";
 
@@ -216,7 +216,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
-      <SearchList
+      <Search
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
