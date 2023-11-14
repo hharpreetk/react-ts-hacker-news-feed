@@ -1,13 +1,17 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { Story, Stories } from "../types/types";
 import Item from "./StoryItem";
+import { useStoriesDispatch } from "../contexts/StoriesContext";
 
 interface StoriesListProps {
   list: Stories;
-  onRemoveItem: (item: Story) => void;
 }
 
-const StoriesList = memo(({ list, onRemoveItem }: StoriesListProps) => {
+const StoriesList = memo(({ list }: StoriesListProps) => {
+  const dispatchStories = useStoriesDispatch();
+  const handleRemoveStory = useCallback((item: Story) => {
+    dispatchStories({ type: "REMOVE_STORY", payload: item });
+  }, []);
   return (
     <>
       <table>
@@ -23,13 +27,7 @@ const StoriesList = memo(({ list, onRemoveItem }: StoriesListProps) => {
         </thead>
         <tbody>
           {list.map((item: Story) => {
-            return (
-              <Item
-                key={item.objectID}
-                item={item}
-                onRemoveItem={onRemoveItem}
-              />
-            );
+            return <Item key={item.objectID} item={item} onRemoveItem={handleRemoveStory} />;
           })}
         </tbody>
       </table>

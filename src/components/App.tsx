@@ -125,10 +125,6 @@ const App = () => {
     handleFetchStories();
   }, [handleFetchStories]);
 
-  const handleRemoveStory = useCallback((item: Story) => {
-    dispatchStories({ type: "REMOVE_STORY", payload: item });
-  }, []);
-
   const handleSearchInput = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -189,7 +185,7 @@ const App = () => {
         <NoResults />
       ) : (
         <>
-          <StoriesList list={sortedList} onRemoveItem={handleRemoveStory} />
+          <StoriesList list={sortedList} />
           {page < totalPages - 1 ? (
             isLoading ? (
               <LoadingMoreResults />
