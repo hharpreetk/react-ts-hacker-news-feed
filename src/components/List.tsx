@@ -50,12 +50,19 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
     });
   };
 
+  const getSortedList = (
+    list: Stories,
+    sortKey: string,
+    isReverse: boolean,
+  ) => {
+    const { sortFunction } = SORTS[sortKey];
+    const sorted = sortFunction(list);
+    return isReverse ? sorted.reverse() : sorted;
+  };
+
   const { sortKey, isReverse } = sort;
 
-  const { sortFunction } = SORTS[sortKey];
-  const sortedList = isReverse
-    ? sortFunction(list).reverse()
-    : sortFunction(list);
+  const sortedList = getSortedList(list, sortKey, isReverse);
 
   return (
     <>
