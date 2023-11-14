@@ -3,7 +3,7 @@ import axios from "axios";
 import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
-import SearchForm from "./SearchForm";
+import SearchList from "./SearchList";
 import List from "./List";
 
 // Api endpoint used to fetch stories
@@ -160,7 +160,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
-      <SearchForm
+      <SearchList
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
