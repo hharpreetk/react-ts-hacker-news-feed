@@ -5,9 +5,9 @@ import { Story, Stories, StoriesState, StoriesAction } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories, useStoriesDispatch } from "../contexts/StoriesContext";
-import Search from "./Search";
-import Sort from "./Sort";
-import List from "./List";
+import Search from "./StoriesSearch";
+import StoriesSorter from "./StoriesSorter";
+import StoriesList from "./StoriesList";
 
 // Api endpoint used to fetch stories
 const API_BASE = "https://hn.algolia.com/api/v1";
@@ -175,7 +175,7 @@ const App = () => {
         onSearchSubmit={handleSearchSubmit}
         suggestions={suggestions}
       />
-      <Sort
+      <StoriesSorter
         sorts={SORTS}
         sort={sort}
         onSortCriteriaSelect={handleSortCriteriaSelect}
@@ -189,7 +189,7 @@ const App = () => {
         <NoResults />
       ) : (
         <>
-          <List list={sortedList} onRemoveItem={handleRemoveStory} />
+          <StoriesList list={sortedList} onRemoveItem={handleRemoveStory} />
           {page < totalPages - 1 ? (
             isLoading ? (
               <LoadingMoreResults />
