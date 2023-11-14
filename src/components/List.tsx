@@ -1,6 +1,6 @@
-import { useState, memo } from "react";
+import { memo } from "react";
 import { Story, Stories } from "../types/types";
-import ListItem from "./ListItem";
+import Item from "./Item";
 
 interface ListProps {
   list: Stories;
@@ -24,7 +24,7 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
         <tbody>
           {list.map((item: Story) => {
             return (
-              <ListItem
+              <Item
                 key={item.objectID}
                 item={item}
                 onRemoveItem={onRemoveItem}

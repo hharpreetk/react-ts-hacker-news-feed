@@ -5,7 +5,7 @@ interface ItemProps {
   onRemoveItem: (item: ItemProps["item"]) => void;
 }
 
-const ListItem = ({ item, onRemoveItem }: ItemProps) => {
+const Item = ({ item, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item);
 
   const getFormattedDate = (dateInput: string): string => {
@@ -32,4 +32,4 @@ const ListItem = ({ item, onRemoveItem }: ItemProps) => {
   );
 };
 
-export default ListItem;
+export default Item;
