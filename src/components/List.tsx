@@ -1,7 +1,7 @@
 import { useState, memo } from "react";
 import { sortBy } from "lodash";
 import { Story, Stories } from "../types/types";
-import Item from "./Item";
+import ListItem from "./ListItem";
 import SortList from "./SortList";
 
 interface ListProps {
@@ -87,7 +87,7 @@ const List = memo(({ list, onRemoveItem }: ListProps) => {
         <tbody>
           {sortedList.map((item) => {
             return (
-              <Item
+              <ListItem
                 key={item.objectID}
                 item={item}
                 onRemoveItem={onRemoveItem}
