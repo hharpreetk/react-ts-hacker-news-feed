@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { sortBy } from "lodash";
 import { Stories } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
-import { useStories, useStoriesDispatch } from "../contexts/StoriesContext";
+import { useStories } from "../contexts/StoriesContext";
+import { useFetchStories } from "../hooks/useFetchStories";
 import Search from "./StoriesSearch";
 import StoriesSorter from "./StoriesSorter";
 import StoriesList from "./StoriesList";
@@ -42,8 +42,6 @@ const SORTS: Record<
 const App = () => {
   const stories = useStories();
 
-  const dispatchStories = useStoriesDispatch();
-
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
   const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
@@ -58,6 +56,13 @@ const App = () => {
     sortKey: "POINTS",
     isReverse: true,
   });
+
+  const fetchStories = useFetchStories(url);
+
+  // Fetch stories when the url changes
+  useEffect(() => {
+    fetchStories();
+  }, [url]);
 
   const handleSortCriteriaSelect = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -85,33 +90,6 @@ const App = () => {
   };
 
   const { data, isLoading, isError } = stories;
-
-  // Memorized handler function for fetching and handling stories
-  const handleFetchStories = useCallback(async () => {
-    // Do nothing if the search term is not present
-    if (!searchTerm) return;
-
-    // Show loading indicator when data loading is delayed
-    dispatchStories({ type: "STORIES_FETCH_INIT" });
-
-    // Fetch stories
-    try {
-      const result = await axios.get(url);
-      const { hits } = result.data; 
-
-      dispatchStories({
-        type: "STORIES_FETCH_SUCCESS",
-        payload: hits,
-      });
-    } catch (error) {
-      console.log(error);
-      dispatchStories({ type: "STORIES_FETCH_FAILURE" });
-    }
-  }, [url]);
-
-  useEffect(() => {
-    handleFetchStories();
-  }, [handleFetchStories]);
 
   const handleSearchInput = (
     event: React.ChangeEvent<HTMLInputElement>
