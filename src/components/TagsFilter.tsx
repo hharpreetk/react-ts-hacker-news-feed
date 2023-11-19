@@ -17,12 +17,13 @@ const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => {
 
   return (
     <div>
-      <label>Filter by Tags:</label>
+      <label>Filter by Type:</label>
       <Select
         isMulti
         options={OPTIONS}
         value={selectedTags}
         onChange={onTagChange}
+        placeholder="Select Type..."
       />
       {selectedTags.length ? (
         <p>Showing {displayTags(selectedTags.map((tag) => tag.label))}</p>
