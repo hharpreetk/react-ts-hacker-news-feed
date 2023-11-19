@@ -22,15 +22,16 @@ const buildApiUrl = (
   return url.toString();
 };
 
-// Constructs a URL for fetching stories sorted by relevance, then points, then number of comments, based on provided parameters
-const getRelevantStoriesUrl = (
+// Construct a URL for fetching stories based on provided parameters
+const getStoriesUrl = (
+  endpoint: string,
   query: string,
   selectedTags: MultiValueOption,
   numericFilters: string,
   page: number
 ) => {
   const tags = `(${selectedTags.map((type) => type.value).join(",")})`;
-  return buildApiUrl(API_ENDPOINTS.SEARCH, {
+  return buildApiUrl(endpoint, {
     query,
     tags,
     numericFilters,
@@ -38,20 +39,34 @@ const getRelevantStoriesUrl = (
   });
 };
 
-// Construct a URL for fetching stories sorted by date, most recent first, based on provided parameters
+// Constructs a URL for fetching relevant stories and popular stories
+const getRelevantStoriesUrl = (
+  query: string,
+  selectedTags: MultiValueOption,
+  numericFilters: string,
+  page: number
+) =>
+  getStoriesUrl(
+    API_ENDPOINTS.SEARCH,
+    query,
+    selectedTags,
+    numericFilters,
+    page
+  );
+
+// Construct a URL for fetching recent stories
 const getRecentStoriesUrl = (
   query: string,
   selectedTags: MultiValueOption,
   numericFilters: string,
   page: number
-) => {
-  const tags = `(${selectedTags.map((type) => type.value).join(",")})`;
-  return buildApiUrl(API_ENDPOINTS.SEARCH, {
+) =>
+  getStoriesUrl(
+    API_ENDPOINTS.SEARCH_BY_DATE,
     query,
-    tags,
+    selectedTags,
     numericFilters,
-    page,
-  });
-};
+    page
+  );
 
 export { getRelevantStoriesUrl, getRecentStoriesUrl };
