@@ -1,5 +1,5 @@
 import { memo, useCallback } from "react";
-import { Story, Stories } from "../types/types";
+import { Story, Stories } from "../types/stories";
 import Item from "./StoryItem";
 import { useStoriesDispatch } from "../contexts/StoriesContext";
 

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, ReactNode, useContext } from "react";
-import { Stories, Story } from "../types/types";
+import { Stories, Story } from "../types/stories";
 
 interface StoriesContextProps {
   children: ReactNode;
