@@ -4,6 +4,7 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getRelevantPopularStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
+import { OPTIONS } from "../constants/options";
 import { MultiValueOption } from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
@@ -14,7 +15,7 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<MultiValueOption>([]);
+  const [selectedTags, setSelectedTags] = useState<MultiValueOption>(OPTIONS); // Select all tags by default
 
   const [url, setUrl] = useState<string>(
     getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
