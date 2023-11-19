@@ -4,7 +4,9 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getRelevantStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
+import { MultiValueOption } from "../types/options";
 import Search from "./Search";
+import TagsFilter from "./TagsFilter";
 import StoriesList from "./StoriesList";
 
 const App = () => {
@@ -12,8 +14,10 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
+  const [selectedTags, setSelectedTags] = useState<MultiValueOption>([]);
+
   const [url, setUrl] = useState<string>(
-    getRelevantStoriesUrl(searchTerm, "story", "created_at_i>0", 0)
+    getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
   );
 
   // State to store an array of urls representing last five searches
@@ -29,6 +33,13 @@ const App = () => {
     fetchStories();
   }, [url]);
 
+  // Update the URL when the selected tags change
+  useEffect(() => {
+    setUrl(
+      getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+    );
+  }, [selectedTags]);
+
   const { data, isLoading, isError } = stories;
 
   const handleSearchInput = (
@@ -42,7 +53,9 @@ const App = () => {
     event: React.FormEvent<HTMLFormElement>
   ): void => {
     event.preventDefault();
-    setUrl(getRelevantStoriesUrl(searchTerm, "story", "created_at_i>0", 0));
+    setUrl(
+      getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+    );
     setSearchSuggestion(searchTerm);
   };
 
@@ -51,6 +64,10 @@ const App = () => {
     if (!suggestions.includes(searchTerm)) {
       setSuggestions([searchTerm, ...suggestions].slice(0, 5)); // Limit the number of suggestions to last 5
     }
+  };
+
+  const handleTagChange = (selectedOptions: MultiValueOption) => {
+    setSelectedTags(selectedOptions);
   };
 
   return (
@@ -62,6 +79,7 @@ const App = () => {
         onSearchSubmit={handleSearchSubmit}
         suggestions={suggestions}
       />
+      <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading ? (
