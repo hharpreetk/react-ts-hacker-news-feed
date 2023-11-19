@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { MultiValueOption } from "../types/options";
-import { OPTIONS } from "../constants/options";
+import { TAG_OPTIONS } from "../constants/options";
 interface TagsFilterProps {
   selectedTags: MultiValueOption;
   onTagChange: (selectedOptions: MultiValueOption) => void;
@@ -20,7 +20,7 @@ const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => {
       <label>Filter by Type:</label>
       <Select
         isMulti
-        options={OPTIONS}
+        options={TAG_OPTIONS}
         value={selectedTags}
         onChange={onTagChange}
         placeholder="Select Type..."

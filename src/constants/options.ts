@@ -1,4 +1,4 @@
-const OPTIONS = [
+const TAG_OPTIONS = [
   { value: "story", label: "Stories" },
   { value: "show_hn", label: "Show HN" },
   { value: "ask_hn", label: "Ask HN" },
@@ -8,4 +8,4 @@ const OPTIONS = [
   { value: "comment", label: "Comments" },
 ];
 
-export { OPTIONS };
+export { TAG_OPTIONS };
