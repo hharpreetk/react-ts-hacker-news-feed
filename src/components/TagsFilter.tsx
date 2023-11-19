@@ -26,7 +26,7 @@ const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => {
       />
       {selectedTags.length ? (
         <p>Showing {displayTags(selectedTags.map((tag) => tag.label))}</p>
-      ) : null}
+      ) : <p>Showing all types</p>}
     </div>
   );
 };
