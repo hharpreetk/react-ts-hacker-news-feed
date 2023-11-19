@@ -4,7 +4,7 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getRelevantStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import Search from "./StoriesSearch";
+import Search from "./Search";
 import StoriesList from "./StoriesList";
 
 const App = () => {

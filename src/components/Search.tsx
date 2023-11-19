@@ -1,16 +1,16 @@
-interface StoriesSearchProps {
+interface SearchProps {
   searchTerm: string;
   onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   suggestions: Array<string>;
 }
 
-const StoriesSearch = ({
+const Search = ({
   searchTerm,
   onSearchInput,
   onSearchSubmit,
   suggestions,
-}: StoriesSearchProps) => {
+}: SearchProps) => {
   return (
     <form onSubmit={onSearchSubmit}>
       <label htmlFor="search">Search: </label>
@@ -34,4 +34,4 @@ const StoriesSearch = ({
   );
 };
 
-export default StoriesSearch;
+export default Search;
