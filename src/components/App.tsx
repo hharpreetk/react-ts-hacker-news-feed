@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
-import { getRelevantStoriesUrl } from "../api/api";
+import { getRelevantPopularStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import { MultiValueOption } from "../types/options";
 import Search from "./Search";
@@ -17,7 +17,7 @@ const App = () => {
   const [selectedTags, setSelectedTags] = useState<MultiValueOption>([]);
 
   const [url, setUrl] = useState<string>(
-    getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+    getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
   );
 
   // State to store an array of urls representing last five searches
@@ -36,7 +36,7 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+      getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
     );
   }, [selectedTags]);
 
@@ -54,7 +54,7 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getRelevantStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+      getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
     );
     setSearchSuggestion(searchTerm);
   };

@@ -40,7 +40,7 @@ const getStoriesUrl = (
 };
 
 // Constructs a URL for fetching relevant stories and popular stories
-const getRelevantStoriesUrl = (
+const getRelevantPopularStoriesUrl = (
   query: string,
   selectedTags: MultiValueOption,
   numericFilters: string,
@@ -69,4 +69,4 @@ const getRecentStoriesUrl = (
     page
   );
 
-export { getRelevantStoriesUrl, getRecentStoriesUrl };
+export { getRelevantPopularStoriesUrl, getRecentStoriesUrl };
