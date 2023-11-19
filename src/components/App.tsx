@@ -4,20 +4,11 @@ import { Stories } from "../types/types";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
+import { getRelevantStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import Search from "./StoriesSearch";
 import StoriesSorter from "./StoriesSorter";
 import StoriesList from "./StoriesList";
-
-// Api endpoint used to fetch stories
-const API_BASE = "https://hn.algolia.com/api/v1";
-const API_SEARCH = "/search";
-const PARAM_SEARCH = "query=";
-const PARAM_PAGE = "page=";
-
-// Retrieve appropriate url based on search and page argument
-const getUrl = (searchTerm: string, page: number): string =>
-  `${API_BASE}${API_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`;
 
 const SORTS: Record<
   string,
@@ -44,7 +35,9 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [url, setUrl] = useState<string>(getUrl(searchTerm, 0));
+  const [url, setUrl] = useState<string>(
+    getRelevantStoriesUrl(searchTerm, "story", "created_at_i>0", 0)
+  );
 
   // State to store an array of urls representing last five searches
   const [suggestions, setSuggestions] = useSearchSuggestions(
@@ -102,7 +95,7 @@ const App = () => {
     event: React.FormEvent<HTMLFormElement>
   ): void => {
     event.preventDefault();
-    setUrl(getUrl(searchTerm, 0));
+    setUrl(getRelevantStoriesUrl(searchTerm, "story", "created_at_i>0", 0));
     setSearchSuggestion(searchTerm);
   };
 
