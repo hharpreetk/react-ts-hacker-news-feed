@@ -4,29 +4,23 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { MultiValueOption, SingleValueOption } from "../types/options";
+import { Option } from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import Sort from "./Sort";
 import StoriesList from "./StoriesList";
-import { SORT_OPTIONS } from "../constants/options";
 
 const App = () => {
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<MultiValueOption>([]);
+  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
 
-  const [selectedSort, setSelectedSort] = useState<SingleValueOption>(
-    SORT_OPTIONS[0]
-  );
-
-  // Use the dynamic API endpoint based on the selected sort option
-  const endpoint = selectedSort?.value || "search";
+  const [selectedSort, setSelectedSort] = useState<string>("search");
 
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
+    getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
   );
 
   // State to store an array of urls representing last five searches
@@ -45,7 +39,7 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
     );
   }, [selectedTags, selectedSort]);
 
@@ -63,7 +57,7 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
     );
     setSearchSuggestion(searchTerm);
   };
@@ -75,11 +69,11 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: MultiValueOption) => {
+  const handleTagChange = (selectedOptions: Option[]) => {
     setSelectedTags(selectedOptions);
   };
 
-  const handleSortSelect = (selectedOption: SingleValueOption) => {
+  const handleSortSelect = (selectedOption: string) => {
     setSelectedSort(selectedOption);
   };
 

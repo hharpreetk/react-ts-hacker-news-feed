@@ -1,22 +1,26 @@
-import Select from "react-select";
-import { SingleValueOption } from "../types/options";
+import { Select, MenuItem } from "@mui/material";
 import { SORT_OPTIONS } from "../constants/options";
+import { Option } from "../types/options";
 
 interface SortProps {
-  selectedSort: SingleValueOption;
-  onSortSelect: (selectedOption: SingleValueOption) => void;
+  selectedSort: string;
+  onSortSelect: (selectedOption: string) => void;
 }
 
 const Sort = ({ selectedSort, onSortSelect }: SortProps) => {
   return (
-    <div>
-      <label>Sort by:</label>
-      <Select
-        options={SORT_OPTIONS}
-        value={selectedSort}
-        onChange={onSortSelect}
-      />
-    </div>
+    <Select
+      value={selectedSort}
+      onChange={(event) => {
+        onSortSelect(event.target.value);
+      }}
+    >
+      {SORT_OPTIONS.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </Select>
   );
 };
 

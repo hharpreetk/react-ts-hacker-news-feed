@@ -1,34 +1,36 @@
-import Select from "react-select";
-import { MultiValueOption } from "../types/options";
+import { Option } from "../types/options";
+import { TextField, Autocomplete, MenuItem } from "@mui/material";
 import { TAG_OPTIONS } from "../constants/options";
+
 interface TagsFilterProps {
-  selectedTags: MultiValueOption;
-  onTagChange: (selectedOptions: MultiValueOption) => void;
+  selectedTags: Option[];
+  onTagChange: (selectedOptions: Option[]) => void;
 }
 
 const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => {
-  // Customize display logic for selected tags
-  const displayTags = (tags: string[]) => {
-    return tags.length > 1
-      ? tags.slice(0, tags.length - 1).join(", ") +
-          ` or ${tags[tags.length - 1]}`
-      : tags;
-  };
-
   return (
-    <div>
-      <label>Filter by Type:</label>
-      <Select
-        isMulti
-        options={TAG_OPTIONS}
-        value={selectedTags}
-        onChange={onTagChange}
-        placeholder="Select Type..."
-      />
-      {selectedTags.length ? (
-        <p>Showing {displayTags(selectedTags.map((tag) => tag.label))}</p>
-      ) : <p>Showing all types</p>}
-    </div>
+    <Autocomplete
+      multiple
+      options={TAG_OPTIONS}
+      value={selectedTags}
+      onChange={(_, newValue) => {
+        onTagChange(newValue);
+      }}
+      getOptionLabel={(option) => option.label}
+      disableCloseOnSelect
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Select Type"
+        />
+      )}
+      renderOption={(props, option) => (
+        <MenuItem {...props} key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      )}
+    />
   );
 };
 
