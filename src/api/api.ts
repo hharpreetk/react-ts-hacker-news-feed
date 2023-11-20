@@ -12,7 +12,7 @@ const buildApiUrl = (
   endpoint: string,
   queryParams: Record<string, string | number>
 ) => {
-  const url = new URL(`${API_BASE}${endpoint}`);
+  const url = new URL(`${API_BASE}/${endpoint}`);
 
   // Append query parameters to the URL
   Object.entries(queryParams).forEach(([key, value]) => {
@@ -40,33 +40,4 @@ const getStoriesUrl = (
 };
 
 // Constructs a URL for fetching relevant stories and popular stories
-const getRelevantPopularStoriesUrl = (
-  query: string,
-  selectedTags: MultiValueOption,
-  numericFilters: string,
-  page: number
-) =>
-  getStoriesUrl(
-    API_ENDPOINTS.SEARCH,
-    query,
-    selectedTags,
-    numericFilters,
-    page
-  );
-
-// Construct a URL for fetching recent stories
-const getRecentStoriesUrl = (
-  query: string,
-  selectedTags: MultiValueOption,
-  numericFilters: string,
-  page: number
-) =>
-  getStoriesUrl(
-    API_ENDPOINTS.SEARCH_BY_DATE,
-    query,
-    selectedTags,
-    numericFilters,
-    page
-  );
-
-export { getRelevantPopularStoriesUrl, getRecentStoriesUrl };
+export { getStoriesUrl };

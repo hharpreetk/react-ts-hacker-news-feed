@@ -8,4 +8,9 @@ const TAG_OPTIONS = [
   { value: "comment", label: "Comments" },
 ];
 
-export { TAG_OPTIONS };
+const SORT_OPTIONS = [
+  { value: "search", label: "Popularity" },
+  { value: "search_by_date", label: "Date" },
+];
+
+export { TAG_OPTIONS, SORT_OPTIONS };

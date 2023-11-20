@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
-import { getRelevantPopularStoriesUrl } from "../api/api";
+import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { MultiValueOption } from "../types/options";
+import { MultiValueOption, SingleValueOption } from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
+import Sort from "./Sort";
 import StoriesList from "./StoriesList";
+import { SORT_OPTIONS } from "../constants/options";
 
 const App = () => {
   const stories = useStories();
@@ -16,8 +18,15 @@ const App = () => {
 
   const [selectedTags, setSelectedTags] = useState<MultiValueOption>([]);
 
+  const [selectedSort, setSelectedSort] = useState<SingleValueOption>(
+    SORT_OPTIONS[0]
+  );
+
+  // Use the dynamic API endpoint based on the selected sort option
+  const endpoint = selectedSort?.value || "search";
+
   const [url, setUrl] = useState<string>(
-    getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+    getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
   );
 
   // State to store an array of urls representing last five searches
@@ -36,9 +45,9 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
     );
-  }, [selectedTags]);
+  }, [selectedTags, selectedSort]);
 
   const { data, isLoading, isError } = stories;
 
@@ -54,7 +63,7 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getRelevantPopularStoriesUrl(searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(endpoint, searchTerm, selectedTags, "created_at_i>0", 0)
     );
     setSearchSuggestion(searchTerm);
   };
@@ -70,6 +79,10 @@ const App = () => {
     setSelectedTags(selectedOptions);
   };
 
+  const handleSortSelect = (selectedOption: SingleValueOption) => {
+    setSelectedSort(selectedOption);
+  };
+
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
@@ -80,6 +93,7 @@ const App = () => {
         suggestions={suggestions}
       />
       <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
+      <Sort selectedSort={selectedSort} onSortSelect={handleSortSelect} />
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading ? (

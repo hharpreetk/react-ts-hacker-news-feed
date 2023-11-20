@@ -1,4 +1,4 @@
-import { MultiValue } from "react-select";
+import { MultiValue, SingleValue } from "react-select";
 
 type Option = {
   value: string;
@@ -7,4 +7,6 @@ type Option = {
 
 type MultiValueOption = MultiValue<Option>;
 
-export { MultiValueOption };
+type SingleValueOption = SingleValue<Option>;
+
+export { MultiValueOption, SingleValueOption};
