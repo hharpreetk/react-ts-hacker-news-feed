@@ -1,6 +1,5 @@
 import { Select, MenuItem } from "@mui/material";
 import { SORT_OPTIONS } from "../constants/options";
-import { Option } from "../types/options";
 
 interface SortProps {
   selectedSort: string;

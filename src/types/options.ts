@@ -3,4 +3,10 @@ type TagOption = {
   label: string;
 };
 
-export { TagOption };
+interface TimeOption {
+  value: string;
+  label: string;
+  numericFilter: string;
+}
+
+export { TagOption, TimeOption };

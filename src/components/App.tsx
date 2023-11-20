@@ -4,24 +4,40 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { TagOption } from "../types/options";
+import { TagOption, TimeOption } from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import Sort from "./Sort";
 import StoriesList from "./StoriesList";
-import { TAG_OPTIONS } from "../constants/options";
+import { TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
+import TimeFilter from "./TimeFilter";
+import { SingleValue } from "react-select";
 
 const App = () => {
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<TagOption[]>([TAG_OPTIONS[0]]);
+  const [selectedTags, setSelectedTags] = useState<TagOption[]>([
+    TAG_OPTIONS[0],
+  ]);
 
   const [selectedSort, setSelectedSort] = useState<string>("search");
 
+  const [selectedTime, setSelectedTime] = useState<SingleValue<TimeOption>>(
+    TIME_OPTIONS[0]
+  );
+
+  const timeFilter = selectedTime?.numericFilter || "created_at>0";
+
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
+    getStoriesUrl(
+      selectedSort,
+      searchTerm,
+      selectedTags,
+      timeFilter,
+      0
+    )
   );
 
   // State to store an array of urls representing last five searches
@@ -40,9 +56,9 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(selectedSort, searchTerm, selectedTags, timeFilter, 0)
     );
-  }, [selectedTags, selectedSort]);
+  }, [selectedTags, selectedSort, selectedTime]);
 
   const { data, isLoading, isError } = stories;
 
@@ -58,7 +74,7 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getStoriesUrl(selectedSort, searchTerm, selectedTags, "created_at_i>0", 0)
+      getStoriesUrl(selectedSort, searchTerm, selectedTags, timeFilter, 0)
     );
     setSearchSuggestion(searchTerm);
   };
@@ -78,6 +94,10 @@ const App = () => {
     setSelectedSort(selectedOption);
   };
 
+  const handleTimeSelect = (selectedOption: SingleValue<TimeOption>) => {
+    setSelectedTime(selectedOption);
+  };
+
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
@@ -89,6 +109,7 @@ const App = () => {
       />
       <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
       <Sort selectedSort={selectedSort} onSortSelect={handleSortSelect} />
+      <TimeFilter selectedTime={selectedTime} onTimeSelect={handleTimeSelect} />
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading ? (
