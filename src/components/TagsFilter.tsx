@@ -1,10 +1,10 @@
-import { Option } from "../types/options";
+import { TagOption } from "../types/options";
 import { TextField, Autocomplete, MenuItem } from "@mui/material";
 import { TAG_OPTIONS } from "../constants/options";
 
 interface TagsFilterProps {
-  selectedTags: Option[];
-  onTagChange: (selectedOptions: Option[]) => void;
+  selectedTags: TagOption[];
+  onTagChange: (selectedOptions: TagOption[]) => void;
 }
 
 const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => {

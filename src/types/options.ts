@@ -1,6 +1,6 @@
-type Option = {
+type TagOption = {
   value: string;
   label: string;
 };
 
-export { Option};
+export { TagOption };

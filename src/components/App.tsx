@@ -4,7 +4,7 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { Option } from "../types/options";
+import { TagOption } from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import Sort from "./Sort";
@@ -16,7 +16,7 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<Option[]>([TAG_OPTIONS[0]]);
+  const [selectedTags, setSelectedTags] = useState<TagOption[]>([TAG_OPTIONS[0]]);
 
   const [selectedSort, setSelectedSort] = useState<string>("search");
 
@@ -70,7 +70,7 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: Option[]) => {
+  const handleTagChange = (selectedOptions: TagOption[]) => {
     setSelectedTags(selectedOptions);
   };
 

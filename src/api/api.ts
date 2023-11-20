@@ -1,4 +1,4 @@
-import { Option } from "../types/options";
+import { TagOption } from "../types/options";
 
 const API_BASE = "https://hn.algolia.com/api/v1";
 
@@ -21,7 +21,7 @@ const buildApiUrl = (
 const getStoriesUrl = (
   endpoint: string,
   query: string,
-  selectedTags: Option[],
+  selectedTags: TagOption[],
   numericFilters: string,
   page: number
 ) => {
