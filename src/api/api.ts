@@ -1,11 +1,6 @@
-import { MultiValueOption } from "../types/options";
+import { Option } from "../types/options";
 
 const API_BASE = "https://hn.algolia.com/api/v1";
-
-const API_ENDPOINTS = {
-  SEARCH: "/search",
-  SEARCH_BY_DATE: "/search_by_date",
-};
 
 // Construct URL with query parameters for API requests
 const buildApiUrl = (
@@ -26,7 +21,7 @@ const buildApiUrl = (
 const getStoriesUrl = (
   endpoint: string,
   query: string,
-  selectedTags: MultiValueOption,
+  selectedTags: Option[],
   numericFilters: string,
   page: number
 ) => {
