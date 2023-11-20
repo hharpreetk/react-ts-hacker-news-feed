@@ -9,13 +9,14 @@ import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import Sort from "./Sort";
 import StoriesList from "./StoriesList";
+import { TAG_OPTIONS } from "../constants/options";
 
 const App = () => {
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Option[]>([TAG_OPTIONS[0]]);
 
   const [selectedSort, setSelectedSort] = useState<string>("search");
 
