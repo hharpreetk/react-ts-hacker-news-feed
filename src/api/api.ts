@@ -1,13 +1,13 @@
-import { TagOption } from "../types/options";
+import { MultiValueTagOption } from "../types/options";
 
 const API_BASE = "https://hn.algolia.com/api/v1";
 
 // Construct URL with query parameters for API requests
 const buildApiUrl = (
-  endpoint: string,
+  resource: string,
   queryParams: Record<string, string | number>
 ) => {
-  const url = new URL(`${API_BASE}/${endpoint}`);
+  const url = new URL(`${API_BASE}/${resource}`);
 
   // Append query parameters to the URL
   Object.entries(queryParams).forEach(([key, value]) => {
@@ -19,14 +19,14 @@ const buildApiUrl = (
 
 // Construct a URL for fetching stories based on provided parameters
 const getStoriesUrl = (
-  endpoint: string,
+  resource: string,
   query: string,
-  selectedTags: TagOption[],
+  selectedTags: MultiValueTagOption,
   numericFilters: string,
   page: number
 ) => {
   const tags = `(${selectedTags.map((type) => type.value).join(",")})`;
-  return buildApiUrl(endpoint, {
+  return buildApiUrl(resource, {
     query,
     tags,
     numericFilters,

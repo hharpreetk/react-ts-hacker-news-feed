@@ -4,40 +4,41 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { TagOption, TimeOption } from "../types/options";
+import {
+  MultiValueTagOption,
+  SingleValueSortOption,
+  SingleValueTimeOption,
+} from "../types/options";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import Sort from "./Sort";
 import StoriesList from "./StoriesList";
-import { TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
+import { SORT_OPTIONS, TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
 import TimeFilter from "./TimeFilter";
-import { SingleValue } from "react-select";
 
 const App = () => {
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<TagOption[]>([
+  const [selectedTags, setSelectedTags] = useState<MultiValueTagOption>([
     TAG_OPTIONS[0],
   ]);
 
-  const [selectedSort, setSelectedSort] = useState<string>("search");
+  const [selectedSort, setSelectedSort] = useState<SingleValueSortOption>(
+    SORT_OPTIONS[0]
+  );
 
-  const [selectedTime, setSelectedTime] = useState<SingleValue<TimeOption>>(
+  const [selectedTime, setSelectedTime] = useState<SingleValueTimeOption>(
     TIME_OPTIONS[0]
   );
 
   const timeFilter = selectedTime?.numericFilter || "created_at>0";
 
+  const sortResource = selectedSort?.resource || "search";
+
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(
-      selectedSort,
-      searchTerm,
-      selectedTags,
-      timeFilter,
-      0
-    )
+    getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
   );
 
   // State to store an array of urls representing last five searches
@@ -56,7 +57,7 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getStoriesUrl(selectedSort, searchTerm, selectedTags, timeFilter, 0)
+      getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
     );
   }, [selectedTags, selectedSort, selectedTime]);
 
@@ -74,7 +75,7 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getStoriesUrl(selectedSort, searchTerm, selectedTags, timeFilter, 0)
+      getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
     );
     setSearchSuggestion(searchTerm);
   };
@@ -86,15 +87,15 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: TagOption[]) => {
+  const handleTagChange = (selectedOptions: MultiValueTagOption) => {
     setSelectedTags(selectedOptions);
   };
 
-  const handleSortSelect = (selectedOption: string) => {
+  const handleSortSelect = (selectedOption: SingleValueSortOption) => {
     setSelectedSort(selectedOption);
   };
 
-  const handleTimeSelect = (selectedOption: SingleValue<TimeOption>) => {
+  const handleTimeSelect = (selectedOption: SingleValueTimeOption) => {
     setSelectedTime(selectedOption);
   };
 

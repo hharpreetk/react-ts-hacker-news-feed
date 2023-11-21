@@ -1,4 +1,8 @@
-import { TimeOption } from "../types/options";
+import {
+  MultiValueTagOption,
+  SingleValueSortOption,
+  SingleValueTimeOption,
+} from "../types/options";
 
 const TAG_OPTIONS = [
   { value: "story", label: "Stories" },
@@ -11,11 +15,11 @@ const TAG_OPTIONS = [
 ];
 
 const SORT_OPTIONS = [
-  { value: "search", label: "Popularity" },
-  { value: "search_by_date", label: "Date" },
+  { value: "popularity", label: "Popularity", resource: "search" },
+  { value: "date", label: "Date", resource: "search_by_date" },
 ];
 
-const TIME_OPTIONS: TimeOption[] = [
+const TIME_OPTIONS = [
   { value: "anytime", label: "Any Time", numericFilter: "created_at_i>0" },
   {
     value: "past24hr",

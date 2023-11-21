@@ -1,10 +1,10 @@
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 import { TIME_OPTIONS } from "../constants/options";
-import { TimeOption } from "../types/options";
+import { SingleValueTimeOption } from "../types/options";
 
 interface TimeFilterProps {
-  selectedTime: SingleValue<TimeOption>;
-  onTimeSelect: (selectedOption: SingleValue<TimeOption>) => void;
+  selectedTime: SingleValueTimeOption;
+  onTimeSelect: (selectedOption: SingleValueTimeOption) => void;
 }
 
 const TimeFilter = ({ selectedTime, onTimeSelect }: TimeFilterProps) => {
