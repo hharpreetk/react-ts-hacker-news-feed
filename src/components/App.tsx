@@ -15,7 +15,7 @@ import Sort from "./Sort";
 import StoriesList from "./StoriesList";
 import { SORT_OPTIONS, TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
 import TimeFilter from "./TimeFilter";
-import { Pagination } from "@mantine/core";
+import { Pagination, Group } from "@mantine/core";
 
 const App = () => {
   const stories = useStories();
@@ -145,11 +145,19 @@ const App = () => {
       ) : (
         <>
           <StoriesList list={data} />
-          <Pagination
+          <Pagination.Root
             total={totalPages}
             value={activePage + 1}
             onChange={handleActivePage}
-          />
+          >
+            <Group gap={5} justify="center">
+              <Pagination.First />
+              <Pagination.Previous />
+              <Pagination.Items />
+              <Pagination.Next />
+              <Pagination.Last />
+            </Group>
+          </Pagination.Root>
         </>
       )}
     </div>
