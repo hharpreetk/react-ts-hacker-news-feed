@@ -15,6 +15,7 @@ import Sort from "./Sort";
 import StoriesList from "./StoriesList";
 import { SORT_OPTIONS, TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
 import TimeFilter from "./TimeFilter";
+import { Pagination } from "@mantine/core";
 
 const App = () => {
   const stories = useStories();
@@ -33,12 +34,20 @@ const App = () => {
     TIME_OPTIONS[0]
   );
 
+  const [activePage, setPage] = useState(0);
+
   const timeFilter = selectedTime?.numericFilter || "created_at>0";
 
   const sortResource = selectedSort?.resource || "search";
 
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
+    getStoriesUrl(
+      sortResource,
+      searchTerm,
+      selectedTags,
+      timeFilter,
+      activePage
+    )
   );
 
   // State to store an array of urls representing last five searches
@@ -57,11 +66,17 @@ const App = () => {
   // Update the URL when the selected tags change
   useEffect(() => {
     setUrl(
-      getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
+      getStoriesUrl(
+        sortResource,
+        searchTerm,
+        selectedTags,
+        timeFilter,
+        activePage
+      )
     );
-  }, [selectedTags, selectedSort, selectedTime]);
+  }, [selectedTags, selectedSort, selectedTime, activePage]);
 
-  const { data, isLoading, isError } = stories;
+  const { data, isLoading, isError, totalPages } = stories;
 
   const handleSearchInput = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -75,7 +90,13 @@ const App = () => {
   ): void => {
     event.preventDefault();
     setUrl(
-      getStoriesUrl(sortResource, searchTerm, selectedTags, timeFilter, 0)
+      getStoriesUrl(
+        sortResource,
+        searchTerm,
+        selectedTags,
+        timeFilter,
+        activePage
+      )
     );
     setSearchSuggestion(searchTerm);
   };
@@ -99,6 +120,10 @@ const App = () => {
     setSelectedTime(selectedOption);
   };
 
+  const handleActivePage = (selectedPage: number) => {
+    setPage(selectedPage - 1);
+  };
+
   return (
     <div className="App">
       <h1>Hacker Stories</h1>
@@ -118,7 +143,14 @@ const App = () => {
       ) : data.length === 0 ? (
         <NoResults />
       ) : (
-        <StoriesList list={data} />
+        <>
+          <StoriesList list={data} />
+          <Pagination
+            total={totalPages}
+            value={activePage + 1}
+            onChange={handleActivePage}
+          />
+        </>
       )}
     </div>
   );

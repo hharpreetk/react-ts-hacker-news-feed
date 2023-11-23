@@ -11,9 +11,10 @@ const useFetchStories = (url: string) => {
     // Fetch stories
     try {
       const result = await axios.get(url);
+      const { hits, nbPages } = result.data;
       dispatchStories({
         type: "STORIES_FETCH_SUCCESS",
-        payload: result.data.hits,
+        payload: { hits, nbPages },
       });
     } catch (error) {
       dispatchStories({ type: "STORIES_FETCH_FAILURE" });
