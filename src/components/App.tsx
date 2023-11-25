@@ -35,13 +35,9 @@ const App = () => {
 
   const [activePage, setPage] = useState(0);
 
-  const timeFilter = selectedTime
-    ? TIME_NUMERIC_FILTERS[selectedTime]
-    : "created_at>0";
+  const timeFilter = selectedTime ? TIME_NUMERIC_FILTERS[selectedTime] : "";
 
-  const sortResource = selectedSort
-    ? SORT_RESOURCE_FILTERS[selectedSort]
-    : "search";
+  const sortResource = selectedSort ? SORT_RESOURCE_FILTERS[selectedSort] : "";
 
   const [url, setUrl] = useState<string>(
     getStoriesUrl(
