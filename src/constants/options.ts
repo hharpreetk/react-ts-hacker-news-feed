@@ -1,10 +1,6 @@
-import {
-  MultiValueTagOption,
-  SingleValueSortOption,
-  SingleValueTimeOption,
-} from "../types/options";
+import { Options } from "../types/options";
 
-const TAG_OPTIONS = [
+const TAG_OPTIONS: Options = [
   { value: "story", label: "Stories" },
   { value: "show_hn", label: "Show HN" },
   { value: "ask_hn", label: "Ask HN" },
@@ -14,40 +10,18 @@ const TAG_OPTIONS = [
   { value: "comment", label: "Comments" },
 ];
 
-const SORT_OPTIONS = [
-  { value: "popularity", label: "Popularity", resource: "search" },
-  { value: "date", label: "Date", resource: "search_by_date" },
+const SORT_OPTIONS: Options = [
+  { value: "popularity", label: "Popularity" },
+  { value: "date", label: "Date" },
 ];
 
-const TIME_OPTIONS = [
-  { value: "anytime", label: "Any Time", numericFilter: "created_at_i>0" },
-  {
-    value: "past24hr",
-    label: "Past 24 Hours",
-    numericFilter:
-      "created_at_i>" + Math.floor((Date.now() - 24 * 60 * 60 * 1000) / 1000),
-  },
-  {
-    value: "pastWeek",
-    label: "Past Week",
-    numericFilter:
-      "created_at_i>" +
-      Math.floor((Date.now() - 7 * 24 * 60 * 60 * 1000) / 1000),
-  },
-  {
-    value: "pastMonth",
-    label: "Past Month",
-    numericFilter:
-      "created_at_i>" +
-      Math.floor((Date.now() - 30 * 24 * 60 * 60 * 1000) / 1000),
-  },
-  {
-    value: "pastYear",
-    label: "Past Year",
-    numericFilter:
-      "created_at_i>" +
-      Math.floor((Date.now() - 365 * 24 * 60 * 60 * 1000) / 1000),
-  },
+const TIME_OPTIONS: Options = [
+  { value: "anytime", label: "Any Time" },
+  { value: "past24hr", label: "Past 24 Hours" },
+  { value: "pastWeek", label: "Past Week" },
+  { value: "pastMonth", label: "Past Month" },
+  { value: "pastYear", label: "Past Year" },
+  // ... other options
 ];
 
 export { TAG_OPTIONS, SORT_OPTIONS, TIME_OPTIONS };

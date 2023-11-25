@@ -1,26 +1,8 @@
-import { SingleValue, MultiValue } from "react-select";
-
-type TagOption = {
+type Option = {
   value: string;
   label: string;
 };
 
-type SortOption = {
-  value: string;
-  label: string;
-  resource: string;
-};
+type Options = Option[];
 
-type TimeOption = {
-  value: string;
-  label: string;
-  numericFilter: string;
-};
-
-type SingleValueSortOption = SingleValue<SortOption>;
-
-type SingleValueTimeOption = SingleValue<TimeOption>;
-
-type MultiValueTagOption = MultiValue<TagOption>;
-
-export { MultiValueTagOption, SingleValueSortOption, SingleValueTimeOption };
+export { Options };

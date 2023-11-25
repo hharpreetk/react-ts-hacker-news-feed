@@ -1,20 +1,19 @@
-import Select from "react-select";
+import { Select } from "@mantine/core";
 import { TIME_OPTIONS } from "../constants/options";
-import { SingleValueTimeOption } from "../types/options";
 
 interface TimeFilterProps {
-  selectedTime: SingleValueTimeOption;
-  onTimeSelect: (selectedOption: SingleValueTimeOption) => void;
+  selectedTime: string | null;
+  onTimeSelect: (selectedOption: string | null) => void;
 }
 
 const TimeFilter = ({ selectedTime, onTimeSelect }: TimeFilterProps) => {
   return (
     <div>
       <Select
-        options={TIME_OPTIONS}
+        label="Filter by Date"
+        data={TIME_OPTIONS}
         value={selectedTime}
         onChange={onTimeSelect}
-        required
       />
     </div>
   );

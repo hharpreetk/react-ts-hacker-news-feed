@@ -21,11 +21,11 @@ const buildApiUrl = (
 const getStoriesUrl = (
   resource: string,
   query: string,
-  selectedTags: MultiValueTagOption,
+  selectedTags: string[],
   numericFilters: string,
   page: number
 ) => {
-  const tags = `(${selectedTags.map((type) => type.value).join(",")})`;
+  const tags = `(${selectedTags.join(",")})`;
   return buildApiUrl(resource, {
     query,
     tags,

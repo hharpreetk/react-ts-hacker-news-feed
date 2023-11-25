@@ -1,20 +1,22 @@
-import { MultiValueTagOption } from "../types/options";
-import Select from "react-select";
+import { MultiSelect } from "@mantine/core";
 import { TAG_OPTIONS } from "../constants/options";
 
 interface TagsFilterProps {
-  selectedTags: MultiValueTagOption;
-  onTagChange: (selectedOptions: MultiValueTagOption) => void;
+  selectedTags: string[];
+  onTagChange: (selectedOptions: string[]) => void;
 }
 
 const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => (
   <div>
-    <Select
-      isMulti
-      options={TAG_OPTIONS}
+    <MultiSelect
+      label="Filter by Story Type or Types"
+      data={TAG_OPTIONS}
       value={selectedTags}
       onChange={onTagChange}
-      placeholder="Select Types..."
+      placeholder="Select a type"
+      hidePickedOptions
+      clearable
+      required
     />
   </div>
 );

@@ -4,41 +4,44 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import {
-  MultiValueTagOption,
-  SingleValueSortOption,
-  SingleValueTimeOption,
-} from "../types/options";
+import { Pagination, Group } from "@mantine/core";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
-import Sort from "./Sort";
+import SortFilter from "./SortFilter";
+import TimeFilter from "./TimeFilter";
 import StoriesList from "./StoriesList";
 import { SORT_OPTIONS, TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
-import TimeFilter from "./TimeFilter";
-import { Pagination, Group } from "@mantine/core";
+import {
+  SORT_RESOURCE_FILTERS,
+  TIME_NUMERIC_FILTERS,
+} from "../constants/mappings";
 
 const App = () => {
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
-  const [selectedTags, setSelectedTags] = useState<MultiValueTagOption>([
-    TAG_OPTIONS[0],
+  const [selectedTags, setSelectedTags] = useState<string[]>([
+    TAG_OPTIONS[0].value,
   ]);
 
-  const [selectedSort, setSelectedSort] = useState<SingleValueSortOption>(
-    SORT_OPTIONS[0]
+  const [selectedSort, setSelectedSort] = useState<string | null>(
+    SORT_OPTIONS[0].value // Select first option by default
   );
 
-  const [selectedTime, setSelectedTime] = useState<SingleValueTimeOption>(
-    TIME_OPTIONS[0]
+  const [selectedTime, setSelectedTime] = useState<string | null>(
+    TIME_OPTIONS[0].value
   );
 
   const [activePage, setPage] = useState(0);
 
-  const timeFilter = selectedTime?.numericFilter || "created_at>0";
+  const timeFilter = selectedTime
+    ? TIME_NUMERIC_FILTERS[selectedTime]
+    : "created_at>0";
 
-  const sortResource = selectedSort?.resource || "search";
+  const sortResource = selectedSort
+    ? SORT_RESOURCE_FILTERS[selectedSort]
+    : "search";
 
   const [url, setUrl] = useState<string>(
     getStoriesUrl(
@@ -108,15 +111,15 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: MultiValueTagOption) => {
+  const handleTagChange = (selectedOptions: string[]) => {
     setSelectedTags(selectedOptions);
   };
 
-  const handleSortSelect = (selectedOption: SingleValueSortOption) => {
+  const handleSortSelect = (selectedOption: string | null) => {
     setSelectedSort(selectedOption);
   };
 
-  const handleTimeSelect = (selectedOption: SingleValueTimeOption) => {
+  const handleTimeSelect = (selectedOption: string | null) => {
     setSelectedTime(selectedOption);
   };
 
@@ -133,9 +136,17 @@ const App = () => {
         onSearchSubmit={handleSearchSubmit}
         suggestions={suggestions}
       />
-      <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
-      <Sort selectedSort={selectedSort} onSortSelect={handleSortSelect} />
-      <TimeFilter selectedTime={selectedTime} onTimeSelect={handleTimeSelect} />
+      <Group>
+        <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
+        <SortFilter
+          selectedSort={selectedSort}
+          onSortSelect={handleSortSelect}
+        />
+        <TimeFilter
+          selectedTime={selectedTime}
+          onTimeSelect={handleTimeSelect}
+        />
+      </Group>
       {isError ? (
         <p>Something went wrong...</p>
       ) : isLoading ? (
