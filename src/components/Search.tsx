@@ -1,6 +1,9 @@
+import { Autocomplete, ActionIcon } from "@mantine/core";
+import { IconSearch, IconArrowRight } from "@tabler/icons-react";
+
 interface SearchProps {
   searchTerm: string;
-  onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchInput: (searchInput: string) => void;
   onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   suggestions: Array<string>;
 }
@@ -13,23 +16,19 @@ const Search = ({
 }: SearchProps) => {
   return (
     <form onSubmit={onSearchSubmit}>
-      <label htmlFor="search">Search: </label>
-      <input
+      <Autocomplete
         id="search"
         value={searchTerm}
-        onChange={onSearchInput}
-        list="suggestions"
-        autoComplete="off"
+        onChange={(value) => onSearchInput(value)}
+        data={suggestions}
+        leftSection={<IconSearch size={16} />}
+        rightSection={
+          <ActionIcon radius="xl" size={24} variant="filled" type="submit">
+            <IconArrowRight size={14} />
+          </ActionIcon>
+        }
         autoFocus
       />
-      <datalist id="suggestions">
-        {suggestions.map((suggestion, index) => (
-          <option key={index} value={suggestion} />
-        ))}
-      </datalist>
-      <button type="submit" disabled={!searchTerm}>
-        Submit
-      </button>
     </form>
   );
 };
