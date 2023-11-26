@@ -15,7 +15,7 @@ const SORT_OPTIONS: Options = [
   { value: "date", label: "Date" },
 ];
 
-const TIME_OPTIONS: Options = [
+const DATE_OPTIONS: Options = [
   { value: "anytime", label: "Any Time" },
   { value: "past24hr", label: "Past 24 Hours" },
   { value: "pastWeek", label: "Past Week" },
@@ -24,4 +24,4 @@ const TIME_OPTIONS: Options = [
   // ... other options
 ];
 
-export { TAG_OPTIONS, SORT_OPTIONS, TIME_OPTIONS };
+export { TAG_OPTIONS, SORT_OPTIONS, DATE_OPTIONS };

@@ -8,12 +8,12 @@ import { Pagination, Group } from "@mantine/core";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import SortFilter from "./SortFilter";
-import TimeFilter from "./TimeFilter";
+import DateFilter from "./DateFilter";
 import StoriesList from "./StoriesList";
-import { SORT_OPTIONS, TAG_OPTIONS, TIME_OPTIONS } from "../constants/options";
+import { SORT_OPTIONS, TAG_OPTIONS, DATE_OPTIONS } from "../constants/options";
 import {
   SORT_RESOURCE_FILTERS,
-  TIME_NUMERIC_FILTERS,
+  DATE_NUMERIC_FILTERS,
 } from "../constants/mappings";
 
 const App = () => {
@@ -29,13 +29,13 @@ const App = () => {
     SORT_OPTIONS[0].value // Select first option by default
   );
 
-  const [selectedTime, setSelectedTime] = useState<string | null>(
-    TIME_OPTIONS[0].value
+  const [selectedDate, setSelectedDate] = useState<string | null>(
+    DATE_OPTIONS[0].value
   );
 
   const [activePage, setPage] = useState(0);
 
-  const timeFilter = selectedTime ? TIME_NUMERIC_FILTERS[selectedTime] : "";
+  const dateFilter = selectedDate ? DATE_NUMERIC_FILTERS[selectedDate] : "";
 
   const sortResource = selectedSort ? SORT_RESOURCE_FILTERS[selectedSort] : "";
 
@@ -44,7 +44,7 @@ const App = () => {
       sortResource,
       searchTerm,
       selectedTags,
-      timeFilter,
+      dateFilter,
       activePage
     )
   );
@@ -69,11 +69,11 @@ const App = () => {
         sortResource,
         searchTerm,
         selectedTags,
-        timeFilter,
+        dateFilter,
         activePage
       )
     );
-  }, [selectedTags, selectedSort, selectedTime, activePage]);
+  }, [selectedTags, selectedSort, selectedDate, activePage]);
 
   const { data, isLoading, isError, totalPages } = stories;
 
@@ -93,7 +93,7 @@ const App = () => {
         sortResource,
         searchTerm,
         selectedTags,
-        timeFilter,
+        dateFilter,
         activePage
       )
     );
@@ -115,8 +115,8 @@ const App = () => {
     setSelectedSort(selectedOption);
   };
 
-  const handleTimeSelect = (selectedOption: string | null) => {
-    setSelectedTime(selectedOption);
+  const handleDateSelect = (selectedOption: string | null) => {
+    setSelectedDate(selectedOption);
   };
 
   const handleActivePage = (selectedPage: number) => {
@@ -138,9 +138,9 @@ const App = () => {
           selectedSort={selectedSort}
           onSortSelect={handleSortSelect}
         />
-        <TimeFilter
-          selectedTime={selectedTime}
-          onTimeSelect={handleTimeSelect}
+        <DateFilter
+          selectedDate={selectedDate}
+          onDateSelect={handleDateSelect}
         />
       </Group>
       {isError ? (

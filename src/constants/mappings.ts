@@ -1,5 +1,5 @@
 // Mapping between TIME_OPTIONS and their numeric filter values
-const TIME_NUMERIC_FILTERS: Record<string, string> = {
+const DATE_NUMERIC_FILTERS: Record<string, string> = {
   anytime: "created_at_i>0",
   past24hr: `created_at_i>${Math.floor(
     (Date.now() - 24 * 60 * 60 * 1000) / 1000
@@ -23,4 +23,4 @@ const SORT_RESOURCE_FILTERS: Record<string, string> = {
   // ... add more mappings as needed
 };
 
-export { TIME_NUMERIC_FILTERS, SORT_RESOURCE_FILTERS };
+export { DATE_NUMERIC_FILTERS, SORT_RESOURCE_FILTERS };
