@@ -19,7 +19,7 @@ import {
 const App = () => {
   const stories = useStories();
 
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
   const [selectedTags, setSelectedTags] = useState<string[]>([
     TAG_OPTIONS[0].value,
@@ -77,10 +77,8 @@ const App = () => {
 
   const { data, isLoading, isError, totalPages } = stories;
 
-  const handleSearchInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSearchTerm(event.target.value);
+  const handleSearchInput = (searchInput: string): void => {
+    setSearchTerm(searchInput);
   };
 
   // Set Url when search is confirmed by the user
@@ -101,9 +99,9 @@ const App = () => {
   };
 
   const setSearchSuggestion = (searchTerm: string) => {
-    // Check if the search term doesn't already exist in the suggestions array
-    if (!suggestions.includes(searchTerm)) {
-      setSuggestions([searchTerm, ...suggestions].slice(0, 5)); // Limit the number of suggestions to last 5
+    // Check if the search term is not empty and doesn't already exist in the suggestions array
+    if (searchTerm && !suggestions.includes(searchTerm)) {
+      setSuggestions([searchTerm, ...suggestions].slice(0, 5)); // Limit the number of suggestions to the last 5
     }
   };
 
