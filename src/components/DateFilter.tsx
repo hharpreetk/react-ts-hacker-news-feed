@@ -10,7 +10,7 @@ const DateFilter = ({ selectedDate, onDateSelect }: DateFilterProps) => {
   return (
     <div>
       <Select
-        label="Filter by Date"
+        label="Filter by Date Range"
         data={DATE_OPTIONS}
         value={selectedDate}
         onChange={onDateSelect}

@@ -9,11 +9,11 @@ interface TagsFilterProps {
 const TagsFilter = ({ selectedTags, onTagChange }: TagsFilterProps) => (
   <div>
     <MultiSelect
-      label="Filter by Story Type or Types"
+      label="Filter by Content Types"
       data={TAG_OPTIONS}
       value={selectedTags}
       onChange={onTagChange}
-      placeholder="Select a type"
+      placeholder="Select Content Type"
       hidePickedOptions
       clearable
       required

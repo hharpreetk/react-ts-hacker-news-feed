@@ -9,7 +9,7 @@ interface SortFilterProps {
 const SortFilter = ({ selectedSort, onSortSelect }: SortFilterProps) => {
   return (
     <Select
-      label="Sort by"
+      label="Sort Stories by"
       data={SORT_OPTIONS}
       value={selectedSort}
       onChange={onSortSelect}
