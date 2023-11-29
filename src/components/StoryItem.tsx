@@ -1,4 +1,4 @@
-import { Card, Flex, Anchor, Divider, Text } from "@mantine/core";
+import { Card, Flex, Anchor, Group, Badge, Text } from "@mantine/core";
 import { Story } from "../types/stories";
 import { format } from "timeago.js";
 
@@ -15,12 +15,24 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     return format(new Date(dateInput));
   };
 
+  // Function to get category tag
+  const getCategory = (): string => {
+    return item._tags[0];
+  };
+
   return (
     <Card withBorder radius="md">
       <Flex direction="column" gap={3}>
-        <Anchor href={item.url} target="_blank" fw={500} lh="sm">
-          {item.title}
-        </Anchor>
+        <Group justify="space-between" wrap="nowrap" align="start">
+          <Anchor href={item.url} target="_blank" fw={500} lh="sm">
+            {item.title}
+          </Anchor>
+          <Text>
+            <Badge tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
+              {getCategory()}
+            </Badge>
+          </Text>
+        </Group>
         {item.story_text ? (
           <Text lineClamp={2} size="sm" c="dimmed" mb={2}>
             {item.story_text}
