@@ -1,5 +1,3 @@
-import { MultiValueTagOption } from "../types/options";
-
 const API_BASE = "https://hn.algolia.com/api/v1";
 
 // Construct URL with query parameters for API requests
