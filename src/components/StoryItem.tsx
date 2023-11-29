@@ -1,5 +1,6 @@
 import { Card, Flex, Anchor, Divider, Text } from "@mantine/core";
 import { Story } from "../types/stories";
+import { format } from "timeago.js";
 
 interface StoryItemProps {
   item: Story;
@@ -9,10 +10,9 @@ interface StoryItemProps {
 const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item);
 
+  // Function to format date as "time ago"
   const getFormattedDate = (dateInput: string): string => {
-    const date = new Date(dateInput);
-    const formattedDate = date.toLocaleDateString();
-    return formattedDate;
+    return format(new Date(dateInput));
   };
 
   return (
