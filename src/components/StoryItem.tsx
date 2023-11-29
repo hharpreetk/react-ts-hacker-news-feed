@@ -72,12 +72,14 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
           </Box>
         </Group>
         {getContent() && (
-          <Text lineClamp={2} size="sm" c="dimmed" mb={2}>
+          <Text lineClamp={2} size="sm" mb={2}>
             {getContent()}
           </Text>
         )}
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" c="dimmed">
           <Text size="sm">{item.author}</Text>
+          <Text size="xs">|</Text>
+          <Text size="sm">{getFormattedDate(item.created_at)}</Text>
           <Text size="xs">|</Text>
           {getPoints() !== null && (
             <>
@@ -91,8 +93,6 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
               <Text size="xs">|</Text>
             </>
           )}
-          <Text size="sm">{getFormattedDate(item.created_at)}</Text>
-          <Text size="xs">|</Text>
           <Anchor size="sm" onClick={handleRemoveItem}>
             Hide
           </Anchor>
