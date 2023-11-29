@@ -18,10 +18,11 @@ const Search = ({
     <form onSubmit={onSearchSubmit}>
       <Autocomplete
         id="search"
+        placeholder="Search stories by title, url or author"
         value={searchTerm}
         onChange={(value) => onSearchInput(value)}
         data={suggestions}
-        leftSection={<IconSearch size={16} />}
+        leftSection={<IconSearch size={14} />}
         rightSection={
           <ActionIcon radius="xl" size={24} variant="filled" type="submit">
             <IconArrowRight size={14} />
