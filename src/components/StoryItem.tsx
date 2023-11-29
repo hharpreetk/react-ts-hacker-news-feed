@@ -1,3 +1,4 @@
+import { Card, Flex, Anchor, Divider, Text } from "@mantine/core";
 import { Story } from "../types/stories";
 
 interface StoryItemProps {
@@ -15,20 +16,31 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
   };
 
   return (
-    <tr>
-      <td>
-        <a href={item.url}>{item.title}</a>
-      </td>
-      <td>{item.author}</td>
-      <td>{item.num_comments}</td>
-      <td>{item.points}</td>
-      <td>{getFormattedDate(item.created_at)}</td>
-      <td>
-        <button type="button" onClick={handleRemoveItem}>
-          Dismiss
-        </button>
-      </td>
-    </tr>
+    <Card withBorder radius="md">
+      <Flex direction="column" gap={3}>
+        <Anchor href={item.url} target="_blank" fw={500} lh="sm">
+          {item.title}
+        </Anchor>
+        {item.story_text ? (
+          <Text lineClamp={2} size="sm" c="dimmed" mb={2}>
+            {item.story_text}
+          </Text>
+        ) : null}
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
+          <Text size="sm">{item.author}</Text>
+          <Text size="xs">|</Text>
+          <Text size="sm">{item.points} points</Text>
+          <Text size="xs">|</Text>
+          <Text size="sm">{item.num_comments} comments</Text>
+          <Text size="xs">|</Text>
+          <Text size="sm">{getFormattedDate(item.created_at)}</Text>
+          <Text size="xs">|</Text>
+          <Anchor size="sm" onClick={handleRemoveItem}>
+            Hide
+          </Anchor>
+        </Flex>
+      </Flex>
+    </Card>
   );
 };
 

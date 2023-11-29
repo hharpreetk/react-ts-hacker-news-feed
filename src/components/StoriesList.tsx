@@ -1,3 +1,4 @@
+import { Flex } from "@mantine/core";
 import { memo, useCallback } from "react";
 import { Story, Stories } from "../types/stories";
 import Item from "./StoryItem";
@@ -13,25 +14,17 @@ const StoriesList = memo(({ list }: StoriesListProps) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
   }, []);
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Comments</th>
-            <th scope="col">Points</th>
-            <th scope="col">Date Created</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((item: Story) => {
-            return <Item key={item.objectID} item={item} onRemoveItem={handleRemoveStory} />;
-          })}
-        </tbody>
-      </table>
-    </>
+    <Flex direction="column" gap="sm" m="md" maw={800} mx="auto">
+      {list.map((item: Story) => {
+        return (
+          <Item
+            key={item.objectID}
+            item={item}
+            onRemoveItem={handleRemoveStory}
+          />
+        );
+      })}
+    </Flex>
   );
 });
 
