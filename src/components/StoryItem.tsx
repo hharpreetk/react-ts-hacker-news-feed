@@ -34,43 +34,29 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     }
   };
 
-  const getPoints = () => {
+  const getPointsOrComments = (property: "points" | "num_comments") => {
     const category = getCategory();
-    switch (category) {
-      case "story":
-        return item.points;
-      case "poll":
-        return item.points;
-      default:
-        return null;
-    }
+    return category === "story" || category === "poll" ? item[property] : null;
   };
 
-  const getNumberOfComments = () => {
+  const renderAnchor = () => {
     const category = getCategory();
-    switch (category) {
-      case "story":
-        return item.num_comments;
-      case "poll":
-        return item.num_comments;
-      default:
-        return null;
-    }
+    const link = category === "comment" ? item.story_url : item.url;
+    const title =
+      category === "comment" ? `ON: ${item.story_title}` : item.title;
+
+    return (
+      <Anchor href={link} target="_blank" fw={500} lh="sm">
+        {title}
+      </Anchor>
+    );
   };
 
   return (
     <Card withBorder radius="md">
       <Flex direction="column" gap={3}>
         <Group justify="space-between" wrap="nowrap" align="start">
-          {getCategory() === "comment" ? (
-            <Anchor href={item.story_url} target="_blank" fw={500} lh="sm">
-              ON: {item.story_title}
-            </Anchor>
-          ) : (
-            <Anchor href={item.url} target="_blank" fw={500} lh="sm">
-              {item.title}
-            </Anchor>
-          )}
+          {renderAnchor()}
           <Box>
             <Badge tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
               {getCategory()}
@@ -87,15 +73,17 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(item.created_at)}</Text>
           <Text size="xs">|</Text>
-          {getPoints() !== null && (
+          {getPointsOrComments("points") !== null && (
             <>
-              <Text size="sm">{getPoints()} points</Text>
+              <Text size="sm">{getPointsOrComments("points")} points</Text>
               <Text size="xs">|</Text>
             </>
           )}
-          {getNumberOfComments() !== null && (
+          {getPointsOrComments("num_comments") !== null && (
             <>
-              <Text size="sm">{getNumberOfComments()} comments</Text>
+              <Text size="sm">
+                {getPointsOrComments("num_comments")} comments
+              </Text>
               <Text size="xs">|</Text>
             </>
           )}
