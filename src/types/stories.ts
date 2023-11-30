@@ -9,6 +9,8 @@ type Story = {
   num_comments: number;
   points: number;
   created_at: string;
+  story_title: string;
+  story_url: string;
   objectID: number;
 };
 

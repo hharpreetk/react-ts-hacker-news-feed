@@ -62,9 +62,15 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     <Card withBorder radius="md">
       <Flex direction="column" gap={3}>
         <Group justify="space-between" wrap="nowrap" align="start">
-          <Anchor href={item.url} target="_blank" fw={500} lh="sm">
-            {item.title}
-          </Anchor>
+          {getCategory() === "comment" ? (
+            <Anchor href={item.story_url} target="_blank" fw={500} lh="sm">
+              ON: {item.story_title}
+            </Anchor>
+          ) : (
+            <Anchor href={item.url} target="_blank" fw={500} lh="sm">
+              {item.title}
+            </Anchor>
+          )}
           <Box>
             <Badge tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
               {getCategory()}
