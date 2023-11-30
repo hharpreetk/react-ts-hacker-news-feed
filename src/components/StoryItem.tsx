@@ -75,14 +75,20 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
           <Text size="xs">|</Text>
           {getPointsOrComments("points") !== null && (
             <>
-              <Text size="sm">{getPointsOrComments("points")} points</Text>
+              <Text size="sm">
+                {getPointsOrComments("points")}{" "}
+                {getPointsOrComments("points") === 1 ? "point" : "points"}
+              </Text>
               <Text size="xs">|</Text>
             </>
           )}
           {getPointsOrComments("num_comments") !== null && (
             <>
               <Text size="sm">
-                {getPointsOrComments("num_comments")} comments
+                {getPointsOrComments("num_comments")}{" "}
+                {getPointsOrComments("num_comments") === 1
+                  ? "comment"
+                  : "comments"}
               </Text>
               <Text size="xs">|</Text>
             </>
