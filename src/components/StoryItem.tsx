@@ -1,5 +1,6 @@
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
 import { Story } from "../types/stories";
+import { TAG_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
 
 interface StoryItemProps {
@@ -15,9 +16,18 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     return format(new Date(dateInput));
   };
 
-  // Function to get category tag
+  // Function to get category
   const getCategory = (): string => {
     return item._tags[0];
+  };
+
+  // Function to get tags
+  const getTags = (): string[] => {
+    const allTags = item._tags;
+    const matchingTags = TAG_OPTIONS.filter((tagOption) =>
+      allTags.includes(tagOption.value)
+    );
+    return matchingTags.map((tagOption) => tagOption.value.replace("_", " "));
   };
 
   const getContent = () => {
@@ -58,9 +68,19 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
         <Group justify="space-between" wrap="nowrap" align="start">
           {renderAnchor()}
           <Box>
-            <Badge tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
-              {getCategory()}
-            </Badge>
+            <Group gap={6} justify="end">
+              {getTags().map((tag) => (
+                <Badge
+                  tt="uppercase"
+                  fw={700}
+                  size="sm"
+                  variant="light"
+                  radius={2}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </Group>
           </Box>
         </Group>
         {getContent() && (
