@@ -69,8 +69,9 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
           {renderAnchor()}
           <Box>
             <Group gap={6} justify="end">
-              {getTags().map((tag) => (
+              {getTags().map((tag, index) => (
                 <Badge
+                  key={index}
                   tt="uppercase"
                   fw={700}
                   size="sm"
