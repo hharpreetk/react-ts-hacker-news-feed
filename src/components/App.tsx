@@ -123,7 +123,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Hacker Stories</h1>
+      <h1>Search Hacker News</h1>
       <Search
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
