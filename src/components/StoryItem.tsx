@@ -56,11 +56,20 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     const title =
       category === "comment" ? `ON: ${item.story_title}` : item.title;
 
-    return (
-      <Anchor href={link} target="_blank" fw={500} lh="sm">
-        {title}
-      </Anchor>
-    );
+    // If url exists, render Anchor component, otherwise render Text component
+    if (link) {
+      return (
+        <Anchor href={link} target="_blank" fw={500} lh="sm">
+          {title}
+        </Anchor>
+      );
+    } else {
+      return (
+        <Text fw={500} lh="sm">
+          {title}
+        </Text>
+      );
+    }
   };
 
   return (
@@ -91,11 +100,12 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
               lineClamp={2}
               size="sm"
               mb={0}
+              c="dimmed"
               dangerouslySetInnerHTML={{ __html: `${getContent()}` }}
             />
           </TypographyStylesProvider>
         )}
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" c="dimmed">
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
           <Text size="sm">{item.author}</Text>
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(item.created_at)}</Text>
