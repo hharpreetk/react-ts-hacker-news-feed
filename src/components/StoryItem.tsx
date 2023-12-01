@@ -1,4 +1,5 @@
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
+import { TypographyStylesProvider } from "@mantine/core";
 import { Story } from "../types/stories";
 import { TAG_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
@@ -85,9 +86,14 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
           </Box>
         </Group>
         {getContent() && (
-          <Text lineClamp={2} size="sm" mb={2}>
-            {getContent()}
-          </Text>
+          <TypographyStylesProvider p={0} m={0}>
+            <Text
+              lineClamp={2}
+              size="sm"
+              mb={0}
+              dangerouslySetInnerHTML={{ __html: `${getContent()}` }}
+            />
+          </TypographyStylesProvider>
         )}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" c="dimmed">
           <Text size="sm">{item.author}</Text>
