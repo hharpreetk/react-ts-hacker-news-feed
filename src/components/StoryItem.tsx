@@ -21,13 +21,13 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     return item._tags[0];
   };
 
-  // Function to get tags
+  // Function to get category tags
   const getTags = (): string[] => {
     const allTags = item._tags;
     const matchingTags = TAG_OPTIONS.filter((tagOption) =>
       allTags.includes(tagOption.value)
     );
-    return matchingTags.map((tagOption) => tagOption.value.replace("_", " "));
+    return matchingTags.map((tagOption) => tagOption.value.replace(/_/g, " "));
   };
 
   const getContent = () => {
