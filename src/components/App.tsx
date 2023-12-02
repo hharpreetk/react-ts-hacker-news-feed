@@ -154,6 +154,7 @@ const App = () => {
             total={totalPages}
             value={activePage + 1}
             onChange={handleActivePage}
+            size="sm"
           >
             <Group gap={5} justify="center">
               <Pagination.First />
