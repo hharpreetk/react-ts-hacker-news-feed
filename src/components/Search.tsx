@@ -1,4 +1,4 @@
-import { Autocomplete, ActionIcon } from "@mantine/core";
+import { Autocomplete, ActionIcon, ThemeIcon } from "@mantine/core";
 import { IconSearch, IconArrowRight } from "@tabler/icons-react";
 
 interface SearchProps {
@@ -24,11 +24,13 @@ const Search = ({
         data={suggestions}
         leftSection={<IconSearch size={14} />}
         rightSection={
-          <ActionIcon radius="xl" size={24} variant="filled" type="submit">
-            <IconArrowRight size={14} />
+          <ActionIcon size={25} variant="filled" type="submit">
+            <IconArrowRight size={14} stroke={2} />
           </ActionIcon>
         }
         autoFocus
+        maw={800}
+        mx="auto"
       />
     </form>
   );
