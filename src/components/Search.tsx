@@ -23,11 +23,6 @@ const Search = ({
         onChange={(value) => onSearchInput(value)}
         data={suggestions}
         leftSection={<IconSearch size={14} />}
-        rightSection={
-          <ActionIcon size={25} variant="filled" type="submit">
-            <IconArrowRight size={14} stroke={2} />
-          </ActionIcon>
-        }
         autoFocus
         maw={800}
         mx="auto"
