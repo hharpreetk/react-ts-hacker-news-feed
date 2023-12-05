@@ -10,6 +10,7 @@ interface SortFilterProps {
 const SortFilter = ({ selectedSort, onSortSelect }: SortFilterProps) => {
   return (
     <Select
+      maw={{ base: 180, xs: "auto" }}
       data={SORT_OPTIONS}
       value={selectedSort}
       onChange={onSortSelect}
