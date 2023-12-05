@@ -19,11 +19,11 @@ const buildApiUrl = (
 const getStoriesUrl = (
   resource: string,
   query: string,
-  selectedTags: string[],
+  selectedTag: string,
   numericFilters: string,
   page: number
 ) => {
-  const tags = `(${selectedTags.join(",")})`;
+  const tags = `(${selectedTag})`;
   return buildApiUrl(resource, {
     query,
     tags,

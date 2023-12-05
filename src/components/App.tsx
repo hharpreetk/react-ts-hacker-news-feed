@@ -37,9 +37,9 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([
-    TAG_OPTIONS[0].value,
-  ]);
+  const [selectedTag, setSelectedTag] = useState<string>(
+    TAG_OPTIONS[0].value
+  );
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
     SORT_OPTIONS[0].value // Select first option by default
@@ -59,7 +59,7 @@ const App = () => {
     getStoriesUrl(
       sortResource,
       searchTerm,
-      selectedTags,
+      selectedTag,
       dateFilter,
       activePage
     )
@@ -84,12 +84,12 @@ const App = () => {
       getStoriesUrl(
         sortResource,
         searchTerm,
-        selectedTags,
+        selectedTag,
         dateFilter,
         activePage
       )
     );
-  }, [selectedTags, selectedSort, selectedDate, activePage]);
+  }, [selectedTag, selectedSort, selectedDate, activePage]);
 
   const { data, isLoading, isError, totalPages } = stories;
 
@@ -106,7 +106,7 @@ const App = () => {
       getStoriesUrl(
         sortResource,
         searchTerm,
-        selectedTags,
+        selectedTag,
         dateFilter,
         activePage
       )
@@ -121,8 +121,8 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: string[]) => {
-    setSelectedTags(selectedOptions);
+  const handleTagChange = (selectedOptions: string) => {
+    setSelectedTag(selectedOptions);
   };
 
   const handleSortSelect = (selectedOption: string | null) => {
@@ -169,11 +169,8 @@ const App = () => {
         </Grid>
       </AppShell.Header>
       <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>
-        <Group>
-          <TagsFilter
-            selectedTags={selectedTags}
-            onTagChange={handleTagChange}
-          />
+        <TagsFilter selectedTag={selectedTag} onTagChange={handleTagChange} />
+        <Group maw={800} m="auto">
           <SortFilter
             selectedSort={selectedSort}
             onSortSelect={handleSortSelect}
@@ -196,11 +193,11 @@ const App = () => {
               total={totalPages}
               value={activePage + 1}
               onChange={handleActivePage}
-              size="xs"
+              size="sm"
               styles={{
                 control: {
                   height: "calc(var(--pagination-control-size)*1.5)",
-                  minWidth: "calc(var(--pagination-control-size)*1.5)",
+                  minWidth: "calc(var(--pagination-control-size)*1.5)"
                 },
               }}
               classNames={{ control: classes.control }}
