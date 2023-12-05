@@ -16,7 +16,7 @@ const DateFilter = ({ selectedDate, onDateSelect }: DateFilterProps) => {
         value={selectedDate}
         onChange={onDateSelect}
         leftSection={<IconCalendarTime size={17} stroke={1.5} />}
-        leftSectionWidth={36.5}
+        leftSectionWidth={36}
         allowDeselect={false}
         required
       />
