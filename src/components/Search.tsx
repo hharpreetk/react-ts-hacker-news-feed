@@ -1,5 +1,5 @@
-import { Autocomplete, ActionIcon, ThemeIcon } from "@mantine/core";
-import { IconSearch, IconArrowRight } from "@tabler/icons-react";
+import { Autocomplete } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 
 interface SearchProps {
   searchTerm: string;
