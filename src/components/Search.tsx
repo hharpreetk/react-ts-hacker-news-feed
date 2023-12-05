@@ -23,7 +23,6 @@ const Search = ({
         onChange={(value) => onSearchInput(value)}
         data={suggestions}
         leftSection={<IconSearch size={14} />}
-        autoFocus
         maw={800}
         mx="auto"
       />
