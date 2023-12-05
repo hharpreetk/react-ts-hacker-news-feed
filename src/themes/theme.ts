@@ -26,11 +26,11 @@ const variantColorResolver: VariantColorsResolver = (input) => {
       background:
         colorScheme === "dark"
           ? getThemeColor("dark.4", theme)
-          : getThemeColor("gray.3", theme),
+          : getThemeColor("gray.2", theme),
       hover:
         colorScheme === "dark"
           ? getThemeColor("dark.5", theme)
-          : getThemeColor("gray.2", theme),
+          : getThemeColor("gray.1", theme),
       color:
         colorScheme === "dark"
           ? getThemeColor("gray.0", theme)
