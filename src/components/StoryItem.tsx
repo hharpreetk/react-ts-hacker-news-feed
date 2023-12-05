@@ -1,5 +1,5 @@
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
-import { TypographyStylesProvider } from "@mantine/core";
+import { TypographyStylesProvider, useMantineTheme } from "@mantine/core";
 import { Story } from "../types/stories";
 import { TAG_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
@@ -10,6 +10,8 @@ interface StoryItemProps {
 }
 
 const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
+  const theme = useMantineTheme();
+  
   const handleRemoveItem = () => onRemoveItem(item);
 
   // Function to format date as "time ago"
@@ -59,7 +61,13 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
     // If url exists, render Anchor component, otherwise render Text component
     if (link) {
       return (
-        <Anchor href={link} target="_blank" fw={500} lh="sm">
+        <Anchor
+          href={link}
+          target="_blank"
+          fw={500}
+          lh="sm"
+          c={theme.primaryColor}
+        >
           {title}
         </Anchor>
       );
@@ -130,7 +138,7 @@ const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
               <Text size="xs">|</Text>
             </>
           )}
-          <Anchor size="sm" onClick={handleRemoveItem}>
+          <Anchor size="sm" c={theme.primaryColor} onClick={handleRemoveItem}>
             Hide
           </Anchor>
         </Flex>
