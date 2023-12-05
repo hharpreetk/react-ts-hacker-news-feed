@@ -4,7 +4,22 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { Pagination, Group } from "@mantine/core";
+import {
+  AppShell,
+  ThemeIcon,
+  ActionIcon,
+  Pagination,
+  Grid,
+  Group,
+  Text,
+  Anchor,
+  Flex,
+  Loader,
+  rem,
+  useMantineTheme,
+} from "@mantine/core";
+import classes from "../styles/Custom.module.css";
+import { useHeadroom } from "@mantine/hooks";
 import Search from "./Search";
 import TagsFilter from "./TagsFilter";
 import SortFilter from "./SortFilter";
@@ -15,6 +30,7 @@ import {
   SORT_RESOURCE_FILTERS,
   DATE_NUMERIC_FILTERS,
 } from "../constants/mappings";
+import { IconSquareLetterH, IconPencilCog } from "@tabler/icons-react";
 
 const App = () => {
   const stories = useStories();
@@ -121,56 +137,109 @@ const App = () => {
     setPage(selectedPage - 1);
   };
 
+  // Collaspe the header when user scrolls
+  const pinned = useHeadroom({ fixedAt: 120 });
+
+  // Get theme object from
+  const theme = useMantineTheme();
+
   return (
-    <div className="App">
-      <h1>Search Hacker News</h1>
-      <Search
-        searchTerm={searchTerm}
-        onSearchInput={handleSearchInput}
-        onSearchSubmit={handleSearchSubmit}
-        suggestions={suggestions}
-      />
-      <Group>
-        <TagsFilter selectedTags={selectedTags} onTagChange={handleTagChange} />
-        <SortFilter
-          selectedSort={selectedSort}
-          onSortSelect={handleSortSelect}
-        />
-        <DateFilter
-          selectedDate={selectedDate}
-          onDateSelect={handleDateSelect}
-        />
-      </Group>
-      {isError ? (
-        <p>Something went wrong...</p>
-      ) : isLoading ? (
-        <LoadingIndicator />
-      ) : data.length === 0 ? (
-        <NoResults />
-      ) : (
-        <>
-          <StoriesList list={data} />
-          <Pagination.Root
-            total={totalPages}
-            value={activePage + 1}
-            onChange={handleActivePage}
-            size="sm"
-          >
-            <Group gap={5} justify="center">
-              <Pagination.First />
-              <Pagination.Previous />
-              <Pagination.Items />
-              <Pagination.Next />
-              <Pagination.Last />
-            </Group>
-          </Pagination.Root>
-        </>
-      )}
-    </div>
+    <AppShell
+      padding="md"
+      header={{ height: 60, collapsed: !pinned, offset: false }}
+      footer={{ height: { base: 80, xs: 60 } }}
+      pos="relative"
+    >
+      <AppShell.Header>
+        <Grid px="lg" py="md" align="center" justify="space-between">
+          <ThemeIcon variant="transparent" size={37}>
+            <IconSquareLetterH size={37} />
+          </ThemeIcon>
+          <Grid.Col span="auto" maw="90%">
+            <Search
+              searchTerm={searchTerm}
+              onSearchInput={handleSearchInput}
+              onSearchSubmit={handleSearchSubmit}
+              suggestions={suggestions}
+            />
+          </Grid.Col>
+          <ActionIcon variant="default" size="lg" aria-label="Edit Preferences">
+            <IconPencilCog size={18} stroke={1.5} />
+          </ActionIcon>
+        </Grid>
+      </AppShell.Header>
+      <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>
+        <Group>
+          <TagsFilter
+            selectedTags={selectedTags}
+            onTagChange={handleTagChange}
+          />
+          <SortFilter
+            selectedSort={selectedSort}
+            onSortSelect={handleSortSelect}
+          />
+          <DateFilter
+            selectedDate={selectedDate}
+            onDateSelect={handleDateSelect}
+          />
+        </Group>
+        {isError ? (
+          <p>Something went wrong...</p>
+        ) : isLoading ? (
+          <Loader type="dots" mx="auto" my="lg" />
+        ) : data.length === 0 ? (
+          <NoResults />
+        ) : (
+          <>
+            <StoriesList list={data} />
+            <Pagination.Root
+              total={totalPages}
+              value={activePage + 1}
+              onChange={handleActivePage}
+              size="xs"
+              styles={{
+                control: {
+                  height: "calc(var(--pagination-control-size)*1.5)",
+                  minWidth: "calc(var(--pagination-control-size)*1.5)",
+                },
+              }}
+              classNames={{ control: classes.control }}
+              py="sm"
+            >
+              <Group gap={5} justify="center">
+                <Pagination.Previous />
+                <Pagination.Items />
+                <Pagination.Next />
+              </Group>
+            </Pagination.Root>
+          </>
+        )}
+      </AppShell.Main>
+      <AppShell.Footer pos="absolute" bottom={0} p="lg">
+        <Flex
+          c="dimmed"
+          direction={{ base: "column-reverse", xs: "row" }}
+          justify={{ base: "center", xs: "space-between" }}
+          gap="xs"
+          align="center"
+          wrap="wrap"
+        >
+          <Text size="xs">© Search Hacker News, 2023.</Text>
+          <Text size="xs">
+            Powered by{" "}
+            <Anchor
+              href="https://hn.algolia.com/api"
+              target="_blank"
+              c={theme.primaryColor}
+            >
+              HN Search API
+            </Anchor>
+          </Text>
+        </Flex>
+      </AppShell.Footer>
+    </AppShell>
   );
 };
-
-const LoadingIndicator = () => <p>Loading...</p>;
 
 const NoResults = () => <p>No Results Found</p>;
 
