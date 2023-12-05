@@ -16,7 +16,7 @@ const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
   const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   return (
-    <ScrollArea maw={800} mx="auto" mb={6}>
+    <ScrollArea maw={800} mx="auto" mb="sm" scrollbarSize={9} type="auto">
       <SegmentedControl
         data={TAG_OPTIONS}
         value={selectedTag}
@@ -35,13 +35,13 @@ const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
           },
           control: {
             padding:
-              "calc(0.1875rem*var(--mantine-scale)) calc(0.375rem*var(--mantine-scale))",
+              "calc(0.185rem*var(--mantine-scale)) calc(0.35rem*var(--mantine-scale))",
           },
           label: {
             fontWeight: "normal",
           },
         }}
-        mb="sm"
+        mb={9}
         classNames={{ control: classes.control, label: classes.label }}
         onChange={onTagChange}
         transitionDuration={0}
