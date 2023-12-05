@@ -1,5 +1,6 @@
 import { Select } from "@mantine/core";
 import { SORT_OPTIONS } from "../constants/options";
+import { IconSortDescending2 } from "@tabler/icons-react";
 
 interface SortFilterProps {
   selectedSort: string | null;
@@ -9,10 +10,12 @@ interface SortFilterProps {
 const SortFilter = ({ selectedSort, onSortSelect }: SortFilterProps) => {
   return (
     <Select
-      label="Sort Stories by"
       data={SORT_OPTIONS}
       value={selectedSort}
       onChange={onSortSelect}
+      leftSection={<IconSortDescending2 size={17} stroke={1.5} />}
+      allowDeselect={false}
+      required
     />
   );
 };

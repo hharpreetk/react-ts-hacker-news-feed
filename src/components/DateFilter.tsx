@@ -1,5 +1,6 @@
 import { Select } from "@mantine/core";
 import { DATE_OPTIONS } from "../constants/options";
+import { IconCalendarTime } from "@tabler/icons-react";
 
 interface DateFilterProps {
   selectedDate: string | null;
@@ -10,10 +11,13 @@ const DateFilter = ({ selectedDate, onDateSelect }: DateFilterProps) => {
   return (
     <div>
       <Select
-        label="Filter by Date Range"
         data={DATE_OPTIONS}
         value={selectedDate}
         onChange={onDateSelect}
+        leftSection={<IconCalendarTime size={17} stroke={1.5} />}
+        leftSectionWidth={36.5}
+        allowDeselect={false}
+        required
       />
     </div>
   );

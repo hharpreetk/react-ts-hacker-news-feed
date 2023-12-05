@@ -16,7 +16,7 @@ const SORT_OPTIONS: Options = [
 ];
 
 const DATE_OPTIONS: Options = [
-  { value: "anytime", label: "Any Time" },
+  { value: "forever", label: "Forever" },
   { value: "past24hr", label: "Past 24 Hours" },
   { value: "pastWeek", label: "Past Week" },
   { value: "pastMonth", label: "Past Month" },
