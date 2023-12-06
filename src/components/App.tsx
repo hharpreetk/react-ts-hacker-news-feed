@@ -138,12 +138,12 @@ const App = () => {
   return (
     <AppShell
       padding="md"
-      header={{ height: 60, collapsed: !pinned, offset: false }}
+      header={{ height: 65, collapsed: !pinned, offset: false }}
       footer={{ height: { base: 80, xs: 60 } }}
       pos="relative"
     >
       <AppShell.Header>
-        <Grid px="lg" py="md" align="center" justify="space-between">
+        <Grid px="lg" py={14} align="center" justify="space-between">
           <ThemeIcon variant="transparent" size={37}>
             <IconSquareLetterH size={37} />
           </ThemeIcon>
@@ -160,7 +160,7 @@ const App = () => {
           </ActionIcon>
         </Grid>
       </AppShell.Header>
-      <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>
+      <AppShell.Main pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}>
         <TagsFilter selectedTag={selectedTag} onTagChange={handleTagChange} />
         <Group maw={800} m="auto">
           <SortFilter
