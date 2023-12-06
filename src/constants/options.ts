@@ -1,12 +1,13 @@
 import { Options } from "../types/options";
 
 const CONTENT_OPTIONS: Options = [
+  { value: "all", label: "All" },
   { value: "story", label: "Stories" },
   { value: "show_hn", label: "Show HN" },
   { value: "ask_hn", label: "Ask HN" },
   { value: "launch_hn", label: "Launch HN" },
   { value: "job", label: "Jobs" },
-  { value: "poll", label: "Polls" }
+  { value: "poll", label: "Polls" },
 ];
 
 const SORT_OPTIONS: Options = [

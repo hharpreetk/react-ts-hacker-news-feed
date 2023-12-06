@@ -1,3 +1,5 @@
+import { CONTENT_TAG_FILTERS } from "../constants/mappings";
+
 const API_BASE = "https://hn.algolia.com/api/v1";
 
 // Construct URL with query parameters for API requests
@@ -19,11 +21,11 @@ const buildApiUrl = (
 const getStoriesUrl = (
   resource: string,
   query: string,
-  selectedTag: string,
+  selectedContent: string,
   numericFilters: string,
   page: number
 ) => {
-  const tags = `(${selectedTag})`;
+  const tags = `(${CONTENT_TAG_FILTERS[selectedContent]})`;
   return buildApiUrl(resource, {
     query,
     tags,

@@ -1,3 +1,18 @@
+// Mapping between CONTENT_OPTIONS and their corresponding tag values
+const CONTENT_TAG_FILTERS: Record<string, string> = {
+  all: "story,show_hn,ask_hn,launch_hn,job,poll", 
+  story: "story",
+  show_hn: "show_hn",
+  ask_hn: "ask_hn",
+  launch_hn: "launch_hn",
+  job: "job",
+  poll: "poll",
+  // ... add more mappings as needed
+};
+
+export { CONTENT_TAG_FILTERS };
+
+
 // Mapping between TIME_OPTIONS and their numeric filter values
 const DATE_NUMERIC_FILTERS: Record<string, string> = {
   forever: "created_at_i>0",
