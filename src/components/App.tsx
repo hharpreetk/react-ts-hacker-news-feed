@@ -32,7 +32,7 @@ const App = () => {
     DATE_OPTIONS[0].value
   );
 
-  const [activePage, setPage] = useState(0);
+  const [activePage, setActivePage] = useState(0);
 
   const dateFilter = selectedDate ? DATE_NUMERIC_FILTERS[selectedDate] : "";
 
@@ -103,6 +103,8 @@ const App = () => {
 
   const handleContentChange = (selectedOptions: string) => {
     setSelectedContent(selectedOptions);
+    // Reset the page to first page every time user switches between content
+    setActivePage(0);
   };
 
   const handleSortSelect = (selectedOption: string | null) => {
@@ -114,7 +116,7 @@ const App = () => {
   };
 
   const handleActivePage = (selectedPage: number) => {
-    setPage(selectedPage - 1);
+    setActivePage(selectedPage - 1);
   };
 
   return (
