@@ -4,32 +4,17 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import {
-  AppShell,
-  ThemeIcon,
-  ActionIcon,
-  Grid,
-  Group,
-  Text,
-  Anchor,
-  Flex,
-  rem,
-  useMantineTheme,
-} from "@mantine/core";
-import { useHeadroom } from "@mantine/hooks";
-import StorySearch from "./StorySearch";
-import StoryView from "./StoryView";
-import StoryFilters from "./StoryFilters";
+import { AppShell, rem } from "@mantine/core";
 import { SORT_OPTIONS, TAG_OPTIONS, DATE_OPTIONS } from "../constants/options";
 import {
   SORT_RESOURCE_FILTERS,
   DATE_NUMERIC_FILTERS,
 } from "../constants/mappings";
-import {
-  IconSquareLetterH,
-  IconAdjustmentsCog,
-  IconMoon,
-} from "@tabler/icons-react";
+import { useHeadroom } from "@mantine/hooks";
+import AppHeader from "./AppHeader";
+import StoryView from "./StoryView";
+import StoryFilters from "./StoryFilters";
+import AppFooter from "./AppFooter";
 
 const App = () => {
   // State variables
@@ -88,8 +73,6 @@ const App = () => {
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
 
-  const theme = useMantineTheme();
-
   // Event Handlers
 
   const handleSearchInput = (searchInput: string): void => {
@@ -142,36 +125,12 @@ const App = () => {
       pos="relative"
     >
       <AppShell.Header>
-        <Grid px="lg" py={14} align="center" justify="space-between">
-          <ThemeIcon variant="transparent" size={37}>
-            <IconSquareLetterH size={37} />
-          </ThemeIcon>
-          <Grid.Col span="auto" maw="90%">
-            <StorySearch
-              searchTerm={searchTerm}
-              onSearchInput={handleSearchInput}
-              onSearchSubmit={handleSearchSubmit}
-              suggestions={suggestions}
-            />
-          </Grid.Col>
-          <Group gap={8}>
-            <ActionIcon
-              variant="default"
-              size="lg"
-              aria-label="Toggle Dark Mode"
-              visibleFrom="xs"
-            >
-              <IconMoon size={18} stroke={1.5} />
-            </ActionIcon>
-            <ActionIcon
-              variant="default"
-              size="lg"
-              aria-label="Edit App Settings"
-            >
-              <IconAdjustmentsCog size={18} stroke={1.5} />
-            </ActionIcon>
-          </Group>
-        </Grid>
+        <AppHeader
+          searchTerm={searchTerm}
+          handleSearchInput={handleSearchInput}
+          handleSearchSubmit={handleSearchSubmit}
+          suggestions={suggestions}
+        />
       </AppShell.Header>
       <AppShell.Main
         maw={`calc(${rem(800)} + 2*var(--mantine-spacing-md))`}
@@ -196,26 +155,7 @@ const App = () => {
         />
       </AppShell.Main>
       <AppShell.Footer pos="absolute" bottom={0} p="lg">
-        <Flex
-          c="dimmed"
-          direction={{ base: "column-reverse", xs: "row" }}
-          justify={{ base: "center", xs: "space-between" }}
-          gap="xs"
-          align="center"
-          wrap="wrap"
-        >
-          <Text size="xs">© Search Hacker News, 2023.</Text>
-          <Text size="xs">
-            Powered by{" "}
-            <Anchor
-              href="https://hn.algolia.com/api"
-              target="_blank"
-              c={theme.primaryColor}
-            >
-              HN Search API
-            </Anchor>
-          </Text>
-        </Flex>
+        <AppFooter />
       </AppShell.Footer>
     </AppShell>
   );
