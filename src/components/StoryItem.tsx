@@ -14,28 +14,21 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const handleRemoveItem = () => onRemoveItem(item);
 
-  // Function to format date as "time ago"
   const getFormattedDate = (dateInput: string): string => {
     return format(new Date(dateInput));
   };
 
-  // Function to get category
-  const getCategory = (): string => {
-    return item._tags[0];
-  };
+  const getCategory = (): string => item._tags[0];
 
-  // Function to get category tags
   const getTags = (): string[] => {
     const allTags = item._tags;
-    const matchingTags = TAG_OPTIONS.filter((tagOption) =>
+    return TAG_OPTIONS.filter((tagOption) =>
       allTags.includes(tagOption.value)
-    );
-    return matchingTags.map((tagOption) => tagOption.value.replace(/_/g, " "));
+    ).map((tagOption) => tagOption.value.replace(/_/g, " "));
   };
 
-  const getContent = () => {
-    const category = getCategory();
-    switch (category) {
+  const getContent = (): string | null => {
+    switch (getCategory()) {
       case "story":
         return item.story_text;
       case "job":
@@ -45,33 +38,37 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     }
   };
 
-  const getPointsOrComments = (property: "points" | "num_comments") => {
+  const getPointsOrComments = (property: "points" | "num_comments"): React.ReactNode => {
     const category = getCategory();
-    return category === "story" || category === "poll" ? item[property] : null;
+    const value = category === "story" || category === "poll" ? item[property] : null;
+
+    if (value !== null) {
+      const label = property === "points" ? "point" : "comment";
+      return (
+        <>
+          <Text size="sm">
+            {value} {value === 1 ? label : `${label}s`}
+          </Text>
+          <Text size="xs">|</Text>
+        </>
+      );
+    }
+
+    return null;
   };
 
   const renderAnchor = () => {
     const { title, url } = item;
+    const anchorProps = {
+      fw: 500,
+      lh: "sm",
+      c: theme.primaryColor,
+    };
 
-    // If url exists, render Anchor component, otherwise render Text component
     if (url) {
-      return (
-        <Anchor
-          href={item.url}
-          target="_blank"
-          fw={500}
-          lh="sm"
-          c={theme.primaryColor}
-        >
-          {title}
-        </Anchor>
-      );
+      return <Anchor href={url} target="_blank" {...anchorProps}>{title}</Anchor>;
     } else {
-      return (
-        <Text fw={500} lh="sm">
-          {title}
-        </Text>
-      );
+      return <Text {...anchorProps}>{title}</Text>;
     }
   };
 
@@ -83,14 +80,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           <Box>
             <Group gap={6} justify="end">
               {getTags().map((tag, index) => (
-                <Badge
-                  key={index}
-                  tt="uppercase"
-                  fw={700}
-                  size="sm"
-                  variant="light"
-                  radius={2}
-                >
+                <Badge key={index} tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
                   {tag}
                 </Badge>
               ))}
@@ -113,26 +103,8 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(item.created_at)}</Text>
           <Text size="xs">|</Text>
-          {getPointsOrComments("points") !== null && (
-            <>
-              <Text size="sm">
-                {getPointsOrComments("points")}{" "}
-                {getPointsOrComments("points") === 1 ? "point" : "points"}
-              </Text>
-              <Text size="xs">|</Text>
-            </>
-          )}
-          {getPointsOrComments("num_comments") !== null && (
-            <>
-              <Text size="sm">
-                {getPointsOrComments("num_comments")}{" "}
-                {getPointsOrComments("num_comments") === 1
-                  ? "comment"
-                  : "comments"}
-              </Text>
-              <Text size="xs">|</Text>
-            </>
-          )}
+          {getPointsOrComments("points")}
+          {getPointsOrComments("num_comments")}
           <Anchor size="sm" c={theme.primaryColor} onClick={handleRemoveItem}>
             Hide
           </Anchor>
