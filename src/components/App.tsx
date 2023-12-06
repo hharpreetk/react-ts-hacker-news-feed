@@ -32,6 +32,7 @@ import {
 } from "@tabler/icons-react";
 
 const App = () => {
+  // State variables
   const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
@@ -84,11 +85,17 @@ const App = () => {
 
   const { data, isLoading, isError, totalPages } = stories;
 
+  // Collaspe the header when user scrolls
+  const pinned = useHeadroom({ fixedAt: 120 });
+
+  const theme = useMantineTheme();
+
+  // Event Handlers
+
   const handleSearchInput = (searchInput: string): void => {
     setSearchTerm(searchInput);
   };
 
-  // Set Url when search is confirmed by the user
   const handleSearchSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ): void => {
@@ -106,9 +113,8 @@ const App = () => {
   };
 
   const setSearchSuggestion = (searchTerm: string) => {
-    // Check if the search term is not empty and doesn't already exist in the suggestions array
     if (searchTerm && !suggestions.includes(searchTerm)) {
-      setSuggestions([searchTerm, ...suggestions].slice(0, 5)); // Limit the number of suggestions to the last 5
+      setSuggestions([searchTerm, ...suggestions].slice(0, 5));
     }
   };
 
@@ -127,11 +133,6 @@ const App = () => {
   const handleActivePage = (selectedPage: number) => {
     setPage(selectedPage - 1);
   };
-
-  // Collaspe the header when user scrolls
-  const pinned = useHeadroom({ fixedAt: 120 });
-
-  const theme = useMantineTheme();
 
   return (
     <AppShell
@@ -177,7 +178,7 @@ const App = () => {
         m="auto"
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
       >
-         <StoryFilters
+        <StoryFilters
           selectedTag={selectedTag}
           handleTagChange={handleTagChange}
           selectedSort={selectedSort}
