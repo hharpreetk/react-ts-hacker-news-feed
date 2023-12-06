@@ -30,7 +30,14 @@ import {
   SORT_RESOURCE_FILTERS,
   DATE_NUMERIC_FILTERS,
 } from "../constants/mappings";
-import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
+import {
+  IconSquareLetterH,
+  IconAdjustmentsCog,
+  IconMoonFilled,
+  IconMoon,
+  IconMoon2,
+} from "@tabler/icons-react";
+import { IconMoonOff } from "@tabler/icons-react";
 
 const App = () => {
   const stories = useStories();
@@ -155,13 +162,23 @@ const App = () => {
               suggestions={suggestions}
             />
           </Grid.Col>
-          <ActionIcon
-            variant="default"
-            size="lg"
-            aria-label="Edit App Settings"
-          >
-            <IconAdjustmentsCog size={18} stroke={1.5} />
-          </ActionIcon>
+          <Group gap="xs">
+            <ActionIcon
+              variant="default"
+              size="lg"
+              aria-label="Toggle Dark Mode"
+              visibleFrom="xs"
+            >
+              <IconMoon size={18} stroke={1.5} />
+            </ActionIcon>
+            <ActionIcon
+              variant="default"
+              size="lg"
+              aria-label="Edit App Settings"
+            >
+              <IconAdjustmentsCog size={18} stroke={1.5} />
+            </ActionIcon>
+          </Group>
         </Grid>
       </AppShell.Header>
       <AppShell.Main
