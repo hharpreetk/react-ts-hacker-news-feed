@@ -16,7 +16,7 @@ const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
   const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   return (
-    <ScrollArea maw={800} mx="auto" mb={6} scrollbarSize={9} type="auto">
+    <ScrollArea mb={6} scrollbarSize={9} type="auto">
       <SegmentedControl
         data={TAG_OPTIONS}
         value={selectedTag}
