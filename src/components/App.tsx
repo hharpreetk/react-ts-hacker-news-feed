@@ -30,7 +30,7 @@ import {
   SORT_RESOURCE_FILTERS,
   DATE_NUMERIC_FILTERS,
 } from "../constants/mappings";
-import { IconSquareLetterH, IconPencilCog } from "@tabler/icons-react";
+import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
 
 const App = () => {
   const stories = useStories();
@@ -155,8 +155,12 @@ const App = () => {
               suggestions={suggestions}
             />
           </Grid.Col>
-          <ActionIcon variant="default" size="lg" aria-label="Edit Preferences">
-            <IconPencilCog size={18} stroke={1.5} />
+          <ActionIcon
+            variant="default"
+            size="lg"
+            aria-label="Edit App Settings"
+          >
+            <IconAdjustmentsCog size={18} stroke={1.5} />
           </ActionIcon>
         </Grid>
       </AppShell.Header>
