@@ -20,7 +20,7 @@ import {
 } from "@mantine/core";
 import classes from "../styles/Custom.module.css";
 import { useHeadroom } from "@mantine/hooks";
-import Search from "./Search";
+import Search from "./StoriesSearch";
 import TagsFilter from "./TagsFilter";
 import SortFilter from "./SortFilter";
 import DateFilter from "./DateFilter";
@@ -33,11 +33,8 @@ import {
 import {
   IconSquareLetterH,
   IconAdjustmentsCog,
-  IconMoonFilled,
   IconMoon,
-  IconMoon2,
 } from "@tabler/icons-react";
-import { IconMoonOff } from "@tabler/icons-react";
 
 const App = () => {
   const stories = useStories();
