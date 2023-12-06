@@ -35,7 +35,7 @@ const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
           },
           control: {
             padding:
-              "calc(0.18rem*var(--mantine-scale)) calc(0.3rem*var(--mantine-scale))",
+              "calc(0.16875rem*var(--mantine-scale)) calc(0.3375rem*var(--mantine-scale))",
           },
           label: {
             fontWeight: "normal",
