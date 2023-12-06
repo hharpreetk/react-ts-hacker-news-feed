@@ -11,6 +11,7 @@ const SortFilter = ({ selectedSort, onSortSelect }: SortFilterProps) => {
   return (
     <Select
       maw={{ base: 180, xs: "auto" }}
+      styles={{ input: { height: 38 } }}
       data={SORT_OPTIONS}
       value={selectedSort}
       onChange={onSortSelect}

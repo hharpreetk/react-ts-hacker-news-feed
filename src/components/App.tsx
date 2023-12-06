@@ -162,7 +162,7 @@ const App = () => {
       </AppShell.Header>
       <AppShell.Main pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}>
         <TagsFilter selectedTag={selectedTag} onTagChange={handleTagChange} />
-        <Group maw={800} m="auto">
+        <Group maw={800} m="auto" gap="sm">
           <SortFilter
             selectedSort={selectedSort}
             onSortSelect={handleSortSelect}

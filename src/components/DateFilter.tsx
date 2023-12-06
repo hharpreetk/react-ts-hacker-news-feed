@@ -12,6 +12,7 @@ const DateFilter = ({ selectedDate, onDateSelect }: DateFilterProps) => {
     <div>
       <Select
         maw={{ base: 180, xs: "auto" }}
+        styles={{input: {height: 38}}}
         data={DATE_OPTIONS}
         value={selectedDate}
         onChange={onDateSelect}
