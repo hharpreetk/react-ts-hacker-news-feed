@@ -37,9 +37,7 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
-  const [selectedTag, setSelectedTag] = useState<string>(
-    TAG_OPTIONS[0].value
-  );
+  const [selectedTag, setSelectedTag] = useState<string>(TAG_OPTIONS[0].value);
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
     SORT_OPTIONS[0].value // Select first option by default
@@ -56,13 +54,7 @@ const App = () => {
   const sortResource = selectedSort ? SORT_RESOURCE_FILTERS[selectedSort] : "";
 
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(
-      sortResource,
-      searchTerm,
-      selectedTag,
-      dateFilter,
-      activePage
-    )
+    getStoriesUrl(sortResource, searchTerm, selectedTag, dateFilter, activePage)
   );
 
   // State to store an array of urls representing last five searches
@@ -196,12 +188,13 @@ const App = () => {
               size="sm"
               styles={{
                 control: {
-                  height: "calc(var(--pagination-control-size)*1.5)",
-                  minWidth: "calc(var(--pagination-control-size)*1.5)"
+                  height: "calc(var(--pagination-control-size)*1.35)",
+                  minWidth: "calc(var(--pagination-control-size)*1.35)",
                 },
               }}
               classNames={{ control: classes.control }}
               py="sm"
+              siblings={0}
             >
               <Group gap={5} justify="center">
                 <Pagination.Previous />
