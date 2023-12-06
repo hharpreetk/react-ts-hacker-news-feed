@@ -4,11 +4,11 @@ import { Story, Stories } from "../types/stories";
 import Item from "./StoryItem";
 import { useStoriesDispatch } from "../contexts/StoriesContext";
 
-interface StoriesListProps {
+interface StoryListProps {
   list: Stories;
 }
 
-const StoriesList = memo(({ list }: StoriesListProps) => {
+const StoryList: React.FC<StoryListProps> = memo(({ list }) => {
   const dispatchStories = useStoriesDispatch();
   const handleRemoveStory = useCallback((item: Story) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
@@ -28,4 +28,4 @@ const StoriesList = memo(({ list }: StoriesListProps) => {
   );
 });
 
-export default StoriesList;
+export default StoryList;

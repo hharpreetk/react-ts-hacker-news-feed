@@ -1,19 +1,19 @@
 import { Autocomplete } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
-interface SearchProps {
+interface StorySearchProps {
   searchTerm: string;
   onSearchInput: (searchInput: string) => void;
   onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   suggestions: Array<string>;
 }
 
-const Search = ({
+const StorySearch: React.FC<StorySearchProps> = ({
   searchTerm,
   onSearchInput,
   onSearchSubmit,
   suggestions,
-}: SearchProps) => {
+}) => {
   return (
     <form onSubmit={onSearchSubmit}>
       <Autocomplete
@@ -30,4 +30,4 @@ const Search = ({
   );
 };
 
-export default Search;
+export default StorySearch;

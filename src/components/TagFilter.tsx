@@ -7,12 +7,12 @@ import {
 import { TAG_OPTIONS } from "../constants/options";
 import classes from "../styles/Custom.module.css";
 
-interface TagsFilterProps {
+interface TagFilterProps {
   selectedTag: string;
   onTagChange: (selectedOptions: string) => void;
 }
 
-const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
+const TagFilter: React.FC<TagFilterProps> = ({ selectedTag, onTagChange }) => {
   const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -50,4 +50,4 @@ const TagsFilter = ({ selectedTag, onTagChange }: TagsFilterProps) => {
   );
 };
 
-export default TagsFilter;
+export default TagFilter;

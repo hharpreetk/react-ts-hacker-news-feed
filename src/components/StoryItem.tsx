@@ -9,9 +9,9 @@ interface StoryItemProps {
   onRemoveItem: (item: Story) => void;
 }
 
-const StoryItem = ({ item, onRemoveItem }: StoryItemProps) => {
+const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const theme = useMantineTheme();
-  
+
   const handleRemoveItem = () => onRemoveItem(item);
 
   // Function to format date as "time ago"

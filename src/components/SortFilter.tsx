@@ -7,7 +7,10 @@ interface SortFilterProps {
   onSortSelect: (selectedOption: string | null) => void;
 }
 
-const SortFilter = ({ selectedSort, onSortSelect }: SortFilterProps) => {
+const SortFilter: React.FC<SortFilterProps> = ({
+  selectedSort,
+  onSortSelect,
+}) => {
   return (
     <Select
       maw={{ base: 180, xs: "auto" }}

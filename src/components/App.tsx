@@ -8,23 +8,18 @@ import {
   AppShell,
   ThemeIcon,
   ActionIcon,
-  Pagination,
   Grid,
   Group,
   Text,
   Anchor,
   Flex,
-  Loader,
   rem,
   useMantineTheme,
 } from "@mantine/core";
-import classes from "../styles/Custom.module.css";
 import { useHeadroom } from "@mantine/hooks";
-import Search from "./StoriesSearch";
-import TagsFilter from "./TagsFilter";
-import SortFilter from "./SortFilter";
-import DateFilter from "./DateFilter";
-import StoriesList from "./StoriesList";
+import StorySearch from "./StorySearch";
+import StoryView from "./StoryView";
+import StoryFilters from "./StoryFilters";
 import { SORT_OPTIONS, TAG_OPTIONS, DATE_OPTIONS } from "../constants/options";
 import {
   SORT_RESOURCE_FILTERS,
@@ -74,7 +69,7 @@ const App = () => {
     fetchStories();
   }, [url]);
 
-  // Update the URL when the selected tags change
+  // Update the URL when dependencies change
   useEffect(() => {
     setUrl(
       getStoriesUrl(
@@ -136,7 +131,6 @@ const App = () => {
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
 
-  // Get theme object from
   const theme = useMantineTheme();
 
   return (
@@ -152,14 +146,14 @@ const App = () => {
             <IconSquareLetterH size={37} />
           </ThemeIcon>
           <Grid.Col span="auto" maw="90%">
-            <Search
+            <StorySearch
               searchTerm={searchTerm}
               onSearchInput={handleSearchInput}
               onSearchSubmit={handleSearchSubmit}
               suggestions={suggestions}
             />
           </Grid.Col>
-          <Group gap="xs">
+          <Group gap={8}>
             <ActionIcon
               variant="default"
               size="lg"
@@ -183,49 +177,22 @@ const App = () => {
         m="auto"
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
       >
-        <TagsFilter selectedTag={selectedTag} onTagChange={handleTagChange} />
-        <Group gap="sm">
-          <SortFilter
-            selectedSort={selectedSort}
-            onSortSelect={handleSortSelect}
-          />
-          <DateFilter
-            selectedDate={selectedDate}
-            onDateSelect={handleDateSelect}
-          />
-        </Group>
-        {isError ? (
-          <p>Something went wrong...</p>
-        ) : isLoading ? (
-          <Loader type="dots" mx="auto" my="lg" />
-        ) : data.length === 0 ? (
-          <NoResults />
-        ) : (
-          <>
-            <StoriesList list={data} />
-            <Pagination.Root
-              total={totalPages}
-              value={activePage + 1}
-              onChange={handleActivePage}
-              size="sm"
-              styles={{
-                control: {
-                  height: "calc(var(--pagination-control-size)*1.35)",
-                  minWidth: "calc(var(--pagination-control-size)*1.35)",
-                },
-              }}
-              classNames={{ control: classes.control }}
-              py="sm"
-              siblings={0}
-            >
-              <Group gap={5} justify="center">
-                <Pagination.Previous />
-                <Pagination.Items />
-                <Pagination.Next />
-              </Group>
-            </Pagination.Root>
-          </>
-        )}
+         <StoryFilters
+          selectedTag={selectedTag}
+          handleTagChange={handleTagChange}
+          selectedSort={selectedSort}
+          handleSortSelect={handleSortSelect}
+          selectedDate={selectedDate}
+          handleDateSelect={handleDateSelect}
+        />
+        <StoryView
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+          totalPages={totalPages}
+          activePage={activePage}
+          handleActivePage={handleActivePage}
+        />
       </AppShell.Main>
       <AppShell.Footer pos="absolute" bottom={0} p="lg">
         <Flex
@@ -252,7 +219,5 @@ const App = () => {
     </AppShell>
   );
 };
-
-const NoResults = () => <p>No Results Found</p>;
 
 export default App;

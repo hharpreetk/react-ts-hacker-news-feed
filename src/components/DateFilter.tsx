@@ -7,7 +7,7 @@ interface DateFilterProps {
   onDateSelect: (selectedOption: string | null) => void;
 }
 
-const DateFilter = ({ selectedDate, onDateSelect }: DateFilterProps) => {
+const DateFilter : React.FC<DateFilterProps> = ({ selectedDate, onDateSelect }) => {
   return (
     <div>
       <Select
