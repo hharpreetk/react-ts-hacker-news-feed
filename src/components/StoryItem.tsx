@@ -40,8 +40,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         return item.story_text;
       case "job":
         return item.job_text;
-      case "comment":
-        return item.comment_text;
       default:
         return null;
     }
@@ -53,16 +51,13 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderAnchor = () => {
-    const category = getCategory();
-    const link = category === "comment" ? item.story_url : item.url;
-    const title =
-      category === "comment" ? `ON: ${item.story_title}` : item.title;
+    const { title, url } = item;
 
     // If url exists, render Anchor component, otherwise render Text component
-    if (link) {
+    if (url) {
       return (
         <Anchor
-          href={link}
+          href={item.url}
           target="_blank"
           fw={500}
           lh="sm"

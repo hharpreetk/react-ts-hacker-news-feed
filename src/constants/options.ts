@@ -6,8 +6,7 @@ const TAG_OPTIONS: Options = [
   { value: "ask_hn", label: "Ask HN" },
   { value: "launch_hn", label: "Launch HN" },
   { value: "job", label: "Jobs" },
-  { value: "poll", label: "Polls" },
-  { value: "comment", label: "Comments" },
+  { value: "poll", label: "Polls" }
 ];
 
 const SORT_OPTIONS: Options = [
