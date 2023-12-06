@@ -5,7 +5,7 @@ import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import { AppShell, rem } from "@mantine/core";
-import { SORT_OPTIONS, TAG_OPTIONS, DATE_OPTIONS } from "../constants/options";
+import { SORT_OPTIONS, CONTENT_OPTIONS, DATE_OPTIONS } from "../constants/options";
 import {
   SORT_RESOURCE_FILTERS,
   DATE_NUMERIC_FILTERS,
@@ -22,7 +22,7 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
-  const [selectedTag, setSelectedTag] = useState<string>(TAG_OPTIONS[0].value);
+  const [selectedContent, setSelectedContent] = useState<string>(CONTENT_OPTIONS[0].value);
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
     SORT_OPTIONS[0].value // Select first option by default
@@ -39,7 +39,7 @@ const App = () => {
   const sortResource = selectedSort ? SORT_RESOURCE_FILTERS[selectedSort] : "";
 
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(sortResource, searchTerm, selectedTag, dateFilter, activePage)
+    getStoriesUrl(sortResource, searchTerm, selectedContent, dateFilter, activePage)
   );
 
   // State to store an array of urls representing last five searches
@@ -61,12 +61,12 @@ const App = () => {
       getStoriesUrl(
         sortResource,
         searchTerm,
-        selectedTag,
+        selectedContent,
         dateFilter,
         activePage
       )
     );
-  }, [selectedTag, selectedSort, selectedDate, activePage]);
+  }, [selectedContent, selectedSort, selectedDate, activePage]);
 
   const { data, isLoading, isError, totalPages } = stories;
 
@@ -87,7 +87,7 @@ const App = () => {
       getStoriesUrl(
         sortResource,
         searchTerm,
-        selectedTag,
+        selectedContent,
         dateFilter,
         activePage
       )
@@ -101,8 +101,8 @@ const App = () => {
     }
   };
 
-  const handleTagChange = (selectedOptions: string) => {
-    setSelectedTag(selectedOptions);
+  const handleContentChange = (selectedOptions: string) => {
+    setSelectedContent(selectedOptions);
   };
 
   const handleSortSelect = (selectedOption: string | null) => {
@@ -138,8 +138,8 @@ const App = () => {
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
       >
         <StoryFilters
-          selectedTag={selectedTag}
-          handleTagChange={handleTagChange}
+          selectedContent={selectedContent}
+          handleContentChange={handleContentChange}
           selectedSort={selectedSort}
           handleSortSelect={handleSortSelect}
           selectedDate={selectedDate}

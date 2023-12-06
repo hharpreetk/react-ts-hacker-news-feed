@@ -1,7 +1,7 @@
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
 import { TypographyStylesProvider, useMantineTheme } from "@mantine/core";
 import { Story } from "../types/stories";
-import { TAG_OPTIONS } from "../constants/options";
+import { CONTENT_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
 
 interface StoryItemProps {
@@ -22,9 +22,9 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const getTags = (): string[] => {
     const allTags = item._tags;
-    return TAG_OPTIONS.filter((tagOption) =>
-      allTags.includes(tagOption.value)
-    ).map((tagOption) => tagOption.value.replace(/_/g, " "));
+    return CONTENT_OPTIONS.filter((option) =>
+      allTags.includes(option.value)
+    ).map((option) => option.value.replace(/_/g, " "));
   };
 
   const getContent = (): string | null => {

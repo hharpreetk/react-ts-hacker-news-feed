@@ -1,6 +1,6 @@
 import { Options } from "../types/options";
 
-const TAG_OPTIONS: Options = [
+const CONTENT_OPTIONS: Options = [
   { value: "story", label: "Stories" },
   { value: "show_hn", label: "Show HN" },
   { value: "ask_hn", label: "Ask HN" },
@@ -23,4 +23,4 @@ const DATE_OPTIONS: Options = [
   // ... other options
 ];
 
-export { TAG_OPTIONS, SORT_OPTIONS, DATE_OPTIONS };
+export { CONTENT_OPTIONS, SORT_OPTIONS, DATE_OPTIONS };

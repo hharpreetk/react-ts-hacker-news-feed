@@ -1,13 +1,13 @@
 // StoryFilters.tsx
 import React from "react";
 import { Group } from "@mantine/core";
-import TagFilter from "./TagFilter";
+import ContentFilter from "./ContentFilter";
 import SortFilter from "./SortFilter";
 import DateFilter from "./DateFilter";
 
 interface StoryFiltersProps {
-  selectedTag: string;
-  handleTagChange: (selectedOptions: string) => void;
+  selectedContent: string;
+  handleContentChange: (selectedOptions: string) => void;
   selectedSort: string | null;
   handleSortSelect: (selectedOption: string | null) => void;
   selectedDate: string | null;
@@ -15,15 +15,15 @@ interface StoryFiltersProps {
 }
 
 const StoryFilters: React.FC<StoryFiltersProps> = ({
-  selectedTag,
-  handleTagChange,
+  selectedContent,
+  handleContentChange,
   selectedSort,
   handleSortSelect,
   selectedDate,
   handleDateSelect,
 }) => (
   <>
-    <TagFilter selectedTag={selectedTag} onTagChange={handleTagChange} />
+    <ContentFilter selectedContent={selectedContent} onContentChange={handleContentChange} />
     <Group gap="sm">
       <SortFilter selectedSort={selectedSort} onSortSelect={handleSortSelect} />
       <DateFilter selectedDate={selectedDate} onDateSelect={handleDateSelect} />
