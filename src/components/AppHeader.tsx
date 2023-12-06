@@ -31,19 +31,9 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         suggestions={suggestions}
       />
     </Grid.Col>
-    <Group gap={8}>
-      <ActionIcon
-        variant="default"
-        size="lg"
-        aria-label="Toggle Dark Mode"
-        visibleFrom="xs"
-      >
-        <IconMoon size={18} stroke={1.5} />
-      </ActionIcon>
-      <ActionIcon variant="default" size="lg" aria-label="Edit App Settings">
-        <IconAdjustmentsCog size={18} stroke={1.5} />
-      </ActionIcon>
-    </Group>
+    <ActionIcon variant="default" size="lg" aria-label="Edit App Settings">
+      <IconAdjustmentsCog size={18} stroke={1.5} />
+    </ActionIcon>
   </Grid>
 );
 
