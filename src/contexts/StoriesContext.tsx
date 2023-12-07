@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, ReactNode, useContext } from "react";
 import { Stories, Story } from "../types/stories";
 
-interface StoriesContextProps {
+interface StoriesProviderProps {
   children: ReactNode;
 }
 
@@ -27,7 +27,7 @@ export const StoriesDispatchContext = createContext<
   React.Dispatch<StoriesAction>
 >(null!);
 
-export const StoriesProvider = ({ children }: StoriesContextProps) => {
+export const StoriesProvider = ({ children }: StoriesProviderProps) => {
   const [stories, dispatchStories] = useReducer(storiesReducer, {
     data: [] as Stories,
     isLoading: false,
