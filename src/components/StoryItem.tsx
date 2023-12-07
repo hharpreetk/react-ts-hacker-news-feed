@@ -1,4 +1,13 @@
-import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
+import {
+  Card,
+  Flex,
+  Anchor,
+  Group,
+  Badge,
+  Box,
+  Text,
+  Highlight,
+} from "@mantine/core";
 import { TypographyStylesProvider, useMantineTheme } from "@mantine/core";
 import { Story } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
@@ -38,9 +47,12 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     }
   };
 
-  const getPointsOrComments = (property: "points" | "num_comments"): React.ReactNode => {
+  const getPointsOrComments = (
+    property: "points" | "num_comments"
+  ): React.ReactNode => {
     const category = getCategory();
-    const value = category === "story" || category === "poll" ? item[property] : null;
+    const value =
+      category === "story" || category === "poll" ? item[property] : null;
 
     if (value !== null) {
       const label = property === "points" ? "point" : "comment";
@@ -58,29 +70,61 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderAnchor = () => {
-    const { title, url } = item;
-    const anchorProps = {
+    const { title, url, _highlightResult } = item;
+    const titleProps = {
       fw: 500,
-      lh: "sm",
+      lh: "xs",
       c: theme.primaryColor,
     };
 
+    const highlightWords = _highlightResult?.title?.matchedWords ?? [];
+
     if (url) {
-      return <Anchor href={url} target="_blank" {...anchorProps}>{title}</Anchor>;
+      return (
+        <Anchor href={url} target="_blank" {...titleProps}>
+          <Highlight highlight={highlightWords} fw={500}>
+            {title}
+          </Highlight>
+        </Anchor>
+      );
     } else {
-      return <Text {...anchorProps}>{title}</Text>;
+      return (
+        <Highlight highlight={highlightWords} {...titleProps}>
+          {title}
+        </Highlight>
+      );
     }
+  };
+
+  const renderAuthor = () => {
+    const { author, _highlightResult } = item;
+    const highlightWords = _highlightResult?.author?.matchedWords ?? [];
+    return (
+      <>
+        <Highlight highlight={highlightWords} size="sm">
+          {author}
+        </Highlight>
+        <Text size="xs">|</Text>
+      </>
+    );
   };
 
   return (
     <Card withBorder radius="md">
-      <Flex direction="column" gap={3}>
+      <Flex direction="column" gap={2}>
         <Group justify="space-between" wrap="nowrap" align="start">
           {renderAnchor()}
           <Box>
             <Group gap={6} justify="end">
               {getTags().map((tag, index) => (
-                <Badge key={index} tt="uppercase" fw={700} size="sm" variant="light" radius={2}>
+                <Badge
+                  key={index}
+                  tt="uppercase"
+                  fw={700}
+                  size="sm"
+                  variant="light"
+                  radius={2}
+                >
                   {tag}
                 </Badge>
               ))}
@@ -98,9 +142,8 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
             />
           </TypographyStylesProvider>
         )}
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
-          <Text size="sm">{item.author}</Text>
-          <Text size="xs">|</Text>
+        <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center">
+          {renderAuthor()}
           <Text size="sm">{getFormattedDate(item.created_at)}</Text>
           <Text size="xs">|</Text>
           {getPointsOrComments("points")}
