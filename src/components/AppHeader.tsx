@@ -1,9 +1,5 @@
-import { Grid, Group, ThemeIcon, ActionIcon } from "@mantine/core";
-import {
-  IconSquareLetterH,
-  IconAdjustmentsCog,
-  IconMoon,
-} from "@tabler/icons-react";
+import { Grid, ThemeIcon, ActionIcon } from "@mantine/core";
+import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
 import StorySearch from "./StorySearch";
 
 interface AppHeaderProps {
