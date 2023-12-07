@@ -10,10 +10,14 @@ const CONTENT_OPTIONS: Options = [
   { value: "poll", label: "Polls" },
 ];
 
-const SORT_OPTIONS: Options = [
+// Constants for common sort options
+const COMMON_SORT_OPTIONS: Options = [
   { value: "popularity", label: "Popularity" },
   { value: "date", label: "Date" },
 ];
+
+// Constants for sort options specific to jobs
+const JOB_SORT_OPTIONS: Options = [{ value: "date", label: "Date" }];
 
 const DATE_OPTIONS: Options = [
   { value: "forever", label: "Forever" },
@@ -24,4 +28,4 @@ const DATE_OPTIONS: Options = [
   // ... other options
 ];
 
-export { CONTENT_OPTIONS, SORT_OPTIONS, DATE_OPTIONS };
+export { CONTENT_OPTIONS, COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS, DATE_OPTIONS };

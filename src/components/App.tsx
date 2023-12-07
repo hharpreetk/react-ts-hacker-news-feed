@@ -6,9 +6,10 @@ import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import { AppShell, rem } from "@mantine/core";
 import {
-  SORT_OPTIONS,
+  COMMON_SORT_OPTIONS,
   CONTENT_OPTIONS,
   DATE_OPTIONS,
+  JOB_SORT_OPTIONS,
 } from "../constants/options";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "./AppHeader";
@@ -27,7 +28,7 @@ const App = () => {
   );
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
-    SORT_OPTIONS[0].value // Select first option by default
+    COMMON_SORT_OPTIONS[0].value // Select first option by default
   );
 
   const [selectedDate, setSelectedDate] = useState<string | null>(
@@ -105,11 +106,18 @@ const App = () => {
     }
   };
 
-  const handleContentChange = (selectedOptions: string) => {
+  const handleContentChange = (selectedOption: string) => {
     // Reset the page to first page every time user switches between content
     setActivePage(0);
 
-    setSelectedContent(selectedOptions);
+    setSelectedContent(selectedOption);
+
+    // If the selected content is "job," update the selectedSort state to "date"
+    if (selectedOption === "job") {
+      setSelectedSort(JOB_SORT_OPTIONS[0].value);
+    } else {
+      setSelectedSort(COMMON_SORT_OPTIONS[0].value);
+    }
   };
 
   const handleSortSelect = (selectedOption: string | null) => {

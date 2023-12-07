@@ -25,7 +25,7 @@ const StoryFilters: React.FC<StoryFiltersProps> = ({
   <>
     <ContentFilter selectedContent={selectedContent} onContentChange={handleContentChange} />
     <Group gap="sm">
-      <SortFilter selectedSort={selectedSort} onSortSelect={handleSortSelect} />
+      <SortFilter selectedSort={selectedSort} onSortSelect={handleSortSelect} selectedContent={selectedContent} />
       <DateFilter selectedDate={selectedDate} onDateSelect={handleDateSelect} />
     </Group>
   </>
