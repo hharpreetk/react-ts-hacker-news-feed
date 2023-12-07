@@ -82,6 +82,18 @@ const App = () => {
 
   const handleSearchInput = (searchInput: string): void => {
     setSearchTerm(searchInput);
+    // If the search input is empty, reset the URL and fetch default stories
+    if (!searchInput.trim()) {
+      setUrl(
+        getStoriesUrl(
+          selectedSort,
+          "", // empty search query
+          selectedContent,
+          selectedDate,
+          0 // reset to the first page
+        )
+      );
+    }
   };
 
   const handleSearchSubmit = (
