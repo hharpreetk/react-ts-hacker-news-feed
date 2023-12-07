@@ -5,7 +5,7 @@ import StorySearch from "./StorySearch";
 interface AppHeaderProps {
   searchTerm: string;
   handleSearchInput: (searchInput: string) => void;
-  handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSearchSubmit: () => void;
   suggestions: Array<string>;
 }
 

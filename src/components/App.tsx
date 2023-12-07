@@ -96,10 +96,7 @@ const App = () => {
     }
   };
 
-  const handleSearchSubmit = (
-    event: React.FormEvent<HTMLFormElement>
-  ): void => {
-    event.preventDefault();
+  const handleSearchSubmit = (): void => {
     setUrl(
       getStoriesUrl(
         selectedSort,
