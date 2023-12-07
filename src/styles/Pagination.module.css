@@ -1,0 +1,9 @@
+.control {
+  height: calc(var(--pagination-control-size) * 1.35);
+  min-width: calc(var(--pagination-control-size) * 1.35);
+
+  &[data-active] {
+    background-color: var(--mantine-primary-color-filled);
+    color: var(--mantine-color-body);
+  }
+}

@@ -5,14 +5,17 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { CONTENT_OPTIONS } from "../constants/options";
-import classes from "../styles/Custom.module.css";
+import classes from "../styles/SegmentedControl.module.css";
 
 interface ContentilterProps {
   selectedContent: string;
   onContentChange: (selectedOptions: string) => void;
 }
 
-const ContentFilter: React.FC<ContentilterProps> = ({ selectedContent, onContentChange }) => {
+const ContentFilter: React.FC<ContentilterProps> = ({
+  selectedContent,
+  onContentChange,
+}) => {
   const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   return (
@@ -32,13 +35,6 @@ const ContentFilter: React.FC<ContentilterProps> = ({ selectedContent, onContent
                 ? `var(--mantine-color-dark-4)`
                 : `var(--mantine-color-gray-3)`
             }`,
-          },
-          control: {
-            padding:
-              "calc(0.12rem*var(--mantine-scale)) calc(0.275rem*var(--mantine-scale))",
-          },
-          label: {
-            fontWeight: "normal",
           },
         }}
         mb={9}

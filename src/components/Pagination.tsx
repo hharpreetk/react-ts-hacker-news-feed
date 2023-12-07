@@ -1,5 +1,5 @@
 import { Group, Pagination as MantinePagination } from "@mantine/core";
-import classes from "../styles/Custom.module.css";
+import classes from "../styles/Pagination.module.css";
 
 interface PaginationProps {
   totalPages: number;
@@ -17,12 +17,6 @@ const Pagination: React.FC<PaginationProps> = ({
     value={activePage + 1}
     onChange={handleActivePage}
     size="sm"
-    styles={{
-      control: {
-        height: "calc(var(--pagination-control-size)*1.35)",
-        minWidth: "calc(var(--pagination-control-size)*1.35)",
-      },
-    }}
     classNames={{ control: classes.control }}
     py="sm"
     siblings={0}
