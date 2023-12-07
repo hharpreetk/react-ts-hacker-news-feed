@@ -1,6 +1,6 @@
 // Mapping between CONTENT_OPTIONS and their corresponding tag values
 const CONTENT_TAG_FILTERS: Record<string, string> = {
-  all: "story,show_hn,ask_hn,launch_hn,job,poll", 
+  all: "(story,show_hn,ask_hn,launch_hn,job,poll)",
   story: "story",
   show_hn: "show_hn",
   ask_hn: "ask_hn",
@@ -9,9 +9,6 @@ const CONTENT_TAG_FILTERS: Record<string, string> = {
   poll: "poll",
   // ... add more mappings as needed
 };
-
-export { CONTENT_TAG_FILTERS };
-
 
 // Mapping between TIME_OPTIONS and their numeric filter values
 const DATE_NUMERIC_FILTERS: Record<string, string> = {
@@ -38,4 +35,14 @@ const SORT_RESOURCE_FILTERS: Record<string, string> = {
   // ... add more mappings as needed
 };
 
-export { DATE_NUMERIC_FILTERS, SORT_RESOURCE_FILTERS };
+const DEFAULT_SORT_RESOURCE_FILTER = SORT_RESOURCE_FILTERS.popularity;
+
+const DEFAULT_DATE_NUMERIC_FILTER = DATE_NUMERIC_FILTERS.forever;
+
+export {
+  CONTENT_TAG_FILTERS,
+  DATE_NUMERIC_FILTERS,
+  SORT_RESOURCE_FILTERS,
+  DEFAULT_SORT_RESOURCE_FILTER,
+  DEFAULT_DATE_NUMERIC_FILTER,
+};

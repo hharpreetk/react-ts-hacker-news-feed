@@ -5,11 +5,11 @@ import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import { AppShell, rem } from "@mantine/core";
-import { SORT_OPTIONS, CONTENT_OPTIONS, DATE_OPTIONS } from "../constants/options";
 import {
-  SORT_RESOURCE_FILTERS,
-  DATE_NUMERIC_FILTERS,
-} from "../constants/mappings";
+  SORT_OPTIONS,
+  CONTENT_OPTIONS,
+  DATE_OPTIONS,
+} from "../constants/options";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "./AppHeader";
 import StoryView from "./StoryView";
@@ -22,7 +22,9 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
-  const [selectedContent, setSelectedContent] = useState<string>(CONTENT_OPTIONS[0].value);
+  const [selectedContent, setSelectedContent] = useState<string>(
+    CONTENT_OPTIONS[0].value
+  );
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
     SORT_OPTIONS[0].value // Select first option by default
@@ -34,12 +36,14 @@ const App = () => {
 
   const [activePage, setActivePage] = useState(0);
 
-  const dateFilter = selectedDate ? DATE_NUMERIC_FILTERS[selectedDate] : "";
-
-  const sortResource = selectedSort ? SORT_RESOURCE_FILTERS[selectedSort] : "";
-
   const [url, setUrl] = useState<string>(
-    getStoriesUrl(sortResource, searchTerm, selectedContent, dateFilter, activePage)
+    getStoriesUrl(
+      selectedSort,
+      searchTerm,
+      selectedContent,
+      selectedDate,
+      activePage
+    )
   );
 
   // State to store an array of urls representing last five searches
@@ -59,10 +63,10 @@ const App = () => {
   useEffect(() => {
     setUrl(
       getStoriesUrl(
-        sortResource,
+        selectedSort,
         searchTerm,
         selectedContent,
-        dateFilter,
+        selectedDate,
         activePage
       )
     );
@@ -85,10 +89,10 @@ const App = () => {
     event.preventDefault();
     setUrl(
       getStoriesUrl(
-        sortResource,
+        selectedSort,
         searchTerm,
         selectedContent,
-        dateFilter,
+        selectedDate,
         activePage
       )
     );
@@ -102,9 +106,10 @@ const App = () => {
   };
 
   const handleContentChange = (selectedOptions: string) => {
-    setSelectedContent(selectedOptions);
     // Reset the page to first page every time user switches between content
     setActivePage(0);
+
+    setSelectedContent(selectedOptions);
   };
 
   const handleSortSelect = (selectedOption: string | null) => {
