@@ -8,7 +8,11 @@ import {
   Text,
   Highlight,
 } from "@mantine/core";
-import { TypographyStylesProvider, useMantineTheme, useMantineColorScheme } from "@mantine/core";
+import {
+  TypographyStylesProvider,
+  useMantineTheme,
+  useMantineColorScheme,
+} from "@mantine/core";
 import "../styles/Content.module.css";
 import { Story } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
@@ -30,21 +34,31 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     return format(new Date(dateInput));
   };
 
-  const getCategory = (): string => item._tags[0];
+  const {
+    title,
+    url,
+    author,
+    story_text,
+    job_text,
+    _tags,
+    _highlightResult,
+    created_at,
+  } = item;
+
+  const getCategory = (): string => _tags[0];
 
   const getTags = (): string[] => {
-    const allTags = item._tags;
-    return CONTENT_OPTIONS.filter((option) =>
-      allTags.includes(option.value)
-    ).map((option) => option.value.replace(/_/g, " "));
+    return CONTENT_OPTIONS.filter((option) => _tags.includes(option.value)).map(
+      (option) => option.value.replace(/_/g, " ")
+    );
   };
 
   const getContent = (): string | null => {
     switch (getCategory()) {
       case "story":
-        return item.story_text;
+        return story_text;
       case "job":
-        return item.job_text;
+        return job_text;
       default:
         return null;
     }
@@ -73,8 +87,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderTitle = () => {
-    const { title, _highlightResult } = item;
-
     const titleProps = {
       fw: 500,
       lh: "xs",
@@ -91,11 +103,12 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderUrl = () => {
-    const { url, _highlightResult } = item;
-
     const UrlProps = {
       size: "sm",
-      c: colorScheme==="dark"? "var(--mantine-color-gray-5)" : "var(--mantine-color-gray-7)",
+      c:
+        colorScheme === "dark"
+          ? "var(--mantine-color-gray-5)"
+          : "var(--mantine-color-gray-7)",
       lineClamp: 1,
     };
 
@@ -111,7 +124,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderAuthor = () => {
-    const { author, _highlightResult } = item;
     const highlightWords = _highlightResult?.author?.matchedWords ?? [];
     return (
       <Highlight highlight={highlightWords} size="sm">
@@ -163,7 +175,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           <Text size="xs">|</Text> */}
           {renderAuthor()}
           <Text size="xs">|</Text>
-          <Text size="sm">{getFormattedDate(item.created_at)}</Text>
+          <Text size="sm">{getFormattedDate(created_at)}</Text>
           <Text size="xs">|</Text>
           {getPointsOrComments("points")}
           {getPointsOrComments("num_comments")}
