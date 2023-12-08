@@ -9,6 +9,7 @@ import {
   Highlight,
 } from "@mantine/core";
 import { TypographyStylesProvider, useMantineTheme } from "@mantine/core";
+import "../styles/Content.module.css";
 import { Story } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
@@ -69,8 +70,9 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     return null;
   };
 
-  const renderAnchor = () => {
-    const { title, url, _highlightResult } = item;
+  const renderTitle = () => {
+    const { title, _highlightResult } = item;
+
     const titleProps = {
       fw: 500,
       lh: "xs",
@@ -79,19 +81,29 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
     const highlightWords = _highlightResult?.title?.matchedWords ?? [];
 
+    return (
+      <Highlight highlight={highlightWords} {...titleProps}>
+        {title}
+      </Highlight>
+    );
+  };
+
+  const renderUrl = () => {
+    const { url, _highlightResult } = item;
+
+    const UrlProps = {
+      size: "sm",
+      c: "dimmed",
+      lineClamp: 1,
+    };
+
+    const urlHighlightWords = _highlightResult?.url?.matchedWords ?? [];
+
     if (url) {
       return (
-        <Anchor href={url} target="_blank" {...titleProps}>
-          <Highlight highlight={highlightWords} fw={500}>
-            {title}
-          </Highlight>
+        <Anchor href={url} target="_blank" {...UrlProps}>
+          <Highlight highlight={urlHighlightWords}>{url}</Highlight>
         </Anchor>
-      );
-    } else {
-      return (
-        <Highlight highlight={highlightWords} {...titleProps}>
-          {title}
-        </Highlight>
       );
     }
   };
@@ -100,20 +112,17 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     const { author, _highlightResult } = item;
     const highlightWords = _highlightResult?.author?.matchedWords ?? [];
     return (
-      <>
-        <Highlight highlight={highlightWords} size="sm">
-          {author}
-        </Highlight>
-        <Text size="xs">|</Text>
-      </>
+      <Highlight highlight={highlightWords} size="sm">
+        {author}
+      </Highlight>
     );
   };
 
   return (
     <Card withBorder radius="md">
-      <Flex direction="column" gap={2}>
+      <Flex direction="column" gap={1}>
         <Group justify="space-between" wrap="nowrap" align="start">
-          {renderAnchor()}
+          {renderTitle()}
           <Box>
             <Group gap={6} justify="end">
               {getTags().map((tag, index) => (
@@ -131,8 +140,13 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
             </Group>
           </Box>
         </Group>
+        {renderUrl()}
         {getContent() && (
-          <TypographyStylesProvider p={0} m={0}>
+          <TypographyStylesProvider
+            p={0}
+            m={0}
+            styles={{ root: { marginBottom: 0 } }}
+          >
             <Text
               lineClamp={2}
               size="sm"
@@ -143,7 +157,10 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           </TypographyStylesProvider>
         )}
         <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center">
+          {/* {renderUrl()}
+          <Text size="xs">|</Text> */}
           {renderAuthor()}
+          <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(item.created_at)}</Text>
           <Text size="xs">|</Text>
           {getPointsOrComments("points")}
