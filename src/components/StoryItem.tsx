@@ -8,7 +8,7 @@ import {
   Text,
   Highlight,
 } from "@mantine/core";
-import { TypographyStylesProvider, useMantineTheme } from "@mantine/core";
+import { TypographyStylesProvider, useMantineTheme, useMantineColorScheme } from "@mantine/core";
 import "../styles/Content.module.css";
 import { Story } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
@@ -21,6 +21,8 @@ interface StoryItemProps {
 
 const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const theme = useMantineTheme();
+
+  const { colorScheme } = useMantineColorScheme();
 
   const handleRemoveItem = () => onRemoveItem(item);
 
@@ -93,7 +95,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
     const UrlProps = {
       size: "sm",
-      c: "dimmed",
+      c: colorScheme==="dark"? "var(--mantine-color-gray-5)" : "var(--mantine-color-gray-7)",
       lineClamp: 1,
     };
 
