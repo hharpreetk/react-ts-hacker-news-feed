@@ -1,20 +1,11 @@
-import {
-  Card,
-  Flex,
-  Anchor,
-  Group,
-  Badge,
-  Box,
-  Text,
-  Highlight,
-} from "@mantine/core";
+import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
 import {
   TypographyStylesProvider,
   useMantineTheme,
   useMantineColorScheme,
 } from "@mantine/core";
-import "../styles/Content.module.css";
-import { Story } from "../types/stories";
+import "../styles/StoryItem.module.css";
+import { Story, HighlightResult } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
 
@@ -56,12 +47,18 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const getContent = (): string | null => {
     switch (getCategory()) {
       case "story":
-        return story_text;
+        return getHighlightedValue("story_text") || story_text;
       case "job":
-        return job_text;
+        return getHighlightedValue("job_text") || job_text;
       default:
         return null;
     }
+  };
+
+  const getHighlightedValue = (
+    field: keyof HighlightResult<Story>
+  ): string | null => {
+    return _highlightResult?.[field]?.value || null;
   };
 
   const getPointsOrComments = (
@@ -95,10 +92,20 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
     const highlightWords = _highlightResult?.title?.matchedWords ?? [];
 
+    const titleValue =
+      highlightWords.length > 0 ? getHighlightedValue("title") : title;
+
     return (
-      <Highlight highlight={highlightWords} {...titleProps}>
-        {title}
-      </Highlight>
+      <TypographyStylesProvider
+        p={0}
+        m={0}
+        styles={{ root: { marginBottom: 0 } }}
+      >
+        <Text
+          {...titleProps}
+          dangerouslySetInnerHTML={{ __html: `${titleValue}` }}
+        />
+      </TypographyStylesProvider>
     );
   };
 
@@ -112,12 +119,21 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       lineClamp: 1,
     };
 
-    const urlHighlightWords = _highlightResult?.url?.matchedWords ?? [];
+    const highlightWords = _highlightResult?.url?.matchedWords ?? [];
+
+    const urlValue =
+      highlightWords.length > 0 ? getHighlightedValue("url") : url;
 
     if (url) {
       return (
         <Anchor href={url} target="_blank" {...UrlProps}>
-          <Highlight highlight={urlHighlightWords}>{url}</Highlight>
+          <TypographyStylesProvider
+            p={0}
+            m={0}
+            styles={{ root: { marginBottom: 0 } }}
+          >
+            <Text dangerouslySetInnerHTML={{ __html: `${urlValue}` }} />
+          </TypographyStylesProvider>
         </Anchor>
       );
     }
@@ -125,11 +141,45 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const renderAuthor = () => {
     const highlightWords = _highlightResult?.author?.matchedWords ?? [];
+
+    const authorValue =
+      highlightWords.length > 0 ? getHighlightedValue("author") : author;
+
     return (
-      <Highlight highlight={highlightWords} size="sm">
-        {author}
-      </Highlight>
+      <TypographyStylesProvider
+        p={0}
+        m={0}
+        styles={{ root: { marginBottom: 0 } }}
+      >
+        <Text
+          dangerouslySetInnerHTML={{ __html: `${authorValue}` }}
+          size="sm"
+        />
+      </TypographyStylesProvider>
     );
+  };
+
+  const renderContent = () => {
+    const contentProps = {
+      lineClamp: 2,
+      size: "sm",
+      mb: 0,
+      c: "dimmed",
+    };
+    if (getContent()) {
+      return (
+        <TypographyStylesProvider
+          p={0}
+          m={0}
+          styles={{ root: { marginBottom: 0 } }}
+        >
+          <Text
+            {...contentProps}
+            dangerouslySetInnerHTML={{ __html: `${getContent()}` }}
+          />
+        </TypographyStylesProvider>
+      );
+    }
   };
 
   return (
@@ -155,24 +205,8 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           </Box>
         </Group>
         {renderUrl()}
-        {getContent() && (
-          <TypographyStylesProvider
-            p={0}
-            m={0}
-            styles={{ root: { marginBottom: 0 } }}
-          >
-            <Text
-              lineClamp={2}
-              size="sm"
-              mb={0}
-              c="dimmed"
-              dangerouslySetInnerHTML={{ __html: `${getContent()}` }}
-            />
-          </TypographyStylesProvider>
-        )}
+        {renderContent()}
         <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center">
-          {/* {renderUrl()}
-          <Text size="xs">|</Text> */}
           {renderAuthor()}
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(created_at)}</Text>

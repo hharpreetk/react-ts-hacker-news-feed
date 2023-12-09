@@ -23,4 +23,4 @@ type Story = {
 
 type Stories = Array<Story>;
 
-export { Story, Stories };
+export { Story, Stories, HighlightResult };
