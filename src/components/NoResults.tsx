@@ -3,11 +3,10 @@ import classes from "../styles/Feedback.module.css";
 
 const NoResults = () => (
   <Notification
-    title="No Results Found"
+    title="No Results"
     my="md"
     classNames={{
       root: classes.root,
-      body: classes.body,
       title: classes.title,
     }}
     withBorder

@@ -1,12 +1,7 @@
 .root {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .title {
-  font-weight: 400;
-  margin-bottom: 0;
-}
-
-.body {
-  margin-left: 2px;
+  margin-bottom: 1px !important;
 }
