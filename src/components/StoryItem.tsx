@@ -201,7 +201,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         </Flex>
         {renderUrl()}
         {renderContent()}
-        <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center">
+        <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center" mt={1}>
           {renderAuthor()}
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(created_at)}</Text>
