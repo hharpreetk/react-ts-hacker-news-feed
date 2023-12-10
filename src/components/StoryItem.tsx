@@ -39,10 +39,11 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const getCategory = (): string => _tags[0];
 
-  const getTags = (): string[] => {
-    return CONTENT_OPTIONS.filter((option) => _tags.includes(option.value)).map(
-      (option) => option.value.replace(/_/g, " ")
+  const getTag = (): string => {
+    const filteredTags = CONTENT_OPTIONS.filter((option) =>
+      _tags.includes(option.value)
     );
+    return filteredTags[filteredTags.length - 1].value.replace(/_/g, " ");
   };
 
   const getContent = (): string | null => {
@@ -182,25 +183,22 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   return (
     <Card withBorder radius="md">
       <Flex direction="column" gap={1}>
-        <Group justify="space-between" wrap="nowrap" align="start">
+        <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}
           <Box>
-            <Group gap={6} justify="end">
-              {getTags().map((tag, index) => (
-                <Badge
-                  key={index}
-                  tt="uppercase"
-                  fw={700}
-                  size="sm"
-                  variant="light"
-                  radius={2}
-                >
-                  {tag}
-                </Badge>
-              ))}
+            <Group>
+              <Badge
+                tt="uppercase"
+                fw={700}
+                size="sm"
+                variant="light"
+                radius={2}
+              >
+                {getTag()}
+              </Badge>
             </Group>
           </Box>
-        </Group>
+        </Flex>
         {renderUrl()}
         {renderContent()}
         <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center">
