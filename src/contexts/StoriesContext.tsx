@@ -9,6 +9,7 @@ type StoriesState = {
   data: Stories;
   isLoading: boolean;
   isError: boolean;
+  error?: any;
   totalPages: number;
 };
 
@@ -18,7 +19,7 @@ type StoriesAction =
       type: "STORIES_FETCH_SUCCESS";
       payload: { hits: Stories; nbPages: number };
     }
-  | { type: "STORIES_FETCH_FAILURE" }
+  | { type: "STORIES_FETCH_FAILURE"; payload: { error: any } }
   | { type: "REMOVE_STORY"; payload: Story };
 
 export const StoriesContext = createContext<StoriesState>(null!);
@@ -32,6 +33,7 @@ export const StoriesProvider = ({ children }: StoriesProviderProps) => {
     data: [] as Stories,
     isLoading: false,
     isError: false,
+    error: undefined,
     totalPages: 0,
   });
 
@@ -76,6 +78,7 @@ const storiesReducer = (
         ...state,
         isLoading: false,
         isError: true,
+        error: action.payload.error,
       };
     case "REMOVE_STORY":
       return {

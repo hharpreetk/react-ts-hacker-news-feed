@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useStoriesDispatch } from "../contexts/StoriesContext";
 
 const useFetchStories = (url: string) => {
@@ -16,8 +16,11 @@ const useFetchStories = (url: string) => {
         type: "STORIES_FETCH_SUCCESS",
         payload: { hits, nbPages },
       });
-    } catch (error) {
-      dispatchStories({ type: "STORIES_FETCH_FAILURE" });
+    } catch (error: any) {
+      dispatchStories({
+        type: "STORIES_FETCH_FAILURE",
+        payload: { error: error },
+      });
     }
   };
 

@@ -73,7 +73,7 @@ const App = () => {
     );
   }, [selectedContent, selectedSort, selectedDate, activePage]);
 
-  const { data, isLoading, isError, totalPages } = stories;
+  const { data, isLoading, isError, error, totalPages } = stories;
 
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
@@ -173,6 +173,7 @@ const App = () => {
           data={data}
           isLoading={isLoading}
           isError={isError}
+          error={error}
           totalPages={totalPages}
           activePage={activePage}
           handleActivePage={handleActivePage}

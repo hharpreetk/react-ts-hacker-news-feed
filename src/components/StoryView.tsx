@@ -9,6 +9,7 @@ interface StoryViewProps {
   data: Stories;
   isLoading: boolean;
   isError: boolean;
+  error: any;
   totalPages: number;
   activePage: number;
   handleActivePage: (selectedPage: number) => void;
@@ -18,6 +19,7 @@ const StoryView: React.FC<StoryViewProps> = ({
   data,
   isLoading,
   isError,
+  error,
   totalPages,
   activePage,
   handleActivePage,
@@ -25,7 +27,18 @@ const StoryView: React.FC<StoryViewProps> = ({
   return (
     <>
       {isError ? (
-        <p>Something went wrong...</p>
+        <Notification
+          title={error?.code ? `Error ${error.code}` : "Unknown Error"}
+          color="red"
+          my="md"
+          classNames={{
+            root: classes.root,
+          }}
+          withBorder
+          withCloseButton={false}
+        >
+          {error?.message || "Something went wrong..."}
+        </Notification>
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
