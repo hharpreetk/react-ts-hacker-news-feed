@@ -1,0 +1,12 @@
+.root {
+  box-shadow: none;
+}
+
+.title {
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.body {
+  margin-left: 2px;
+}

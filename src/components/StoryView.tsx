@@ -1,7 +1,9 @@
-import { Loader } from "@mantine/core";
+import { Loader, Notification } from "@mantine/core";
+import classes from "../styles/Feedback.module.css";
 import { Stories } from "../types/stories";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
+import NoResults from "./NoResults";
 
 interface StoryViewProps {
   data: Stories;
@@ -27,7 +29,7 @@ const StoryView: React.FC<StoryViewProps> = ({
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <p>No Results Found</p>
+        <NoResults />
       ) : (
         <>
           <StoryList list={data} />
