@@ -24,21 +24,12 @@ const ContentFilter: React.FC<ContentilterProps> = ({
         data={CONTENT_OPTIONS}
         value={selectedContent}
         color={theme.primaryColor}
-        styles={{
-          root: {
-            background:
-              colorScheme === "dark"
-                ? `var(--mantine-color-dark-6)`
-                : `var(--mantine-color-body)`,
-            border: `calc(0.0625rem*var(--mantine-scale)) solid ${
-              colorScheme === "dark"
-                ? `var(--mantine-color-dark-4)`
-                : `var(--mantine-color-gray-3)`
-            }`,
-          },
-        }}
         mb={9}
-        classNames={{ control: classes.control, label: classes.label }}
+        classNames={{
+          root: classes.root,
+          control: classes.control,
+          label: classes.label,
+        }}
         onChange={onContentChange}
         transitionDuration={0}
       />

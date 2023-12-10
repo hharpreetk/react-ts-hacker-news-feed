@@ -5,6 +5,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import "../styles/StoryItem.module.css";
+import classes from "../styles/StoryItem.module.css";
 import { Story, HighlightResult } from "../types/stories";
 import { CONTENT_OPTIONS } from "../constants/options";
 import { format } from "timeago.js";
@@ -97,7 +98,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       <TypographyStylesProvider
         p={0}
         m={0}
-        styles={{ root: { marginBottom: 0 } }}
+        classNames={{ root: classes.wrapper }}
       >
         <Text
           {...titleProps}
@@ -125,7 +126,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           <TypographyStylesProvider
             p={0}
             m={0}
-            styles={{ root: { marginBottom: 0 } }}
+            classNames={{ root: classes.wrapper }}
           >
             <Text
               dangerouslySetInnerHTML={{
@@ -143,7 +144,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       <TypographyStylesProvider
         p={0}
         m={0}
-        styles={{ root: { marginBottom: 0 } }}
+        classNames={{ root: classes.wrapper }}
       >
         <Text
           dangerouslySetInnerHTML={{
@@ -167,7 +168,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         <TypographyStylesProvider
           p={0}
           m={0}
-          styles={{ root: { marginBottom: 0 } }}
+          classNames={{ root: classes.wrapper }}
         >
           <Text
             {...contentProps}

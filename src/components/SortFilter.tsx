@@ -2,6 +2,7 @@ import { Select } from "@mantine/core";
 import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../constants/options";
 import { IconSortDescending2 } from "@tabler/icons-react";
 import { Options } from "../types/options";
+import classes from "../styles/Select.module.css";
 
 interface SortFilterProps {
   selectedSort: string | null;
@@ -27,7 +28,7 @@ const SortFilter: React.FC<SortFilterProps> = ({
   return (
     <Select
       maw={{ base: 180, xs: "auto" }}
-      styles={{ input: { height: 38 } }}
+      classNames={{ input: classes.input }}
       data={getSortOptions(selectedContent)}
       value={selectedSort}
       onChange={onSortSelect}
