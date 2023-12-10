@@ -171,6 +171,7 @@ const App = () => {
         />
         <StoryView
           data={data}
+          selectedContent = {selectedContent}
           isLoading={isLoading}
           isError={isError}
           error={error}

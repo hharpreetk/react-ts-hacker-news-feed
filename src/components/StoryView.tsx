@@ -1,12 +1,13 @@
-import { Loader, Notification } from "@mantine/core";
+import { Loader, Notification, Text, useMantineTheme } from "@mantine/core";
 import classes from "../styles/Feedback.module.css";
 import { Stories } from "../types/stories";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
-import NoResults from "./NoResults";
+import { NO_RESULT_CONTENT_FEEDBACK } from "../constants/mappings";
 
 interface StoryViewProps {
   data: Stories;
+  selectedContent: string;
   isLoading: boolean;
   isError: boolean;
   error: any;
@@ -17,6 +18,7 @@ interface StoryViewProps {
 
 const StoryView: React.FC<StoryViewProps> = ({
   data,
+  selectedContent,
   isLoading,
   isError,
   error,
@@ -24,6 +26,7 @@ const StoryView: React.FC<StoryViewProps> = ({
   activePage,
   handleActivePage,
 }) => {
+  const theme = useMantineTheme();
   return (
     <>
       {isError ? (
@@ -33,6 +36,7 @@ const StoryView: React.FC<StoryViewProps> = ({
           my="md"
           classNames={{
             root: classes.root,
+            title: classes.title
           }}
           withBorder
           withCloseButton={false}
@@ -42,7 +46,22 @@ const StoryView: React.FC<StoryViewProps> = ({
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <NoResults />
+        <Notification
+          title={`Oops! No ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} Found`}
+          color={theme.primaryColor}
+          my="md"
+          classNames={{
+            root: classes.root,
+            title: classes.title
+          }}
+          withBorder
+          withCloseButton={false}
+        >
+          <Text size="sm">
+            Sorry, but we couldn't find the search results matching the filter
+            criteria.
+          </Text>
+        </Notification>
       ) : (
         <>
           <StoryList list={data} />

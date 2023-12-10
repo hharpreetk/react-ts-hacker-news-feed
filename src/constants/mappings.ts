@@ -35,6 +35,17 @@ const SORT_RESOURCE_FILTERS: Record<string, string> = {
   // ... add more mappings as needed
 };
 
+const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
+    all: "Stories or Jobs or Polls",
+    story: "Stories",
+    show_hn: "Show HN Stories",
+    ask_hn: "Ask HN Stories",
+    launch_hn: "Launch HN Stories",
+    job: "Jobs",
+    poll: "Polls",
+    // ... add more mappings as needed
+}
+
 const DEFAULT_SORT_RESOURCE_FILTER = SORT_RESOURCE_FILTERS.popularity;
 
 const DEFAULT_DATE_NUMERIC_FILTER = DATE_NUMERIC_FILTERS.forever;
@@ -45,4 +56,5 @@ export {
   SORT_RESOURCE_FILTERS,
   DEFAULT_SORT_RESOURCE_FILTER,
   DEFAULT_DATE_NUMERIC_FILTER,
+  NO_RESULT_CONTENT_FEEDBACK
 };
