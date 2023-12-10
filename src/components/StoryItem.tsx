@@ -58,7 +58,10 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const getHighlightedValue = (
     field: keyof HighlightResult<Story>
   ): string | null => {
-    return _highlightResult?.[field]?.value || null;
+    const highlightedWords = _highlightResult?.[field]?.matchedWords || [];
+    return highlightedWords.length > 0
+      ? _highlightResult?.[field]?.value || null
+      : null;
   };
 
   const getPointsOrComments = (
@@ -90,11 +93,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       c: theme.primaryColor,
     };
 
-    const highlightWords = _highlightResult?.title?.matchedWords ?? [];
-
-    const titleValue =
-      highlightWords.length > 0 ? getHighlightedValue("title") : title;
-
     return (
       <TypographyStylesProvider
         p={0}
@@ -103,7 +101,9 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       >
         <Text
           {...titleProps}
-          dangerouslySetInnerHTML={{ __html: `${titleValue}` }}
+          dangerouslySetInnerHTML={{
+            __html: `${getHighlightedValue("title") || title}`,
+          }}
         />
       </TypographyStylesProvider>
     );
@@ -119,11 +119,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       lineClamp: 1,
     };
 
-    const highlightWords = _highlightResult?.url?.matchedWords ?? [];
-
-    const urlValue =
-      highlightWords.length > 0 ? getHighlightedValue("url") : url;
-
     if (url) {
       return (
         <Anchor href={url} target="_blank" {...UrlProps}>
@@ -132,7 +127,11 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
             m={0}
             styles={{ root: { marginBottom: 0 } }}
           >
-            <Text dangerouslySetInnerHTML={{ __html: `${urlValue}` }} />
+            <Text
+              dangerouslySetInnerHTML={{
+                __html: `${getHighlightedValue("url") || url}`,
+              }}
+            />
           </TypographyStylesProvider>
         </Anchor>
       );
@@ -140,11 +139,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const renderAuthor = () => {
-    const highlightWords = _highlightResult?.author?.matchedWords ?? [];
-
-    const authorValue =
-      highlightWords.length > 0 ? getHighlightedValue("author") : author;
-
     return (
       <TypographyStylesProvider
         p={0}
@@ -152,7 +146,9 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         styles={{ root: { marginBottom: 0 } }}
       >
         <Text
-          dangerouslySetInnerHTML={{ __html: `${authorValue}` }}
+          dangerouslySetInnerHTML={{
+            __html: `${getHighlightedValue("author") || author}`,
+          }}
           size="sm"
         />
       </TypographyStylesProvider>
