@@ -1,7 +1,7 @@
 import { Options } from "../types/options";
 
 const CONTENT_OPTIONS: Options = [
-  { value: "all", label: "All" },
+  // { value: "all", label: "All" },
   { value: "story", label: "Stories" },
   { value: "show_hn", label: "Show HN" },
   { value: "ask_hn", label: "Ask HN" },
