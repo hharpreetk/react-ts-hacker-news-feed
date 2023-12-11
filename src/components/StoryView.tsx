@@ -26,42 +26,14 @@ const StoryView: React.FC<StoryViewProps> = ({
   activePage,
   handleActivePage,
 }) => {
-  const theme = useMantineTheme();
   return (
     <>
       {isError ? (
-        <Notification
-          title={error?.code ? `Error ${error.code}` : "Unknown Error"}
-          color="red"
-          my="md"
-          classNames={{
-            root: classes.root,
-            title: classes.title
-          }}
-          withBorder
-          withCloseButton={false}
-        >
-          {error?.message || "Something went wrong..."}
-        </Notification>
+        <ErrorFeedback error={error} />
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <Notification
-          title={`Oops! No ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} Found`}
-          color={theme.primaryColor}
-          my="md"
-          classNames={{
-            root: classes.root,
-            title: classes.title
-          }}
-          withBorder
-          withCloseButton={false}
-        >
-          <Text size="sm">
-            Sorry, but we couldn't find the search results matching the filter
-            criteria.
-          </Text>
-        </Notification>
+        <NoResultsFeedback selectedContent={selectedContent} />
       ) : (
         <>
           <StoryList list={data} />
@@ -77,3 +49,51 @@ const StoryView: React.FC<StoryViewProps> = ({
 };
 
 export default StoryView;
+
+interface NoResultsFeedbackProps {
+  selectedContent: string;
+}
+
+const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
+  selectedContent,
+}) => {
+  const theme = useMantineTheme();
+  return (
+    <Notification
+      title={`Oops! No ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} Found`}
+      color={theme.primaryColor}
+      my="md"
+      classNames={{
+        root: classes.root,
+        title: classes.title,
+      }}
+      withBorder
+      withCloseButton={false}
+    >
+      <Text size="sm">
+        Sorry, but we couldn't find the search results matching the filter
+        criteria.
+      </Text>
+    </Notification>
+  );
+};
+
+interface ErrorFeedbackProps {
+  error?: any;
+}
+
+const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ error }) => (
+  <Notification
+    title={error?.code ? `Error ${error.code}` : "Unknown Error"}
+    color="red"
+    my="md"
+    classNames={{
+      root: classes.root,
+      title: classes.title,
+    }}
+    withBorder
+    withCloseButton={false}
+  >
+    {error?.message || "Something went wrong..."}
+  </Notification>
+);
