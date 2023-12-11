@@ -33,7 +33,9 @@ const StoryView: React.FC<StoryViewProps> = ({
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <NoResultsFeedback selectedContent={selectedContent} />
+        <NoResultsFeedback
+          selectedContent={selectedContent}
+        />
       ) : (
         <>
           <StoryList list={data} />
@@ -58,21 +60,22 @@ const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
   selectedContent,
 }) => {
   const theme = useMantineTheme();
+  const userSearchTerm = localStorage.getItem("search");
   return (
     <Notification
-      title={`Oops! No ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} Found`}
+      title={`We couldn't find ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} matching your search for "${userSearchTerm}"`}
       color={theme.primaryColor}
       my="md"
       classNames={{
         root: classes.root,
         title: classes.title,
+        body: classes.body,
       }}
       withBorder
       withCloseButton={false}
     >
       <Text size="sm">
-        Sorry, but we couldn't find the search results matching the filter
-        criteria.
+        {`Sorry, but we couldn't find any ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} matching the filter criteria and search for "${userSearchTerm}". Please try adjusting your filters or using different keywords.`}
       </Text>
     </Notification>
   );
@@ -90,6 +93,7 @@ const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ error }) => (
     classNames={{
       root: classes.root,
       title: classes.title,
+      body: classes.body,
     }}
     withBorder
     withCloseButton={false}

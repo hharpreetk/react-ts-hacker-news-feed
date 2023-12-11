@@ -4,4 +4,10 @@
 
 .title {
   margin-bottom: 1px !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+.body {
+  margin-left: 2px !important;
 }

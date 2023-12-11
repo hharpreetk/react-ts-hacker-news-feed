@@ -36,13 +36,13 @@ const SORT_RESOURCE_FILTERS: Record<string, string> = {
 };
 
 const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
-    all: "Stories or Jobs or Polls",
-    story: "Stories",
-    show_hn: "Show HN Stories",
-    ask_hn: "Ask HN Stories",
-    launch_hn: "Launch HN Stories",
-    job: "Jobs",
-    poll: "Polls",
+    all: "stories or jobs or polls",
+    story: "stories",
+    show_hn: "show HN stories",
+    ask_hn: "ask HN stories",
+    launch_hn: "launch HN stories",
+    job: "jobs",
+    poll: "polls",
     // ... add more mappings as needed
 }
 
