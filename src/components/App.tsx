@@ -21,14 +21,17 @@ const App = () => {
   // State variables
   const stories = useStories();
 
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("searchTerm", "");
 
-  const [selectedContent, setSelectedContent] = useState<string>(
+  const [selectedContent, setSelectedContent] = useSemiPersistentState(
+    "contentType",
     CONTENT_OPTIONS[0].value
   );
 
   const [selectedSort, setSelectedSort] = useState<string | null>(
-    COMMON_SORT_OPTIONS[0].value // Select first option by default
+    selectedContent === "job"
+      ? JOB_SORT_OPTIONS[0].value
+      : COMMON_SORT_OPTIONS[0].value // Select first option by default
   );
 
   const [selectedDate, setSelectedDate] = useState<string | null>(
