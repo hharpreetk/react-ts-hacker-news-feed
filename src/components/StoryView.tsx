@@ -1,5 +1,4 @@
-import { Loader, Notification, Text, useMantineTheme } from "@mantine/core";
-import classes from "../styles/Feedback.module.css";
+import { Loader, Text } from "@mantine/core";
 import { Stories } from "../types/stories";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
@@ -33,9 +32,7 @@ const StoryView: React.FC<StoryViewProps> = ({
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <NoResultsFeedback
-          selectedContent={selectedContent}
-        />
+        <NoResultsFeedback selectedContent={selectedContent} />
       ) : (
         <>
           <StoryList list={data} />
@@ -59,25 +56,14 @@ interface NoResultsFeedbackProps {
 const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
   selectedContent,
 }) => {
-  const theme = useMantineTheme();
   const userSearchTerm = localStorage.getItem("search");
   return (
-    <Notification
-      title={`We couldn't find ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} matching your search for "${userSearchTerm}"`}
-      color={theme.primaryColor}
-      my="md"
-      classNames={{
-        root: classes.root,
-        title: classes.title,
-        body: classes.body,
-      }}
-      withBorder
-      withCloseButton={false}
-    >
-      <Text size="sm">
-        {`Sorry, but we couldn't find any ${NO_RESULT_CONTENT_FEEDBACK[selectedContent]} matching the filter criteria and search for "${userSearchTerm}". Please try adjusting your filters or using different keywords.`}
-      </Text>
-    </Notification>
+    <Text
+      size="0.95rem"
+      mt="sm"
+      c="dark"
+      lh="lg"
+    >{`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search for '${userSearchTerm}'.`}</Text>
   );
 };
 
@@ -86,18 +72,9 @@ interface ErrorFeedbackProps {
 }
 
 const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ error }) => (
-  <Notification
-    title={error?.code ? `Error ${error.code}` : "Unknown Error"}
-    color="red"
-    my="md"
-    classNames={{
-      root: classes.root,
-      title: classes.title,
-      body: classes.body,
-    }}
-    withBorder
-    withCloseButton={false}
-  >
+  <Text size="0.95rem" mt="sm" c="dark" lh="lg">
+    {error?.code ? `Error ${error.code}:` : "Unknown Error:"}
+    {"  "}
     {error?.message || "Something went wrong..."}
-  </Notification>
+  </Text>
 );
