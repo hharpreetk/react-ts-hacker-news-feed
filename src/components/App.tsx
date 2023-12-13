@@ -4,7 +4,7 @@ import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import { AppShell, rem } from "@mantine/core";
+import { AppShell, Pagination, rem } from "@mantine/core";
 import {
   COMMON_SORT_OPTIONS,
   CONTENT_OPTIONS,
@@ -21,24 +21,29 @@ const App = () => {
   // State variables
   const stories = useStories();
 
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("searchTerm", "");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState<string>(
+    "search",
+    ""
+  );
 
-  const [selectedContent, setSelectedContent] = useSemiPersistentState(
-    "contentType",
+  const [selectedContent, setSelectedContent] = useSemiPersistentState<string>(
+    "content",
     CONTENT_OPTIONS[0].value
   );
 
-  const [selectedSort, setSelectedSort] = useState<string | null>(
+  const [selectedSort, setSelectedSort] = useSemiPersistentState<string | null>(
+    "sort",
     selectedContent === "job"
       ? JOB_SORT_OPTIONS[0].value
-      : COMMON_SORT_OPTIONS[0].value // Select first option by default
+      : COMMON_SORT_OPTIONS[0].value
   );
 
-  const [selectedDate, setSelectedDate] = useState<string | null>(
+  const [selectedDate, setSelectedDate] = useSemiPersistentState<string | null>(
+    "dateRange",
     DATE_OPTIONS[0].value
   );
 
-  const [activePage, setActivePage] = useState(0);
+  const [activePage, setActivePage] = useSemiPersistentState<number>("page", 0);
 
   const [url, setUrl] = useState<string>(
     getStoriesUrl(
