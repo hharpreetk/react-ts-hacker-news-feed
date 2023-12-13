@@ -185,7 +185,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       <Flex direction="column" gap={1}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}
-          <Box>
+          <Box visibleFrom="xs">
             <Group>
               <Badge
                 tt="uppercase"
