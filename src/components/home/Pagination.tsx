@@ -1,5 +1,5 @@
 import { Group, Pagination as MantinePagination } from "@mantine/core";
-import classes from "../styles/Pagination.module.css";
+import classes from "../../styles/Pagination.module.css";
 
 interface PaginationProps {
   totalPages: number;

@@ -1,8 +1,8 @@
 import { Select } from "@mantine/core";
-import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../constants/options";
+import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../../constants/options";
 import { IconSortDescending2 } from "@tabler/icons-react";
-import { Options } from "../types/options";
-import classes from "../styles/Select.module.css";
+import { Options } from "../../types/options";
+import classes from "../../styles/Select.module.css";
 
 interface SortFilterProps {
   selectedSort: string | null;

@@ -1,8 +1,8 @@
 import { Loader, Text } from "@mantine/core";
-import { Stories } from "../types/stories";
+import { Stories } from "../../types/stories";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
-import { NO_RESULT_CONTENT_FEEDBACK } from "../constants/mappings";
+import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
 
 interface StoryViewProps {
   data: Stories;

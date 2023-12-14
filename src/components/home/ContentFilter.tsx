@@ -3,8 +3,8 @@ import {
   SegmentedControl,
   useMantineTheme,
 } from "@mantine/core";
-import { CONTENT_OPTIONS } from "../constants/options";
-import classes from "../styles/SegmentedControl.module.css";
+import { CONTENT_OPTIONS } from "../../constants/options";
+import classes from "../../styles/SegmentedControl.module.css";
 
 interface ContentilterProps {
   selectedContent: string;

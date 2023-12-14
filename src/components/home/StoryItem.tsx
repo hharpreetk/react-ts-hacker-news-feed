@@ -4,10 +4,10 @@ import {
   useMantineTheme,
   useMantineColorScheme,
 } from "@mantine/core";
-import "../styles/StoryItem.module.css";
-import classes from "../styles/StoryItem.module.css";
-import { Story, HighlightResult } from "../types/stories";
-import { CONTENT_OPTIONS } from "../constants/options";
+import "../../styles/StoryItem.module.css";
+import classes from "../../styles/StoryItem.module.css";
+import { Story, HighlightResult } from "../../types/stories";
+import { CONTENT_OPTIONS } from "../../constants/options";
 import { format } from "timeago.js";
 
 interface StoryItemProps {

@@ -1,6 +1,6 @@
 import { Grid, ThemeIcon, ActionIcon } from "@mantine/core";
 import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
-import StorySearch from "./StorySearch";
+import StorySearch from "../home/StorySearch";
 
 interface AppHeaderProps {
   searchTerm: string;
@@ -27,7 +27,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         suggestions={suggestions}
       />
     </Grid.Col>
-    <ActionIcon variant="default" size="lg" aria-label="Edit App Settings">
+    <ActionIcon component="a" href="/settings" variant="default" size="lg" aria-label="Edit App Settings">
       <IconAdjustmentsCog size={18} stroke={1.5} />
     </ActionIcon>
   </Grid>

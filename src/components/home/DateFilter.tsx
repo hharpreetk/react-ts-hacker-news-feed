@@ -1,7 +1,7 @@
 import { Select } from "@mantine/core";
-import { DATE_OPTIONS } from "../constants/options";
+import { DATE_OPTIONS } from "../../constants/options";
 import { IconCalendarTime } from "@tabler/icons-react";
-import classes from "../styles/Select.module.css";
+import classes from "../../styles/Select.module.css";
 
 interface DateFilterProps {
   selectedDate: string | null;

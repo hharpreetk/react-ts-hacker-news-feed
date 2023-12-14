@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
-import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
-import { useStories } from "../contexts/StoriesContext";
-import { getStoriesUrl } from "../api/api";
-import { useFetchStories } from "../hooks/useFetchStories";
-import { AppShell, Pagination, rem } from "@mantine/core";
+import { useSemiPersistentState } from "../../hooks/useSemiPersistentState";
+import { useSearchSuggestions } from "../../hooks/useSearchSuggestions";
+import { useStories } from "../../contexts/StoriesContext";
+import { getStoriesUrl } from "../../api/api";
+import { useFetchStories } from "../../hooks/useFetchStories";
+import { AppShell, rem } from "@mantine/core";
 import {
   COMMON_SORT_OPTIONS,
   CONTENT_OPTIONS,
   DATE_OPTIONS,
   JOB_SORT_OPTIONS,
-} from "../constants/options";
+} from "../../constants/options";
 import { useHeadroom } from "@mantine/hooks";
-import AppHeader from "./AppHeader";
-import StoryView from "./StoryView";
-import StoryFilters from "./StoryFilters";
-import AppFooter from "./AppFooter";
+import AppHeader from "../shared/AppHeader";
+import StoryView from "../home/StoryView";
+import StoryFilters from "../home/StoryFilters";
+import AppFooter from "../shared/AppFooter";
 
-const App = () => {
+const Home: React.FC = () => {
   // State variables
   const stories = useStories();
 
@@ -195,4 +195,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
