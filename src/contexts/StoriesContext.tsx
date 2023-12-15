@@ -22,11 +22,26 @@ type StoriesAction =
   | { type: "STORIES_FETCH_FAILURE"; payload: { error: any } }
   | { type: "REMOVE_STORY"; payload: Story };
 
-export const StoriesContext = createContext<StoriesState>(null!);
+export const StoriesContext = createContext<StoriesState | undefined>(undefined);
 
-export const StoriesDispatchContext = createContext<
-  React.Dispatch<StoriesAction>
->(null!);
+export const StoriesDispatchContext =
+  createContext<React.Dispatch<StoriesAction> | undefined>(undefined);
+
+export const useStories = () => {
+  const context = useContext(StoriesContext);
+  if (!context) {
+    throw new Error("useStories must be used within a StoriesProvider");
+  }
+  return context;
+};
+
+export const useStoriesDispatch = () => {
+  const context = useContext(StoriesDispatchContext);
+  if (!context) {
+    throw new Error("useStoriesDispatch must be used within a StoriesProvider");
+  }
+  return context;
+};
 
 export const StoriesProvider = ({ children }: StoriesProviderProps) => {
   const [stories, dispatchStories] = useReducer(storiesReducer, {
@@ -44,14 +59,6 @@ export const StoriesProvider = ({ children }: StoriesProviderProps) => {
       </StoriesDispatchContext.Provider>
     </StoriesContext.Provider>
   );
-};
-
-export const useStories = () => {
-  return useContext(StoriesContext);
-};
-
-export const useStoriesDispatch = () => {
-  return useContext(StoriesDispatchContext);
 };
 
 const storiesReducer = (
