@@ -1,6 +1,6 @@
 import { Grid, ThemeIcon, ActionIcon } from "@mantine/core";
 import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
-import StorySearch from "../home/StorySearch";
+import StorySearch from "../search/StorySearch";
 
 interface AppHeaderProps {
   searchTerm: string;

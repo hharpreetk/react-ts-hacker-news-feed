@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { theme } from "./themes/theme";
 import { StoriesProvider } from "./contexts/StoriesContext";
-import Home from "./components/pages/Home";
+import Search from "./components/pages/Search";
 import Settings from "./components/pages/Settings";
 import "@mantine/core/styles.css";
 
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(rootElement);
 const router = createBrowserRouter([
   {
     path: "/:path?",
-    element: <Home />,
+    element: <Search />,
   },
   {
     path: "/settings",

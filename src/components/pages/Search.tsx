@@ -2,11 +2,11 @@ import useSearchState from "../../hooks/useSearchState";
 import { AppShell, rem } from "@mantine/core";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "../shared/AppHeader";
-import StoryView from "../home/StoryView";
-import StoryFilters from "../home/StoryFilters";
+import StoryView from "../search/StoryView";
+import StoryFilters from "../search/StoryFilters";
 import AppFooter from "../shared/AppFooter";
 
-const Home: React.FC = () => {
+const Search: React.FC = () => {
   const {
     searchTerm,
     selectedContent,
@@ -66,4 +66,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Search;
