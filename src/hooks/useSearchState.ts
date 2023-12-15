@@ -12,7 +12,6 @@ import {
 
 const useSearchState = () => {
   // State variables
-  const stories = useStories();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -132,7 +131,6 @@ const useSearchState = () => {
   };
 
   return {
-    stories,
     searchTerm,
     selectedContent,
     selectedSort,

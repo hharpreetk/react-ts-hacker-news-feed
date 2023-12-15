@@ -8,7 +8,6 @@ import AppFooter from "../shared/AppFooter";
 
 const Home: React.FC = () => {
   const {
-    stories,
     searchTerm,
     selectedContent,
     selectedSort,
@@ -22,8 +21,6 @@ const Home: React.FC = () => {
     handleDateSelect,
     handleActivePage,
   } = useSearchState();
-
-  const { data, isLoading, isError, error, totalPages } = stories;
 
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
@@ -56,13 +53,8 @@ const Home: React.FC = () => {
           selectedDate={selectedDate}
           handleDateSelect={handleDateSelect}
         />
-        <StoryView
-          data={data}
+        <StoryView    
           selectedContent={selectedContent}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          totalPages={totalPages}
           activePage={activePage}
           handleActivePage={handleActivePage}
         />

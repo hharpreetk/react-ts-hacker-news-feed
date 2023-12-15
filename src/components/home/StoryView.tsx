@@ -1,30 +1,24 @@
 import { Loader, Text } from "@mantine/core";
-import { Stories } from "../../types/stories";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
 import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
+import { useStories } from "../../contexts/StoriesContext";
 
 interface StoryViewProps {
-  data: Stories;
   selectedContent: string;
-  isLoading: boolean;
-  isError: boolean;
-  error: any;
-  totalPages: number;
   activePage: number;
   handleActivePage: (selectedPage: number) => void;
 }
 
 const StoryView: React.FC<StoryViewProps> = ({
-  data,
   selectedContent,
-  isLoading,
-  isError,
-  error,
-  totalPages,
   activePage,
   handleActivePage,
 }) => {
+  const stories = useStories();
+
+  const { data, isLoading, isError, error, totalPages } = stories;
+  
   return (
     <>
       {isError ? (
