@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
-import { useStories } from "../contexts/StoriesContext";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
 import {
@@ -9,8 +8,9 @@ import {
   DATE_OPTIONS,
   JOB_SORT_OPTIONS,
 } from "../constants/options";
+import { SearchState } from "../types/search";
 
-const useSearchState = () => {
+const useSearchState = (): SearchState => {
   // State variables
 
   const [searchTerm, setSearchTerm] = useState<string>("");
