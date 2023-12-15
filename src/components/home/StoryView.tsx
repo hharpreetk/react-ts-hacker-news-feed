@@ -56,14 +56,13 @@ interface NoResultsFeedbackProps {
 const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
   selectedContent,
 }) => {
-  const userSearchTerm = localStorage.getItem("search");
   return (
     <Text
       size="0.95rem"
       mt="sm"
       c="dark"
       lh="lg"
-    >{`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search for '${userSearchTerm}'.`}</Text>
+    >{`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search.`}</Text>
   );
 };
 
