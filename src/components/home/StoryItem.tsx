@@ -119,23 +119,25 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           ? "var(--mantine-color-gray-5)"
           : "var(--mantine-color-gray-7)",
       lineClamp: 1,
+      w: "fit-content"
     };
 
     if (url) {
       return (
-        <Anchor href={url} target="_blank" {...UrlProps}>
-          <TypographyStylesProvider
-            p={0}
-            m={0}
-            classNames={{ root: classes.wrapper }}
-          >
-            <Text
-              dangerouslySetInnerHTML={{
-                __html: `${getHighlightedValue("url") || url}`,
-              }}
-            />
-          </TypographyStylesProvider>
-        </Anchor>
+        <TypographyStylesProvider
+          p={0}
+          m={0}
+          classNames={{ root: classes.wrapper }}
+        >
+          <Anchor
+            href={url}
+            target="_blank"
+            {...UrlProps}
+            dangerouslySetInnerHTML={{
+              __html: `${getHighlightedValue("url") || url}`,
+            }}
+          />
+        </TypographyStylesProvider>
       );
     }
   };
