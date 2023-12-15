@@ -21,29 +21,23 @@ const Home: React.FC = () => {
   // State variables
   const stories = useStories();
 
-  const [searchTerm, setSearchTerm] = useSemiPersistentState<string>(
-    "search",
-    ""
-  );
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [selectedContent, setSelectedContent] = useSemiPersistentState<string>(
-    "content",
+  const [selectedContent, setSelectedContent] = useState<string>(
     CONTENT_OPTIONS[0].value
   );
 
-  const [selectedSort, setSelectedSort] = useSemiPersistentState<string | null>(
-    "sort",
+  const [selectedSort, setSelectedSort] = useState<string | null>(
     selectedContent === "job"
       ? JOB_SORT_OPTIONS[0].value
       : COMMON_SORT_OPTIONS[0].value
   );
 
-  const [selectedDate, setSelectedDate] = useSemiPersistentState<string | null>(
-    "dateRange",
+  const [selectedDate, setSelectedDate] = useState<string | null>(
     DATE_OPTIONS[0].value
   );
 
-  const [activePage, setActivePage] = useSemiPersistentState<number>("page", 0);
+  const [activePage, setActivePage] = useState<number>(0);
 
   const [url, setUrl] = useState<string>(
     getStoriesUrl(
