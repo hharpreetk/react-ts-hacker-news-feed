@@ -1,4 +1,4 @@
-import useSearchState from "../../hooks/useSearchState";
+import { useSearch } from "../../contexts/SearchContext";
 import { AppShell, rem } from "@mantine/core";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "../shared/AppHeader";
@@ -7,21 +7,6 @@ import StoryFilters from "../search/StoryFilters";
 import AppFooter from "../shared/AppFooter";
 
 const Search: React.FC = () => {
-  const {
-    searchTerm,
-    selectedContent,
-    selectedSort,
-    selectedDate,
-    activePage,
-    suggestions,
-    handleSearchInput,
-    handleSearchSubmit,
-    handleContentChange,
-    handleSortSelect,
-    handleDateSelect,
-    handleActivePage,
-  } = useSearchState();
-
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
 
@@ -33,31 +18,15 @@ const Search: React.FC = () => {
       pos="relative"
     >
       <AppShell.Header>
-        <AppHeader
-          searchTerm={searchTerm}
-          handleSearchInput={handleSearchInput}
-          handleSearchSubmit={handleSearchSubmit}
-          suggestions={suggestions}
-        />
+        <AppHeader />
       </AppShell.Header>
       <AppShell.Main
         maw={`calc(${rem(800)} + 2*var(--mantine-spacing-md))`}
         m="auto"
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
       >
-        <StoryFilters
-          selectedContent={selectedContent}
-          handleContentChange={handleContentChange}
-          selectedSort={selectedSort}
-          handleSortSelect={handleSortSelect}
-          selectedDate={selectedDate}
-          handleDateSelect={handleDateSelect}
-        />
-        <StoryView    
-          selectedContent={selectedContent}
-          activePage={activePage}
-          handleActivePage={handleActivePage}
-        />
+        <StoryFilters />
+        <StoryView />
       </AppShell.Main>
       <AppShell.Footer pos="absolute" bottom={0} p="lg">
         <AppFooter />

@@ -3,38 +3,23 @@ import StoryList from "./StoryList";
 import Pagination from "./Pagination";
 import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
 import { useStories } from "../../contexts/StoriesContext";
+import { useSearch } from "../../contexts/SearchContext";
 
-interface StoryViewProps {
-  selectedContent: string;
-  activePage: number;
-  handleActivePage: (selectedPage: number) => void;
-}
-
-const StoryView: React.FC<StoryViewProps> = ({
-  selectedContent,
-  activePage,
-  handleActivePage,
-}) => {
-  const stories = useStories();
-
-  const { data, isLoading, isError, error, totalPages } = stories;
+const StoryView: React.FC = () => {
+  const { data, isLoading, isError } = useStories();
   
   return (
     <>
       {isError ? (
-        <ErrorFeedback error={error} />
+        <ErrorFeedback />
       ) : isLoading ? (
         <Loader type="dots" mx="auto" my="lg" />
       ) : data.length === 0 ? (
-        <NoResultsFeedback selectedContent={selectedContent} />
+        <NoResultsFeedback />
       ) : (
         <>
-          <StoryList list={data} />
-          <Pagination
-            totalPages={totalPages}
-            activePage={activePage}
-            handleActivePage={handleActivePage}
-          />
+          <StoryList />
+          <Pagination />
         </>
       )}
     </>
@@ -43,13 +28,8 @@ const StoryView: React.FC<StoryViewProps> = ({
 
 export default StoryView;
 
-interface NoResultsFeedbackProps {
-  selectedContent: string;
-}
-
-const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
-  selectedContent,
-}) => {
+const NoResultsFeedback: React.FC = () => {
+  const { selectedContent } = useSearch();
   return (
     <Text
       size="0.95rem"
@@ -60,14 +40,13 @@ const NoResultsFeedback: React.FC<NoResultsFeedbackProps> = ({
   );
 };
 
-interface ErrorFeedbackProps {
-  error?: any;
-}
-
-const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ error }) => (
-  <Text size="0.95rem" mt="sm" c="dark" lh="lg">
-    {error?.code ? `Error ${error.code}:` : "Unknown Error:"}
-    {"  "}
-    {error?.message || "Something went wrong..."}
-  </Text>
-);
+const ErrorFeedback: React.FC = () => {
+  const { error } = useStories();
+  return (
+    <Text size="0.95rem" mt="sm" c="dark" lh="lg">
+      {error?.code ? `Error ${error.code}:` : "Unknown Error:"}
+      {"  "}
+      {error?.message || "Something went wrong..."}
+    </Text>
+  );
+};

@@ -1,26 +1,18 @@
 import { ActionIcon, Autocomplete } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
+import { useSearch } from "../../contexts/SearchContext";
 
-interface StorySearchProps {
-  searchTerm: string;
-  onSearchInput: (searchInput: string) => void;
-  onSearchSubmit: () => void;
-  suggestions: Array<string>;
-}
-
-const StorySearch: React.FC<StorySearchProps> = ({
-  searchTerm,
-  onSearchInput,
-  onSearchSubmit,
-  suggestions,
-}) => {
+const StorySearch: React.FC = () => {
+  const { searchTerm, handleSearchInput, handleSearchSubmit, suggestions } =
+    useSearch();
+    
   const form = useForm({
     initialValues: { search: searchTerm },
   });
-  
+
   return (
-    <form onSubmit={form.onSubmit(onSearchSubmit)}>
+    <form onSubmit={form.onSubmit(handleSearchSubmit)}>
       <Autocomplete
         id="search"
         type="text"
@@ -28,7 +20,7 @@ const StorySearch: React.FC<StorySearchProps> = ({
         value={form.values.search}
         onChange={(value) => {
           form.setFieldValue("search", value);
-          onSearchInput(value);
+          handleSearchInput(value);
         }}
         data={suggestions}
         leftSection={<IconSearch size={14} />}

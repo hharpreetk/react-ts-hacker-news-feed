@@ -1,17 +1,12 @@
 import { Select } from "@mantine/core";
 import { DATE_OPTIONS } from "../../constants/options";
+import { useSearch } from "../../contexts/SearchContext";
 import { IconCalendarTime } from "@tabler/icons-react";
 import classes from "../../styles/Select.module.css";
 
-interface DateFilterProps {
-  selectedDate: string | null;
-  onDateSelect: (selectedOption: string | null) => void;
-}
 
-const DateFilter: React.FC<DateFilterProps> = ({
-  selectedDate,
-  onDateSelect,
-}) => {
+const DateFilter: React.FC = () => {
+  const { selectedDate, handleDateSelect } = useSearch();
   return (
     <div>
       <Select
@@ -19,7 +14,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
         classNames={{ input: classes.input }}
         data={DATE_OPTIONS}
         value={selectedDate}
-        onChange={onDateSelect}
+        onChange={handleDateSelect}
         leftSection={<IconCalendarTime size={17} stroke={1.5} />}
         leftSectionWidth={36}
         allowDeselect={false}

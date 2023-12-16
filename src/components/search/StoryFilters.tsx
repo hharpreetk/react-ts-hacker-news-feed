@@ -5,28 +5,12 @@ import ContentFilter from "./ContentFilter";
 import SortFilter from "./SortFilter";
 import DateFilter from "./DateFilter";
 
-interface StoryFiltersProps {
-  selectedContent: string;
-  handleContentChange: (selectedOptions: string) => void;
-  selectedSort: string | null;
-  handleSortSelect: (selectedOption: string | null) => void;
-  selectedDate: string | null;
-  handleDateSelect: (selectedOption: string | null) => void;
-}
-
-const StoryFilters: React.FC<StoryFiltersProps> = ({
-  selectedContent,
-  handleContentChange,
-  selectedSort,
-  handleSortSelect,
-  selectedDate,
-  handleDateSelect,
-}) => (
+const StoryFilters: React.FC = () => (
   <>
-    <ContentFilter selectedContent={selectedContent} onContentChange={handleContentChange} />
+    <ContentFilter />
     <Group gap="sm">
-      <SortFilter selectedSort={selectedSort} onSortSelect={handleSortSelect} selectedContent={selectedContent} />
-      <DateFilter selectedDate={selectedDate} onDateSelect={handleDateSelect} />
+      <SortFilter />
+      <DateFilter />
     </Group>
   </>
 );

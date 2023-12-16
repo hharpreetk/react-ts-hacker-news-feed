@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { theme } from "./themes/theme";
 import { StoriesProvider } from "./contexts/StoriesContext";
+import { SearchProvider } from "./contexts/SearchContext";
 import Search from "./components/pages/Search";
 import Settings from "./components/pages/Settings";
 import "@mantine/core/styles.css";
@@ -28,7 +29,9 @@ root.render(
   <React.StrictMode>
     <MantineProvider theme={theme} defaultColorScheme="light">
       <StoriesProvider>
+      <SearchProvider>
         <App />
+        </SearchProvider>
       </StoriesProvider>
     </MantineProvider>
   </React.StrictMode>
