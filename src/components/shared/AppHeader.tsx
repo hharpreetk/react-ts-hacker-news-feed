@@ -1,25 +1,20 @@
-import { Grid, ThemeIcon, ActionIcon } from "@mantine/core";
-import { IconSquareLetterH, IconAdjustmentsCog } from "@tabler/icons-react";
-import StorySearch from "../search/StorySearch";
+import { Grid, ThemeIcon } from "@mantine/core";
+import { useLocation } from "react-router-dom";
+import { IconSquareLetterH } from "@tabler/icons-react";
+import SearchHeader from "../search/SearchHeader";
+import SettingsHeader from "../settings/SettingsHeader";
 
-const AppHeader: React.FC = () => (
-  <Grid px="lg" py={14} align="center" justify="space-between">
-    <ThemeIcon variant="transparent" size={37}>
-      <IconSquareLetterH size={37} />
-    </ThemeIcon>
-    <Grid.Col span="auto" maw="90%">
-      <StorySearch />
-    </Grid.Col>
-    <ActionIcon
-      component="a"
-      href="/settings"
-      variant="default"
-      size="lg"
-      aria-label="Edit App Settings"
-    >
-      <IconAdjustmentsCog size={18} stroke={1.5} />
-    </ActionIcon>
-  </Grid>
-);
+const AppHeader: React.FC = () => {
+  const location = useLocation();
+  const showSearchHeader = location.pathname === "/settings";
+  return (
+    <Grid px="lg" py={22} align="center" justify="space-between">
+      <ThemeIcon variant="transparent" size={37}>
+        <IconSquareLetterH size={37} />
+      </ThemeIcon>
+      {showSearchHeader ? <SettingsHeader /> : <SearchHeader />}
+    </Grid>
+  );
+};
 
 export default AppHeader;

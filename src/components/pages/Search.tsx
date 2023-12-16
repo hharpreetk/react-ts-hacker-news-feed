@@ -1,4 +1,3 @@
-import { useSearch } from "../../contexts/SearchContext";
 import { AppShell, rem } from "@mantine/core";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "../shared/AppHeader";
