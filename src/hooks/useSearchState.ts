@@ -9,27 +9,31 @@ import {
   JOB_SORT_OPTIONS,
 } from "../constants/options";
 import { SearchState } from "../types/search";
+import { useQueryParamsState } from "./useQueryParamsState";
 
 const useSearchState = (): SearchState => {
   // State variables
 
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useQueryParamsState<string>("query", "");
 
-  const [selectedContent, setSelectedContent] = useState<string>(
+  const [selectedContent, setSelectedContent] = useQueryParamsState<string>(
+    "type",
     CONTENT_OPTIONS[0].value
   );
 
-  const [selectedSort, setSelectedSort] = useState<string | null>(
+  const [selectedSort, setSelectedSort] = useQueryParamsState<string | null>(
+    "sort",
     selectedContent === "job"
       ? JOB_SORT_OPTIONS[0].value
       : COMMON_SORT_OPTIONS[0].value
   );
 
-  const [selectedDate, setSelectedDate] = useState<string | null>(
+  const [selectedDate, setSelectedDate] = useQueryParamsState<string | null>(
+    "dateRange",
     DATE_OPTIONS[0].value
   );
 
-  const [activePage, setActivePage] = useState<number>(0);
+  const [activePage, setActivePage] = useQueryParamsState<number>("page", 0);
 
   const [url, setUrl] = useState<string>(
     getStoriesUrl(
