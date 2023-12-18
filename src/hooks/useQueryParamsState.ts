@@ -15,15 +15,31 @@ export const useQueryParamsState = <T extends ValueTypes>(
     if (typeof window === "undefined") return initialState;
     const { search } = window.location;
     const searchParams = new URLSearchParams(search);
-    return searchParams.has(param)
-      ? (searchParams.get(param) as T)
-      : initialState;
+
+    // Retrieve the parameter value as a string from the URL
+    const paramValue = searchParams.get(param);
+
+    // Convert the parameter value to the desired type
+    let parsedValue: T;
+
+    if (paramValue !== null) {
+      if (typeof initialState === "number") {
+        parsedValue = parseInt(paramValue, 10) as T;
+      } else {
+        parsedValue = paramValue as T;
+      }
+    } else {
+      parsedValue = initialState;
+    }
+
+    return parsedValue;
   });
 
   useEffect(() => {
     if (location.pathname === "/") {
       const currentSearchParams = new URLSearchParams(window.location.search);
       if (value !== null && value !== "") {
+        // Convert the state value to a string before updating the URL
         currentSearchParams.set(param, String(value));
       } else {
         currentSearchParams.delete(param);
