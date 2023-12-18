@@ -7,6 +7,7 @@ import { StoriesProvider } from "./contexts/StoriesContext";
 import { SearchProvider } from "./contexts/SearchContext";
 import Search from "./components/pages/Search";
 import Settings from "./components/pages/Settings";
+import NotFound from "./components/pages/NotFound";
 import "@mantine/core/styles.css";
 
 const rootElement = document.getElementById("root")!;
@@ -21,6 +22,8 @@ root.render(
             <Routes>
               <Route path="/" element={<Search />} />
               <Route path="/settings" element={<Settings />} />
+              {/* Catch-all route for unmatched routes */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </SearchProvider>
         </StoriesProvider>
