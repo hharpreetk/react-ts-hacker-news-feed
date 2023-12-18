@@ -1,3 +1,7 @@
+.root {
+  max-width: calc(11.25rem * var(--mantine-scale));
+}
+
 .input {
   height: 38px;
 }

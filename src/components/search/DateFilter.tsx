@@ -4,14 +4,12 @@ import { useSearch } from "../../contexts/SearchContext";
 import { IconCalendarTime } from "@tabler/icons-react";
 import classes from "../../styles/Select.module.css";
 
-
 const DateFilter: React.FC = () => {
   const { selectedDate, handleDateSelect } = useSearch();
   return (
     <div>
       <Select
-        maw={{ base: 180, xs: "auto" }}
-        classNames={{ input: classes.input }}
+        classNames={{ root: classes.root, input: classes.input }}
         data={DATE_OPTIONS}
         value={selectedDate}
         onChange={handleDateSelect}
