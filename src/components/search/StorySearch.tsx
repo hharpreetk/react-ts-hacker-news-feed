@@ -16,7 +16,7 @@ const StorySearch: React.FC = () => {
       <Autocomplete
         id="search"
         type="text"
-        placeholder="Search stories by title, url or author"
+        placeholder="Search here..."
         value={form.values.search}
         onChange={(value) => {
           form.setFieldValue("search", value);
