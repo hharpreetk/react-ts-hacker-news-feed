@@ -4,13 +4,14 @@ import {
   Flex,
   Title,
   Text,
-  Button,
   Group,
+  useMantineTheme,
 } from "@mantine/core";
 import AppHeader from "../shared/AppHeader";
 import AppFooter from "../shared/AppFooter";
 
 const NotFound = () => {
+  const theme = useMantineTheme();
   return (
     <AppShell
       padding="md"
@@ -31,7 +32,7 @@ const NotFound = () => {
           p="md"
           maw={800}
         >
-          <Title c="orange" ta="center">
+          <Title c={theme.primaryColor} ta="center">
             Sorry, that page can't be found.
           </Title>
           <Text c="dimmed" size="lg" ta="center">
@@ -40,7 +41,7 @@ const NotFound = () => {
             this is an error contact support.
           </Text>
           <Group justify="center" mb="md">
-            <Anchor href="/" size="lg" underline="always">
+            <Anchor href="/" size="lg" underline="always" c={theme.primaryColor}>
               Go Back To Home Page
             </Anchor>
           </Group>
