@@ -25,7 +25,7 @@ const StorySearch: React.FC = () => {
         data={suggestions}
         leftSection={<IconSearch size={14} />}
         rightSection={
-          <ActionIcon type="submit" size={30}>
+          <ActionIcon type="submit" size={30} variant="filled">
             <IconArrowRight size={15} />
           </ActionIcon>
         }
