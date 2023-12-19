@@ -1,4 +1,4 @@
-import { Loader, Text } from "@mantine/core";
+import { Loader, Text, Center } from "@mantine/core";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
 import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
@@ -7,13 +7,15 @@ import { useSearch } from "../../contexts/SearchContext";
 
 const StoryView: React.FC = () => {
   const { data, isLoading, isError } = useStories();
-  
+
   return (
     <>
       {isError ? (
         <ErrorFeedback />
       ) : isLoading ? (
-        <Loader type="dots" mx="auto" my="lg" />
+        <Center>
+          <Loader type="oval" mx="auto" my="lg" />
+        </Center>
       ) : data.length === 0 ? (
         <NoResultsFeedback />
       ) : (

@@ -17,7 +17,9 @@ const Settings: React.FC = () => {
         maw={`calc(${rem(800)} + 2*var(--mantine-spacing-md))`}
         m="auto"
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
-      ></AppShell.Main>
+      >
+        
+      </AppShell.Main>
       <AppShell.Footer pos="absolute" bottom={0} p="lg">
         <AppFooter />
       </AppShell.Footer>
