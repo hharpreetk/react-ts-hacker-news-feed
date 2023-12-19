@@ -14,11 +14,7 @@ const AppFooter = () => {
       <Text size="xs">© Search Hacker News, 2023.</Text>
       <Text size="xs">
         Powered by{" "}
-        <Anchor
-          href="https://hn.algolia.com/api"
-          target="_blank"
-          c={theme.primaryColor}
-        >
+        <Anchor href="https://hn.algolia.com/api" target="_blank">
           HN Search API
         </Anchor>
       </Text>
