@@ -115,10 +115,8 @@ const useSearchState = (): SearchState => {
     setSelectedContent(selectedOption);
 
     // If the selected content is "job," update the selectedSort state to "date"
-    if (selectedOption === "job") {
+    if (selectedOption === "job" && selectedSort === "popularity") {
       setSelectedSort(JOB_SORT_OPTIONS[0].value);
-    } else {
-      setSelectedSort(COMMON_SORT_OPTIONS[0].value);
     }
   };
 
