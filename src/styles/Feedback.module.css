@@ -1,0 +1,18 @@
+[data-mantine-color-scheme="light"] .info {
+  background-color: var(--mantine-color-gray-1);
+  color: var(--mantine-color-dark-7);
+}
+
+[data-mantine-color-scheme="dark"] .info {
+  background-color: var(--mantine-color-dark-6);
+}
+
+[data-mantine-color-scheme="light"] .error {
+  background-color: var(--mantine-color-red-0);
+  color: var(--mantine-color-red-7);
+}
+
+[data-mantine-color-scheme="dark"] .error {
+  background-color: rgba(224, 49, 49, 0.08);
+  color: rgb(205, 92, 92);
+}
