@@ -7,12 +7,11 @@ const ContentFilter: React.FC = () => {
   const { selectedContent, handleContentChange } = useSearch();
   const theme = useMantineTheme();
   return (
-    <ScrollArea mb={6} scrollbarSize={9} type="auto">
+    <ScrollArea mb={6} scrollbarSize={10} type="auto" offsetScrollbars scrollbars="x">
       <SegmentedControl
         data={CONTENT_OPTIONS}
         value={selectedContent}
         color={theme.primaryColor}
-        mb={9}
         classNames={classes}
         onChange={handleContentChange}
         transitionDuration={0}
