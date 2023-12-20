@@ -9,16 +9,23 @@ import classes from "../../styles/Feedback.module.css";
 const StoryView: React.FC = () => {
   const { data, isLoading, isError } = useStories();
 
+  const feedbackProps = {
+    size: "0.95rem",
+    lh: "lg",
+    p: "md",
+    mt: "md",
+  };
+
   return (
     <>
       {isError ? (
-        <ErrorFeedback />
+        <ErrorFeedback feedbackProps={feedbackProps} />
       ) : isLoading ? (
         <Center py="sm">
           <Loader type="oval" mx="auto" my="lg" />
         </Center>
       ) : data.length === 0 ? (
-        <NoResultsFeedback />
+        <NoResultsFeedback feedbackProps={feedbackProps} />
       ) : (
         <>
           <StoryList />
@@ -31,29 +38,20 @@ const StoryView: React.FC = () => {
 
 export default StoryView;
 
-const NoResultsFeedback: React.FC = () => {
+const NoResultsFeedback: React.FC<{feedbackProps: Record<string, string>}> = ({feedbackProps}) => {
   const { selectedContent } = useSearch();
   return (
     <Text
-      size="0.95rem"
-      lh="lg"
-      p="md"
-      mt="md"
       classNames={{ root: classes.info }}
+      {...feedbackProps}
     >{`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search.`}</Text>
   );
 };
 
-const ErrorFeedback: React.FC = () => {
+const ErrorFeedback: React.FC<{feedbackProps: Record<string, string>}> = ({feedbackProps}) => {
   const { error } = useStories();
   return (
-    <Text
-      size="0.95rem"
-      lh="lg"
-      p="md"
-      mt="md"
-      classNames={{ root: classes.error }}
-    >
+    <Text classNames={{ root: classes.error }} {...feedbackProps}>
       {error?.code ? `Error ${error.code}:` : "Unknown Error:"}
       {"  "}
       {error?.message || "Something went wrong..."}
