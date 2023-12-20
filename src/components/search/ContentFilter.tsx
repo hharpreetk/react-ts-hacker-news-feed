@@ -13,11 +13,7 @@ const ContentFilter: React.FC = () => {
         value={selectedContent}
         color={theme.primaryColor}
         mb={9}
-        classNames={{
-          root: classes.root,
-          control: classes.control,
-          label: classes.label,
-        }}
+        classNames={classes}
         onChange={handleContentChange}
         transitionDuration={0}
       />

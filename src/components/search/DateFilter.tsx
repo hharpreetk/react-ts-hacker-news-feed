@@ -9,7 +9,7 @@ const DateFilter: React.FC = () => {
   return (
     <div>
       <Select
-        classNames={{ root: classes.root, input: classes.input }}
+        classNames={classes}
         data={DATE_OPTIONS}
         value={selectedDate}
         onChange={handleDateSelect}

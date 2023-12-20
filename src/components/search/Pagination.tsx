@@ -16,7 +16,7 @@ const Pagination: React.FC = () => {
       value={activePage + 1}
       onChange={handleActivePage}
       size="sm"
-      classNames={{ control: classes.control }}
+      classNames={classes}
       pt="xs"
       py="md"
       siblings={isSmallScreen ? 0 : 1}

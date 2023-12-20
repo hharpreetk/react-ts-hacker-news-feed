@@ -99,7 +99,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       <TypographyStylesProvider
         p={0}
         m={0}
-        classNames={{ root: classes.wrapper }}
+        classNames={classes}
       >
         <Text
           {...titleProps}
@@ -127,7 +127,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         <TypographyStylesProvider
           p={0}
           m={0}
-          classNames={{ root: classes.wrapper }}
+          classNames={classes}
         >
           <Anchor
             href={url}
@@ -147,7 +147,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       <TypographyStylesProvider
         p={0}
         m={0}
-        classNames={{ root: classes.wrapper }}
+        classNames={classes}
       >
         <Text
           dangerouslySetInnerHTML={{
@@ -171,7 +171,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         <TypographyStylesProvider
           p={0}
           m={0}
-          classNames={{ root: classes.wrapper }}
+          classNames={classes}
         >
           <Text
             {...contentProps}

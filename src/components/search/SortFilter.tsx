@@ -19,7 +19,7 @@ const SortFilter: React.FC = () => {
   const { selectedSort, handleSortSelect, selectedContent } = useSearch();
   return (
     <Select
-      classNames={{ root: classes.root, input: classes.input }}
+      classNames={classes}
       data={getSortOptions(selectedContent)}
       value={selectedSort}
       onChange={handleSortSelect}
