@@ -1,5 +1,5 @@
 import { Select } from "@mantine/core";
-import { DATE_OPTIONS } from "../../constants/options";
+import { DATE_OPTIONS } from "../../constants/filters";
 import { useSearch } from "../../contexts/SearchContext";
 import { IconCalendarTime } from "@tabler/icons-react";
 import classes from "../../styles/Select.module.css";

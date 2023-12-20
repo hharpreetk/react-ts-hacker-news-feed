@@ -7,7 +7,7 @@ import {
   CONTENT_OPTIONS,
   DATE_OPTIONS,
   JOB_SORT_OPTIONS,
-} from "../constants/options";
+} from "../constants/filters";
 import { SearchState } from "../types/search";
 import { useQueryParamsState } from "./useQueryParamsState";
 

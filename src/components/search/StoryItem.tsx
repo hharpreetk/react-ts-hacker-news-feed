@@ -7,7 +7,7 @@ import {
 import "../../styles/StoryItem.module.css";
 import classes from "../../styles/StoryItem.module.css";
 import { Story, HighlightResult } from "../../types/stories";
-import { CONTENT_OPTIONS } from "../../constants/options";
+import { CONTENT_OPTIONS } from "../../constants/filters";
 import { format } from "timeago.js";
 
 interface StoryItemProps {
