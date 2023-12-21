@@ -134,13 +134,13 @@ const SettingsView = () => {
         <Card miw={290} withBorder>
           <Card.Section withBorder inheritPadding py="xs">
             <Group justify="space-between">
-              <Text size="sm">Search Matching</Text>
+              <Text size="sm">Search Match</Text>
               <ActionIcon variant="default" radius="sm">
                 <IconQuestionMark size={13} />
               </ActionIcon>
             </Group>
           </Card.Section>
-          <CardSection withBorder inheritPadding py="xs">
+          <CardSection withBorder inheritPadding py="sm">
             <Grid align="center">
               <Grid.Col span={4}>
                 <Text size="sm">Author</Text>
@@ -150,7 +150,7 @@ const SettingsView = () => {
               </Grid.Col>
             </Grid>
           </CardSection>
-          <CardSection withBorder inheritPadding py="xs">
+          <CardSection withBorder inheritPadding py="sm">
             <Grid align="center">
               <Grid.Col span={4}>
                 <Text size="sm">Story Text</Text>
