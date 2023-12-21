@@ -1,7 +1,6 @@
-import { Flex, Text, Anchor, useMantineTheme } from "@mantine/core";
+import { Flex, Text, Anchor } from "@mantine/core";
 
 const AppFooter = () => {
-  const theme = useMantineTheme();
   return (
     <Flex
       c="dimmed"
