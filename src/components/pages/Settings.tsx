@@ -1,6 +1,7 @@
 import { AppShell, rem } from "@mantine/core";
 import AppHeader from "../shared/AppHeader";
 import AppFooter from "../shared/AppFooter";
+import SettingsView from "../settings/SettingsView";
 
 const Settings: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ const Settings: React.FC = () => {
         m="auto"
         pt={`calc(${rem(65)} + var(--mantine-spacing-md))`}
       >
-        
+        <SettingsView />
       </AppShell.Main>
       <AppShell.Footer pos="absolute" bottom={0} p="lg">
         <AppFooter />
