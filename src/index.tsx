@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <Router>
-      <MantineProvider theme={theme} defaultColorScheme="light">
+      <MantineProvider theme={theme}>
         <StoriesProvider>
           <SearchProvider>
             <Routes>
