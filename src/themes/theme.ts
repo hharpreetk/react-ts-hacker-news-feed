@@ -33,7 +33,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
           : getThemeColor("gray.1", theme),
       color:
         colorScheme === "dark"
-          ? getThemeColor("gray.0", theme)
+          ? getThemeColor("dark.0", theme)
           : getThemeColor("dark.8", theme),
       border: "none",
     };

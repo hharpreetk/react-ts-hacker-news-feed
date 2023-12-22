@@ -4,7 +4,6 @@ import {
   useMantineTheme,
   useMantineColorScheme,
 } from "@mantine/core";
-import "../../styles/StoryItem.module.css";
 import classes from "../../styles/StoryItem.module.css";
 import { Story, HighlightResult } from "../../types/stories";
 import { CONTENT_OPTIONS } from "../../constants/filters";
@@ -88,19 +87,21 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     return null;
   };
 
+  const typographyStylesProviderProps = {
+    p: 0,
+    m: 0,
+    classNames: { root: classes.storyContent },
+  };
+
   const renderTitle = () => {
     const titleProps = {
       fw: 500,
       lh: "xs",
-      c: theme.primaryColor,
+      classNames: { root: classes.storyTitle },
     };
 
     return (
-      <TypographyStylesProvider
-        p={0}
-        m={0}
-        classNames={classes}
-      >
+      <TypographyStylesProvider {...typographyStylesProviderProps}>
         <Text
           {...titleProps}
           dangerouslySetInnerHTML={{
@@ -116,19 +117,15 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       size: "sm",
       c:
         colorScheme === "dark"
-          ? "var(--mantine-color-gray-5)"
+          ? "var(--mantine-color-dark-1)"
           : "var(--mantine-color-gray-7)",
       lineClamp: 1,
-      w: "fit-content"
+      w: "fit-content",
     };
 
     if (url) {
       return (
-        <TypographyStylesProvider
-          p={0}
-          m={0}
-          classNames={classes}
-        >
+        <TypographyStylesProvider {...typographyStylesProviderProps}>
           <Anchor
             href={url}
             target="_blank"
@@ -144,11 +141,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const renderAuthor = () => {
     return (
-      <TypographyStylesProvider
-        p={0}
-        m={0}
-        classNames={classes}
-      >
+      <TypographyStylesProvider {...typographyStylesProviderProps}>
         <Text
           dangerouslySetInnerHTML={{
             __html: `${getHighlightedValue("author") || author}`,
@@ -165,14 +158,11 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       size: "sm",
       mb: 0,
       c: "dimmed",
+      classNames: { root: classes.storyText },
     };
     if (getContent()) {
       return (
-        <TypographyStylesProvider
-          p={0}
-          m={0}
-          classNames={classes}
-        >
+        <TypographyStylesProvider {...typographyStylesProviderProps}>
           <Text
             {...contentProps}
             dangerouslySetInnerHTML={{ __html: `${getContent()}` }}
@@ -210,7 +200,11 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           <Text size="xs">|</Text>
           {getPointsOrComments("points")}
           {getPointsOrComments("num_comments")}
-          <Anchor size="sm" c={theme.primaryColor} onClick={handleRemoveItem}>
+          <Anchor
+            size="sm"
+            classNames={{ root: classes.storyHide }}
+            onClick={handleRemoveItem}
+          >
             Hide
           </Anchor>
         </Flex>

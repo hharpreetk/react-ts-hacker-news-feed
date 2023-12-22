@@ -9,6 +9,7 @@ import Search from "./components/pages/Search";
 import Settings from "./components/pages/Settings";
 import NotFound from "./components/pages/NotFound";
 import "@mantine/core/styles.css";
+import "./styles/Global.module.css";
 
 const rootElement = document.getElementById("root")!;
 const root = ReactDOM.createRoot(rootElement);

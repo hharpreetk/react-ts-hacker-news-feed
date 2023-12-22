@@ -1,20 +1,28 @@
-.wrapper {
-  margin-bottom: 0;
+.storyTitle {
+  color: var(--mantine-primary-color-filled) !important;
 }
 
-p {
-  margin-bottom: 0 !important;
+.storyHide {
+  color: var(--mantine-primary-color-filled) !important;
 }
 
-em {
+.storyContent em {
   color: black;
   font-style: normal;
 }
 
-[data-mantine-color-scheme="light"] em {
+[data-mantine-color-scheme="light"] .storyContent em {
   background-color: var(--mantine-color-yellow-2);
 }
 
-[data-mantine-color-scheme="dark"] em {
+[data-mantine-color-scheme="dark"] .storyContent em {
   background-color: var(--mantine-color-yellow-5);
+}
+
+[data-mantine-color-scheme="dark"] .storyText a {
+  color: var(--mantine-color-dark-0) !important;
+}
+
+[data-mantine-color-scheme="light"] .storyText a {
+  color: var(--mantine-color-gray-7) !important;
 }
