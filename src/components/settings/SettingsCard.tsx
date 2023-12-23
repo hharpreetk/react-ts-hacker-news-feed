@@ -18,21 +18,19 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         <Card.Section withBorder inheritPadding py={16}>
           <Group justify="space-between">
             <Text size="sm">{title}</Text>
-            <Group justify="center">
-              <HoverCard width={250} offset={5} position="right">
-                <HoverCard.Target>
-                  <IconHelpCircle
-                    size={22}
-                    strokeWidth={1.5}
-                    color="gray"
-                    aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
-                  />
-                </HoverCard.Target>
-                <HoverCard.Dropdown>
-                  <Text size="sm">{hoverText}</Text>
-                </HoverCard.Dropdown>
-              </HoverCard>
-            </Group>
+            <HoverCard width={250} position="right">
+              <HoverCard.Target>
+                <IconHelpCircle
+                  size={22}
+                  strokeWidth={1.5}
+                  color="gray"
+                  aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
+                />
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <Text size="sm">{hoverText}</Text>
+              </HoverCard.Dropdown>
+            </HoverCard>
           </Group>
         </Card.Section>
         {children}
