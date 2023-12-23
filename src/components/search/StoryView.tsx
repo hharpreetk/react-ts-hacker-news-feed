@@ -1,4 +1,4 @@
-import { Loader, Text, Center, Box } from "@mantine/core";
+import { Loader, Text, Center } from "@mantine/core";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
 import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
