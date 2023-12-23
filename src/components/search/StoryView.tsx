@@ -5,27 +5,21 @@ import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
 import { useStories } from "../../contexts/StoriesContext";
 import { useSearch } from "../../contexts/SearchContext";
 import classes from "../../styles/Feedback.module.css";
+import Feedback from "./Feedback";
 
 const StoryView: React.FC = () => {
   const { data, isLoading, isError } = useStories();
 
-  const feedbackProps = {
-    size: "0.95rem",
-    lh: "lg",
-    p: "md",
-    mt: "md",
-  };
-
   return (
     <>
       {isError ? (
-        <ErrorFeedback feedbackProps={feedbackProps} />
+        <ErrorFeedback />
       ) : isLoading ? (
         <Center py="sm">
           <Loader type="oval" mx="auto" my="lg" />
         </Center>
       ) : data?.length === 0 ? (
-        <NoResultsFeedback feedbackProps={feedbackProps} />
+        <NoResultsFeedback />
       ) : (
         data && (
           <>
@@ -40,27 +34,26 @@ const StoryView: React.FC = () => {
 
 export default StoryView;
 
-const NoResultsFeedback: React.FC<{
-  feedbackProps: Record<string, string>;
-}> = ({ feedbackProps }) => {
+const NoResultsFeedback = () => {
   const { selectedContent } = useSearch();
   return (
-    <Text
-      classNames={{ root: classes.info }}
-      {...feedbackProps}
-    >{`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search.`}</Text>
+    <Feedback
+      status="info"
+      message={`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search.`}
+    />
   );
 };
 
-const ErrorFeedback: React.FC<{ feedbackProps: Record<string, string> }> = ({
-  feedbackProps,
-}) => {
+const ErrorFeedback = () => {
   const { error } = useStories();
   return (
-    <Text classNames={{ root: classes.error }} {...feedbackProps}>
-      {error?.code ? `Error ${error.code}:` : "Unknown Error:"}
-      {"  "}
-      {error?.message || "Something went wrong..."}
-    </Text>
+    <Feedback
+      status="error"
+      message={
+        error
+          ? `Error ${error.code}: ${error?.message}`
+          : "Oops! Something went wrong."
+      }
+    />
   );
 };
