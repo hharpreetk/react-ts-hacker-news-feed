@@ -4,7 +4,6 @@ import Pagination from "./Pagination";
 import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
 import { useStories } from "../../contexts/StoriesContext";
 import { useSearch } from "../../contexts/SearchContext";
-import classes from "../../styles/Feedback.module.css";
 import Feedback from "./Feedback";
 
 const StoryView: React.FC = () => {
