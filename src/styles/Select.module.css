@@ -3,5 +3,5 @@
 }
 
 .input {
-  height: calc(2.375rem * var(--mantine-scale));
+  height: calc(2.438rem * var(--mantine-scale)) !important;
 }
