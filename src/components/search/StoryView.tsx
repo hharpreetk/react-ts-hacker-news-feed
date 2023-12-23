@@ -24,13 +24,15 @@ const StoryView: React.FC = () => {
         <Center py="sm">
           <Loader type="oval" mx="auto" my="lg" />
         </Center>
-      ) : data.length === 0 ? (
+      ) : data?.length === 0 ? (
         <NoResultsFeedback feedbackProps={feedbackProps} />
       ) : (
-        <>
-          <StoryList />
-          <Pagination />
-        </>
+        data && (
+          <>
+            <StoryList />
+            <Pagination />
+          </>
+        )
       )}
     </>
   );
@@ -38,7 +40,9 @@ const StoryView: React.FC = () => {
 
 export default StoryView;
 
-const NoResultsFeedback: React.FC<{feedbackProps: Record<string, string>}> = ({feedbackProps}) => {
+const NoResultsFeedback: React.FC<{
+  feedbackProps: Record<string, string>;
+}> = ({ feedbackProps }) => {
   const { selectedContent } = useSearch();
   return (
     <Text
@@ -48,7 +52,9 @@ const NoResultsFeedback: React.FC<{feedbackProps: Record<string, string>}> = ({f
   );
 };
 
-const ErrorFeedback: React.FC<{feedbackProps: Record<string, string>}> = ({feedbackProps}) => {
+const ErrorFeedback: React.FC<{ feedbackProps: Record<string, string> }> = ({
+  feedbackProps,
+}) => {
   const { error } = useStories();
   return (
     <Text classNames={{ root: classes.error }} {...feedbackProps}>

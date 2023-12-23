@@ -15,7 +15,7 @@ const StoryList: React.FC = memo(() => {
 
   return (
     <Flex direction="column" gap="sm" my="md" maw={800} mx="auto">
-      {data.map((item: Story) => (
+      {data?.map((item: Story) => (
         <Suspense fallback={<StorySkeleton />}>
           <StoryItem
             key={item.objectID}

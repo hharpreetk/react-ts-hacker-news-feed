@@ -6,7 +6,7 @@ interface StoriesProviderProps {
 }
 
 type StoriesState = {
-  data: Stories;
+  data: Stories | undefined;
   isLoading: boolean;
   isError: boolean;
   error?: any;
@@ -45,7 +45,7 @@ export const useStoriesDispatch = () => {
 
 export const StoriesProvider = ({ children }: StoriesProviderProps) => {
   const [stories, dispatchStories] = useReducer(storiesReducer, {
-    data: [] as Stories,
+    data: undefined,
     isLoading: false,
     isError: false,
     error: undefined,
@@ -90,7 +90,7 @@ const storiesReducer = (
     case "REMOVE_STORY":
       return {
         ...state,
-        data: state.data.filter(
+        data: state.data?.filter(
           (story) => action.payload.objectID !== story.objectID
         ),
       };
