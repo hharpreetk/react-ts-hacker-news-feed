@@ -1,6 +1,6 @@
 // Mapping between CONTENT_OPTIONS and their corresponding tag values
-const CONTENT_TAG_FILTERS: Record<string, string> = {
-  all: "(story,show_hn,ask_hn,launch_hn,job,poll)",
+export const CONTENT_TAG_FILTERS: Record<string, string> = {
+  // all: "(story,show_hn,ask_hn,launch_hn,job,poll)",
   story: "story",
   show_hn: "show_hn",
   ask_hn: "ask_hn",
@@ -11,7 +11,7 @@ const CONTENT_TAG_FILTERS: Record<string, string> = {
 };
 
 // Mapping between TIME_OPTIONS and their numeric filter values
-const DATE_NUMERIC_FILTERS: Record<string, string> = {
+export const DATE_NUMERIC_FILTERS: Record<string, string> = {
   forever: "created_at_i>0",
   past24hr: `created_at_i>${Math.floor(
     (Date.now() - 24 * 60 * 60 * 1000) / 1000
@@ -29,14 +29,14 @@ const DATE_NUMERIC_FILTERS: Record<string, string> = {
 };
 
 // Mapping between SORT_OPTIONS and their resource values
-const SORT_RESOURCE_FILTERS: Record<string, string> = {
+export const SORT_RESOURCE_FILTERS: Record<string, string> = {
   popularity: "search",
   date: "search_by_date",
   // ... add more mappings as needed
 };
 
-const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
-    all: "stories or jobs or polls",
+export const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
+    // all: "stories or jobs or polls",
     story: "stories",
     show_hn: "show HN stories",
     ask_hn: "ask HN stories",
@@ -46,15 +46,6 @@ const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
     // ... add more mappings as needed
 }
 
-const DEFAULT_SORT_RESOURCE_FILTER = SORT_RESOURCE_FILTERS.popularity;
+export const DEFAULT_SORT_RESOURCE_FILTER = SORT_RESOURCE_FILTERS.popularity;
 
-const DEFAULT_DATE_NUMERIC_FILTER = DATE_NUMERIC_FILTERS.forever;
-
-export {
-  CONTENT_TAG_FILTERS,
-  DATE_NUMERIC_FILTERS,
-  SORT_RESOURCE_FILTERS,
-  DEFAULT_SORT_RESOURCE_FILTER,
-  DEFAULT_DATE_NUMERIC_FILTER,
-  NO_RESULT_CONTENT_FEEDBACK
-};
+export const DEFAULT_DATE_NUMERIC_FILTER = DATE_NUMERIC_FILTERS.forever;
