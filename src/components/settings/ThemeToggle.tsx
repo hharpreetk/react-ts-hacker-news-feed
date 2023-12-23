@@ -29,6 +29,7 @@ const ThemeToggle = () => {
   return (
     <Switch
       size="md"
+      m={4}
       color="dark.4"
       onLabel={sunIcon}
       offLabel={moonIcon}

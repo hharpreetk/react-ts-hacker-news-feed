@@ -3,5 +3,5 @@
 }
 
 .input {
-  height: 38px;
+  height: calc(2.375rem * var(--mantine-scale));
 }
