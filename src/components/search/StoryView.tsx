@@ -1,7 +1,7 @@
 import { Loader, Text, Center } from "@mantine/core";
 import StoryList from "./StoryList";
 import Pagination from "./Pagination";
-import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/mappings";
+import { NO_RESULT_CONTENT_FEEDBACK } from "../../constants/feedback";
 import { useStories } from "../../contexts/StoriesContext";
 import { useSearch } from "../../contexts/SearchContext";
 import Feedback from "./Feedback";

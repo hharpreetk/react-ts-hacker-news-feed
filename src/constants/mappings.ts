@@ -7,7 +7,6 @@ export const CONTENT_TAG_FILTERS: Record<string, string> = {
   launch_hn: "launch_hn",
   job: "job",
   poll: "poll",
-  // ... add more mappings as needed
 };
 
 // Mapping between TIME_OPTIONS and their numeric filter values
@@ -25,26 +24,13 @@ export const DATE_NUMERIC_FILTERS: Record<string, string> = {
   pastYear: `created_at_i>${Math.floor(
     (Date.now() - 365 * 24 * 60 * 60 * 1000) / 1000
   )}`,
-  // ... add more mappings as needed
 };
 
 // Mapping between SORT_OPTIONS and their resource values
 export const SORT_RESOURCE_FILTERS: Record<string, string> = {
   popularity: "search",
   date: "search_by_date",
-  // ... add more mappings as needed
 };
-
-export const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
-    // all: "stories or jobs or polls",
-    story: "stories",
-    show_hn: "show HN stories",
-    ask_hn: "ask HN stories",
-    launch_hn: "launch HN stories",
-    job: "jobs",
-    poll: "polls",
-    // ... add more mappings as needed
-}
 
 export const DEFAULT_SORT_RESOURCE_FILTER = SORT_RESOURCE_FILTERS.popularity;
 
