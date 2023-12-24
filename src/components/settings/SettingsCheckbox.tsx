@@ -1,7 +1,11 @@
 import { Checkbox } from "@mantine/core";
 
-const SettingsCheckbox = () => {
-  return <Checkbox defaultChecked m={7} />;
+interface SettingsCheckboxProps {
+  checked: boolean;
+}
+
+const SettingsCheckbox: React.FC<SettingsCheckboxProps> = ({ checked }) => {
+  return <Checkbox defaultChecked m={7} checked={checked} />;
 };
 
 export default SettingsCheckbox;

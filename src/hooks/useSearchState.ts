@@ -5,7 +5,7 @@ import { useFetchStories } from "../hooks/useFetchStories";
 import {
   COMMON_SORT_OPTIONS,
   CONTENT_OPTIONS,
-  DATE_OPTIONS,
+  DATE_RANGE_OPTIONS,
   JOB_SORT_OPTIONS,
 } from "../constants/options";
 import { SearchState } from "../types/search";
@@ -30,7 +30,7 @@ const useSearchState = (): SearchState => {
 
   const [selectedDate, setSelectedDate] = useQueryParamsState<string | null>(
     "dateRange",
-    DATE_OPTIONS[0].value
+    DATE_RANGE_OPTIONS[0].value
   );
 
   const [activePage, setActivePage] = useQueryParamsState<number>("page", 0);

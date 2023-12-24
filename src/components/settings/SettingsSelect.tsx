@@ -1,8 +1,9 @@
 import { Select } from "@mantine/core";
+import { Options } from "../../types/options";
 import classes from "../../styles/Select.module.css";
 
 interface SettingsSelectProps {
-  options: string[];
+  options: Options;
   value: string;
 }
 

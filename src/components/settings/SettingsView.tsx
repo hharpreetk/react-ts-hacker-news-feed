@@ -1,4 +1,20 @@
 import { Button, Flex, Group, Stack } from "@mantine/core";
+import {
+  DEFAULT_DISPLAY_SETTINGS,
+  DEFAULT_DEFAULT_FILTERS,
+  DEFAULT_SEARCH_MATCHES,
+} from "../../constants/settings";
+import {
+  DISPLAY_SETTING,
+  DEFAULT_FILTER,
+  SEARCH_MATCH,
+} from "../../constants/settings";
+import {
+  PER_PAGE_OPTIONS,
+  CONTENT_OPTIONS,
+  COMMON_SORT_OPTIONS,
+  DATE_RANGE_OPTIONS,
+} from "../../constants/options";
 import ThemeToggle from "./ThemeToggle";
 import SettingsCard from "./SettingsCard";
 import SettingsSection from "./SettingsSection";
@@ -19,8 +35,8 @@ const SettingsView = () => {
           </SettingsSection>
           <SettingsSection label="Per Page" withBorder={false}>
             <SettingsSelect
-              options={["10", "20", "30", "40", "50"]}
-              value="20"
+              options={PER_PAGE_OPTIONS}
+              value={DEFAULT_DISPLAY_SETTINGS[DISPLAY_SETTING.PER_PAGE]}
             />
           </SettingsSection>
         </SettingsCard>
@@ -30,34 +46,20 @@ const SettingsView = () => {
         >
           <SettingsSection label="Sort">
             <SettingsSelect
-              options={["Popularity", "Date"]}
-              value="Popularity"
+              options={COMMON_SORT_OPTIONS}
+              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.SORT]}
             />
           </SettingsSection>
-          <SettingsSection label="Type">
+          <SettingsSection label="Content">
             <SettingsSelect
-              options={[
-                "Stories",
-                "Ask HN",
-                "Show HN",
-                "Launch HN",
-                "Jobs",
-                "Polls",
-              ]}
-              value="Stories"
+              options={CONTENT_OPTIONS}
+              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.CONTENT]}
             />
           </SettingsSection>
           <SettingsSection label="Date Range" withBorder={false}>
             <SettingsSelect
-              options={[
-                "Forever",
-                "Past Year",
-                "Past Month",
-                "Past Week",
-                "Past 24 Hrs",
-                "Past Hour",
-              ]}
-              value="Forever"
+              options={DATE_RANGE_OPTIONS}
+              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.DATE_RANGE]}
             />
           </SettingsSection>
         </SettingsCard>
@@ -66,10 +68,10 @@ const SettingsView = () => {
           hoverText="When checked, the search will include matches for selected attributes, author names or story text."
         >
           <SettingsSection label="Author">
-            <SettingsCheckbox />
+            <SettingsCheckbox checked={DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR]} />
           </SettingsSection>
           <SettingsSection label="Story Text" withBorder={false}>
-            <SettingsCheckbox />
+            <SettingsCheckbox checked={DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT]} />
           </SettingsSection>
         </SettingsCard>
       </Stack>
