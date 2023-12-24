@@ -1,6 +1,6 @@
 import { ScrollArea, SegmentedControl, useMantineTheme } from "@mantine/core";
 import { useSearch } from "../../contexts/SearchContext";
-import { CONTENT_OPTIONS } from "../../constants/filters";
+import { CONTENT_OPTIONS } from "../../constants/options";
 import classes from "../../styles/SegmentedControl.module.css";
 
 const ContentFilter: React.FC = () => {

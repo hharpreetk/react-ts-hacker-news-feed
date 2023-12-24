@@ -1,5 +1,5 @@
 import { Select } from "@mantine/core";
-import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../../constants/filters";
+import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../../constants/options";
 import { useSearch } from "../../contexts/SearchContext";
 import { IconSortDescending2 } from "@tabler/icons-react";
 import { Options } from "../../types/options";

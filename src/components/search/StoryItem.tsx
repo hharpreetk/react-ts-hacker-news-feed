@@ -6,7 +6,7 @@ import {
 } from "@mantine/core";
 import classes from "../../styles/StoryItem.module.css";
 import { Story, HighlightResult } from "../../types/stories";
-import { CONTENT_OPTIONS } from "../../constants/filters";
+import { CONTENT_OPTIONS } from "../../constants/options";
 import { format } from "timeago.js";
 
 interface StoryItemProps {
