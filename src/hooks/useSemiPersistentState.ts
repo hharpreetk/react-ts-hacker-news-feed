@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
+import { Settings } from "../types/settings";
 
-// define generic type for the state
-type StateType = string | number | null;
-
-const useSemiPersistentState = <T extends StateType>(
+const useSemiPersistentState = (
   key: string,
-  initialState: T
-): [T, (newValue: T) => void] => {
-  const storedValue = localStorage.getItem(key);
-  const initial = storedValue ? JSON.parse(storedValue) : initialState;
-  const [value, setValue] = useState<T>(initial);
+  initialValue: Settings
+): [Settings, (newSettings: Settings) => void] => {
+  const [settings, setSettings] = useState(() => {
+    const storedSettings = localStorage.getItem(key);
+    if (storedSettings) {
+      return JSON.parse(storedSettings);
+    }
+    return initialValue;
+  });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [value, key]);
+    // Save the value to localStorage whenever it changes
+    localStorage.setItem(key, JSON.stringify(settings));
+  }, [settings]);
 
-  return [value, setValue];
+  return [settings, setSettings];
 };
 
 export { useSemiPersistentState };

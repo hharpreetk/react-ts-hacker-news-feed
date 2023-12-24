@@ -1,4 +1,5 @@
 import { Button, Flex, Group, Stack } from "@mantine/core";
+import { useSemiPersistentState } from "../../hooks/useSemiPersistentState";
 import {
   DEFAULT_DISPLAY_SETTINGS,
   DEFAULT_DEFAULT_FILTERS,
@@ -23,6 +24,61 @@ import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
 
 const SettingsView = () => {
+  // Use the useSemiPersistentState hook to manage and persist settings
+  const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
+    // Initial settings
+    hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DISPLAY_SETTING.PER_PAGE],
+    defaultContent: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.SORT],
+    defaultSort: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.CONTENT],
+    defaultDateRange: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.DATE_RANGE],
+    authorSearchMatch: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR],
+    storyTextSearchMatch: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT],
+  });
+
+  const handleStoryTextChecked = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSettings({
+      ...settings,
+      storyTextSearchMatch: event.currentTarget.checked,
+    });
+  };
+
+  const handleAuthorChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSettings({
+      ...settings,
+      authorSearchMatch: event.currentTarget.checked,
+    });
+  };
+
+  const handlePerPageSelect = (value: string | null) => {
+    setSettings({
+      ...settings,
+      hitsPerPage: value,
+    });
+  };
+
+  const handleDefaultSortSelect = (value: string | null) => {
+    setSettings({
+      ...settings,
+      defaultSort: value,
+    });
+  };
+
+  const handleDefaultContentSelect = (value: string | null) => {
+    setSettings({
+      ...settings,
+      defaultContent: value,
+    });
+  };
+
+  const handleDefaultDateRangeSelect = (value: string | null) => {
+    setSettings({
+      ...settings,
+      defaultDateRange: value,
+    });
+  };
+
   return (
     <Flex direction="column" align="flex-end">
       <Stack gap="xs" w="100%">
@@ -36,7 +92,8 @@ const SettingsView = () => {
           <SettingsSection label="Per Page" withBorder={false}>
             <SettingsSelect
               options={PER_PAGE_OPTIONS}
-              value={DEFAULT_DISPLAY_SETTINGS[DISPLAY_SETTING.PER_PAGE]}
+              selectedValue={settings.hitsPerPage}
+              handleSelect={handlePerPageSelect}
             />
           </SettingsSection>
         </SettingsCard>
@@ -47,19 +104,22 @@ const SettingsView = () => {
           <SettingsSection label="Sort">
             <SettingsSelect
               options={COMMON_SORT_OPTIONS}
-              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.SORT]}
+              selectedValue={settings.defaultSort}
+              handleSelect={handleDefaultSortSelect}
             />
           </SettingsSection>
           <SettingsSection label="Content">
             <SettingsSelect
               options={CONTENT_OPTIONS}
-              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.CONTENT]}
+              selectedValue={settings.defaultContent}
+              handleSelect={handleDefaultContentSelect}
             />
           </SettingsSection>
           <SettingsSection label="Date Range" withBorder={false}>
             <SettingsSelect
               options={DATE_RANGE_OPTIONS}
-              value={DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.DATE_RANGE]}
+              selectedValue={settings.defaultDateRange}
+              handleSelect={handleDefaultDateRangeSelect}
             />
           </SettingsSection>
         </SettingsCard>
@@ -68,10 +128,16 @@ const SettingsView = () => {
           hoverText="When checked, the search will include matches for selected attributes, author names or story text."
         >
           <SettingsSection label="Author">
-            <SettingsCheckbox checked={DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR]} />
+            <SettingsCheckbox
+              checked={settings.authorSearchMatch}
+              handleChecked={handleAuthorChecked}
+            />
           </SettingsSection>
           <SettingsSection label="Story Text" withBorder={false}>
-            <SettingsCheckbox checked={DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT]} />
+            <SettingsCheckbox
+              checked={settings.storyTextSearchMatch}
+              handleChecked={handleStoryTextChecked}
+            />
           </SettingsSection>
         </SettingsCard>
       </Stack>

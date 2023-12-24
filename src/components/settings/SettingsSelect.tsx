@@ -4,16 +4,22 @@ import classes from "../../styles/Select.module.css";
 
 interface SettingsSelectProps {
   options: Options;
-  value: string;
+  selectedValue: string | null;
+  handleSelect: (value: string | null) => void;
 }
 
-const SettingsSelect: React.FC<SettingsSelectProps> = ({ options, value }) => {
+const SettingsSelect: React.FC<SettingsSelectProps> = ({
+  options,
+  selectedValue,
+  handleSelect,
+}) => {
   return (
     <Select
       data={options}
-      value={value}
+      value={selectedValue}
       allowDeselect={false}
       classNames={classes}
+      onChange={handleSelect}
     />
   );
 };
