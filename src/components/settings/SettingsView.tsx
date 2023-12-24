@@ -26,7 +26,7 @@ const SettingsView = () => {
         </SettingsCard>
         <SettingsCard
           title="Default Filters"
-          hoverText="Choose sorting options, content type, and date range filters for your content."
+          hoverText="Choose sort options, content type, and date range filters for your content."
         >
           <SettingsSection label="Sort">
             <SettingsSelect
@@ -63,7 +63,7 @@ const SettingsView = () => {
         </SettingsCard>
         <SettingsCard
           title="Search Match"
-          hoverText="Enable or disable search matching for specific criteria. When active, the search will include matches for the selected attributes, such as author names or story text."
+          hoverText="When checked, the search will include matches for selected attributes, author names or story text."
         >
           <SettingsSection label="Author">
             <SettingsCheckbox />

@@ -1,4 +1,4 @@
-import { Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
+import { Box, Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
 import { IconHelpCircle } from "@tabler/icons-react";
 
 interface SettingsCardProps {
@@ -18,7 +18,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
         <Card.Section withBorder inheritPadding py={16}>
           <Group justify="space-between">
             <Text size="sm">{title}</Text>
-            <HoverCard width={250} position="right">
+            <HoverCard width={220}>
               <HoverCard.Target>
                 <IconHelpCircle
                   size={22}
