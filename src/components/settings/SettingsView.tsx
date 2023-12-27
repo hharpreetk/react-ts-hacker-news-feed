@@ -1,20 +1,23 @@
 import { Button, Flex, Group, Stack } from "@mantine/core";
 import { useSemiPersistentState } from "../../hooks/useSemiPersistentState";
 import {
-  DEFAULT_DISPLAY_SETTINGS,
+  DEFAULT_DISPLAY_SETTING_THEME,
+  DEFAULT_DISPLAY_SETTING_HITS_PER_PAGE,
   DEFAULT_DEFAULT_FILTERS,
   DEFAULT_SEARCH_MATCHES,
 } from "../../constants/settings";
 import {
-  DISPLAY_SETTING,
+  DISPLAY_SETTING_THEME,
+  DISPLAY_SETTING_HITS_PER_PAGE,
   DEFAULT_FILTER,
   SEARCH_MATCH,
 } from "../../constants/settings";
 import {
-  PER_PAGE_OPTIONS,
+  HITS_PER_PAGE_OPTIONS,
   CONTENT_OPTIONS,
   COMMON_SORT_OPTIONS,
   DATE_RANGE_OPTIONS,
+  THEME_OPTION,
 } from "../../constants/options";
 import ThemeToggle from "./ThemeToggle";
 import SettingsCard from "./SettingsCard";
@@ -24,30 +27,44 @@ import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
 
 const SettingsView = () => {
-  // Use the useSemiPersistentState hook to manage and persist settings
+  // Persist settings
   const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
     // Initial settings
-    hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DISPLAY_SETTING.PER_PAGE],
+    theme: DEFAULT_DISPLAY_SETTING_THEME[DISPLAY_SETTING_THEME.THEME],
+    hitsPerPage:
+      DEFAULT_DISPLAY_SETTING_HITS_PER_PAGE[
+        DISPLAY_SETTING_HITS_PER_PAGE.HITS_PER_PAGE
+      ],
     defaultContent: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.CONTENT],
     defaultSort: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.SORT],
     defaultDateRange: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.DATE_RANGE],
-    authorSearchMatch: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR],
-    storyTextSearchMatch: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT],
+    authorText: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR],
+    storyText: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT],
   });
+
+  const handleThemeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTheme = event.currentTarget.checked
+      ? THEME_OPTION.DARK_THEME
+      : THEME_OPTION.LIGHT_THEME;
+    setSettings({
+      ...settings,
+      theme: newTheme,
+    });
+  };
 
   const handleStoryTextChecked = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSettings({
       ...settings,
-      storyTextSearchMatch: event.currentTarget.checked,
+      storyText: event.currentTarget.checked,
     });
   };
 
   const handleAuthorChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSettings({
       ...settings,
-      authorSearchMatch: event.currentTarget.checked,
+      authorText: event.currentTarget.checked,
     });
   };
 
@@ -87,11 +104,14 @@ const SettingsView = () => {
           hoverText=" Pick a light or dark theme for the interface, and adjust the items per page to suit your browsing preferences."
         >
           <SettingsSection label="Theme">
-            <ThemeToggle />
+            <ThemeToggle
+              theme={settings.theme}
+              handleToggle={handleThemeToggle}
+            />
           </SettingsSection>
-          <SettingsSection label="Per Page" withBorder={false}>
+          <SettingsSection label="Hits Per Page" withBorder={false}>
             <SettingsSelect
-              options={PER_PAGE_OPTIONS}
+              options={HITS_PER_PAGE_OPTIONS}
               selectedValue={settings.hitsPerPage}
               handleSelect={handlePerPageSelect}
             />
@@ -129,13 +149,13 @@ const SettingsView = () => {
         >
           <SettingsSection label="Author">
             <SettingsCheckbox
-              checked={settings.authorSearchMatch}
+              checked={settings.authorText}
               handleChecked={handleAuthorChecked}
             />
           </SettingsSection>
           <SettingsSection label="Story Text" withBorder={false}>
             <SettingsCheckbox
-              checked={settings.storyTextSearchMatch}
+              checked={settings.storyText}
               handleChecked={handleStoryTextChecked}
             />
           </SettingsSection>

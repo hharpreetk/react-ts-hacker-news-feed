@@ -1,17 +1,36 @@
 import {
-  PER_PAGE_OPTION,
+  THEME_OPTION,
+  HITS_PER_PAGE_OPTION,
   CONTENT_OPTION,
   SORT_OPTION,
   DATE_RANGE_OPTION,
 } from "./options";
 
-// Display settings constants
-export enum DISPLAY_SETTING {
-  PER_PAGE = "perPage",
+import { ColorScheme } from "../types/settings";
+
+//  Default display theme constants
+export enum DISPLAY_SETTING_THEME {
+  THEME = "theme",
 }
 
-export const DEFAULT_DISPLAY_SETTINGS: Record<DISPLAY_SETTING, string> = {
-  [DISPLAY_SETTING.PER_PAGE]: PER_PAGE_OPTION.PER_PAGE_20,
+export const DEFAULT_DISPLAY_SETTING_THEME: Record<
+  DISPLAY_SETTING_THEME,
+  ColorScheme
+> = {
+  [DISPLAY_SETTING_THEME.THEME]: THEME_OPTION.LIGHT_THEME,
+};
+
+//  Default hits per page constants
+export enum DISPLAY_SETTING_HITS_PER_PAGE {
+  HITS_PER_PAGE = "hitsPerPage",
+}
+
+export const DEFAULT_DISPLAY_SETTING_HITS_PER_PAGE: Record<
+  DISPLAY_SETTING_HITS_PER_PAGE,
+  string
+> = {
+  [DISPLAY_SETTING_HITS_PER_PAGE.HITS_PER_PAGE]:
+    HITS_PER_PAGE_OPTION.PER_PAGE_20,
 };
 
 //  Default filter constants

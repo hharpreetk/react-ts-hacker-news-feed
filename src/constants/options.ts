@@ -50,7 +50,7 @@ export const DATE_RANGE_OPTIONS: Options = [
   { value: DATE_RANGE_OPTION.PAST_YEAR, label: "Past Year" },
 ];
 
-export enum PER_PAGE_OPTION {
+export enum HITS_PER_PAGE_OPTION {
   PER_PAGE_10 = "10",
   PER_PAGE_20 = "20",
   PER_PAGE_30 = "30",
@@ -58,10 +58,15 @@ export enum PER_PAGE_OPTION {
   PER_PAGE_50 = "50",
 }
 
-export const PER_PAGE_OPTIONS: Options = [
-  { value: PER_PAGE_OPTION.PER_PAGE_10, label: "10" },
-  { value: PER_PAGE_OPTION.PER_PAGE_20, label: "20" },
-  { value: PER_PAGE_OPTION.PER_PAGE_30, label: "30" },
-  { value: PER_PAGE_OPTION.PER_PAGE_40, label: "40" },
-  { value: PER_PAGE_OPTION.PER_PAGE_50, label: "50" },
+export const HITS_PER_PAGE_OPTIONS: Options = [
+  { value: HITS_PER_PAGE_OPTION.PER_PAGE_10, label: "10" },
+  { value: HITS_PER_PAGE_OPTION.PER_PAGE_20, label: "20" },
+  { value: HITS_PER_PAGE_OPTION.PER_PAGE_30, label: "30" },
+  { value: HITS_PER_PAGE_OPTION.PER_PAGE_40, label: "40" },
+  { value: HITS_PER_PAGE_OPTION.PER_PAGE_50, label: "50" },
 ];
+
+export enum THEME_OPTION {
+  LIGHT_THEME = "light",
+  DARK_THEME = "dark",
+}
