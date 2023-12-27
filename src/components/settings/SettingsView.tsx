@@ -1,24 +1,22 @@
 import { Button, Flex, Group, Stack } from "@mantine/core";
 import { useSemiPersistentState } from "../../hooks/useSemiPersistentState";
 import {
-  DEFAULT_DISPLAY_SETTING_THEME,
-  DEFAULT_DISPLAY_SETTING_HITS_PER_PAGE,
+  DEFAULT_DISPLAY_SETTINGS,
   DEFAULT_DEFAULT_FILTERS,
   DEFAULT_SEARCH_MATCHES,
 } from "../../constants/settings";
 import {
-  DISPLAY_SETTING_THEME,
-  DISPLAY_SETTING_HITS_PER_PAGE,
-  DEFAULT_FILTER,
-  SEARCH_MATCH,
+  DisplaySettings,
+  DefaultFilter,
+  SearchMatch,
 } from "../../constants/settings";
 import {
   HITS_PER_PAGE_OPTIONS,
   CONTENT_OPTIONS,
   COMMON_SORT_OPTIONS,
   DATE_RANGE_OPTIONS,
-  THEME_OPTION,
 } from "../../constants/options";
+import { ThemeOption } from "../../constants/options";
 import ThemeToggle from "./ThemeToggle";
 import SettingsCard from "./SettingsCard";
 import SettingsSection from "./SettingsSection";
@@ -30,22 +28,19 @@ const SettingsView = () => {
   // Persist settings
   const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
     // Initial settings
-    theme: DEFAULT_DISPLAY_SETTING_THEME[DISPLAY_SETTING_THEME.THEME],
-    hitsPerPage:
-      DEFAULT_DISPLAY_SETTING_HITS_PER_PAGE[
-        DISPLAY_SETTING_HITS_PER_PAGE.HITS_PER_PAGE
-      ],
-    defaultContent: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.CONTENT],
-    defaultSort: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.SORT],
-    defaultDateRange: DEFAULT_DEFAULT_FILTERS[DEFAULT_FILTER.DATE_RANGE],
-    authorText: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.AUTHOR],
-    storyText: DEFAULT_SEARCH_MATCHES[SEARCH_MATCH.STORY_TEXT],
+    theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
+    hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
+    defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
+    defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
+    defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
+    authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
+    storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
   });
 
   const handleThemeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTheme = event.currentTarget.checked
-      ? THEME_OPTION.DARK_THEME
-      : THEME_OPTION.LIGHT_THEME;
+      ? ThemeOption.Dark
+      : ThemeOption.Light;
     setSettings({
       ...settings,
       theme: newTheme,

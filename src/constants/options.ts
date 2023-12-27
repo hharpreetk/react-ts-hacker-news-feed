@@ -1,72 +1,72 @@
 import { Options } from "../types/options";
 
-export enum CONTENT_OPTION {
-  STORY = "story",
-  SHOW_HN = "show_hn",
-  ASK_HN = "ask_hn",
-  LAUNCH_HN = "launch_hn",
-  JOB = "job",
-  POLL = "poll",
+export enum ContentOption {
+  Story = "story",
+  ShowHN = "show_hn",
+  AskHN = "ask_hn",
+  LaunchHN = "launch_hn",
+  Job = "job",
+  Poll = "poll",
 }
 
 export const CONTENT_OPTIONS: Options = [
-  { value: CONTENT_OPTION.STORY, label: "Stories" },
-  { value: CONTENT_OPTION.SHOW_HN, label: "Show HN" },
-  { value: CONTENT_OPTION.ASK_HN, label: "Ask HN" },
-  { value: CONTENT_OPTION.LAUNCH_HN, label: "Launch HN" },
-  { value: CONTENT_OPTION.JOB, label: "Jobs" },
-  { value: CONTENT_OPTION.POLL, label: "Polls" },
+  { value: ContentOption.Story, label: "Stories" },
+  { value: ContentOption.ShowHN, label: "Show HN" },
+  { value: ContentOption.AskHN, label: "Ask HN" },
+  { value: ContentOption.LaunchHN, label: "Launch HN" },
+  { value: ContentOption.Job, label: "Jobs" },
+  { value: ContentOption.Poll, label: "Polls" },
 ];
 
-export enum SORT_OPTION {
-  POPULARITY = "popularity",
-  DATE = "date",
+export enum SortOption {
+  Popularity = "popularity",
+  Date = "date",
 }
 
 // Constants for common sort options
 export const COMMON_SORT_OPTIONS: Options = [
-  { value: SORT_OPTION.POPULARITY, label: "Popularity" },
-  { value: SORT_OPTION.DATE, label: "Date" },
+  { value: SortOption.Popularity, label: "Popularity" },
+  { value: SortOption.Date, label: "Date" },
 ];
 
 // Constants for sort options specific to jobs
 export const JOB_SORT_OPTIONS: Options = [
-  { value: SORT_OPTION.DATE, label: "Date" },
+  { value: SortOption.Date, label: "Date" },
 ];
 
-export enum DATE_RANGE_OPTION {
-  FOREVER = "forever",
-  PAST_24_HOURS = "past24hr",
-  PAST_WEEK = "pastWeek",
-  PAST_MONTH = "pastMonth",
-  PAST_YEAR = "pastYear",
+export enum DateRangeOption {
+  Forever = "forever",
+  Past24Hr = "past24hr",
+  PastWeek = "pastWeek",
+  PastMonth = "pastMonth",
+  PastYear = "pastYear",
 }
 
 export const DATE_RANGE_OPTIONS: Options = [
-  { value: DATE_RANGE_OPTION.FOREVER, label: "Forever" },
-  { value: DATE_RANGE_OPTION.PAST_24_HOURS, label: "Past 24 Hours" },
-  { value: DATE_RANGE_OPTION.PAST_WEEK, label: "Past Week" },
-  { value: DATE_RANGE_OPTION.PAST_MONTH, label: "Past Month" },
-  { value: DATE_RANGE_OPTION.PAST_YEAR, label: "Past Year" },
+  { value: DateRangeOption.Forever, label: "Forever" },
+  { value: DateRangeOption.Past24Hr, label: "Past 24 Hours" },
+  { value: DateRangeOption.PastWeek, label: "Past Week" },
+  { value: DateRangeOption.PastMonth, label: "Past Month" },
+  { value: DateRangeOption.PastYear, label: "Past Year" },
 ];
 
-export enum HITS_PER_PAGE_OPTION {
-  PER_PAGE_10 = "10",
-  PER_PAGE_20 = "20",
-  PER_PAGE_30 = "30",
-  PER_PAGE_40 = "40",
-  PER_PAGE_50 = "50",
+export enum HitsPerPageOption {
+  PerPage10 = "10",
+  PerPage20 = "20",
+  PerPage30 = "30",
+  PerPage40 = "40",
+  PerPage50 = "50",
 }
 
 export const HITS_PER_PAGE_OPTIONS: Options = [
-  { value: HITS_PER_PAGE_OPTION.PER_PAGE_10, label: "10" },
-  { value: HITS_PER_PAGE_OPTION.PER_PAGE_20, label: "20" },
-  { value: HITS_PER_PAGE_OPTION.PER_PAGE_30, label: "30" },
-  { value: HITS_PER_PAGE_OPTION.PER_PAGE_40, label: "40" },
-  { value: HITS_PER_PAGE_OPTION.PER_PAGE_50, label: "50" },
+  { value: HitsPerPageOption.PerPage10, label: "10" },
+  { value: HitsPerPageOption.PerPage20, label: "20" },
+  { value: HitsPerPageOption.PerPage30, label: "30" },
+  { value: HitsPerPageOption.PerPage40, label: "40" },
+  { value: HitsPerPageOption.PerPage50, label: "50" },
 ];
 
-export enum THEME_OPTION {
-  LIGHT_THEME = "light",
-  DARK_THEME = "dark",
+export enum ThemeOption {
+  Light = "light",
+  Dark = "dark",
 }

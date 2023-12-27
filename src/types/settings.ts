@@ -1,7 +1,5 @@
-export type ColorScheme = "light" | "dark";
-
 export type Settings = {
-  theme: ColorScheme;
+  theme: "light" | "dark";
   hitsPerPage: string | null;
   defaultContent: string | null;
   defaultSort: string | null;
