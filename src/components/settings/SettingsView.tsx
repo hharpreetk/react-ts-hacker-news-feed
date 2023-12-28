@@ -23,6 +23,8 @@ import SettingsSection from "./SettingsSection";
 import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
+import { useForm } from "@mantine/form";
+import { formToJSON } from "axios";
 
 const SettingsView = () => {
   // Persist settings
@@ -91,6 +93,18 @@ const SettingsView = () => {
     });
   };
 
+  const form = useForm({
+    initialValues: {
+      theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
+      hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
+      defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
+      defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
+      defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
+      authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
+      storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
+    },
+  });
+
   return (
     <Flex direction="column" align="flex-end">
       <Stack gap="xs" w="100%">
@@ -100,14 +114,14 @@ const SettingsView = () => {
         >
           <SettingsSection label="Theme">
             <ThemeToggle
-              theme={settings.theme}
+              theme={form.values.theme}
               handleToggle={handleThemeToggle}
             />
           </SettingsSection>
           <SettingsSection label="Hits Per Page" withBorder={false}>
             <SettingsSelect
               options={HITS_PER_PAGE_OPTIONS}
-              selectedValue={settings.hitsPerPage}
+              selectedValue={form.values.hitsPerPage}
               handleSelect={handlePerPageSelect}
             />
           </SettingsSection>
