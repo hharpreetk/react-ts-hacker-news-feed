@@ -24,7 +24,7 @@ import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
 import { useForm } from "@mantine/form";
-import { formToJSON } from "axios";
+import { useEffect } from "react";
 
 const SettingsView = () => {
   // Persist settings
@@ -39,12 +39,16 @@ const SettingsView = () => {
     storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
   });
 
+  const form = useForm({
+    initialValues: settings,
+  });
+
   const handleThemeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTheme = event.currentTarget.checked
       ? ThemeOption.Dark
       : ThemeOption.Light;
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       theme: newTheme,
     });
   };
@@ -52,130 +56,129 @@ const SettingsView = () => {
   const handleStoryTextChecked = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       storyText: event.currentTarget.checked,
     });
   };
 
   const handleAuthorChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       authorText: event.currentTarget.checked,
     });
   };
 
   const handlePerPageSelect = (value: string | null) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       hitsPerPage: value,
     });
   };
 
   const handleDefaultSortSelect = (value: string | null) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       defaultSort: value,
     });
   };
 
   const handleDefaultContentSelect = (value: string | null) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       defaultContent: value,
     });
   };
 
   const handleDefaultDateRangeSelect = (value: string | null) => {
-    setSettings({
-      ...settings,
+    form.setValues({
+      ...form.values,
       defaultDateRange: value,
     });
   };
 
-  const form = useForm({
-    initialValues: {
-      theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
-      hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
-      defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
-      defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
-      defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
-      authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
-      storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
-    },
-  });
-
   return (
-    <Flex direction="column" align="flex-end">
-      <Stack gap="xs" w="100%">
-        <SettingsCard
-          title="Display Settings"
-          hoverText=" Pick a light or dark theme for the interface, and adjust the items per page to suit your browsing preferences."
-        >
-          <SettingsSection label="Theme">
-            <ThemeToggle
-              theme={form.values.theme}
-              handleToggle={handleThemeToggle}
-            />
-          </SettingsSection>
-          <SettingsSection label="Hits Per Page" withBorder={false}>
-            <SettingsSelect
-              options={HITS_PER_PAGE_OPTIONS}
-              selectedValue={form.values.hitsPerPage}
-              handleSelect={handlePerPageSelect}
-            />
-          </SettingsSection>
-        </SettingsCard>
-        <SettingsCard
-          title="Default Filters"
-          hoverText="Choose sort options, content type, and date range filters for your content."
-        >
-          <SettingsSection label="Sort">
-            <SettingsSelect
-              options={COMMON_SORT_OPTIONS}
-              selectedValue={settings.defaultSort}
-              handleSelect={handleDefaultSortSelect}
-            />
-          </SettingsSection>
-          <SettingsSection label="Content">
-            <SettingsSelect
-              options={CONTENT_OPTIONS}
-              selectedValue={settings.defaultContent}
-              handleSelect={handleDefaultContentSelect}
-            />
-          </SettingsSection>
-          <SettingsSection label="Date Range" withBorder={false}>
-            <SettingsSelect
-              options={DATE_RANGE_OPTIONS}
-              selectedValue={settings.defaultDateRange}
-              handleSelect={handleDefaultDateRangeSelect}
-            />
-          </SettingsSection>
-        </SettingsCard>
-        <SettingsCard
-          title="Search Match"
-          hoverText="When checked, the search will include matches for selected attributes, author names or story text."
-        >
-          <SettingsSection label="Author">
-            <SettingsCheckbox
-              checked={settings.authorText}
-              handleChecked={handleAuthorChecked}
-            />
-          </SettingsSection>
-          <SettingsSection label="Story Text" withBorder={false}>
-            <SettingsCheckbox
-              checked={settings.storyText}
-              handleChecked={handleStoryTextChecked}
-            />
-          </SettingsSection>
-        </SettingsCard>
-      </Stack>
-      <Group gap="xs" mb="xs">
-        <Button variant="filled" classNames={classes}>
-          Save
-        </Button>
-      </Group>
-    </Flex>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        // When the form is submitted and it's dirty, the settings are saved, and the dirty state is reset
+        if (form.isDirty()) {
+          setSettings(form.values); // Save form values to local storage
+        }
+        form.resetDirty();
+      }}
+    >
+      <Flex direction="column" align="flex-end">
+        <Stack gap="xs" w="100%">
+          <SettingsCard
+            title="Display Settings"
+            hoverText=" Pick a light or dark theme for the interface, and adjust the items per page to suit your browsing preferences."
+          >
+            <SettingsSection label="Theme">
+              <ThemeToggle
+                theme={form.values.theme}
+                handleToggle={handleThemeToggle}
+              />
+            </SettingsSection>
+            <SettingsSection label="Hits Per Page" withBorder={false}>
+              <SettingsSelect
+                options={HITS_PER_PAGE_OPTIONS}
+                selectedValue={form.values.hitsPerPage}
+                handleSelect={handlePerPageSelect}
+              />
+            </SettingsSection>
+          </SettingsCard>
+          <SettingsCard
+            title="Default Filters"
+            hoverText="Choose sort options, content type, and date range filters for your content."
+          >
+            <SettingsSection label="Sort">
+              <SettingsSelect
+                options={COMMON_SORT_OPTIONS}
+                selectedValue={form.values.defaultSort}
+                handleSelect={handleDefaultSortSelect}
+              />
+            </SettingsSection>
+            <SettingsSection label="Content">
+              <SettingsSelect
+                options={CONTENT_OPTIONS}
+                selectedValue={form.values.defaultContent}
+                handleSelect={handleDefaultContentSelect}
+              />
+            </SettingsSection>
+            <SettingsSection label="Date Range" withBorder={false}>
+              <SettingsSelect
+                options={DATE_RANGE_OPTIONS}
+                selectedValue={form.values.defaultDateRange}
+                handleSelect={handleDefaultDateRangeSelect}
+              />
+            </SettingsSection>
+          </SettingsCard>
+          <SettingsCard
+            title="Search Match"
+            hoverText="When checked, the search will include matches for selected attributes, author names or story text."
+          >
+            <SettingsSection label="Author">
+              <SettingsCheckbox
+                checked={form.values.authorText}
+                handleChecked={handleAuthorChecked}
+              />
+            </SettingsSection>
+            <SettingsSection label="Story Text" withBorder={false}>
+              <SettingsCheckbox
+                checked={form.values.storyText}
+                handleChecked={handleStoryTextChecked}
+              />
+            </SettingsSection>
+          </SettingsCard>
+        </Stack>
+        <Group gap="xs" mb="xs">
+          <Button type="submit" variant="filled" classNames={classes}>
+            Save
+          </Button>
+        </Group>
+      </Flex>
+    </form>
   );
 };
 
