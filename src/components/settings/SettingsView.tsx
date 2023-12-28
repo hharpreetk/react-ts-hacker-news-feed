@@ -1,15 +1,6 @@
 import { Button, Flex, Group, Stack } from "@mantine/core";
-import { useSemiPersistentState } from "../../hooks/useSemiPersistentState";
-import {
-  DEFAULT_DISPLAY_SETTINGS,
-  DEFAULT_DEFAULT_FILTERS,
-  DEFAULT_SEARCH_MATCHES,
-} from "../../constants/settings";
-import {
-  DisplaySettings,
-  DefaultFilter,
-  SearchMatch,
-} from "../../constants/settings";
+import { useForm } from "@mantine/form";
+import { useSettings } from "../../contexts/SettingsContext";
 import {
   HITS_PER_PAGE_OPTIONS,
   CONTENT_OPTIONS,
@@ -23,21 +14,10 @@ import SettingsSection from "./SettingsSection";
 import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
-import { useForm } from "@mantine/form";
-import { useEffect } from "react";
 
 const SettingsView = () => {
   // Persist settings
-  const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
-    // Initial settings
-    theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
-    hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
-    defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
-    defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
-    defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
-    authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
-    storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
-  });
+  const [settings, setSettings] = useSettings();
 
   const form = useForm({
     initialValues: settings,

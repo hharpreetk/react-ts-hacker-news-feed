@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { theme } from "./themes/theme";
+import { SettingsProvider } from "./contexts/SettingsContext";
 import { StoriesProvider } from "./contexts/StoriesContext";
 import { SearchProvider } from "./contexts/SearchContext";
 import Search from "./components/pages/Search";
@@ -18,16 +19,18 @@ root.render(
   <React.StrictMode>
     <Router>
       <MantineProvider theme={theme}>
-        <StoriesProvider>
-          <SearchProvider>
-            <Routes>
-              <Route path="/" element={<Search />} />
-              <Route path="/settings" element={<Settings />} />
-              {/* Catch-all route for unmatched routes */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </SearchProvider>
-        </StoriesProvider>
+        <SettingsProvider>
+          <StoriesProvider>
+            <SearchProvider>
+              <Routes>
+                <Route path="/" element={<Search />} />
+                <Route path="/settings" element={<Settings />} />
+                {/* Catch-all route for unmatched routes */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </SearchProvider>
+          </StoriesProvider>
+        </SettingsProvider>
       </MantineProvider>
     </Router>
   </React.StrictMode>
