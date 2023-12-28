@@ -1,4 +1,4 @@
-export type Settings = {
+type SettingsState = {
   theme: "light" | "dark";
   hitsPerPage: string | null;
   defaultContent: string | null;
@@ -7,3 +7,5 @@ export type Settings = {
   authorText: boolean;
   storyText: boolean;
 };
+
+export { SettingsState };

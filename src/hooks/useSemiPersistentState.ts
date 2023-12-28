@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Settings } from "../types/settings";
+import { SettingsState } from "../types/settings";
 
 const useSemiPersistentState = (
   key: string,
-  initialValue: Settings
-): [Settings, (newSettings: Settings) => void] => {
+  initialValue: SettingsState
+): [SettingsState, (newSettings: SettingsState) => void] => {
   const [settings, setSettings] = useState(() => {
     const storedSettings = localStorage.getItem(key);
     if (storedSettings) {
