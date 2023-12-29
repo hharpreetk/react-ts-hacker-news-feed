@@ -6,7 +6,7 @@ import { Options } from "../../types/options";
 import classes from "../../styles/Select.module.css";
 
 // Function to get sort options based on selected content
-const getSortOptions = (selectedContent: string): Options => {
+const getSortOptions = (selectedContent: string | null): Options => {
   // If selected content is "job," return job-specific options
   if (selectedContent === "job") {
     return JOB_SORT_OPTIONS;
