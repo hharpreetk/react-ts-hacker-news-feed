@@ -33,12 +33,3 @@ export const SORT_RESOURCE_FILTERS: Record<string, string> = {
   [SortOption.Popularity]: "search",
   [SortOption.Date]: "search_by_date",
 };
-
-export const DEFAULT_SORT_RESOURCE_FILTER =
-  SORT_RESOURCE_FILTERS[SortOption.Popularity];
-
-export const DEFAULT_DATE_NUMERIC_FILTER =
-  DATE_NUMERIC_FILTERS[DateRangeOption.Forever];
-
-export const DEFAULT_CONTENT_TAG_FILTER =
-  CONTENT_TAG_FILTERS[ContentOption.Story];
