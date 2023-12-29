@@ -1,4 +1,10 @@
-import { Button, Flex, Group, Stack } from "@mantine/core";
+import {
+  Button,
+  Flex,
+  Group,
+  Stack,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSettings } from "../../contexts/SettingsContext";
 import {
@@ -14,6 +20,7 @@ import SettingsSection from "./SettingsSection";
 import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
+import { useEffect } from "react";
 
 const SettingsView = () => {
   // Persist settings
@@ -76,6 +83,13 @@ const SettingsView = () => {
       defaultDateRange: value,
     });
   };
+
+  const { setColorScheme } = useMantineColorScheme();
+
+  // Function to update colorscheme based on the theme setting
+  useEffect(() => {
+    setColorScheme(settings.theme);
+  }, [settings.theme]);
 
   return (
     <form
