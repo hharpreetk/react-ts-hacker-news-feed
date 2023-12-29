@@ -10,27 +10,26 @@ import {
 } from "../constants/options";
 import { SearchState } from "../types/search";
 import { useQueryParamsState } from "./useQueryParamsState";
+import { useSettings } from "../contexts/SettingsContext";
 
 const useSearchState = (): SearchState => {
-  // State variables
+  // Use the useSettings hook to get the settings values
+  const [settings] = useSettings();
 
   const [searchTerm, setSearchTerm] = useQueryParamsState<string>("query", "");
 
-  const [selectedContent, setSelectedContent] = useQueryParamsState<string>(
-    "type",
-    CONTENT_OPTIONS[0].value
-  );
+  const [selectedContent, setSelectedContent] = useQueryParamsState<
+    string | null
+  >("type", settings.defaultContent);
 
   const [selectedSort, setSelectedSort] = useQueryParamsState<string | null>(
     "sort",
-    selectedContent === "job"
-      ? JOB_SORT_OPTIONS[0].value
-      : COMMON_SORT_OPTIONS[0].value
+    selectedContent === "job" ? JOB_SORT_OPTIONS[0].value : settings.defaultSort
   );
 
   const [selectedDate, setSelectedDate] = useQueryParamsState<string | null>(
     "dateRange",
-    DATE_RANGE_OPTIONS[0].value
+    settings.defaultDateRange
   );
 
   const [activePage, setActivePage] = useQueryParamsState<number>("page", 0);

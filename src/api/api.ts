@@ -4,6 +4,7 @@ import {
   DATE_NUMERIC_FILTERS,
   DEFAULT_SORT_RESOURCE_FILTER,
   DEFAULT_DATE_NUMERIC_FILTER,
+  DEFAULT_CONTENT_TAG_FILTER,
 } from "../constants/mappings";
 
 const API_BASE = "https://hn.algolia.com/api/v1";
@@ -27,16 +28,18 @@ const buildApiUrl = (
 const getStoriesUrl = (
   selectedSort: string | null,
   query: string,
-  selectedContent: string,
+  selectedContent: string | null,
   selectedDate: string | null,
   page: number
 ) => {
   const resource =
     selectedSort && SORT_RESOURCE_FILTERS[selectedSort]
       ? SORT_RESOURCE_FILTERS[selectedSort]
-      : DEFAULT_SORT_RESOURCE_FILTER; 
+      : DEFAULT_SORT_RESOURCE_FILTER;
 
-  const tags = CONTENT_TAG_FILTERS[selectedContent];
+  const tags = selectedContent
+    ? CONTENT_TAG_FILTERS[selectedContent]
+    : DEFAULT_CONTENT_TAG_FILTER;
 
   const numericFilters =
     selectedDate && DATE_NUMERIC_FILTERS[selectedDate]

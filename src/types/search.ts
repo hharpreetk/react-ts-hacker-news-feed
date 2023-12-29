@@ -1,6 +1,6 @@
 type SearchState = {
   searchTerm: string;
-  selectedContent: string;
+  selectedContent: string | null;
   selectedSort: string | null;
   selectedDate: string | null;
   activePage: number;

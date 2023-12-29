@@ -39,3 +39,6 @@ export const DEFAULT_SORT_RESOURCE_FILTER =
 
 export const DEFAULT_DATE_NUMERIC_FILTER =
   DATE_NUMERIC_FILTERS[DateRangeOption.Forever];
+
+export const DEFAULT_CONTENT_TAG_FILTER =
+  CONTENT_TAG_FILTERS[ContentOption.Story];
