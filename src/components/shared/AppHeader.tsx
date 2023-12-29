@@ -1,4 +1,4 @@
-import { Grid, ThemeIcon } from "@mantine/core";
+import { Grid, ActionIcon } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import { IconSquareLetterH } from "@tabler/icons-react";
 import SearchHeader from "../search/SearchHeader";
@@ -10,9 +10,9 @@ const AppHeader: React.FC = () => {
   const showSettingsHeader = location.pathname === "/settings";
   return (
     <Grid px="lg" py={22} align="center" justify="space-between">
-      <ThemeIcon variant="transparent" size={37}>
+      <ActionIcon component="a" href="/" variant="transparent" size={37}>
         <IconSquareLetterH size={37} />
-      </ThemeIcon>
+      </ActionIcon>
       {showSearchHeader && <SearchHeader />}
       {showSettingsHeader && <SettingsHeader />}
     </Grid>
