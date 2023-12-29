@@ -153,7 +153,12 @@ const SettingsView = () => {
           </SettingsCard>
         </Stack>
         <Group gap="xs" mb="xs">
-          <Button type="submit" variant="filled" classNames={classes}>
+          <Button
+            type="submit"
+            variant="filled"
+            classNames={classes}
+            disabled={!form.isDirty()}
+          >
             Save
           </Button>
         </Group>
