@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
 import { getStoriesUrl } from "../api/api";
 import { useFetchStories } from "../hooks/useFetchStories";
-import {
-  COMMON_SORT_OPTIONS,
-  CONTENT_OPTIONS,
-  DATE_RANGE_OPTIONS,
-  JOB_SORT_OPTIONS,
-} from "../constants/options";
+import { JOB_SORT_OPTIONS } from "../constants/options";
 import { SearchState } from "../types/search";
 import { useQueryParamsState } from "./useQueryParamsState";
 import { useSettings } from "../contexts/SettingsContext";
@@ -16,20 +11,29 @@ const useSearchState = (): SearchState => {
   // Use the useSettings hook to get the settings values
   const [settings] = useSettings();
 
+  const {
+    hitsPerPage,
+    defaultContent,
+    defaultSort,
+    defaultDateRange,
+    authorText,
+    storyText,
+  } = settings;
+
   const [searchTerm, setSearchTerm] = useQueryParamsState<string>("query", "");
 
   const [selectedContent, setSelectedContent] = useQueryParamsState<
     string | null
-  >("type", settings.defaultContent);
+  >("type", defaultContent);
 
   const [selectedSort, setSelectedSort] = useQueryParamsState<string | null>(
     "sort",
-    selectedContent === "job" ? JOB_SORT_OPTIONS[0].value : settings.defaultSort
+    selectedContent === "job" ? JOB_SORT_OPTIONS[0].value : defaultSort
   );
 
   const [selectedDate, setSelectedDate] = useQueryParamsState<string | null>(
     "dateRange",
-    settings.defaultDateRange
+    defaultDateRange
   );
 
   const [activePage, setActivePage] = useQueryParamsState<number>("page", 0);
@@ -40,7 +44,8 @@ const useSearchState = (): SearchState => {
       searchTerm,
       selectedContent,
       selectedDate,
-      activePage
+      activePage,
+      hitsPerPage
     )
   );
 
@@ -65,7 +70,8 @@ const useSearchState = (): SearchState => {
         searchTerm,
         selectedContent,
         selectedDate,
-        activePage
+        activePage,
+        hitsPerPage
       )
     );
   }, [selectedContent, selectedSort, selectedDate, activePage]);
@@ -82,7 +88,8 @@ const useSearchState = (): SearchState => {
           "", // empty search query
           selectedContent,
           selectedDate,
-          0 // reset to the first page
+          0, // reset to the first page
+          hitsPerPage
         )
       );
     }
@@ -95,7 +102,8 @@ const useSearchState = (): SearchState => {
         searchTerm,
         selectedContent,
         selectedDate,
-        activePage
+        activePage,
+        hitsPerPage
       )
     );
     setSearchSuggestion(searchTerm);

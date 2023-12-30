@@ -1,4 +1,5 @@
 import { ContentOption, SortOption, DateRangeOption } from "./options";
+import { DEFAULT_DISPLAY_SETTINGS, DisplaySettings } from "./settings";
 
 // Mapping between ContentOptionS and their corresponding tag values
 export const CONTENT_TAG_FILTERS: Record<string, string> = {
@@ -33,3 +34,15 @@ export const SORT_RESOURCE_FILTERS: Record<string, string> = {
   [SortOption.Popularity]: "search",
   [SortOption.Date]: "search_by_date",
 };
+
+export const DEFAULT_SORT_RESOURCE_FILTER =
+  SORT_RESOURCE_FILTERS[SortOption.Popularity];
+
+export const DEFAULT_DATE_NUMERIC_FILTER =
+  DATE_NUMERIC_FILTERS[DateRangeOption.Forever];
+
+export const DEFAULT_CONTENT_TAG_FILTER =
+  CONTENT_TAG_FILTERS[ContentOption.Story];
+
+export const DEFAULT_HITS_PER_PAGE =
+  DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage];
