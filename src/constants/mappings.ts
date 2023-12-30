@@ -46,3 +46,11 @@ export const DEFAULT_CONTENT_TAG_FILTER =
 
 export const DEFAULT_HITS_PER_PAGE =
   DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage];
+
+export const SEARCHABLE_ATTRIBUTES = [
+  "author",
+  "title",
+  "url",
+  "story_text",
+  // Add other attributes as needed
+];

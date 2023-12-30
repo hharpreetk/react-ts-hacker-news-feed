@@ -45,7 +45,9 @@ const useSearchState = (): SearchState => {
       selectedContent,
       selectedDate,
       activePage,
-      hitsPerPage
+      hitsPerPage,
+      authorText,
+      storyText
     )
   );
 
@@ -71,7 +73,9 @@ const useSearchState = (): SearchState => {
         selectedContent,
         selectedDate,
         activePage,
-        hitsPerPage
+        hitsPerPage,
+        authorText,
+        storyText
       )
     );
   }, [selectedContent, selectedSort, selectedDate, activePage]);
@@ -89,7 +93,9 @@ const useSearchState = (): SearchState => {
           selectedContent,
           selectedDate,
           0, // reset to the first page
-          hitsPerPage
+          hitsPerPage,
+          authorText,
+          storyText
         )
       );
     }
@@ -103,7 +109,9 @@ const useSearchState = (): SearchState => {
         selectedContent,
         selectedDate,
         activePage,
-        hitsPerPage
+        hitsPerPage,
+        authorText,
+        storyText
       )
     );
     setSearchSuggestion(searchTerm);

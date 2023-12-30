@@ -6,6 +6,7 @@ import {
   DEFAULT_DATE_NUMERIC_FILTER,
   DEFAULT_CONTENT_TAG_FILTER,
   DEFAULT_HITS_PER_PAGE,
+  SEARCHABLE_ATTRIBUTES,
 } from "../constants/mappings";
 
 const API_BASE = "https://hn.algolia.com/api/v1";
@@ -32,7 +33,9 @@ const getStoriesUrl = (
   selectedContent: string | null,
   selectedDate: string | null,
   page: number,
-  nbHitsPerPage: string | null
+  nbHitsPerPage: string | null,
+  authorText: boolean,
+  storyText: boolean
 ) => {
   const resource =
     selectedSort && SORT_RESOURCE_FILTERS[selectedSort]
@@ -51,12 +54,22 @@ const getStoriesUrl = (
 
   const hitsPerPage = nbHitsPerPage ? nbHitsPerPage : DEFAULT_HITS_PER_PAGE;
 
+  // Determine the searchable attributes based on settings
+  const restrictSearchableAttributes = SEARCHABLE_ATTRIBUTES.filter((attr) => {
+    return (
+      (attr === "author" && authorText) ||
+      (attr === "story_text" && storyText) ||
+      !["author", "story_text"].includes(attr)
+    );
+  }).join(",");
+
   return buildApiUrl(resource, {
     query,
     tags,
     numericFilters,
     page,
     hitsPerPage,
+    restrictSearchableAttributes,
   });
 };
 
