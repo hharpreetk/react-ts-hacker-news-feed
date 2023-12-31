@@ -1,5 +1,4 @@
 import { Card, Skeleton, Flex, Box } from "@mantine/core";
-import "../../styles/StoryItem.module.css";
 
 const StorySkeleton: React.FC = () => {
   const renderSkeletonLines = (length: number) => {

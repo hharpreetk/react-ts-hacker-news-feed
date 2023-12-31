@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
-import { TypographyStylesProvider, useMantineColorScheme } from "@mantine/core";
-import classes from "../../styles/StoryItem.module.css";
+import { TypographyStylesProvider } from "@mantine/core";
+import classes from "../../styles/Story.module.css";
 import { Story, HighlightResult } from "../../types/stories";
 import { CONTENT_OPTIONS } from "../../constants/options";
 import { format } from "timeago.js";
@@ -12,8 +12,6 @@ interface StoryItemProps {
 }
 
 const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
-  const { colorScheme } = useMantineColorScheme();
-
   const handleRemoveItem = () => onRemoveItem(item);
 
   const getFormattedDate = (dateInput: string): string => {
@@ -111,12 +109,8 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const renderUrl = () => {
     const UrlProps = {
       size: "sm",
-      c:
-        colorScheme === "dark"
-          ? "var(--mantine-color-dark-1)"
-          : "var(--mantine-color-gray-7)",
       lineClamp: 1,
-      w: "fit-content",
+      classNames: { root: classes.storyUrl },
     };
 
     if (url) {

@@ -2,6 +2,18 @@
   color: var(--mantine-primary-color-filled) !important;
 }
 
+.storyUrl {
+  width: fit-content;
+}
+
+[data-mantine-color-scheme="light"] .storyUrl {
+  color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .storyUrl {
+  color: var(--mantine-color-dark-1);
+}
+
 .storyHide {
   color: var(--mantine-primary-color-filled) !important;
 }
