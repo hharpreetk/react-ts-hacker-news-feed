@@ -1,9 +1,6 @@
+import { Link } from "react-router-dom";
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
-import {
-  TypographyStylesProvider,
-  useMantineTheme,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { TypographyStylesProvider, useMantineColorScheme } from "@mantine/core";
 import classes from "../../styles/StoryItem.module.css";
 import { Story, HighlightResult } from "../../types/stories";
 import { CONTENT_OPTIONS } from "../../constants/options";
@@ -15,8 +12,6 @@ interface StoryItemProps {
 }
 
 const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
-  const theme = useMantineTheme();
-
   const { colorScheme } = useMantineColorScheme();
 
   const handleRemoveItem = () => onRemoveItem(item);
@@ -26,6 +21,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   const {
+    objectID,
     title,
     url,
     author,
@@ -173,7 +169,13 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   };
 
   return (
-    <Card withBorder radius="md">
+    <Card
+      withBorder
+      radius="md"
+      component={Link}
+      to={`story/${objectID}`}
+      state={item}
+    >
       <Flex direction="column" gap={1}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}

@@ -11,6 +11,7 @@ import Settings from "./components/pages/Settings";
 import NotFound from "./components/pages/NotFound";
 import "@mantine/core/styles.css";
 import "./styles/Global.module.css";
+import StoryDetail from "./components/pages/StoryDetail";
 
 const rootElement = document.getElementById("root")!;
 const root = ReactDOM.createRoot(rootElement);
@@ -25,6 +26,7 @@ root.render(
               <Routes>
                 <Route path="/" element={<Search />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/story/:id" element={<StoryDetail />} />
                 {/* Catch-all route for unmatched routes */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
