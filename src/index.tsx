@@ -8,10 +8,10 @@ import { StoriesProvider } from "./contexts/StoriesContext";
 import { SearchProvider } from "./contexts/SearchContext";
 import Search from "./components/pages/Search";
 import Settings from "./components/pages/Settings";
+import Story from "./components/pages/Story";
 import NotFound from "./components/pages/NotFound";
 import "@mantine/core/styles.css";
 import "./styles/Global.module.css";
-import StoryDetail from "./components/pages/StoryDetail";
 
 const rootElement = document.getElementById("root")!;
 const root = ReactDOM.createRoot(rootElement);
@@ -26,7 +26,7 @@ root.render(
               <Routes>
                 <Route path="/" element={<Search />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/story/:id" element={<StoryDetail />} />
+                <Route path="/story/:id" element={<Story />} />
                 {/* Catch-all route for unmatched routes */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

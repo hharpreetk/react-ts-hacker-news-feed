@@ -1,11 +1,16 @@
+import { useLocation } from "react-router-dom";
 import { AppShell, rem } from "@mantine/core";
 import { useHeadroom } from "@mantine/hooks";
 import AppHeader from "../shared/AppHeader";
 import AppFooter from "../shared/AppFooter";
 
-const StoryDetail: React.FC = () => {
+const Story: React.FC = () => {
   // Collaspe the header when user scrolls
   const pinned = useHeadroom({ fixedAt: 120 });
+
+  const location = useLocation();
+
+  const story = location.state;
 
   return (
     <AppShell
@@ -29,4 +34,4 @@ const StoryDetail: React.FC = () => {
   );
 };
 
-export default StoryDetail;
+export default Story;
