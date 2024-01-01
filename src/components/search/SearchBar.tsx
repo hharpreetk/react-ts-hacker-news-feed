@@ -1,8 +1,8 @@
 import { Grid, ActionIcon } from "@mantine/core";
 import { IconAdjustmentsCog } from "@tabler/icons-react";
-import StorySearch from "../search/StorySearch";
+import StorySearch from "./StorySearch";
 
-const SearchHeader = () => {
+const SearchBar = () => {
   return (
     <>
       <Grid.Col span="auto" maw="90%" py={0}>
@@ -21,4 +21,4 @@ const SearchHeader = () => {
   );
 };
 
-export default SearchHeader;
+export default SearchBar;
