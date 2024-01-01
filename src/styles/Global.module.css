@@ -1,3 +1,4 @@
 p {
+  margin-top: calc(0.375rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
 }

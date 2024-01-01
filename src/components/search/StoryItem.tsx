@@ -170,7 +170,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       to={`story/${objectID}`}
       state={item}
     >
-      <Flex direction="column" gap={1}>
+      <Flex direction="column" gap={1} classNames={{ root: classes.storyItem }}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}
           <Box visibleFrom="xs">
@@ -189,7 +189,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         </Flex>
         {renderUrl()}
         {renderContent()}
-        <Flex wrap="wrap" rowGap={3} columnGap="xs" align="center" mt={1}>
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={1}>
           {renderAuthor()}
           <Text size="xs">|</Text>
           <Text size="sm">{getFormattedDate(created_at)}</Text>

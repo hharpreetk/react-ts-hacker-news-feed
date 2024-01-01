@@ -1,3 +1,8 @@
+.storyItem * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .storyTitle {
   color: var(--mantine-primary-color-filled) !important;
 }
