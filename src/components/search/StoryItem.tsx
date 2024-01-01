@@ -170,7 +170,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       to={`story/${objectID}`}
       state={item}
     >
-      <Flex direction="column" gap={1} classNames={{ root: classes.storyItem }}>
+      <Flex direction="column" gap={2} classNames={{ root: classes.storyItem }}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}
           <Box visibleFrom="xs">
