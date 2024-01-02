@@ -4,9 +4,6 @@ import {
   Text,
   TypographyStylesProvider,
   Box,
-  Card,
-  Container,
-  Divider,
 } from "@mantine/core";
 import { Story } from "../../types/stories";
 import { format } from "timeago.js";
@@ -92,7 +89,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
             {url}
           </Anchor>
         )}
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={3}>
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={4}>
           <Text size="sm" span>
             {author}
           </Text>
