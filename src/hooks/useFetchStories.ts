@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useStoriesDispatch } from "../contexts/StoriesContext";
 
 const useFetchStories = (url: string) => {
