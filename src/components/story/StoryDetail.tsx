@@ -5,6 +5,8 @@ import {
   TypographyStylesProvider,
   Box,
   Card,
+  Container,
+  Divider,
 } from "@mantine/core";
 import { Story } from "../../types/stories";
 import { format } from "timeago.js";
@@ -68,49 +70,57 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   };
 
   return (
-    <Flex direction="column" gap={2}>
-      <Text fw={600} lh="xs" classNames={{ root: classes.storyTitle }} span>
-        {title}
-      </Text>
-      {url && (
-        <Anchor
-          href={url}
-          target="_blank"
-          size="sm"
-          lineClamp={1}
-          classNames={{ root: classes.storyUrl }}
+    <Flex direction="column" gap="xs">
+      <div>
+        <Text
+          fw={600}
+          size="lg"
+          lh="xs"
+          classNames={{ root: classes.storyTitle }}
+          span
         >
-          {url}
-        </Anchor>
-      )}
-      <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={1} mb={2}>
-        <Text size="sm" span>
-          {author}
+          {title}
         </Text>
-        <Text size="xs" span>
-          |
-        </Text>
-        <Text size="sm" span>
-          {getFormattedDate(created_at)}
-        </Text>
-        {getPointsOrComments("points") ? (
-          <>
-            <Text size="xs" span>
-              |
-            </Text>
-            {getPointsOrComments("points")}
-          </>
-        ) : null}
-        {getPointsOrComments("num_comments") ? (
-          <>
-            <Text size="xs" span>
-              |
-            </Text>
-            {getPointsOrComments("num_comments")}
-          </>
-        ) : null}
-      </Flex>
-      {renderContent()}
+        {url && (
+          <Anchor
+            href={url}
+            target="_blank"
+            lineClamp={1}
+            underline="always"
+            classNames={{ root: classes.storyUrl }}
+          >
+            {url}
+          </Anchor>
+        )}
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={3}>
+          <Text size="sm" span>
+            {author}
+          </Text>
+          <Text size="xs" span>
+            |
+          </Text>
+          <Text size="sm" span>
+            {getFormattedDate(created_at)}
+          </Text>
+          {getPointsOrComments("points") ? (
+            <>
+              <Text size="xs" span>
+                |
+              </Text>
+              {getPointsOrComments("points")}
+            </>
+          ) : null}
+          {getPointsOrComments("num_comments") ? (
+            <>
+              <Text size="xs" span>
+                |
+              </Text>
+              {getPointsOrComments("num_comments")}
+            </>
+          ) : null}
+        </Flex>
+      </div>
+      <div>{renderContent()}</div>
     </Flex>
   );
 };
