@@ -1,4 +1,5 @@
 import { Flex, Text, Anchor } from "@mantine/core";
+import classes from "../../styles/Footer.module.css";
 
 const AppFooter = () => {
   return (
@@ -10,8 +11,10 @@ const AppFooter = () => {
       align="center"
       wrap="wrap"
     >
-      <Text size="xs">© Search Hacker News, 2023.</Text>
-      <Text size="xs">
+      <Text size="xs" classNames={{ root: classes.footerText }}>
+        © Search Hacker News, 2023.
+      </Text>
+      <Text size="xs" classNames={{ root: classes.footerText }}>
         Powered by{" "}
         <Anchor href="https://hn.algolia.com/api" target="_blank">
           HN Search API
