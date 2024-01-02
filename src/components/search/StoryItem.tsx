@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, Flex, Anchor, Group, Badge, Box, Text } from "@mantine/core";
 import { TypographyStylesProvider } from "@mantine/core";
 import classes from "../../styles/Story.module.css";
@@ -162,13 +162,24 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    // Check if the content is a "job" before navigating
+    if (getCategory() !== "job") {
+      navigate(`story/${objectID}`, { state: item });
+    }
+  };
+
   return (
     <Card
       withBorder
       radius="md"
-      component={Link}
-      to={`story/${objectID}`}
-      state={item}
+      component="a"
+      onClick={handleCardClick}
+      style={{
+        cursor: getCategory() === "job" ? "auto" : "pointer",
+      }}
     >
       <Flex direction="column" gap={2} classNames={{ root: classes.storyItem }}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
