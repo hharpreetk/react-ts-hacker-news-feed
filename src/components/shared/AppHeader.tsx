@@ -7,7 +7,7 @@ import ExitButton from "../settings/ExitButton";
 const AppHeader: React.FC = () => {
   const location = useLocation();
   const showSearchBar = location.pathname === "/";
-  const showExitButton = location.pathname.startsWith("/story/");
+  const showExitButton = location.pathname === "/settings" || location.pathname.startsWith("/story/");
 
   return (
     <Grid px="lg" py={22} align="center" justify="space-between">
