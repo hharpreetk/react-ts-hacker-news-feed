@@ -4,7 +4,7 @@ import { TypographyStylesProvider } from "@mantine/core";
 import classes from "../../styles/Story.module.css";
 import { Story, HighlightResult } from "../../types/stories";
 import { CONTENT_OPTIONS } from "../../constants/options";
-import { format } from "timeago.js";
+import { getFormattedDate, getPointsOrComments } from "../../utils/storyUtils";
 
 interface StoryItemProps {
   item: Story;
@@ -13,10 +13,6 @@ interface StoryItemProps {
 
 const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const handleRemoveItem = () => onRemoveItem(item);
-
-  const getFormattedDate = (dateInput: string): string => {
-    return format(new Date(dateInput));
-  };
 
   const {
     objectID,
@@ -59,27 +55,11 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       : null;
   };
 
-  const getPointsOrComments = (
-    property: "points" | "num_comments"
-  ): React.ReactNode => {
-    const category = getCategory();
-    const value =
-      category === "story" || category === "poll" ? item[property] : null;
+  const formattedDate = getFormattedDate(created_at);
 
-    if (value !== null) {
-      const label = property === "points" ? "point" : "comment";
-      return (
-        <>
-          <Text size="sm">
-            {value} {value === 1 ? label : `${label}s`}
-          </Text>
-          <Text size="xs">|</Text>
-        </>
-      );
-    }
+  const points = getPointsOrComments(item, "points");
 
-    return null;
-  };
+  const num_comments = getPointsOrComments(item, "num_comments");
 
   const typographyStylesProviderProps = {
     p: 0,
@@ -203,10 +183,20 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={1}>
           {renderAuthor()}
           <Text size="xs">|</Text>
-          <Text size="sm">{getFormattedDate(created_at)}</Text>
+          <Text size="sm">{formattedDate}</Text>
+          {points ? (
+            <>
+              <Text size="xs">|</Text>
+              <Text size="sm">{points}</Text>
+            </>
+          ) : null}
+          {num_comments ? (
+            <>
+              <Text size="xs">|</Text>
+              <Text size="sm">{num_comments}</Text>
+            </>
+          ) : null}
           <Text size="xs">|</Text>
-          {getPointsOrComments("points")}
-          {getPointsOrComments("num_comments")}
           <Anchor
             size="sm"
             classNames={{ root: classes.storyHide }}
