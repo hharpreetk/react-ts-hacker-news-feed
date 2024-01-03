@@ -184,18 +184,18 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           {renderAuthor()}
           <Text size="xs">|</Text>
           <Text size="sm">{formattedDate}</Text>
-          {points ? (
+          {points && (
             <>
               <Text size="xs">|</Text>
               <Text size="sm">{points}</Text>
             </>
-          ) : null}
-          {num_comments ? (
+          )}
+          {num_comments && (
             <>
               <Text size="xs">|</Text>
               <Text size="sm">{num_comments}</Text>
             </>
-          ) : null}
+          )}
           <Text size="xs">|</Text>
           <Anchor
             size="sm"
