@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Flex,
   Anchor,
@@ -5,24 +6,33 @@ import {
   TypographyStylesProvider,
   Box,
 } from "@mantine/core";
-import { Story } from "../../types/stories";
 import { getFormattedDate, getPointsOrComments } from "../../utils/storyUtils";
+import { useFetchComments } from "../../hooks/useFetchComments";
 import classes from "../../styles/Story.module.css";
 
-interface StoryDetailProps {
-  story: Story;
-}
+const StoryDetail: React.FC = () => {
+  const location = useLocation();
 
-const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
-  const { title, url, author, created_at } = story;
+  const story = location.state;
+
+  const {
+    objectID,
+    title,
+    url,
+    author,
+    created_at,
+    _tags,
+    story_text,
+    job_text,
+  } = story;
 
   const getContent = (): string | null => {
-    const category = story._tags[0];
+    const category = _tags[0];
     switch (category) {
       case "story":
-        return story.story_text;
+        return story_text;
       case "job":
-        return story.job_text;
+        return job_text;
       default:
         return null;
     }
@@ -48,6 +58,28 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
       );
     }
   };
+
+  const renderComments = () => {
+    const { data, isLoading, error } = useFetchComments(objectID);
+    if (isLoading) {
+      return <Text>Loading comments...</Text>;
+    }
+
+    if (error) {
+      return <Text>Error fetching comments: {error.message}</Text>;
+    }
+
+
+    return (
+      <ul>
+        {data.map((comment: any) => (
+          <li key={comment.id}>{comment.text}</li>
+        ))}
+      </ul>
+    );
+  };
+
+  renderComments();
 
   return (
     <Flex direction="column" gap={6}>
@@ -106,6 +138,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
         </Flex>
       </div>
       <div>{renderContent()}</div>
+      <div>{renderComments()}</div>
     </Flex>
   );
 };

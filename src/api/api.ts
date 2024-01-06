@@ -27,7 +27,7 @@ const buildApiUrl = (
 };
 
 // Construct a URL for fetching stories based on provided parameters
-const getStoriesUrl = (
+export const getStoriesUrl = (
   selectedSort: string | null,
   query: string,
   selectedContent: string | null,
@@ -73,5 +73,7 @@ const getStoriesUrl = (
   });
 };
 
-// Constructs a URL for fetching relevant stories and popular stories
-export { getStoriesUrl };
+// Construct a URL for fetching a story based on storyId
+export const getStoryUrl = (storyId: string) => {
+  return buildApiUrl(`items/${storyId}`, {});
+};
