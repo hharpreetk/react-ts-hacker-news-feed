@@ -38,7 +38,7 @@ const NoResultsFeedback = () => {
   return (
     <Feedback
       status="info"
-      message={`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent]}' were found matching your search.`}
+      message={`No '${NO_RESULT_CONTENT_FEEDBACK[selectedContent || 'stories']}' were found matching your search.`}
     />
   );
 };
