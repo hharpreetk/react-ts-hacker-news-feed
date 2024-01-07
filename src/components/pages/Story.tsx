@@ -1,11 +1,11 @@
 import AppShell from "../shared/AppShell";
-import StoryDetail from "../story/StoryDetail";
+import StoryView from "../story/StoryView";
 
 const Story: React.FC = () => {
 
   return (
     <AppShell>
-      <StoryDetail />
+      <StoryView />
     </AppShell>
   );
 };

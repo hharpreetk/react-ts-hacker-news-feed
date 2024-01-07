@@ -2,18 +2,17 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { getStoryUrl } from "../api/api";
 
-const useFetchComments = (storyId: string) => {
-  const url = getStoryUrl(storyId);
+const useFetchStory = (storyId: string | undefined) => {
+  const url = getStoryUrl(storyId || "");
 
   const { data, isLoading, error } = useQuery({
     queryKey: [storyId],
     queryFn: async () => {
       const result = await axios.get(url);
-      const { children } = result.data;
-      return children;
+      return result.data;
     },
   });
   return { data, isLoading, error };
 };
 
-export { useFetchComments };
+export { useFetchStory };

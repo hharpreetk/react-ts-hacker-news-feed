@@ -4,7 +4,7 @@ import { TypographyStylesProvider } from "@mantine/core";
 import classes from "../../styles/Story.module.css";
 import { Story, HighlightResult } from "../../types/stories";
 import { CONTENT_OPTIONS } from "../../constants/options";
-import { getFormattedDate, getPointsOrComments } from "../../utils/storyUtils";
+import { getFormattedDate } from "../../utils/storyUtils";
 
 interface StoryItemProps {
   item: Story;
@@ -57,9 +57,22 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
 
   const formattedDate = getFormattedDate(created_at);
 
-  const points = getPointsOrComments(item, "points");
+  const getPointsOrComments = (property: "points" | "num_comments"): string => {
+    const category = _tags[0];
+    const value =
+      category === "story" || category === "poll" ? item[property] : null;
 
-  const num_comments = getPointsOrComments(item, "num_comments");
+    if (value !== null) {
+      const label = property === "points" ? "point" : "comment";
+      return `${value} ${value === 1 ? label : `${label}s`}`;
+    }
+
+    return "";
+  };
+
+  const points = getPointsOrComments("points");
+
+  const num_comments = getPointsOrComments("num_comments");
 
   const typographyStylesProviderProps = {
     p: 0,
@@ -147,7 +160,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const handleCardClick = () => {
     // Check if the content is a "job" before navigating
     if (getCategory() !== "job") {
-      navigate(`story/${objectID}`, { state: item });
+      navigate(`story/${objectID}`);
     }
   };
 

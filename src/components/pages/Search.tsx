@@ -1,12 +1,12 @@
 import AppShell from "../shared/AppShell";
-import StoryView from "../search/StoryView";
+import StoryListView from "../search/StoryListView";
 import StoryFilters from "../search/StoryFilters";
 
 const Search: React.FC = () => {
   return (
     <AppShell>
       <StoryFilters />
-      <StoryView />
+      <StoryListView />
     </AppShell>
   );
 };
