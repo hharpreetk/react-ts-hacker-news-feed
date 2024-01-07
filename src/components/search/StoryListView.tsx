@@ -6,7 +6,7 @@ import { useStories } from "../../contexts/StoriesContext";
 import { useSearch } from "../../contexts/SearchContext";
 import Feedback from "./Feedback";
 
-const StoryView: React.FC = () => {
+const StoryListView: React.FC = () => {
   const { data, isLoading, isError } = useStories();
 
   return (
@@ -31,7 +31,7 @@ const StoryView: React.FC = () => {
   );
 };
 
-export default StoryView;
+export default StoryListView;
 
 const NoResultsFeedback = () => {
   const { selectedContent } = useSearch();
