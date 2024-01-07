@@ -40,13 +40,15 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   };
 
   const renderComments = () => {
-    return (
-      <ul>
-        {children.map((comment: any) => (
-          <li key={comment.id}>{comment.text}</li>
-        ))}
-      </ul>
-    );
+    if (children) {
+      return (
+        <ul>
+          {children.map((comment: any) => (
+            <li key={comment.id}>{comment.text}</li>
+          ))}
+        </ul>
+      );
+    }
   };
 
   return (
