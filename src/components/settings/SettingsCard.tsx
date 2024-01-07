@@ -13,7 +13,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
   children,
 }) => {
   return (
-    <ScrollArea type="auto" offsetScrollbars scrollbars="x">
+    <ScrollArea offsetScrollbars="x">
       <Card withBorder miw={250} pb={0}>
         <Card.Section withBorder inheritPadding py={16}>
           <Group justify="space-between">
