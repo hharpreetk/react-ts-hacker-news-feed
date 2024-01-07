@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import {
   Flex,
   Anchor,
@@ -6,53 +5,34 @@ import {
   TypographyStylesProvider,
   Box,
 } from "@mantine/core";
-import { getFormattedDate, getPointsOrComments } from "../../utils/storyUtils";
-import { useFetchComments } from "../../hooks/useFetchComments";
+import { getFormattedDate } from "../../utils/storyUtils";
 import classes from "../../styles/Story.module.css";
 
-const StoryDetail: React.FC = () => {
-  const location = useLocation();
-
-  const story = location.state;
-
-  const {
-    objectID,
-    title,
-    url,
-    author,
-    created_at,
-    _tags,
-    story_text,
-    job_text,
-  } = story;
-
-  const getContent = (): string | null => {
-    const category = _tags[0];
-    switch (category) {
-      case "story":
-        return story_text;
-      case "job":
-        return job_text;
-      default:
-        return null;
-    }
+interface StoryDetailProps {
+  story: {
+    title: string;
+    url: string;
+    author: string;
+    text: string | null;
+    points: number;
+    created_at: string;
+    children: [];
   };
+}
+
+const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
+  const { title, url, author, created_at, text, points, children } = story;
 
   const formattedDate = getFormattedDate(created_at);
 
-  const points = getPointsOrComments(story, "points");
-
-  const num_comments = getPointsOrComments(story, "num_comments");
-
   const renderContent = () => {
-    const content = getContent();
-    if (content) {
+    if (text) {
       return (
         <TypographyStylesProvider m={0} p={0}>
           <Box
             c="gray"
             style={{ fontSize: 14 }}
-            dangerouslySetInnerHTML={{ __html: `${content}` }}
+            dangerouslySetInnerHTML={{ __html: `${text}` }}
           />
         </TypographyStylesProvider>
       );
@@ -60,26 +40,14 @@ const StoryDetail: React.FC = () => {
   };
 
   const renderComments = () => {
-    const { data, isLoading, error } = useFetchComments(objectID);
-    if (isLoading) {
-      return <Text>Loading comments...</Text>;
-    }
-
-    if (error) {
-      return <Text>Error fetching comments: {error.message}</Text>;
-    }
-
-
     return (
       <ul>
-        {data.map((comment: any) => (
+        {children.map((comment: any) => (
           <li key={comment.id}>{comment.text}</li>
         ))}
       </ul>
     );
   };
-
-  renderComments();
 
   return (
     <Flex direction="column" gap={6}>
@@ -121,17 +89,7 @@ const StoryDetail: React.FC = () => {
                 |
               </Text>
               <Text size="sm" span>
-                {points}
-              </Text>
-            </>
-          ) : null}
-          {num_comments ? (
-            <>
-              <Text size="xs" span>
-                |
-              </Text>
-              <Text size="sm" span>
-                {num_comments}
+                {points} point{points === 1 ? "" : "s"}
               </Text>
             </>
           ) : null}
