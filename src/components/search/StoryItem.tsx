@@ -160,7 +160,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const handleCardClick = () => {
     // Check if the content is a "job" before navigating
     if (getCategory() !== "job") {
-      navigate(`story/${objectID}`, { state: item });
+      navigate(`story/${objectID}`);
     }
   };
 
