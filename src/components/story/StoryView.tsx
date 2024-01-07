@@ -11,7 +11,7 @@ const StoryView: React.FC = () => {
     <Feedback
       status="error"
       message={
-        error ? `Error : ${error?.message}` : "Oops! Something went wrong."
+        error ? `Error: ${error?.message}` : "Oops! Something went wrong."
       }
     />
   ) : isLoading ? (
