@@ -23,6 +23,8 @@ interface StoryDetailProps {
 const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const { title, url, author, created_at, text, points, children } = story;
 
+  const num_comments = children.length;
+
   const formattedDate = getFormattedDate(created_at);
 
   const renderContent = () => {
@@ -41,6 +43,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
 
   const renderComments = () => {
     if (children) {
+      console.log(children);
       return (
         <ul>
           {children.map((comment: any) => (
@@ -85,7 +88,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           <Text size="sm" span>
             {formattedDate}
           </Text>
-          {points ? (
+          {points && (
             <>
               <Text size="xs" span>
                 |
@@ -94,7 +97,17 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
                 {points} point{points === 1 ? "" : "s"}
               </Text>
             </>
-          ) : null}
+          )}
+          {children && (
+            <>
+              <Text size="xs" span>
+                |
+              </Text>
+              <Text size="sm" span>
+                {num_comments} comment{num_comments > 1 || num_comments === 0 ? "s" : ""}
+              </Text>
+            </>
+          )}
         </Flex>
       </div>
       <div>{renderContent()}</div>
