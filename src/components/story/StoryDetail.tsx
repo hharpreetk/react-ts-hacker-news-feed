@@ -4,22 +4,14 @@ import {
   Text,
   TypographyStylesProvider,
   Box,
-  Paper,
-  Space,
 } from "@mantine/core";
+import StoryComment from "./StoryComment";
 import { getFormattedDate } from "../../utils/storyUtils";
+import { Comment, Story } from "../../types/story";
 import classes from "../../styles/Story.module.css";
 
 interface StoryDetailProps {
-  story: {
-    title: string;
-    url: string;
-    author: string;
-    text: string | null;
-    points: number;
-    created_at: string;
-    children: [];
-  };
+  story: Story;
 }
 
 const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
@@ -32,12 +24,11 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const renderContent = () => {
     if (text) {
       return (
-        <TypographyStylesProvider m={0} p={0}>
-          <Box
-            c="gray"
-            style={{ fontSize: 14 }}
-            dangerouslySetInnerHTML={{ __html: `${text}` }}
-          />
+        <TypographyStylesProvider
+          m={0}
+          p={0}
+        >
+          <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
       );
     }
@@ -45,30 +36,9 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
 
   const renderComments = () => {
     if (children) {
-      return children.map((comment: any) => (
-        <Flex direction="column" key={comment.id} mb="md">
-          {/* <Paper p="xs" my={6} withBorder> */}
-            <Flex direction="column" gap={4}>
-              <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
-                <Text fz="sm" span>
-                  {comment.author}
-                </Text>
-                <Text fz="xs" span>
-                  |
-                </Text>
-                <Text fz="sm" span>
-                  {getFormattedDate(comment.created_at)}
-                </Text>
-              </Flex>
-              <TypographyStylesProvider m={0} p={0}>
-                <Box
-                  c="gray"
-                  style={{ fontSize: 14 }}
-                  dangerouslySetInnerHTML={{ __html: `${comment.text}` }}
-                />
-              </TypographyStylesProvider>
-            </Flex>
-          {/* </Paper> */}
+      return children.map((comment: Comment) => (
+        <Flex direction="column" mb="md">
+          <StoryComment key={comment.id} comment={comment} />
         </Flex>
       ));
     } else {
@@ -136,9 +106,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
       {renderContent() && <div>{renderContent()}</div>}
       {num_comments ? (
         <Flex direction="column">
-          <Text fz="sm">
-            Comments ({num_comments})
-          </Text>
+          <Text fz="sm">Comments ({num_comments})</Text>
           {renderComments()}
         </Flex>
       ) : null}
