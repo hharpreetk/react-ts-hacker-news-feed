@@ -1,4 +1,4 @@
-import { Box, Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
+import { Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
 import { IconHelpCircle } from "@tabler/icons-react";
 
 interface SettingsCardProps {
