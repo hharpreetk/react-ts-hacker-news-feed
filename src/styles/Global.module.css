@@ -2,3 +2,7 @@ p {
   margin-top: calc(0.525rem * var(--mantine-scale)) !important;
   margin-bottom: calc(0.525rem * var(--mantine-scale)) !important;
 }
+
+a {
+  word-break: break-all;
+}
