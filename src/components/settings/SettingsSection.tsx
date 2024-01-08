@@ -1,5 +1,5 @@
 import { CardSection, Grid, Text } from "@mantine/core";
-
+import classes from "../../styles/Setting.module.css";
 interface SettingsSectionProps {
   withBorder?: boolean;
   label: string;
@@ -12,7 +12,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
 }) => {
   return (
     <CardSection withBorder={withBorder} inheritPadding py="sm">
-      <Grid align="center">
+      <Grid align="center" classNames={{ root: classes.settingContent }}>
         <Grid.Col span={4}>
           <Text size="sm">{label}</Text>
         </Grid.Col>
