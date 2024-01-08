@@ -4,6 +4,8 @@ import {
   Text,
   TypographyStylesProvider,
   Box,
+  Paper,
+  Space,
 } from "@mantine/core";
 import { getFormattedDate } from "../../utils/storyUtils";
 import classes from "../../styles/Story.module.css";
@@ -43,14 +45,34 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
 
   const renderComments = () => {
     if (children) {
-      console.log(children);
-      return (
-        <ul>
-          {children.map((comment: any) => (
-            <li key={comment.id}>{comment.text}</li>
-          ))}
-        </ul>
-      );
+      return children.map((comment: any) => (
+        <Flex direction="column" key={comment.id} mb="md">
+          {/* <Paper p="xs" my={6} withBorder> */}
+            <Flex direction="column" gap={4}>
+              <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
+                <Text fz="sm" span>
+                  {comment.author}
+                </Text>
+                <Text fz="xs" span>
+                  |
+                </Text>
+                <Text fz="sm" span>
+                  {getFormattedDate(comment.created_at)}
+                </Text>
+              </Flex>
+              <TypographyStylesProvider m={0} p={0}>
+                <Box
+                  c="gray"
+                  style={{ fontSize: 14 }}
+                  dangerouslySetInnerHTML={{ __html: `${comment.text}` }}
+                />
+              </TypographyStylesProvider>
+            </Flex>
+          {/* </Paper> */}
+        </Flex>
+      ));
+    } else {
+      return null;
     }
   };
 
@@ -104,14 +126,22 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
                 |
               </Text>
               <Text size="sm" span>
-                {num_comments} comment{num_comments > 1 || num_comments === 0 ? "s" : ""}
+                {num_comments} comment
+                {num_comments > 1 || num_comments === 0 ? "s" : ""}
               </Text>
             </>
           )}
         </Flex>
       </div>
-      <div>{renderContent()}</div>
-      <div>{renderComments()}</div>
+      {renderContent() && <div>{renderContent()}</div>}
+      {num_comments ? (
+        <Flex direction="column">
+          <Text fz="sm">
+            Comments ({num_comments})
+          </Text>
+          {renderComments()}
+        </Flex>
+      ) : null}
     </Flex>
   );
 };
