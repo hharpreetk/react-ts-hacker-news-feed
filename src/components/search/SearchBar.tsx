@@ -13,6 +13,7 @@ const SearchBar = () => {
         href="/settings"
         variant="default"
         size="lg"
+        title="Edit App Settings"
         aria-label="Edit App Settings"
       >
         <IconAdjustmentsCog size={18} stroke={1.5} />

@@ -12,7 +12,8 @@ const ExitButton = () => {
     <ActionIcon
       variant="default"
       size="lg"
-      aria-label="Exit Page"
+      aria-label="Go Back"
+      title="Go Back"
       onClick={handlePageExit}
     >
       <IconX size={18} />

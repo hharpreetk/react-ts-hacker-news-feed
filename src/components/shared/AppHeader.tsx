@@ -11,7 +11,7 @@ const AppHeader: React.FC = () => {
 
   return (
     <Grid px="lg" py={22} align="center" justify="space-between">
-      <ActionIcon component="a" href="/" variant="transparent" size={37}>
+      <ActionIcon component="a" href="/" variant="transparent" size={37} aria-label="Go to Home" title="Go to Home">
         <IconSquareLetterH size={37} />
       </ActionIcon>
       {showSearchBar && <SearchBar />}
