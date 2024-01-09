@@ -19,18 +19,18 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
 
   const calculateTotalComments = (comments: Comment[] | undefined): number => {
     let total = comments ? comments.length : 0;
-  
+
     if (comments && comments.length > 0) {
       comments.forEach((comment: Comment) => {
         total += calculateTotalComments(comment.children);
       });
     }
-  
+
     return total;
   };
-  
+
   const num_comments = calculateTotalComments(children);
-  
+
   const formattedDate = getFormattedDate(created_at);
 
   const renderContent = () => {
@@ -67,7 +67,6 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           fz="lg"
           lh="xs"
           classNames={{ root: classes.storyTitle }}
-          span
         >
           {title}
         </Text>
@@ -84,31 +83,21 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           </Anchor>
         )}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={4}>
-          <Text fz="sm" span>
-            {author}
-          </Text>
-          <Text fz="xs" span>
-            |
-          </Text>
-          <Text fz="sm" span>
-            {formattedDate}
-          </Text>
+          <Text fz="sm">{author}</Text>
+          <Text fz="xs">|</Text>
+          <Text fz="sm">{formattedDate}</Text>
           {points && (
             <>
-              <Text fz="xs" span>
-                |
-              </Text>
-              <Text fz="sm" span>
+              <Text fz="xs">|</Text>
+              <Text fz="sm">
                 {points} point{points === 1 ? "" : "s"}
               </Text>
             </>
           )}
           {children && (
             <>
-              <Text fz="xs" span>
-                |
-              </Text>
-              <Text fz="sm" span>
+              <Text fz="xs">|</Text>
+              <Text fz="sm">
                 {num_comments} comment
                 {num_comments > 1 || num_comments === 0 ? "s" : ""}
               </Text>
