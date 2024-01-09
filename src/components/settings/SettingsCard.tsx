@@ -17,7 +17,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
       <Card withBorder miw={250}>
         <Card.Section withBorder inheritPadding py={16}>
           <Group justify="space-between" my={3}>
-            <Text size="sm">{title}</Text>
+            <Text fz="sm">{title}</Text>
             <HoverCard width={220}>
               <HoverCard.Target>
                 <IconHelpCircle
@@ -28,7 +28,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
                 />
               </HoverCard.Target>
               <HoverCard.Dropdown>
-                <Text size="sm">{hoverText}</Text>
+                <Text fz="sm">{hoverText}</Text>
               </HoverCard.Dropdown>
             </HoverCard>
           </Group>

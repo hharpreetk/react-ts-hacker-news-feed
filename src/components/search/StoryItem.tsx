@@ -129,7 +129,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           dangerouslySetInnerHTML={{
             __html: `${getHighlightedValue("author") || author}`,
           }}
-          size="sm"
+          fz="sm"
         />
       </TypographyStylesProvider>
     );
@@ -195,23 +195,23 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         {renderContent()}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
           {renderAuthor()}
-          <Text size="xs">|</Text>
-          <Text size="sm">{formattedDate}</Text>
+          <Text fz="xs">|</Text>
+          <Text fz="sm">{formattedDate}</Text>
           {points && (
             <>
-              <Text size="xs">|</Text>
-              <Text size="sm">{points}</Text>
+              <Text fz="xs">|</Text>
+              <Text fz="sm">{points}</Text>
             </>
           )}
           {num_comments && (
             <>
-              <Text size="xs">|</Text>
-              <Text size="sm">{num_comments}</Text>
+              <Text fz="xs">|</Text>
+              <Text fz="sm">{num_comments}</Text>
             </>
           )}
-          <Text size="xs">|</Text>
+          <Text fz="xs">|</Text>
           <Anchor
-            size="sm"
+            fz="sm"
             classNames={{ root: classes.storyHide }}
             onClick={handleRemoveItem}
           >

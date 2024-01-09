@@ -14,7 +14,7 @@ const SettingsSection: React.FC<SettingsSectionProps> = ({
     <CardSection withBorder={withBorder} inheritPadding py="sm">
       <Grid align="center">
         <Grid.Col span={4}>
-          <Text size="sm">{label}</Text>
+          <Text fz="sm">{label}</Text>
         </Grid.Col>
         <Grid.Col span="auto">{children}</Grid.Col>
       </Grid>
