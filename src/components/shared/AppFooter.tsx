@@ -10,13 +10,14 @@ const AppFooter = () => {
       gap="xs"
       align="center"
       wrap="wrap"
+      w="100%"
     >
       <Text fz="xs" classNames={{ root: classes.footerText }}>
         © Search Hacker News, 2023.
       </Text>
       <Text fz="xs" classNames={{ root: classes.footerText }}>
         Powered by{" "}
-        <Anchor href="https://hn.algolia.com/api" target="_blank">
+        <Anchor fz="xs" href="https://hn.algolia.com/api" target="_blank">
           HN Search API
         </Anchor>
       </Text>

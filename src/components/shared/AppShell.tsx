@@ -16,7 +16,7 @@ const AppShell: React.FC<AppShellProps> = ({ children, isDisplayCenter }) => {
     <App
       padding="md"
       header={{ height: 65, collapsed: !pinned, offset: false }}
-      footer={{ height: { base: 86, xs: 60 } }}
+      footer={{ height: { base: 80, xs: 65 } }}
       pos="relative"
     >
       <App.Header>
@@ -30,7 +30,7 @@ const AppShell: React.FC<AppShellProps> = ({ children, isDisplayCenter }) => {
       >
         {children}
       </App.Main>
-      <App.Footer pos="absolute" bottom={0} p={22}>
+      <App.Footer pos="absolute" display="flex" px="sm">
         <AppFooter />
       </App.Footer>
     </App>
