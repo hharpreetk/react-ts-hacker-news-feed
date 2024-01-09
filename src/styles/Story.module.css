@@ -38,3 +38,8 @@
 [data-mantine-color-scheme="light"] .storyText a {
   color: var(--mantine-color-gray-7) !important;
 }
+
+.storyDetail p {
+  margin-top: calc(0.525rem * var(--mantine-scale)) !important;
+  margin-bottom: 0 !important;
+}

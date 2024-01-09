@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 import { getFormattedDate } from "../../utils/storyUtils";
 import { Comment } from "../../types/story";
-import classes from "../../styles/Story.module.css";
+import classes from "../../styles/Comment.module.css";
 
 const StoryComment = ({ comment }: { comment: Comment }) => {
   const { author, created_at, children, text } = comment;
@@ -27,13 +27,17 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
       <TypographyStylesProvider
         m={0}
         p={0}
+        classNames={{ root: classes.storyComment }}
       >
         <Box c="gray" fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
       </TypographyStylesProvider>
       {children && children.length > 0 && (
         <div>
           {children.map((child: Comment) => (
-            <Paper pl="md" style={{ borderLeft: "1px solid lightgray", borderRadius: 0 }}>
+            <Paper
+              pl="md"
+              style={{ borderLeft: "1px solid lightgray", borderRadius: 0 }}
+            >
               <StoryComment key={child.id} comment={child} />
             </Paper>
           ))}

@@ -1,0 +1,4 @@
+.storyComment p {
+  margin-top: calc(0.325rem * var(--mantine-scale)) !important;
+  margin-bottom: 0 !important;
+}

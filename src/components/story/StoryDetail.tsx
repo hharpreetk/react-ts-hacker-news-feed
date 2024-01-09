@@ -27,6 +27,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
         <TypographyStylesProvider
           m={0}
           p={0}
+          classNames={{root: classes.storyDetail}}
         >
           <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
@@ -37,7 +38,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const renderComments = () => {
     if (children) {
       return children.map((comment: Comment) => (
-        <Flex direction="column" mb="md">
+        <Flex direction="column" mb="sm">
           <StoryComment key={comment.id} comment={comment} />
         </Flex>
       ));
