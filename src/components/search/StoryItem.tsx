@@ -90,6 +90,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     return (
       <TypographyStylesProvider {...typographyStylesProviderProps}>
         <Text
+          span
           {...titleProps}
           dangerouslySetInnerHTML={{
             __html: `${getHighlightedValue("title") || title}`,
@@ -168,7 +169,6 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
     <Card
       withBorder
       radius="md"
-      component="a"
       onClick={handleCardClick}
       style={{
         cursor: getCategory() === "job" ? "auto" : "pointer",
@@ -195,21 +195,35 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         {renderContent()}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
           {renderAuthor()}
-          <Text fz="xs">|</Text>
-          <Text fz="sm">{formattedDate}</Text>
+          <Text fz="xs" span>
+            |
+          </Text>
+          <Text fz="sm" span>
+            {formattedDate}
+          </Text>
           {points && (
             <>
-              <Text fz="xs">|</Text>
-              <Text fz="sm">{points}</Text>
+              <Text fz="xs" span>
+                |
+              </Text>
+              <Text fz="sm" span>
+                {points}
+              </Text>
             </>
           )}
           {num_comments && (
             <>
-              <Text fz="xs">|</Text>
-              <Text fz="sm">{num_comments}</Text>
+              <Text fz="xs" span>
+                |
+              </Text>
+              <Text fz="sm" span>
+                {num_comments}
+              </Text>
             </>
           )}
-          <Text fz="xs">|</Text>
+          <Text fz="xs" span>
+            |
+          </Text>
           <Anchor
             fz="sm"
             classNames={{ root: classes.storyHide }}

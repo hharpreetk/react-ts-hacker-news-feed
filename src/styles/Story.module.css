@@ -7,11 +7,11 @@
 }
 
 [data-mantine-color-scheme="light"] .storyUrl {
-  color: var(--mantine-color-gray-7);
+  color: var(--mantine-color-gray-7) !important;
 }
 
 [data-mantine-color-scheme="dark"] .storyUrl {
-  color: var(--mantine-color-dark-1);
+  color: var(--mantine-color-gray-4) !important;
 }
 
 .storyHide {
@@ -42,4 +42,12 @@
 .storyDetail p {
   margin-top: calc(0.525rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .storyDetail {
+  color: var(--mantine-color-gray-4);
+}
+
+[data-mantine-color-scheme="dark"] .storyDetail a {
+  color: var(--mantine-primary-color-filled) !important;
 }

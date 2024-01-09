@@ -67,6 +67,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           fz="lg"
           lh="xs"
           classNames={{ root: classes.storyTitle }}
+          span
         >
           {title}
         </Text>
@@ -83,21 +84,31 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           </Anchor>
         )}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={4}>
-          <Text fz="sm">{author}</Text>
-          <Text fz="xs">|</Text>
-          <Text fz="sm">{formattedDate}</Text>
+          <Text fz="sm" span>
+            {author}
+          </Text>
+          <Text fz="xs" span>
+            |
+          </Text>
+          <Text fz="sm" span>
+            {formattedDate}
+          </Text>
           {points && (
             <>
-              <Text fz="xs">|</Text>
-              <Text fz="sm">
+              <Text fz="xs" span>
+                |
+              </Text>
+              <Text fz="sm" span>
                 {points} point{points === 1 ? "" : "s"}
               </Text>
             </>
           )}
           {children && (
             <>
-              <Text fz="xs">|</Text>
-              <Text fz="sm">
+              <Text fz="xs" span>
+                |
+              </Text>
+              <Text fz="sm" span>
                 {num_comments} comment
                 {num_comments > 1 || num_comments === 0 ? "s" : ""}
               </Text>

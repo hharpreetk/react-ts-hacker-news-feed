@@ -1,13 +1,32 @@
+.commentText * {
+  overflow-x: hidden;
+}
+
 .commentText p {
   margin-top: calc(0.325rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
 }
 
-.commentText * {
-  overflow-x: hidden;
+[data-mantine-color-scheme="dark"] .commentText {
+  color: var(--mantine-color-gray-4);
+}
+
+[data-mantine-color-scheme="dark"] .commentText a {
+  color: var(--mantine-primary-color-filled) !important;
+}
+
+[data-mantine-color-scheme="light"] .commentInfo {
+  color: var(--mantine-color-dark-4);
 }
 
 .commentReply {
+  border-radius: 0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .commentReply {
+  border-left: 1px solid var(--mantine-color-dark-4);
+}
+
+[data-mantine-color-scheme="light"] .commentReply {
   border-left: 1px solid var(--mantine-color-gray-4);
-  border-radius: 0;
 }

@@ -12,14 +12,20 @@ import classes from "../../styles/Comment.module.css";
 const StoryComment = ({ comment }: { comment: Comment }) => {
   const { author, created_at, children, text } = comment;
   return (
-    <Flex direction="column" mt={8}>
+    <Flex direction="column" mt={10}>
       <Flex direction="column" gap={3}>
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
+        <Flex
+          wrap="wrap"
+          align="center"
+          rowGap={2}
+          columnGap="xs"
+          classNames={{ root: classes.commentInfo }}
+        >
           <Text fz="sm" span>
             {author}
           </Text>
           <Text fz="xs" span>
-            |
+            ·
           </Text>
           <Text fz="sm" span>
             {getFormattedDate(created_at)}
@@ -30,11 +36,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           p={0}
           classNames={{ root: classes.commentText }}
         >
-          <Box
-            c="gray"
-            fz="sm"
-            dangerouslySetInnerHTML={{ __html: `${text}` }}
-          />
+          <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
       </Flex>
       {children && children.length > 0 && (
