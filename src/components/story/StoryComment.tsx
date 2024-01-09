@@ -18,7 +18,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           wrap="wrap"
           align="center"
           rowGap={2}
-          columnGap="xs"
+          columnGap={8}
           classNames={{ root: classes.commentInfo }}
         >
           <Text fz="sm" span>
