@@ -30,7 +30,7 @@ const AppShell: React.FC<AppShellProps> = ({ children, isDisplayCenter }) => {
       >
         {children}
       </App.Main>
-      <App.Footer pos="absolute" display="flex" px="sm">
+      <App.Footer pos="absolute" display="flex" px="md">
         <AppFooter />
       </App.Footer>
     </App>
