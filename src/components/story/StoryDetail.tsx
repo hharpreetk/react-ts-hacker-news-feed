@@ -19,18 +19,18 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
 
   const calculateTotalComments = (comments: Comment[] | undefined): number => {
     let total = comments ? comments.length : 0;
-
+  
     if (comments && comments.length > 0) {
       comments.forEach((comment: Comment) => {
         total += calculateTotalComments(comment.children);
       });
     }
-
+  
     return total;
   };
-
+  
   const num_comments = calculateTotalComments(children);
-
+  
   const formattedDate = getFormattedDate(created_at);
 
   const renderContent = () => {
@@ -116,9 +116,9 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           )}
         </Flex>
       </div>
-      <div>{renderContent()}</div>
+      {renderContent() && <div>{renderContent()}</div>}
       {num_comments ? (
-        <Flex direction="column">
+        <Flex direction="column" mt={6}>
           <Text fz="sm">Comments ({num_comments})</Text>
           {renderComments()}
         </Flex>
