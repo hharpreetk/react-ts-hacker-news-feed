@@ -174,7 +174,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         cursor: getCategory() === "job" ? "auto" : "pointer",
       }}
     >
-      <Flex direction="column" gap={2} classNames={{ root: classes.storyItem }}>
+      <Flex direction="column" gap={2}>
         <Flex justify="space-between" wrap="nowrap" align="start" gap="xs">
           {renderTitle()}
           <Box visibleFrom="xs">
@@ -193,7 +193,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
         </Flex>
         {renderUrl()}
         {renderContent()}
-        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={1}>
+        <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center">
           {renderAuthor()}
           <Text size="xs">|</Text>
           <Text size="sm">{formattedDate}</Text>

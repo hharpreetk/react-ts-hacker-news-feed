@@ -1,6 +1,5 @@
 import { Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
 import { IconHelpCircle } from "@tabler/icons-react";
-import classes from "../../styles/Setting.module.css";
 
 interface SettingsCardProps {
   title: string;
@@ -15,7 +14,7 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
 }) => {
   return (
     <ScrollArea offsetScrollbars="x">
-      <Card withBorder miw={250} pb={0} classNames={{root: classes.settingContent}}>
+      <Card withBorder miw={250}>
         <Card.Section withBorder inheritPadding py={16}>
           <Group justify="space-between" my={3}>
             <Text size="sm">{title}</Text>

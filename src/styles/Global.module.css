@@ -1,5 +1,5 @@
 p {
-  margin-top: calc(0.525rem * var(--mantine-scale)) !important;
+  margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
 
