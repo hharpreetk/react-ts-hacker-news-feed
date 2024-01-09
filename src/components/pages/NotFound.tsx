@@ -19,16 +19,17 @@ const NotFound = () => {
         m="auto"
         p="md"
         maw={800}
+        gap="xs"
       >
         <Title c={theme.primaryColor} order={2} ta="center">
-          Sorry, that page can't be found.
+          Sorry, this page cannot be found.
         </Title>
         <Text c="dimmed" ta="center">
           Page you are trying to open does not exist. You may have mistyped the
           address, or the page has been moved to another URL. If you think this
           is an error contact support.
         </Text>
-        <Group justify="center" mt={5.5} mb="md">
+        <Group justify="center" mb="md">
           <Anchor href="/" underline="always" c={theme.primaryColor}>
             Go Back To Home Page
           </Anchor>
