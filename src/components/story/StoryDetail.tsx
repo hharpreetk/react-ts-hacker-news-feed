@@ -50,7 +50,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const renderComments = () => {
     if (children) {
       return children.map((comment: Comment) => (
-        <Flex direction="column" mb="sm">
+        <Flex direction="column" mb={8}>
           <StoryComment key={comment.id} comment={comment} />
         </Flex>
       ));

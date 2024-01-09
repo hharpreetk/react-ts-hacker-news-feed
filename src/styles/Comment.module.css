@@ -1,8 +1,13 @@
-.storyText p {
+.commentText p {
   margin-top: calc(0.325rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
 }
 
-.storyText * {
+.commentText * {
   overflow-x: hidden;
+}
+
+.commentReply {
+  border-left: 1px solid var(--mantine-color-gray-4);
+  border-radius: 0;
 }
