@@ -10,7 +10,7 @@ import { Comment } from "../../types/story";
 import classes from "../../styles/Comment.module.css";
 
 const StoryComment = ({ comment }: { comment: Comment }) => {
-  const { author, created_at, children, text } = comment;
+  const { author, created_at, children, text, points } = comment;
   return (
     <Flex direction="column" mt={10}>
       <Flex direction="column" gap={3}>
@@ -30,6 +30,16 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           <Text fz="sm" span>
             {getFormattedDate(created_at)}
           </Text>
+          {points && (
+            <>
+              <Text fz="xs" span>
+                ·
+              </Text>
+              <Text fz="sm" span>
+                {points}
+              </Text>
+            </>
+          )}
         </Flex>
         <TypographyStylesProvider
           m={0}

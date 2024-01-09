@@ -14,6 +14,7 @@ type Comment = {
   created_at: string;
   children: Array<Comment>;
   text: string;
+  points: number;
 };
 
 export { Story, Comment };
