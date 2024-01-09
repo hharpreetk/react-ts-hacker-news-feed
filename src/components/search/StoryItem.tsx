@@ -159,10 +159,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    // Check if the content is a "job" before navigating
-    if (getCategory() !== "job") {
-      navigate(`story/${objectID}`);
-    }
+    navigate(`story/${objectID}`);
   };
 
   return (
@@ -171,7 +168,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
       radius="md"
       onClick={handleCardClick}
       style={{
-        cursor: getCategory() === "job" ? "auto" : "pointer",
+        cursor: "pointer",
       }}
     >
       <Flex direction="column" gap={2}>
