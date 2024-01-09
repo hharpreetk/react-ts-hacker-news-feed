@@ -53,10 +53,11 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
         <div>
           {children.map((child: Comment) => (
             <Paper
+              key={child.id}
               pl={{ base: "sm", xs: "md" }}
               classNames={{ root: classes.commentReply }}
             >
-              <StoryComment key={child.id} comment={child} />
+              <StoryComment comment={child} />
             </Paper>
           ))}
         </div>
