@@ -1,8 +1,8 @@
-import { Center, Loader, Text } from "@mantine/core";
 import { useFetchStory } from "../../hooks/useFetchStory";
 import StoryDetail from "./StoryDetail";
 import { useParams } from "react-router-dom";
 import Feedback from "../search/Feedback";
+import StorySkeleton from "./StorySkeleton";
 
 const StoryView: React.FC = () => {
   const { id } = useParams();
@@ -15,9 +15,7 @@ const StoryView: React.FC = () => {
       }
     />
   ) : isLoading ? (
-    <Center py="sm" my="lg">
-      <Loader type="oval" mx="auto" />
-    </Center>
+    <StorySkeleton />
   ) : (
     <StoryDetail story={data} />
   );
