@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   Group,
-  Slider,
   Stack,
   useMantineColorScheme,
 } from "@mantine/core";
@@ -22,6 +21,7 @@ import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
 import { useEffect } from "react";
+import ScaleSlider from "./ScaleSlider";
 
 const SettingsView = () => {
   // Persist settings
@@ -117,14 +117,7 @@ const SettingsView = () => {
               />
             </SettingsSection>
             <SettingsSection label="Scale">
-              <Slider
-                defaultValue={100}
-                min={70}
-                max={130}
-                onChange={(value) => {
-                  document.documentElement.style.fontSize = `${value}%`;
-                }}
-              />
+              <ScaleSlider />
             </SettingsSection>
             <SettingsSection label="Hits Per Page" withBorder={false}>
               <SettingsSelect
