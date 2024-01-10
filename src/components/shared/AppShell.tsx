@@ -17,6 +17,7 @@ const AppShell: React.FC<AppShellProps> = ({ children, isDisplayCenter }) => {
       padding="md"
       header={{ height: 65, collapsed: !pinned, offset: false }}
       footer={{ height: { base: 80, xs: 65 } }}
+      transitionDuration={0}
       pos="relative"
     >
       <App.Header>
