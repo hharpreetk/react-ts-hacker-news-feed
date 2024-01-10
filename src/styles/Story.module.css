@@ -44,10 +44,6 @@
   margin-bottom: 0 !important;
 }
 
-[data-mantine-color-scheme="dark"] .storyDetail {
-  color: var(--mantine-color-gray-4);
-}
-
 [data-mantine-color-scheme="dark"] .storyDetail a {
   color: var(--mantine-primary-color-filled) !important;
 }
