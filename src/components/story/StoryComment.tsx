@@ -13,7 +13,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
   const { author, created_at, children, text, points } = comment;
   return (
     <Flex direction="column" mt={10}>
-      <Flex direction="column" gap={3}>
+      <Flex direction="column" gap={1}>
         <Flex
           wrap="wrap"
           align="center"
