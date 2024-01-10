@@ -7,5 +7,5 @@
           (3 * calc(0.9375rem * var(--mantine-scale))) +
           (2 * calc(0.5rem * var(--mantine-scale))) + var(--mantine-spacing-sm)
       )
-  );
+  ) !important;
 }
