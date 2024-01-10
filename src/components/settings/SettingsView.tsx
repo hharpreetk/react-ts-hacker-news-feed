@@ -2,6 +2,7 @@ import {
   Button,
   Flex,
   Group,
+  Slider,
   Stack,
   useMantineColorScheme,
 } from "@mantine/core";
@@ -34,6 +35,7 @@ const SettingsView = () => {
     const newTheme = event.currentTarget.checked
       ? ThemeOption.Dark
       : ThemeOption.Light;
+
     form.setValues({
       ...form.values,
       theme: newTheme,
@@ -112,6 +114,16 @@ const SettingsView = () => {
               <ThemeToggle
                 theme={form.values.theme}
                 handleToggle={handleThemeToggle}
+              />
+            </SettingsSection>
+            <SettingsSection label="Scale">
+              <Slider
+                defaultValue={100}
+                min={70}
+                max={130}
+                onChange={(value) => {
+                  document.documentElement.style.fontSize = `${value}%`;
+                }}
               />
             </SettingsSection>
             <SettingsSection label="Hits Per Page" withBorder={false}>
