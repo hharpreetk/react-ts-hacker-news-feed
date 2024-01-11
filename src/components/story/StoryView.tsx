@@ -17,7 +17,7 @@ const StoryView: React.FC = () => {
   ) : isLoading ? (
     <StorySkeleton />
   ) : (
-    <StoryDetail story={data} />
+    data && <StoryDetail story={data} />
   );
 };
 
