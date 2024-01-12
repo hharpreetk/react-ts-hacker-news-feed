@@ -2,12 +2,13 @@ import { ActionIcon } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { IconX } from "@tabler/icons-react";
 
-const ExitButton = () => {
+const BackButton = () => {
   const navigate = useNavigate();
   const handlePageExit = () => {
     // Go back to the previous route
     navigate(-1);
   };
+
   return (
     <ActionIcon
       variant="default"
@@ -21,4 +22,4 @@ const ExitButton = () => {
   );
 };
 
-export default ExitButton;
+export default BackButton;

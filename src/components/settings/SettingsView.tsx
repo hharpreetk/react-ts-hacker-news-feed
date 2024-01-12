@@ -27,6 +27,13 @@ const SettingsView = () => {
   // Persist settings
   const [settings, setSettings] = useSettings();
 
+  const { setColorScheme } = useMantineColorScheme();
+
+  // Function to update colorscheme based on the theme setting
+  useEffect(() => {
+    setColorScheme(settings.theme);
+  }, [settings.theme]);
+
   const form = useForm({
     initialValues: settings,
   });
@@ -86,19 +93,13 @@ const SettingsView = () => {
     });
   };
 
-  const { setColorScheme } = useMantineColorScheme();
-
-  // Function to update colorscheme based on the theme setting
-  useEffect(() => {
-    setColorScheme(settings.theme);
-  }, [settings.theme]);
-
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
         // When the form is submitted and it's dirty, the settings are saved, and the dirty state is reset
         if (form.isDirty()) {
+          setColorScheme(settings.theme);
           setSettings(form.values); // Save form values to local storage
         }
         form.resetDirty();
