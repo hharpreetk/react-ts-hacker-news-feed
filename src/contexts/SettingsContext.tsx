@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode, createContext, useContext, useEffect } from "react";
+import { useMantineColorScheme } from "@mantine/core";
 import { SettingsState } from "../types/settings";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import {
@@ -32,6 +33,14 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
     authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
     storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
   });
+
+  
+  const { setColorScheme } = useMantineColorScheme();
+
+  // Function to update colorscheme based on the theme setting
+  useEffect(() => {
+    setColorScheme(settings.theme);
+  }, [settings.theme]);
 
   return (
     <SettingsContext.Provider value={[settings, setSettings]}>

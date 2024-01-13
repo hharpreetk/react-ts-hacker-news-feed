@@ -29,11 +29,6 @@ const SettingsView = () => {
 
   const { setColorScheme } = useMantineColorScheme();
 
-  // Function to update colorscheme based on the theme setting
-  useEffect(() => {
-    setColorScheme(settings.theme);
-  }, [settings.theme]);
-
   const form = useForm({
     initialValues: settings,
   });
@@ -47,6 +42,8 @@ const SettingsView = () => {
       ...form.values,
       theme: newTheme,
     });
+
+    setColorScheme(newTheme);
   };
 
   const handleStoryTextChecked = (
