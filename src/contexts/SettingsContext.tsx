@@ -26,6 +26,7 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
   const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
     // Initial settings
     theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
+    scale: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Scale],
     hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
     defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
     defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
@@ -34,10 +35,8 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
     storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
   });
 
-  
   const { setColorScheme } = useMantineColorScheme();
 
-  // Function to update colorscheme based on the theme setting
   useEffect(() => {
     setColorScheme(settings.theme);
   }, [settings.theme]);
