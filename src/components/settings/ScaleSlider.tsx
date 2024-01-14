@@ -1,15 +1,20 @@
 import { Slider } from "@mantine/core";
 
-const ScaleSlider = () => {
+interface ScaleSliderProps {
+  scale: number;
+  handleChange: (value: number) => void;
+}
+
+const ScaleSlider: React.FC<ScaleSliderProps> = ({ scale, handleChange }) => {
   return (
     <Slider
-      defaultValue={100}
+      value={scale}
       min={70}
       max={130}
       my={8}
-      onChange={(value) => {
-        document.documentElement.style.fontSize = `${value}%`;
-      }}
+      maw={300}
+      onChange={handleChange}
+      label = {`${scale}%`}
     />
   );
 };

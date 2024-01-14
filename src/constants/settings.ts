@@ -8,11 +8,13 @@ import {
 
 export enum DisplaySettings {
   Theme = "theme",
+  Scale = "scale",
   HitsPerPage = "hitsPerPage",
 }
 
 export const DEFAULT_DISPLAY_SETTINGS = {
   [DisplaySettings.Theme]: ThemeOption.Light,
+  [DisplaySettings.Scale]: 100,
   [DisplaySettings.HitsPerPage]: HitsPerPageOption.PerPage20,
 };
 

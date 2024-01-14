@@ -20,13 +20,12 @@ import SettingsSection from "./SettingsSection";
 import SettingsSelect from "./SettingsSelect";
 import SettingsCheckbox from "./SettingsCheckbox";
 import classes from "../../styles/Button.module.css";
-import { useEffect } from "react";
 import ScaleSlider from "./ScaleSlider";
 
 const SettingsView = () => {
   // Persist settings
   const [settings, setSettings] = useSettings();
-
+  
   const { setColorScheme } = useMantineColorScheme();
 
   const form = useForm({
@@ -90,6 +89,15 @@ const SettingsView = () => {
     });
   };
 
+  const handleScaleChange = (value: number) => {
+    document.documentElement.style.fontSize = `${value}%`;
+
+    form.setValues({
+      ...form.values,
+      scale: value,
+    });
+  };
+
   return (
     <form
       onSubmit={(event) => {
@@ -115,7 +123,10 @@ const SettingsView = () => {
               />
             </SettingsSection>
             <SettingsSection label="Scale">
-              <ScaleSlider />
+              <ScaleSlider
+                scale={form.values.scale}
+                handleChange={handleScaleChange}
+              />
             </SettingsSection>
             <SettingsSection label="Hits Per Page" withBorder={false}>
               <SettingsSelect
