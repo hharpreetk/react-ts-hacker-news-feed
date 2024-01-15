@@ -8,8 +8,8 @@ import {
   COMMON_SORT_OPTIONS,
   DATE_RANGE_OPTIONS,
 } from "../../constants/options";
-import { ThemeOption } from "../../constants/options";
-import ThemeToggle from "./ThemeToggle";
+import { ColorSchemeOption } from "../../constants/options";
+import ColorSchemeToggle from "./ColorSchemeToggle";
 import SettingsCard from "./SettingsCard";
 import SettingsSection from "./SettingsSection";
 import SettingsSelect from "./SettingsSelect";
@@ -21,25 +21,25 @@ const SettingsView = () => {
   // Persist settings
   const [settings, setSettings] = useSettings();
 
-  // const { setColorScheme } = useMantineColorScheme();
-
   const { setScale, setColorScheme } = useCustomMantineTheme();
 
   const form = useForm({
     initialValues: settings,
   });
 
-  const handleThemeToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newTheme = event.currentTarget.checked
-      ? ThemeOption.Dark
-      : ThemeOption.Light;
+  const handleColorSchemeToggle = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newColorScheme = event.currentTarget.checked
+      ? ColorSchemeOption.Dark
+      : ColorSchemeOption.Light;
 
     form.setValues({
       ...form.values,
-      theme: newTheme,
+      colorScheme: newColorScheme,
     });
 
-    setColorScheme(newTheme);
+    setColorScheme(newColorScheme);
   };
 
   const handleStoryTextChecked = (
@@ -110,12 +110,12 @@ const SettingsView = () => {
         <Stack gap="xs" w="100%">
           <SettingsCard
             title="Display Settings"
-            hoverText=" Pick a light or dark theme for the interface, and adjust the items per page to suit your browsing preferences."
+            hoverText=" Pick a light or dark mode for the interface, and adjust the items per page to suit your browsing preferences."
           >
-            <SettingsSection label="Theme">
-              <ThemeToggle
-                theme={form.values.theme}
-                handleToggle={handleThemeToggle}
+            <SettingsSection label="Color Scheme">
+              <ColorSchemeToggle
+                colorScheme={form.values.colorScheme}
+                handleToggle={handleColorSchemeToggle}
               />
             </SettingsSection>
             <SettingsSection label="Scale">

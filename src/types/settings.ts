@@ -1,9 +1,9 @@
-export type Theme = "light" | "dark";
+export type ColorScheme = "light" | "dark";
 
 export type Scale = number;
 
 export type SettingsState = {
-  theme: Theme;
+  colorScheme: ColorScheme;
   scale: Scale;
   hitsPerPage: string | null;
   defaultContent: string | null;

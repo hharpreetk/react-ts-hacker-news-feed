@@ -28,7 +28,7 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
     LOCAL_STORAGE_KEYS["SETTINGS"],
     {
       // Initial settings
-      theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
+      colorScheme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.ColorScheme],
       scale: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Scale],
       hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
       defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],

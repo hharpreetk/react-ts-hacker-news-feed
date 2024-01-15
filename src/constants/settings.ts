@@ -1,5 +1,5 @@
 import {
-  ThemeOption,
+  ColorSchemeOption,
   HitsPerPageOption,
   ContentOption,
   SortOption,
@@ -7,13 +7,13 @@ import {
 } from "./options";
 
 export enum DisplaySettings {
-  Theme = "theme",
+  ColorScheme = "colorScheme",
   Scale = "scale",
   HitsPerPage = "hitsPerPage",
 }
 
 export const DEFAULT_DISPLAY_SETTINGS = {
-  [DisplaySettings.Theme]: ThemeOption.Light,
+  [DisplaySettings.ColorScheme]: ColorSchemeOption.Light,
   [DisplaySettings.Scale]: 100,
   [DisplaySettings.HitsPerPage]: HitsPerPageOption.PerPage20,
 };

@@ -1,12 +1,12 @@
 import { Switch, useMantineTheme, rem } from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
-interface ThemeToggleProps {
-  theme: string;
+interface ColorSchemeToggleProps {
+  colorScheme: string;
   handleToggle: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, handleToggle }) => {
+const ColorSchemeToggle: React.FC<ColorSchemeToggleProps> = ({ colorScheme, handleToggle }) => {
   const mantineTheme = useMantineTheme();
 
   const sunIcon = (
@@ -32,10 +32,10 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, handleToggle }) => {
       color="dark.4"
       onLabel={sunIcon}
       offLabel={moonIcon}
-      checked={theme === "dark"}
+      checked={colorScheme === "dark"}
       onChange={handleToggle}
     />
   );
 };
 
-export default ThemeToggle;
+export default ColorSchemeToggle;

@@ -66,7 +66,7 @@ export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage50, label: "50" },
 ];
 
-export enum ThemeOption {
+export enum ColorSchemeOption {
   Light = "light",
   Dark = "dark",
 }

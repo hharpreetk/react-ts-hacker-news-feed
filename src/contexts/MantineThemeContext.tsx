@@ -1,14 +1,14 @@
 import { ReactNode, createContext, useContext, useState, useMemo } from "react";
 import { MantineProvider, mergeMantineTheme } from "@mantine/core";
 import { theme } from "../themes/theme";
-import { Scale, Theme } from "../types/settings";
+import { ColorScheme, Scale } from "../types/settings";
 import { LOCAL_STORAGE_KEYS } from "../constants/keys";
 
 interface CustomMantineThemeContextProps {
   scale: Scale;
   setScale: (scale: Scale) => void;
-  colorScheme: Theme;
-  setColorScheme: (colorScheme: Theme) => void;
+  colorScheme: ColorScheme;
+  setColorScheme: (colorScheme: ColorScheme) => void;
 }
 
 const CustomMantineThemeContext = createContext<
@@ -29,7 +29,7 @@ export const CustomMantineThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const storedSettings = getSettings() ?? {};
-  const { scale: storedScale, theme: storedColorScheme } = storedSettings;
+  const { scale: storedScale, colorScheme: storedColorScheme } = storedSettings;
 
   const [scale, setScale] = useState(storedScale);
   const [colorScheme, setColorScheme] = useState(storedColorScheme);
