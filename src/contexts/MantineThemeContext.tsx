@@ -31,7 +31,7 @@ export const CustomMantineThemeProvider: React.FC<{ children: ReactNode }> = ({
   const storedSettings = useMemo(() => getSettings() ?? {}, []);
   const { scale: storedScale, colorScheme: storedColorScheme } = storedSettings;
 
-  const [scale, setScale] = useState(storedScale);
+  const [scale, setScale] = useState(isNaN(storedScale) ? 1 : storedScale);
   const [colorScheme, setColorScheme] = useState(storedColorScheme);
 
   return (
