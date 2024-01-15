@@ -112,7 +112,7 @@ const SettingsView = () => {
             title="Display Settings"
             hoverText=" Pick a light or dark mode for the interface, and adjust the items per page to suit your browsing preferences."
           >
-            <SettingsSection label="Color Scheme">
+            <SettingsSection label="Theme">
               <ColorSchemeToggle
                 colorScheme={form.values.colorScheme}
                 handleToggle={handleColorSchemeToggle}
