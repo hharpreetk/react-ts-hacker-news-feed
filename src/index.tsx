@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { MantineProvider } from "@mantine/core";
-import { theme } from "./themes/theme";
+import {
+  CustomMantineProvider,
+  CustomMantineThemeProvider,
+} from "./contexts/MantineThemeContext";
 import { SettingsProvider } from "./contexts/SettingsContext";
 import { StoriesProvider } from "./contexts/StoriesContext";
 import { SearchProvider } from "./contexts/SearchContext";
@@ -22,23 +24,25 @@ const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     <Router>
-      <MantineProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <SettingsProvider>
-            <StoriesProvider>
-              <SearchProvider>
-                <Routes>
-                  <Route path="/" element={<Search />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/story/:id" element={<Story />} />
-                  {/* Catch-all route for unmatched routes */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </SearchProvider>
-            </StoriesProvider>
-          </SettingsProvider>
-        </QueryClientProvider>
-      </MantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <CustomMantineThemeProvider>
+          <CustomMantineProvider>
+            <SettingsProvider>
+              <StoriesProvider>
+                <SearchProvider>
+                  <Routes>
+                    <Route path="/" element={<Search />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/story/:id" element={<Story />} />
+                    {/* Catch-all route for unmatched routes */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </SearchProvider>
+              </StoriesProvider>
+            </SettingsProvider>
+          </CustomMantineProvider>
+        </CustomMantineThemeProvider>
+      </QueryClientProvider>
     </Router>
   </React.StrictMode>
 );

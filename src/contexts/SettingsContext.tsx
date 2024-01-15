@@ -35,12 +35,6 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
     storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
   });
 
-  const { setColorScheme } = useMantineColorScheme();
-
-  useEffect(() => {
-    setColorScheme(settings.theme);
-  }, [settings.theme]);
-
   return (
     <SettingsContext.Provider value={[settings, setSettings]}>
       {children}
@@ -51,7 +45,7 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
 export const useSettings = () => {
   const context = useContext(SettingsContext);
   if (!context) {
-    throw new Error("useSearch must be used within a SearchProvider");
+    throw new Error("useSettings must be used within a SettingsProvider");
   }
   return context;
 };

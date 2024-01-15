@@ -1,12 +1,7 @@
-import {
-  Button,
-  Flex,
-  Group,
-  Stack,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { Button, Flex, Group, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSettings } from "../../contexts/SettingsContext";
+import { useCustomMantineTheme } from "../../contexts/MantineThemeContext";
 import {
   HITS_PER_PAGE_OPTIONS,
   CONTENT_OPTIONS,
@@ -25,8 +20,10 @@ import ScaleSlider from "./ScaleSlider";
 const SettingsView = () => {
   // Persist settings
   const [settings, setSettings] = useSettings();
-  
-  const { setColorScheme } = useMantineColorScheme();
+
+  // const { setColorScheme } = useMantineColorScheme();
+
+  const { setScale, setColorScheme } = useCustomMantineTheme();
 
   const form = useForm({
     initialValues: settings,
@@ -90,12 +87,12 @@ const SettingsView = () => {
   };
 
   const handleScaleChange = (value: number) => {
-    document.documentElement.style.fontSize = `${value}%`;
-
     form.setValues({
       ...form.values,
       scale: value,
     });
+
+    setScale(value);
   };
 
   return (

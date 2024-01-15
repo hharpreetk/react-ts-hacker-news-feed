@@ -1,6 +1,10 @@
-type SettingsState = {
-  theme: "light" | "dark";
-  scale: number;
+export type Theme = "light" | "dark";
+
+export type Scale = number;
+
+export type SettingsState = {
+  theme: Theme;
+  scale: Scale;
   hitsPerPage: string | null;
   defaultContent: string | null;
   defaultSort: string | null;
@@ -8,5 +12,3 @@ type SettingsState = {
   authorText: boolean;
   storyText: boolean;
 };
-
-export { SettingsState };

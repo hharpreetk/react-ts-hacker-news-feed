@@ -2,4 +2,5 @@
   font-weight: 400 !important;
   font-size: calc(0.925rem * var(--mantine-scale)) !important;
   height: calc(2.35rem * var(--mantine-scale)) !important;
+  border-top-width: 0 !important;
 }
