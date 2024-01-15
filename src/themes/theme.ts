@@ -81,7 +81,6 @@ const variantColorResolver: VariantColorsResolver = (input) => {
 const themeOverride = createTheme({
   primaryColor: "orange",
   primaryShade: { light: 7, dark: 3 },
-  // fontFamily: "Georgia, serif",
   variantColorResolver,
 });
 
