@@ -2,6 +2,7 @@ import { ReactNode, createContext, useContext, useState, useMemo } from "react";
 import { MantineProvider, mergeMantineTheme } from "@mantine/core";
 import { theme } from "../themes/theme";
 import { Scale, Theme } from "../types/settings";
+import { LOCAL_STORAGE_KEYS } from "../constants/keys";
 
 interface CustomMantineThemeContextProps {
   scale: Scale;
@@ -16,7 +17,7 @@ const CustomMantineThemeContext = createContext<
 
 const getSettings = () => {
   try {
-    const storedSettings = localStorage.getItem("APP_SETTINGS");
+    const storedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS["SETTINGS"]);
     return storedSettings ? { ...JSON.parse(storedSettings) } : null;
   } catch (error) {
     console.error("Error parsing stored settings:", error);

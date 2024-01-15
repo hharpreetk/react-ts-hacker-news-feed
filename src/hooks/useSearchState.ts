@@ -6,6 +6,7 @@ import { JOB_SORT_OPTIONS } from "../constants/options";
 import { SearchState } from "../types/search";
 import { useQueryParamsState } from "./useQueryParamsState";
 import { useSettings } from "../contexts/SettingsContext";
+import { LOCAL_STORAGE_KEYS } from "../constants/keys";
 
 const useSearchState = (): SearchState => {
   // Use the useSettings hook to get the settings values
@@ -53,7 +54,7 @@ const useSearchState = (): SearchState => {
 
   // State to store an array of urls representing last five searches
   const [suggestions, setSuggestions] = useSearchSuggestions(
-    "searchSuggestions",
+    LOCAL_STORAGE_KEYS["SEARCH_SUGGESTIONS"],
     []
   );
 

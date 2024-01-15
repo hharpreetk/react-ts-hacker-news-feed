@@ -10,6 +10,7 @@ import {
   DisplaySettings,
   SearchMatch,
 } from "../constants/settings";
+import { LOCAL_STORAGE_KEYS } from "../constants/keys";
 
 interface SettingsContextProps {
   children: ReactNode;
@@ -23,17 +24,20 @@ export const SettingsProvider: React.FC<SettingsContextProps> = ({
   children,
 }) => {
   // Persist settings
-  const [settings, setSettings] = useSemiPersistentState("APP_SETTINGS", {
-    // Initial settings
-    theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
-    scale: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Scale],
-    hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
-    defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
-    defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
-    defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
-    authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
-    storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
-  });
+  const [settings, setSettings] = useSemiPersistentState(
+    LOCAL_STORAGE_KEYS["SETTINGS"],
+    {
+      // Initial settings
+      theme: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Theme],
+      scale: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Scale],
+      hitsPerPage: DEFAULT_DISPLAY_SETTINGS[DisplaySettings.HitsPerPage],
+      defaultContent: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Content],
+      defaultSort: DEFAULT_DEFAULT_FILTERS[DefaultFilter.Sort],
+      defaultDateRange: DEFAULT_DEFAULT_FILTERS[DefaultFilter.DateRange],
+      authorText: DEFAULT_SEARCH_MATCHES[SearchMatch.Author],
+      storyText: DEFAULT_SEARCH_MATCHES[SearchMatch.StoryText],
+    }
+  );
 
   return (
     <SettingsContext.Provider value={[settings, setSettings]}>
