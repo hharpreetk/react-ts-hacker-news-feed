@@ -7,7 +7,7 @@ const AppFooter = () => {
       c="dimmed"
       direction={{ base: "column-reverse", xs: "row" }}
       justify={{ base: "center", xs: "space-between" }}
-      gap="xs"
+      gap={6}
       align="center"
       wrap="wrap"
       w="100%"
