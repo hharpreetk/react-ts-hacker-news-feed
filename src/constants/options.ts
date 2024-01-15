@@ -9,6 +9,32 @@ export enum ContentOption {
   Poll = "poll",
 }
 
+export enum SortOption {
+  Popularity = "popularity",
+  Date = "date",
+}
+
+export enum DateRangeOption {
+  Forever = "forever",
+  Past24Hr = "past24hr",
+  PastWeek = "pastWeek",
+  PastMonth = "pastMonth",
+  PastYear = "pastYear",
+}
+
+export enum HitsPerPageOption {
+  PerPage10 = "10",
+  PerPage20 = "20",
+  PerPage30 = "30",
+  PerPage40 = "40",
+  PerPage50 = "50",
+}
+
+export enum ColorSchemeOption {
+  Light = "light",
+  Dark = "dark",
+}
+
 export const CONTENT_OPTIONS: Options = [
   { value: ContentOption.Story, label: "Stories" },
   { value: ContentOption.ShowHN, label: "Show HN" },
@@ -17,11 +43,6 @@ export const CONTENT_OPTIONS: Options = [
   { value: ContentOption.Job, label: "Jobs" },
   { value: ContentOption.Poll, label: "Polls" },
 ];
-
-export enum SortOption {
-  Popularity = "popularity",
-  Date = "date",
-}
 
 // Constants for common sort options
 export const COMMON_SORT_OPTIONS: Options = [
@@ -34,14 +55,6 @@ export const JOB_SORT_OPTIONS: Options = [
   { value: SortOption.Date, label: "Date" },
 ];
 
-export enum DateRangeOption {
-  Forever = "forever",
-  Past24Hr = "past24hr",
-  PastWeek = "pastWeek",
-  PastMonth = "pastMonth",
-  PastYear = "pastYear",
-}
-
 export const DATE_RANGE_OPTIONS: Options = [
   { value: DateRangeOption.Forever, label: "Forever" },
   { value: DateRangeOption.Past24Hr, label: "Past 24 Hours" },
@@ -50,14 +63,6 @@ export const DATE_RANGE_OPTIONS: Options = [
   { value: DateRangeOption.PastYear, label: "Past Year" },
 ];
 
-export enum HitsPerPageOption {
-  PerPage10 = "10",
-  PerPage20 = "20",
-  PerPage30 = "30",
-  PerPage40 = "40",
-  PerPage50 = "50",
-}
-
 export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage10, label: "10" },
   { value: HitsPerPageOption.PerPage20, label: "20" },
@@ -65,8 +70,3 @@ export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage40, label: "40" },
   { value: HitsPerPageOption.PerPage50, label: "50" },
 ];
-
-export enum ColorSchemeOption {
-  Light = "light",
-  Dark = "dark",
-}

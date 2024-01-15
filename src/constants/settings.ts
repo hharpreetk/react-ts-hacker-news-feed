@@ -12,30 +12,28 @@ export enum DisplaySettings {
   HitsPerPage = "hitsPerPage",
 }
 
-export const DEFAULT_DISPLAY_SETTINGS = {
-  [DisplaySettings.ColorScheme]: ColorSchemeOption.Light,
-  [DisplaySettings.Scale]: 100,
-  [DisplaySettings.HitsPerPage]: HitsPerPageOption.PerPage20,
-};
-
-// Default filter constants
 export enum DefaultFilter {
   Sort = "sort",
   Content = "content",
   DateRange = "dateRange",
 }
 
+export enum SearchMatch {
+  Author = "author",
+  StoryText = "storyText",
+}
+
+export const DEFAULT_DISPLAY_SETTINGS = {
+  [DisplaySettings.ColorScheme]: ColorSchemeOption.Light,
+  [DisplaySettings.Scale]: 100,
+  [DisplaySettings.HitsPerPage]: HitsPerPageOption.PerPage20,
+};
+
 export const DEFAULT_DEFAULT_FILTERS = {
   [DefaultFilter.Sort]: SortOption.Popularity,
   [DefaultFilter.Content]: ContentOption.Story,
   [DefaultFilter.DateRange]: DateRangeOption.Forever,
 };
-
-// Search match constants
-export enum SearchMatch {
-  Author = "author",
-  StoryText = "storyText",
-}
 
 export const DEFAULT_SEARCH_MATCHES = {
   [SearchMatch.Author]: true,
