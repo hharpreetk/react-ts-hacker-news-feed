@@ -1,6 +1,6 @@
 import { Options } from "../types/options";
 
-export enum ContentOption {
+export const enum ContentOption {
   Story = "story",
   ShowHN = "show_hn",
   AskHN = "ask_hn",
@@ -18,7 +18,7 @@ export const CONTENT_OPTIONS: Options = [
   { value: ContentOption.Poll, label: "Polls" },
 ];
 
-export enum SortOption {
+export const enum SortOption {
   Popularity = "popularity",
   Date = "date",
 }
@@ -34,7 +34,7 @@ export const JOB_SORT_OPTIONS: Options = [
   { value: SortOption.Date, label: "Date" },
 ];
 
-export enum DateRangeOption {
+export const enum DateRangeOption {
   Forever = "forever",
   Past24Hr = "past24hr",
   PastWeek = "pastWeek",
@@ -50,7 +50,7 @@ export const DATE_RANGE_OPTIONS: Options = [
   { value: DateRangeOption.PastYear, label: "Past Year" },
 ];
 
-export enum HitsPerPageOption {
+export const enum HitsPerPageOption {
   PerPage10 = "10",
   PerPage20 = "20",
   PerPage30 = "30",
@@ -66,7 +66,7 @@ export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage50, label: "50" },
 ];
 
-export enum ColorSchemeOption {
+export const enum ColorSchemeOption {
   Light = "light",
   Dark = "dark",
 }

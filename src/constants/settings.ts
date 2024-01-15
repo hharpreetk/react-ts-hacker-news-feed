@@ -6,7 +6,7 @@ import {
   DateRangeOption,
 } from "./options";
 
-export enum DisplaySettings {
+export const enum DisplaySettings {
   ColorScheme = "colorScheme",
   Scale = "scale",
   HitsPerPage = "hitsPerPage",
@@ -19,7 +19,7 @@ export const DEFAULT_DISPLAY_SETTINGS = {
 };
 
 // Default filter constants
-export enum DefaultFilter {
+export const enum DefaultFilter {
   Sort = "sort",
   Content = "content",
   DateRange = "dateRange",
@@ -32,7 +32,7 @@ export const DEFAULT_DEFAULT_FILTERS = {
 };
 
 // Search match constants
-export enum SearchMatch {
+export const enum SearchMatch {
   Author = "author",
   StoryText = "storyText",
 }
