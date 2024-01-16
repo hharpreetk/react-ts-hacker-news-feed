@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext, useState, useMemo } from "react";
 import { MantineProvider, mergeMantineTheme } from "@mantine/core";
 import { theme } from "../themes/theme";
 import { ColorScheme, Scale } from "../types/settings";
-import { LOCAL_STORAGE_KEYS } from "../constants/keys";
+import { getSettingsFromLocalStorage } from "../utils/settingsUtils";
 
 interface CustomMantineThemeContextProps {
   scale: Scale;
@@ -15,20 +15,10 @@ const CustomMantineThemeContext = createContext<
   CustomMantineThemeContextProps | undefined
 >(undefined);
 
-const getSettings = () => {
-  try {
-    const storedSettings = localStorage.getItem(LOCAL_STORAGE_KEYS["SETTINGS"]);
-    return storedSettings ? { ...JSON.parse(storedSettings) } : null;
-  } catch (error) {
-    console.error("Error parsing stored settings:", error);
-    return null;
-  }
-};
-
 export const CustomMantineThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const storedSettings = useMemo(() => getSettings() ?? {}, []);
+  const storedSettings = useMemo(() => getSettingsFromLocalStorage() ?? {}, []);
   const { scale: storedScale, colorScheme: storedColorScheme } = storedSettings;
 
   const [scale, setScale] = useState(isNaN(storedScale) ? 100 : storedScale);
