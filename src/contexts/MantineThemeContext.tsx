@@ -3,6 +3,11 @@ import { MantineProvider, mergeMantineTheme } from "@mantine/core";
 import { theme } from "../themes/theme";
 import { ColorScheme, Scale } from "../types/settings";
 import { getSettingsFromLocalStorage } from "../utils/settingsUtils";
+import { calculateMantineScale } from "../utils/themeUtils";
+import {
+  DEFAULT_DISPLAY_SETTINGS,
+  DisplaySettings,
+} from "../constants/settings";
 
 interface CustomMantineThemeContextProps {
   scale: Scale;
@@ -21,7 +26,11 @@ export const CustomMantineThemeProvider: React.FC<{ children: ReactNode }> = ({
   const storedSettings = useMemo(() => getSettingsFromLocalStorage() ?? {}, []);
   const { scale: storedScale, colorScheme: storedColorScheme } = storedSettings;
 
-  const [scale, setScale] = useState(isNaN(storedScale) ? 100 : storedScale);
+  const [scale, setScale] = useState(
+    isNaN(storedScale)
+      ? DEFAULT_DISPLAY_SETTINGS[DisplaySettings.Scale]
+      : storedScale
+  );
   const [colorScheme, setColorScheme] = useState(storedColorScheme);
 
   return (
@@ -53,7 +62,7 @@ export const CustomMantineProvider: React.FC<CustomMantineProviderProps> = ({
   const { scale, colorScheme } = useCustomMantineTheme();
 
   const customTheme = useMemo(
-    () => mergeMantineTheme(theme, { scale: isNaN(scale) ? 1 : scale / 100 }),
+    () => mergeMantineTheme(theme, { scale: calculateMantineScale(scale) }),
     [scale]
   );
 
