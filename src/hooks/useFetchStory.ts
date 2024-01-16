@@ -11,6 +11,7 @@ const useFetchStory = (storyId: string | undefined) => {
       const result = await axios.get(url);
       return result.data;
     },
+    throwOnError: false,
   });
   return { data, isLoading, error };
 };

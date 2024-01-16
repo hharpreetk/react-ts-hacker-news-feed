@@ -9,7 +9,6 @@ const Feedback: React.FC<{ status: "info" | "error"; message: string }> = ({
     size: "0.95rem",
     lh: "lg",
     p: "md",
-    mt: "md",
   };
 
   const classNames = {

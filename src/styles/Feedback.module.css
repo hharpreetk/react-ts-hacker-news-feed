@@ -1,7 +1,3 @@
-.info, .error {
-  margin-top: var(--mantine-spacing-md) !important;
-}
-
 [data-mantine-color-scheme="light"] .info {
   background-color: var(--mantine-color-gray-1);
   color: var(--mantine-color-dark-7);

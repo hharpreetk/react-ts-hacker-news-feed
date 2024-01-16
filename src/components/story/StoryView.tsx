@@ -10,9 +10,7 @@ const StoryView: React.FC = () => {
   return error ? (
     <Feedback
       status="error"
-      message={
-        error ? `Error: ${error?.message}` : "Oops! Something went wrong."
-      }
+      message={error ? error?.message : "Oops! Something went wrong."}
     />
   ) : isLoading ? (
     <StorySkeleton />
