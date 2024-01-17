@@ -130,6 +130,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
           dangerouslySetInnerHTML={{
             __html: `${getHighlightedValue("author") || author}`,
           }}
+          translate="no"
           fz="sm"
         />
       </TypographyStylesProvider>
