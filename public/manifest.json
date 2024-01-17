@@ -1,0 +1,43 @@
+{
+    "name": "Search Hacker News",
+    "short_name": "Search HN",
+    "description": "Search Hacker News for the latest stories.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f76707",
+    "theme_color": "#f76707",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        }
+    ],
+    "ms_tile_images": {
+        "square70x70logo": "/mstile-70x70.png",
+        "square150x150logo": "/mstile-150x150.png",
+        "wide310x150logo": "/mstile-310x150.png",
+        "square310x310logo": "/mstile-310x310.png",
+        "square144x144logo": "/mstile-144x144.png"
+    }
+}
