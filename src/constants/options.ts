@@ -1,6 +1,6 @@
 import { Options } from "../types/options";
 
-export enum ContentOption {
+export const enum ContentOption {
   Story = "story",
   ShowHN = "show_hn",
   AskHN = "ask_hn",
@@ -9,12 +9,12 @@ export enum ContentOption {
   Poll = "poll",
 }
 
-export enum SortOption {
+export const enum SortOption {
   Popularity = "popularity",
   Date = "date",
 }
 
-export enum DateRangeOption {
+export const enum DateRangeOption {
   Forever = "forever",
   Past24Hr = "past24hr",
   PastWeek = "pastWeek",
@@ -22,7 +22,7 @@ export enum DateRangeOption {
   PastYear = "pastYear",
 }
 
-export enum HitsPerPageOption {
+export const enum HitsPerPageOption {
   PerPage10 = "10",
   PerPage20 = "20",
   PerPage30 = "30",
@@ -30,7 +30,7 @@ export enum HitsPerPageOption {
   PerPage50 = "50",
 }
 
-export enum ColorSchemeOption {
+export const enum ColorSchemeOption {
   Light = "light",
   Dark = "dark",
 }
@@ -42,18 +42,18 @@ export const CONTENT_OPTIONS: Options = [
   { value: ContentOption.LaunchHN, label: "Launch HN" },
   { value: ContentOption.Job, label: "Jobs" },
   { value: ContentOption.Poll, label: "Polls" },
-];
+] as const;
 
 // Constants for common sort options
 export const COMMON_SORT_OPTIONS: Options = [
   { value: SortOption.Popularity, label: "Popularity" },
   { value: SortOption.Date, label: "Date" },
-];
+] as const;
 
 // Constants for sort options specific to jobs
 export const JOB_SORT_OPTIONS: Options = [
   { value: SortOption.Date, label: "Date" },
-];
+] as const;
 
 export const DATE_RANGE_OPTIONS: Options = [
   { value: DateRangeOption.Forever, label: "Forever" },
@@ -61,7 +61,7 @@ export const DATE_RANGE_OPTIONS: Options = [
   { value: DateRangeOption.PastWeek, label: "Past Week" },
   { value: DateRangeOption.PastMonth, label: "Past Month" },
   { value: DateRangeOption.PastYear, label: "Past Year" },
-];
+] as const;
 
 export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage10, label: "10" },
@@ -69,4 +69,4 @@ export const HITS_PER_PAGE_OPTIONS: Options = [
   { value: HitsPerPageOption.PerPage30, label: "30" },
   { value: HitsPerPageOption.PerPage40, label: "40" },
   { value: HitsPerPageOption.PerPage50, label: "50" },
-];
+] as const;

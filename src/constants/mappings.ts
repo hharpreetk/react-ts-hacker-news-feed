@@ -10,7 +10,7 @@ export const CONTENT_TAG_FILTERS: Record<string, string> = {
   [ContentOption.LaunchHN]: "launch_hn",
   [ContentOption.Job]: "job",
   [ContentOption.Poll]: "poll",
-};
+} as const;
 
 // Mapping between TIME_OPTIONS and their numeric filter values
 export const DATE_NUMERIC_FILTERS: Record<string, string> = {
@@ -27,13 +27,13 @@ export const DATE_NUMERIC_FILTERS: Record<string, string> = {
   [DateRangeOption.PastYear]: `created_at_i>${Math.floor(
     (Date.now() - 365 * 24 * 60 * 60 * 1000) / 1000
   )}`,
-};
+} as const;
 
 // Mapping between SortOptionS and their resource values
 export const SORT_RESOURCE_FILTERS: Record<string, string> = {
   [SortOption.Popularity]: "search",
   [SortOption.Date]: "search_by_date",
-};
+} as const;
 
 export const DEFAULT_SORT_RESOURCE_FILTER =
   SORT_RESOURCE_FILTERS[SortOption.Popularity];
@@ -53,4 +53,4 @@ export const SEARCHABLE_ATTRIBUTES = [
   "url",
   "story_text",
   // Add other attributes as needed
-];
+] as const;

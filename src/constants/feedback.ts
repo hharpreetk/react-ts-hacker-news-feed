@@ -7,4 +7,4 @@ export const NO_RESULT_CONTENT_FEEDBACK: Record<string, string> = {
   [ContentOption.LaunchHN]: "launch HN stories",
   [ContentOption.Job]: "jobs",
   [ContentOption.Poll]: "polls",
-};
+} as const;
