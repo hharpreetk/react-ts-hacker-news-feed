@@ -1,4 +1,4 @@
-import { Grid, ActionIcon } from "@mantine/core";
+import { Grid, ActionIcon, rem } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import { IconSquareLetterH } from "@tabler/icons-react";
 import SearchBar from "../search/SearchBar";
@@ -17,11 +17,11 @@ const AppHeader: React.FC = () => {
         component="a"
         href="/"
         variant="transparent"
-        size={37}
+        size={rem(37)}
         aria-label="Go to Home"
         title="Go to Home"
       >
-        <IconSquareLetterH size={37} />
+        <IconSquareLetterH size={rem(37)} />
       </ActionIcon>
       {showSearchBar && <SearchBar />}
       {showExitButton && <BackButton />}

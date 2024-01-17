@@ -1,4 +1,4 @@
-import { Select } from "@mantine/core";
+import { Select, rem } from "@mantine/core";
 import { DATE_RANGE_OPTIONS } from "../../constants/options";
 import { useSearch } from "../../contexts/SearchContext";
 import { IconCalendarTime } from "@tabler/icons-react";
@@ -13,8 +13,13 @@ const DateFilter: React.FC = () => {
         data={DATE_RANGE_OPTIONS}
         value={selectedDate}
         onChange={handleDateSelect}
-        leftSection={<IconCalendarTime size={17} stroke={1.5} />}
-        leftSectionWidth={36}
+        leftSection={
+          <IconCalendarTime
+            style={{ height: rem(15), width: rem(15) }}
+            stroke={1.5}
+          />
+        }
+        leftSectionWidth={35}
         allowDeselect={false}
         required
       />

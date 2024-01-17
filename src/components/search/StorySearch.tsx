@@ -1,4 +1,4 @@
-import { ActionIcon, Autocomplete } from "@mantine/core";
+import { ActionIcon, Autocomplete, rem } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { useSearch } from "../../contexts/SearchContext";
@@ -23,10 +23,11 @@ const StorySearch: React.FC = () => {
           handleSearchInput(value);
         }}
         data={suggestions}
-        leftSection={<IconSearch size={14} />}
+        leftSection={<IconSearch style={{ height: rem(12), width: rem(12), marginTop: 1 }} />}
+        leftSectionWidth={33}
         rightSection={
           <ActionIcon type="submit" size={30} variant="filled" title="Submit Search" aria-label="Submit Search">
-            <IconArrowRight size={15} />
+            <IconArrowRight style={{ height: rem(14), width: rem(14) }} />
           </ActionIcon>
         }
         maw={800}

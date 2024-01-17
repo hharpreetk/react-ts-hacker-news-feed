@@ -1,4 +1,4 @@
-import { Select } from "@mantine/core";
+import { Select, rem } from "@mantine/core";
 import { COMMON_SORT_OPTIONS, JOB_SORT_OPTIONS } from "../../constants/options";
 import { useSearch } from "../../contexts/SearchContext";
 import { IconSortDescending2 } from "@tabler/icons-react";
@@ -23,7 +23,12 @@ const SortFilter: React.FC = () => {
       data={getSortOptions(selectedContent)}
       value={selectedSort}
       onChange={handleSortSelect}
-      leftSection={<IconSortDescending2 size={17} stroke={1.5} />}
+      leftSection={
+        <IconSortDescending2
+          style={{ height: rem(17), width: rem(17) }}
+          stroke={1.5}
+        />
+      }
       allowDeselect={false}
       required
     />

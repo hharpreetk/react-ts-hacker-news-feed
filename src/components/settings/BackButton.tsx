@@ -1,4 +1,4 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, rem } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { IconX } from "@tabler/icons-react";
 
@@ -17,7 +17,7 @@ const BackButton = () => {
       title="Go Back"
       onClick={handlePageExit}
     >
-      <IconX size={18} />
+      <IconX style={{ height: rem(16), width: rem(16) }} />
     </ActionIcon>
   );
 };

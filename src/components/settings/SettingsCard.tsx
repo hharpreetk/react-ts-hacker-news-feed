@@ -1,4 +1,12 @@
-import { Card, Group, HoverCard, ScrollArea, Text } from "@mantine/core";
+import {
+  Card,
+  Group,
+  HoverCard,
+  ScrollArea,
+  Text,
+  ThemeIcon,
+  rem,
+} from "@mantine/core";
 import { IconHelpCircle } from "@tabler/icons-react";
 
 interface SettingsCardProps {
@@ -20,12 +28,14 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
             <Text fz="sm">{title}</Text>
             <HoverCard width={220}>
               <HoverCard.Target>
-                <IconHelpCircle
-                  size={22}
-                  strokeWidth={1.5}
-                  color="gray"
-                  aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
-                />
+                <ThemeIcon variant="transparent" size={rem(22)}>
+                  <IconHelpCircle
+                    size={rem(22)}
+                    strokeWidth={1.5}
+                    color="gray"
+                    aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
+                  />
+                </ThemeIcon>
               </HoverCard.Target>
               <HoverCard.Dropdown>
                 <Text fz="sm">{hoverText}</Text>

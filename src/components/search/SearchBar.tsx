@@ -1,4 +1,4 @@
-import { Grid, ActionIcon } from "@mantine/core";
+import { Grid, ActionIcon, rem } from "@mantine/core";
 import { IconAdjustmentsCog } from "@tabler/icons-react";
 import StorySearch from "./StorySearch";
 
@@ -16,7 +16,10 @@ const SearchBar = () => {
         title="Edit App Settings"
         aria-label="Edit App Settings"
       >
-        <IconAdjustmentsCog size={18} stroke={1.5} />
+        <IconAdjustmentsCog
+          style={{ height: rem(17), width: rem(17) }}
+          stroke={1.5}
+        />
       </ActionIcon>
     </>
   );
