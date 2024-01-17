@@ -84,15 +84,21 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           </Anchor>
         )}
         <Flex wrap="wrap" rowGap={2} columnGap="xs" align="center" mt={4}>
-          <Text fz="sm" translate="no" span>
-            {author}
-          </Text>
-          <Text fz="xs" span>
-            |
-          </Text>
-          <Text fz="sm" span>
-            {formattedDate}
-          </Text>
+          {author && (
+            <Text fz="sm" translate="no" span>
+              {author}
+            </Text>
+          )}
+          {created_at && (
+            <>
+              <Text fz="xs" span>
+                |
+              </Text>
+              <Text fz="sm" span>
+                {formattedDate}
+              </Text>
+            </>
+          )}
           {points && (
             <>
               <Text fz="xs" span>
