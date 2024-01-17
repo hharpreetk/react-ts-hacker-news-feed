@@ -28,14 +28,12 @@ const SettingsCard: React.FC<SettingsCardProps> = ({
             <Text fz="sm">{title}</Text>
             <HoverCard width={220}>
               <HoverCard.Target>
-                <ThemeIcon variant="transparent" size={rem(22)}>
-                  <IconHelpCircle
-                    size={rem(22)}
-                    strokeWidth={1.5}
-                    color="gray"
-                    aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
-                  />
-                </ThemeIcon>
+                <IconHelpCircle
+                  style={{ width: rem(22), height: rem(22) }}
+                  strokeWidth={1.5}
+                  color="gray"
+                  aria-label={`Hover to see more information about ${title.toLowerCase()}.`}
+                />
               </HoverCard.Target>
               <HoverCard.Dropdown>
                 <Text fz="sm">{hoverText}</Text>

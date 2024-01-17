@@ -21,7 +21,7 @@ const AppHeader: React.FC = () => {
         aria-label="Go to Home"
         title="Go to Home"
       >
-        <IconSquareLetterH size={rem(37)} />
+        <IconSquareLetterH style={{ width: rem(37), height: rem(37) }} />
       </ActionIcon>
       {showSearchBar && <SearchBar />}
       {showExitButton && <BackButton />}
