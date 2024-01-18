@@ -5,7 +5,9 @@
         var(--app-shell-header-height) + var(--app-shell-footer-height) +
           (2 * var(--mantine-spacing-md)) +
           (3 * calc(1rem * var(--mantine-scale))) +
-          (2 * calc(0.5rem * var(--mantine-scale))) + var(--mantine-spacing-xs)
+          (2 * calc(0.5rem * var(--mantine-scale))) +
+          (4 * calc(0.0625rem * var(--mantine-scale))) +
+          var(--mantine-spacing-xs)
       )
   ) !important;
 }
