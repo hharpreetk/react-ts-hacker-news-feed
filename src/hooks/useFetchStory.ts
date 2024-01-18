@@ -5,28 +5,35 @@ import { getStoryUrl } from "../api/api";
 const useFetchStory = (storyId: string | undefined) => {
   const url = getStoryUrl(storyId || "");
 
-  const { data, isLoading, isFetching, isError, error } = useQuery({
+  const { data, isPending, isLoading, isError, error } = useQuery({
     queryKey: [storyId],
     queryFn: async () => {
-      const response = await fetch(url);
+      try {
+        const response = await fetch(url);
 
-      if (!response.ok) {
-        let errorMessage = `Status ${response.status} error.`;
+        if (!response.ok) {
+          let errorMessage = `Status ${response.status} error.`;
 
-        // Customize error message based on different status codes
-        if (response.status === 404) {
-          errorMessage = "Story not found.";
-        } else if (response.status === 500) {
-          errorMessage = "Internal server error.";
+          // Customize error message based on different status codes
+          if (response.status === 404) {
+            errorMessage = "Story not found.";
+          } else if (response.status === 500) {
+            errorMessage = "Internal server error.";
+          }
+
+          throw new Error(errorMessage);
         }
 
-        throw new Error(errorMessage);
+        return response.json();
+      } catch (error) {
+        // Log the error on server side
+        console.error("Error fetching story:", error);
+        throw error;
+        //Rethrow error to be caught by the query
       }
-
-      return response.json();
     },
   });
-  return { data, isLoading, isFetching, isError, error };
+  return { data, isLoading, isPending, isError, error };
 };
 
 export { useFetchStory };
