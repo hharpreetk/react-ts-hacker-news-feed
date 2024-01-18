@@ -26,10 +26,8 @@ const useFetchStory = (storyId: string | undefined) => {
 
         return response.json();
       } catch (error) {
-        // Log the error on server side
-        console.error("Error fetching story:", error);
-        throw error;
         //Rethrow error to be caught by the query
+        throw error;
       }
     },
   });
