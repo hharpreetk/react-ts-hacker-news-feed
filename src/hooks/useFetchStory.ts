@@ -25,7 +25,6 @@ const useFetchStory = (storyId: string | undefined) => {
 
       return response.json();
     },
-    throwOnError: false,
   });
   return { data, isLoading, isFetching, isError, error };
 };
