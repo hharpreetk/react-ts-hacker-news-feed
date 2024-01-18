@@ -6,17 +6,24 @@ import StorySkeleton from "./StorySkeleton";
 
 const StoryView: React.FC = () => {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetchStory(id);
-  return error ? (
-    <Feedback
-      status="error"
-      message={error ? error?.message : "Oops! Something went wrong."}
-    />
-  ) : isLoading ? (
-    <StorySkeleton />
-  ) : (
-    data && <StoryDetail story={data} />
-  );
+  const { data, isPending, isLoading, isError, error } = useFetchStory(id);
+
+  if (isError) {
+    return (
+      <Feedback
+        status="error"
+        message={
+          error?.message || "Sorry, something went wrong. Try again later."
+        }
+      />
+    );
+  }
+
+  if (isPending || isLoading) {
+    return <StorySkeleton />;
+  }
+
+  return data ? <StoryDetail story={data} /> : null;
 };
 
 export default StoryView;
