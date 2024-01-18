@@ -6,7 +6,7 @@ const Feedback: React.FC<{ status: "info" | "error"; message: string }> = ({
   message,
 }) => {
   const feedbackProps = {
-    size: "0.95rem",
+    fz: "0.95rem",
     lh: "lg",
     p: "md",
   };
