@@ -6,7 +6,7 @@ import StorySkeleton from "./StorySkeleton";
 
 const StoryView: React.FC = () => {
   const { id } = useParams();
-  const { data, isPending, isError, error } = useFetchStory(id);
+  const { data, isLoading, isError, error } = useFetchStory(id);
 
   if (isError) {
     return (
@@ -19,7 +19,7 @@ const StoryView: React.FC = () => {
     );
   }
 
-  if (isPending) {
+  if (isLoading) {
     return <StorySkeleton />;
   }
 

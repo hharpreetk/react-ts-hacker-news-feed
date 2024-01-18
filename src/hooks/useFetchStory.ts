@@ -5,7 +5,7 @@ import { getStoryUrl } from "../api/api";
 const useFetchStory = (storyId: string | undefined) => {
   const url = getStoryUrl(storyId || "");
 
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: [storyId],
     queryFn: async () => {
       const response = await fetch(url);
@@ -25,7 +25,7 @@ const useFetchStory = (storyId: string | undefined) => {
       return response.json();
     },
   });
-  return { data, isPending, isError, error };
+  return { data, isLoading, isError, error };
 };
 
 export { useFetchStory };
