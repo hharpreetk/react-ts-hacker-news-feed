@@ -20,7 +20,7 @@ const useFetchStory = (storyId: string | undefined) => {
           errorMessage = "Internal server error.";
         }
 
-        return new Error(errorMessage);
+        throw new Error(errorMessage);
       }
       return response.json();
     },
