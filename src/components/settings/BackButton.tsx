@@ -8,8 +8,12 @@ const BackButton = () => {
   const navigate = useNavigate();
 
   const handlePageExit = () => {
-    // Go back to the previous route
-    navigate(-1);
+    if (location.key !== "default") {
+      // Go back to the previous route
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
