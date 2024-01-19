@@ -1,12 +1,19 @@
 import { ActionIcon, rem } from "@mantine/core";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IconX } from "@tabler/icons-react";
 
 const BackButton = () => {
+  const location = useLocation();
+
   const navigate = useNavigate();
+
   const handlePageExit = () => {
-    // Go back to the previous route
-    navigate(-1);
+    if (location.key !== "default") {
+      // Go back to the previous route
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
