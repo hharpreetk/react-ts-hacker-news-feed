@@ -40,7 +40,7 @@ const NoResultsFeedback = () => {
       <Feedback
         status="info"
         message={`No '${
-          NO_RESULT_CONTENT_FEEDBACK[selectedContent || "stories"]
+          NO_RESULT_CONTENT_FEEDBACK[selectedContent || "stories"] || "stories"
         }' were found matching your search.`}
       />
     </Box>
