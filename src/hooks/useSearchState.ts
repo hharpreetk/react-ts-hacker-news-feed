@@ -138,10 +138,16 @@ const useSearchState = (): SearchState => {
 
   const handleSortSelect = (selectedOption: string | null) => {
     setSelectedSort(selectedOption);
+
+    // Reset the page
+    setActivePage(0);
   };
 
   const handleDateSelect = (selectedOption: string | null) => {
     setSelectedDate(selectedOption);
+
+    // Reset the page
+    setActivePage(0);
   };
 
   const handleActivePage = (selectedPage: number) => {
