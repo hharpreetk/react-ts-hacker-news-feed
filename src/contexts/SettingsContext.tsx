@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useContext, useEffect } from "react";
-import { useMantineColorScheme } from "@mantine/core";
 import { SettingsState } from "../types/settings";
 import { useSemiPersistentState } from "../hooks/useSemiPersistentState";
 import {
