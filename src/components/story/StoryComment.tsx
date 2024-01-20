@@ -58,8 +58,6 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
       </Flex>
-
-      {/* Render "View More Replies" link only if there are more than one child comments */}
       {children.length > 1 && (
         <div>
           <Button
