@@ -4,3 +4,11 @@
 
 # Ignore Node.js modules
 node_modules/
+
+# Generated files
+build/
+.DS_Store
+
+# User-specific files
+npm-debug.log
+yarn-error.log
