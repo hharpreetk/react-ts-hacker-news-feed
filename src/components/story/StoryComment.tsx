@@ -19,7 +19,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
   // State to manage the visibility of child comments
   const [showReplies, setShowReplies] = useState(false);
   const { author, created_at, children, text, points } = comment;
- 
+
   return (
     <Flex direction="column" mt={10}>
       <Flex direction="column" gap={3}>
@@ -65,7 +65,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           <Button
             variant="transparent"
             fz={15}
-            style={{ padding: 0, marginBottom: rem(-9), marginTop: rem(-3) }}
+            style={{ padding: 0, marginBottom: rem(-14), marginTop: rem(-10) }}
             onClick={() => setShowReplies(!showReplies)}
           >
             {showReplies ? (
