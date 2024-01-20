@@ -65,7 +65,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           <Button
             variant="transparent"
             fz={15}
-            style={{ padding: 0, marginBottom: rem(-12), marginTop: rem(-12) }}
+            style={{ padding: 0, marginBottom: rem(-14), marginTop: rem(-13) }}
             onClick={() => setShowReplies(!showReplies)}
           >
             {showReplies ? (
