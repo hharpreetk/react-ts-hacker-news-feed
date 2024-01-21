@@ -6,7 +6,7 @@ import SearchHeader from "../search/SearchHeader";
 
 const AppHeader: React.FC = () => {
   const location = useLocation();
-  const showSearchBar = location.pathname === "/";
+  const showSearchHeader = location.pathname === "/";
   const showExitButton =
     location.pathname === "/settings" ||
     location.pathname.startsWith("/story/");
@@ -23,7 +23,7 @@ const AppHeader: React.FC = () => {
       >
         <IconSquareLetterH style={{ width: rem(37), height: rem(37) }} />
       </ActionIcon>
-      {showSearchBar && <SearchHeader />}
+      {showSearchHeader && <SearchHeader />}
       {showExitButton && <BackButton />}
     </Grid>
   );
