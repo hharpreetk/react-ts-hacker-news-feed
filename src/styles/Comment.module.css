@@ -30,3 +30,7 @@
 [data-mantine-color-scheme="light"] .commentReply {
   border-left: 1px solid var(--mantine-color-gray-4);
 }
+
+[data-mantine-color-scheme="dark"] .replyToggle {
+  color: var(--mantine-primary-color-filled) !important;
+}
