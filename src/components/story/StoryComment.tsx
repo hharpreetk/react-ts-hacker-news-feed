@@ -7,6 +7,7 @@ import {
   Paper,
   Text,
   TypographyStylesProvider,
+  VisuallyHidden,
   em,
   rem,
 } from "@mantine/core";
@@ -60,41 +61,48 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
         </TypographyStylesProvider>
       </Flex>
       {children.length > 1 && (
-        <Anchor
-          variant="transparent"
-          underline="never"
-          fz={15}
-          w="fit-content"
-          pr={3}
-          style={{ marginTop: rem(2.5), marginBottom: rem(-4) }}
-          classNames={{ root: classes.replyToggle }}
-          onClick={() => setShowReplies(!showReplies)}
-          tabIndex={0} // Ensure the anchor is focusable
-        >
-          {showReplies ? (
-            <Group gap={10}>
-              <IconCaretUpFilled
-                style={{
-                  height: rem(14),
-                  width: rem(14),
-                  marginTop: em(2.5),
-                }}
-              />
-              <span>{children.length} replies</span>
-            </Group>
-          ) : (
-            <Group gap={10}>
-              <IconCaretDownFilled
-                style={{
-                  height: rem(14),
-                  width: rem(14),
-                  marginTop: em(1.5),
-                }}
-              />
-              {children.length} replies
-            </Group>
-          )}
-        </Anchor>
+        <>
+          <Anchor
+            variant="transparent"
+            underline="never"
+            fz={15}
+            w="fit-content"
+            pr={3}
+            style={{ marginTop: rem(2.5), marginBottom: rem(-4) }}
+            classNames={{ root: classes.replyToggle }}
+            onClick={() => setShowReplies(!showReplies)}
+            tabIndex={0} // Ensure the anchor is focusable
+            aria-live="assertive" // Announce changes immediately
+            aria-atomic="true" // Announce the entire content change
+          >
+            {showReplies ? (
+              <Group gap={10}>
+                <IconCaretUpFilled
+                  style={{
+                    height: rem(14),
+                    width: rem(14),
+                    marginTop: em(2.5),
+                  }}
+                />
+                <span>{children.length} replies</span>
+              </Group>
+            ) : (
+              <Group gap={10}>
+                <IconCaretDownFilled
+                  style={{
+                    height: rem(14),
+                    width: rem(14),
+                    marginTop: em(1.5),
+                  }}
+                />
+                {children.length} replies
+              </Group>
+            )}
+          </Anchor>
+          <VisuallyHidden>
+            {showReplies ? "Replies are now visible" : "Replies are now hidden"}
+          </VisuallyHidden>
+        </>
       )}
 
       {children && children.length > 0 && (
