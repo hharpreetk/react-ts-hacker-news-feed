@@ -1,8 +1,8 @@
 import { Grid, ActionIcon, rem } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 import { IconSquareLetterH } from "@tabler/icons-react";
-import SearchBar from "../search/SearchBar";
 import BackButton from "../settings/BackButton";
+import SearchHeader from "../search/SearchHeader";
 
 const AppHeader: React.FC = () => {
   const location = useLocation();
@@ -23,7 +23,7 @@ const AppHeader: React.FC = () => {
       >
         <IconSquareLetterH style={{ width: rem(37), height: rem(37) }} />
       </ActionIcon>
-      {showSearchBar && <SearchBar />}
+      {showSearchBar && <SearchHeader />}
       {showExitButton && <BackButton />}
     </Grid>
   );
