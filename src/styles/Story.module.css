@@ -31,15 +31,6 @@
   background-color: var(--mantine-color-yellow-5);
 }
 
-.storyText,
-.storyText * {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 [data-mantine-color-scheme="dark"] .storyText a {
   color: var(--mantine-color-dark-0) !important;
 }
