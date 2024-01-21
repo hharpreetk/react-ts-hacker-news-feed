@@ -12,11 +12,11 @@
 
 .control {
   padding: calc(0.12rem * var(--mantine-scale))
-    calc(0.275rem * var(--mantine-scale));
+    calc(0.275rem * var(--mantine-scale)) !important;
 
   &[data-active] {
-    background-color: var(--mantine-primary-color-filled);
-    color: var(--mantine-color-body);
+    background-color: var(--mantine-primary-color-filled) !important;
+    color: var(--mantine-color-body) !important;
     border-radius: var(--mantine-radius-default);
   }
 }
