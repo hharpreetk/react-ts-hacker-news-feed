@@ -79,6 +79,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
             underline="always"
             fz="sm"
             classNames={{ root: classes.storyUrl }}
+            aria-label={`Read the external story at ${url}`}
           >
             {url}
           </Anchor>

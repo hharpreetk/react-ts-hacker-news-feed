@@ -117,6 +117,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
             dangerouslySetInnerHTML={{
               __html: `${getHighlightedValue("url") || url}`,
             }}
+            aria-label={`Read the external story at ${url}`}
           />
         </TypographyStylesProvider>
       );
