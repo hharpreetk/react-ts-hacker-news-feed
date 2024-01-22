@@ -18,6 +18,7 @@ const ContentFilter: React.FC = () => {
         data={CONTENT_OPTIONS}
         value={selectedContent ? selectedContent : ""}
         color={theme.primaryColor}
+        size="lg"
         classNames={classes}
         onChange={handleContentChange}
         transitionDuration={0}

@@ -10,20 +10,10 @@
     var(--mantine-color-dark-4);
 }
 
-.control {
-  padding: calc(0.12rem * var(--mantine-scale))
-    calc(0.275rem * var(--mantine-scale)) !important;
-
-  &[data-active] {
-    background-color: var(--mantine-primary-color-filled) !important;
-    color: var(--mantine-color-body) !important;
-    border-radius: var(--mantine-radius-default);
-  }
-}
-
 .label {
   color: var(--mantine-color-text) !important;
   font-weight: 400 !important;
+  font-size: var(--mantine-font-size-sm) !important;
 
   &[data-active] {
     color: var(--mantine-color-body) !important;
