@@ -23,6 +23,7 @@ const ContentFilter: React.FC = () => {
         onChange={handleContentChange}
         transitionDuration={0}
         autoContrast
+        onTouchStart={() => {}}
       />
     </ScrollArea>
   );
