@@ -22,6 +22,7 @@ const ContentFilter: React.FC = () => {
         classNames={classes}
         onChange={handleContentChange}
         transitionDuration={0}
+        autoContrast
       />
     </ScrollArea>
   );

@@ -11,11 +11,14 @@
 }
 
 .label {
-  color: var(--mantine-color-text) !important;
   font-weight: 400 !important;
   font-size: var(--mantine-font-size-sm) !important;
 
-  &[data-active] {
-    color: var(--mantine-color-body) !important;
+  [data-mantine-color-scheme="light"] &[data-active] {
+    color: var(--mantine-color-white) !important;
+  }
+
+  [data-mantine-color-scheme="dark"] &[data-active] {
+    color: var(--mantine-color-black) !important;
   }
 }

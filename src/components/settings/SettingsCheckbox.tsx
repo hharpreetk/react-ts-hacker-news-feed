@@ -10,7 +10,7 @@ const SettingsCheckbox: React.FC<SettingsCheckboxProps> = ({
   checked,
   handleChecked,
 }) => {
-  return <Checkbox defaultChecked={checked} m={7} onChange={handleChecked} />;
+  return <Checkbox autoContrast defaultChecked={checked} m={7} onChange={handleChecked} />;
 };
 
 export default SettingsCheckbox;
