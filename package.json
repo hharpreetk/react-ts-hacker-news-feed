@@ -25,7 +25,8 @@
     "@types/css-modules": "^1.0.5",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
-    "postcss": "^8.4.31",
+    "flex-gap-polyfill": "^4.2.0",
+    "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.11.0",
     "postcss-simple-vars": "^7.0.1",
     "typescript": "^4"
