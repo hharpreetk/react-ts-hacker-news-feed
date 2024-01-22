@@ -31,9 +31,13 @@
   background-color: var(--mantine-color-yellow-5);
 }
 
-.storyText + p {
-  display: inline-block;
-  overflow: hidden;
+.storyText p:first-child::before {
+  content: " \A";
+  white-space: pre;
+}
+
+.storyText p:first-child {
+  display: inline;
 }
 
 [data-mantine-color-scheme="dark"] .storyText a {
