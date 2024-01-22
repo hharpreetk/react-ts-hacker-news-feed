@@ -1,5 +1,5 @@
 .root {
-  max-width: calc(11.25rem * var(--mantine-scale));
+  max-width: calc(10.25rem * var(--mantine-scale));
 }
 
 .input {

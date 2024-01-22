@@ -17,8 +17,7 @@ const Pagination: React.FC = () => {
       onChange={handleActivePage}
       size="sm"
       classNames={classes}
-      pt="xs"
-      py="md"
+      pb="sm"
       siblings={isSmallScreen ? 0 : 1}
     >
       <Group gap={5} justify="center">

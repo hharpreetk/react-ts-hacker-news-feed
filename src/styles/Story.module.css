@@ -31,8 +31,8 @@
   background-color: var(--mantine-color-yellow-5);
 }
 
-.storyText p {
-  display: inline;
+.storyText + p {
+  display: inline-block;
   overflow: hidden;
 }
 
