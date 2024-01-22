@@ -14,11 +14,7 @@
   font-weight: 400 !important;
   font-size: var(--mantine-font-size-sm) !important;
 
-  [data-mantine-color-scheme="light"] &[data-active] {
+  [data-mantine-color-scheme="light"] &[data-active="true"] {
     color: var(--mantine-color-white) !important;
-  }
-
-  [data-mantine-color-scheme="dark"] &[data-active] {
-    color: var(--mantine-color-black) !important;
   }
 }
