@@ -40,6 +40,10 @@
   display: inline;
 }
 
+.storyText ** {
+  display: inline;
+}
+
 [data-mantine-color-scheme="dark"] .storyText a {
   color: var(--mantine-color-dark-0) !important;
 }
@@ -51,6 +55,10 @@
 .storyDetail p {
   margin-top: calc(0.525rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
+}
+
+.storyDetail code {
+  white-space-collapse: collapse;
 }
 
 [data-mantine-color-scheme="dark"] .storyDetail a {
