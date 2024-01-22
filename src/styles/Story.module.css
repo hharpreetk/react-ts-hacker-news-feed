@@ -32,7 +32,7 @@
 }
 
 .storyText p:first-child::before {
-  content: " \A";
+  content: " \A\A";
   white-space: pre;
 }
 
