@@ -58,7 +58,7 @@
 }
 
 .storyDetail code {
-  white-space-collapse: collapse;
+  white-space: normal;
 }
 
 [data-mantine-color-scheme="dark"] .storyDetail a {
