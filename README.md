@@ -1,5 +1,7 @@
 # Search Hacker News
 
+![Frame](https://github.com/hharpreetk/react-ts-hacker-news-feed/assets/68283477/286db65a-b796-469b-b6cd-17b36ba98d38)
+
 ## Description
 
 This project is developed using React and TypeScript. It's designed to provide a better experience for Hacker News enthusiasts and tech enthusiasts searching for the latest stories and updates.
