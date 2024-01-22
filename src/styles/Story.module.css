@@ -36,7 +36,7 @@
   white-space: pre;
 }
 
-.storyText p:first-child {
+.storyText p {
   display: inline;
 }
 
