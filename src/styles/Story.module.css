@@ -31,6 +31,11 @@
   background-color: var(--mantine-color-yellow-5);
 }
 
+.storyText,
+.storyUrl {
+  display: inline;
+}
+
 [data-mantine-color-scheme="dark"] .storyText a {
   color: var(--mantine-color-dark-0) !important;
 }
