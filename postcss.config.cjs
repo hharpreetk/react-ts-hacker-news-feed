@@ -1,3 +1,6 @@
 module.exports = {
-  plugins: [require("postcss-flex-gap-polyfill")],
+  plugins: {
+    "postcss-preset-mantine": {},
+    "flex-gap-polyfill": {},
+  },
 };
