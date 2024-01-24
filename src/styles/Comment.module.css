@@ -1,6 +1,9 @@
 .commentText * {
   overflow-x: hidden;
-  font-size: var(--mantine-font-size-sm) !important;
+}
+
+.commentText {
+  max-height: 999999px;
 }
 
 .commentText p {
