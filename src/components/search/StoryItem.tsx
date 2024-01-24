@@ -12,7 +12,10 @@ interface StoryItemProps {
 }
 
 const StoryItem: React.FC<StoryItemProps> = ({ item, onRemoveItem }) => {
-  const handleRemoveItem = () => onRemoveItem(item);
+  const handleRemoveItem = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Stop the event propagation
+    onRemoveItem(item);
+  };
 
   const {
     objectID,
