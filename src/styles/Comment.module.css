@@ -1,5 +1,10 @@
 .commentText * {
   overflow-x: hidden;
+  max-height: 999999px !important;
+}
+
+.commentText {
+  max-height: 999999px !important;
 }
 
 .commentText p {

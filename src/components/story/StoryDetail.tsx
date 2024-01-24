@@ -54,7 +54,6 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           direction="column"
           mb={7}
           key={comment.id}
-          style={{ maxHeight: 999999 }}
         >
           <StoryComment comment={comment} />
         </Flex>
