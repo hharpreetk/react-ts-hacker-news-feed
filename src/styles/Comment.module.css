@@ -1,10 +1,13 @@
 .commentText * {
   overflow-x: hidden;
-  max-height: 999999px !important;
 }
 
 .commentText {
-  max-height: 999999px !important;
+  /* prevent font boosting on mobile devices */
+  width: 100%;
+  height: auto;
+  min-height: 1px;
+  max-height: 999999px;
 }
 
 .commentText p {
