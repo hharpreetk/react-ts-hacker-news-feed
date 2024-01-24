@@ -1,5 +1,6 @@
 .commentText * {
   overflow-x: hidden;
+  font-size: var(--mantine-font-size-sm) !important;
 }
 
 .commentText p {

@@ -57,7 +57,7 @@ const StoryComment = ({ comment }: { comment: Comment }) => {
           p={0}
           classNames={{ root: classes.commentText }}
         >
-          <Box size="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
+          <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
       </Flex>
       {children.length > 1 && (
