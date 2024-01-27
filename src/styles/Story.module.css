@@ -52,7 +52,7 @@
   color: var(--mantine-color-gray-7) !important;
 }
 
-.storyDetail p {
+.storyDetail p:not(:first-child) {
   margin-top: calc(0.525rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
 }

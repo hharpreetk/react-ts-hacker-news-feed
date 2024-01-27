@@ -41,7 +41,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
           p={0}
           classNames={{ root: classes.storyDetail }}
         >
-          <Box fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
+          <Text fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
         </TypographyStylesProvider>
       );
     }
