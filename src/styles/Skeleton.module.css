@@ -1,6 +1,6 @@
 .storyContent {
   height: calc(
-    100dvh -
+    100svh -
       (
         var(--app-shell-header-height) + var(--app-shell-footer-height) +
           (2 * var(--mantine-spacing-md)) +
