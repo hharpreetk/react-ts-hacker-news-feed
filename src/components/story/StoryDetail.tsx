@@ -36,12 +36,12 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const renderContent = () => {
     if (text) {
       return (
-        <TypographyStylesProvider
-          m={0}
-          p={0}
-          classNames={{ root: classes.storyDetail }}
-        >
-          <Text fz="sm" dangerouslySetInnerHTML={{ __html: `${text}` }} />
+        <TypographyStylesProvider m={0} p={0}>
+          <Text
+            fz="sm"
+            classNames={{ root: classes.storyDetail }}
+            dangerouslySetInnerHTML={{ __html: `${text}` }}
+          />
         </TypographyStylesProvider>
       );
     }
@@ -50,11 +50,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
   const renderComments = () => {
     if (children) {
       return children.map((comment: Comment) => (
-        <Flex
-          direction="column"
-          mb={7}
-          key={comment.id}
-        >
+        <Flex direction="column" mb={7} key={comment.id}>
           <StoryComment comment={comment} />
         </Flex>
       ));
