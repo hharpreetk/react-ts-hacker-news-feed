@@ -38,7 +38,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story }) => {
       return (
         <TypographyStylesProvider m={0} p={0}>
           <Text
-            fz="sm"
+            size="sm"
             classNames={{ root: classes.storyDetail }}
             dangerouslySetInnerHTML={{ __html: `${text}` }}
           />
