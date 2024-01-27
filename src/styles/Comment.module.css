@@ -2,14 +2,6 @@
   overflow-x: hidden;
 }
 
-.commentText {
-  /* prevent font boosting on mobile devices */
-  width: 100%;
-  height: auto;
-  min-height: 1px;
-  max-height: 999999px;
-}
-
 .commentText p {
   margin-top: calc(0.325rem * var(--mantine-scale)) !important;
   margin-bottom: 0 !important;
