@@ -13,7 +13,7 @@ const ContentFilter: React.FC = () => {
   const theme = useMantineTheme();
   return (
     <ScrollArea
-      mb={6}
+      mb={5}
       scrollbarSize={10}
       type="auto"
       offsetScrollbars

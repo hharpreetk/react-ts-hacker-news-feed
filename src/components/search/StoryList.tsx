@@ -1,4 +1,4 @@
-import { Suspense, memo, useCallback, lazy } from "react";
+import { Suspense, memo, useCallback } from "react";
 import { Flex } from "@mantine/core";
 import { Story } from "../../types/stories";
 import StoryItem from "./StoryItem";
@@ -14,7 +14,13 @@ const StoryList: React.FC = memo(() => {
   }, []);
 
   return (
-    <Flex direction="column" gap="sm" my="md" maw={800} mx="auto">
+    <Flex
+      direction="column"
+      gap="sm"
+      my="md"
+      maw={800}
+      mx="auto"
+    >
       {data?.map((item: Story) => (
         <Suspense key={item.objectID} fallback={<StorySkeleton />}>
           <StoryItem
