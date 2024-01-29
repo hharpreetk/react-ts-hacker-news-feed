@@ -6,6 +6,10 @@
 
 This project is developed using React and TypeScript. It's designed to provide a better experience for Hacker News enthusiasts and tech enthusiasts searching for the latest stories and updates.
 
+🚀 **Try it out on CodeSandbox:** [Search Hacker News on CodeSandbox](https://codesandbox.io/p/sandbox/search-hacker-news-gv3k23)
+
+🌐 **Live on Netlify:** [Search Hacker News on Netlify](https://search-hacker-news-feed.netlify.app/)
+
 ## Table of Contents
 
 - [Installation and Usage](#installation-and-usage)
