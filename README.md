@@ -10,13 +10,6 @@ This project is developed using React and TypeScript. It's designed to provide a
 
 🌐 **Live on Netlify:** [Search Hacker News on Netlify](https://search-hacker-news-feed.netlify.app/)
 
-## Table of Contents
-
-- [Installation and Usage](#installation-and-usage)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [License](#license)
-
 ## Installation and Usage
 
 1. Clone the repository:
